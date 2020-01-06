@@ -1,0 +1,96 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>随机生成100道数学题</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" charset="utf-8"></script>
+
+    <style>
+        body {
+            width: 754px;
+            padding: 20px;
+            font-size: 18px;
+            background: #FCFCFC;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        p {
+            text-align: center;
+            padding: 10px;
+        }
+
+        ul {
+            padding: 10px;
+            clear: both;
+        }
+
+        li {
+            float: left;
+            padding: 7px 10px;
+            width: 160px;
+            height: 20px;
+            border: 1px solid;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><span id="spanMaxNum"></span>以内加减法</h1>
+    <p>
+        日期：_________
+        开始时间：________
+        结束时间：________
+        分数：__________
+    </p>
+    <ul id="ulProbemList"></ul>
+    <script>
+        $("body").ready(function () {
+            var html = "";
+            var maxNum = 100;  //设置多少以内的加减法
+            $("#spanMaxNum").html(maxNum);
+            for (var i = 0; i < 100; i++) {
+                var num1 = Math.floor(Math.random() * 1234321) % maxNum;
+                var num2 = Math.floor(Math.random() * 654321) % maxNum;
+                if (num1 == num2 || num2 == 0) {  //减少两个数字完全相等的情况
+                    var num2 = Math.floor(Math.random() * 3214321) % maxNum;
+                }
+               
+                html += "<li>"
+                if (i % 3 == 2) {
+                    if (num1 > num2) {
+                        html += num1 + " - ( &nbsp;&nbsp;&nbsp;&nbsp;) = " + num2;
+                    }
+                    else {
+                        preprocessNum();
+                        html += "(  &nbsp;&nbsp;&nbsp;&nbsp;) + "+num1 + " = " + num2;
+                    }
+                } else {
+                    if (num1 > num2) {
+                        html += num1 + " - " + num2 + " = ";
+                    }
+                    else {
+                        preprocessNum();
+                        html += num1 + " + " + num2 + " = ";
+                    }
+                }
+                html += "</li>"
+
+                function preprocessNum() {  //确保等式两边的3个数，都不超过maxNum
+                    if (num1 + num2 > maxNum) { 
+                        num1 = Math.floor(num1 / 2);
+                        num2 = Math.ceil(num2 / 2);
+                    }
+                }
+            }
+            $("#ulProbemList").html(html);
+        });
+        
+    </script>
+</body>
+
+</html>
