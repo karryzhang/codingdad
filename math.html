@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>随机生成100道数学题</title>
+    <title>随机生成100道数学题（打印版）</title>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" charset="utf-8"></script>
 
     <style>
@@ -36,6 +36,12 @@
             border: 1px solid;
             list-style: none;
         }
+        input{
+            width: 100px;
+            height: 25px;
+            border: 1px solid #333;
+            margin-right: 10px;
+        }
     </style>
 </head>
 
@@ -47,11 +53,20 @@
         结束时间：________
         分数：__________
     </p>
+    <p id="pMaxNumWrap">你希望是多少以内的加减法:<input id="txtMaxNum" type="text" value="100" /><input type="button" id="btnExcute" value="随机生成100题" /> <input type="button" value="打印" id="btnPrint" /></p>
     <ul id="ulProbemList"></ul>
     <script>
-        $("body").ready(function () {
+        $(document).ready(function(){
+            $("#txtMaxNum").focus();
+            $("#txtMaxNum").select();
+        });
+        $("#btnExcute").click(function () {
             var html = "";
-            var maxNum = 100;  //设置多少以内的加减法
+            var maxNum = $("#txtMaxNum").val();  //设置多少以内的加减法
+            if(isNaN(maxNum)||maxNum<=0){
+                maxNum=100;
+                $("#txtMaxNum").val("100");
+            }
             $("#spanMaxNum").html(maxNum);
             for (var i = 0; i < 100; i++) {
                 var num1 = Math.floor(Math.random() * 1234321) % maxNum;
@@ -87,7 +102,16 @@
             }
             $("#ulProbemList").html(html);
         });
-        
+        $("#btnPrint").click(function(){
+            window.print();
+        });
+       window.onbeforeprint = function(){
+           $("#pMaxNumWrap").hide();
+       }     
+       window.onafterprint = function(){
+           $("#pMaxNumWrap").show();
+       }       
+
     </script>
 </body>
 </html>
