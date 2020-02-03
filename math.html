@@ -41,6 +41,10 @@
             height: 25px;
             border: 1px solid #333;
             margin-right: 10px;
+            background: #ccc;
+        }
+        input.txt{
+            background:#FFF;
         }
     </style>
 </head>
@@ -53,7 +57,7 @@
         结束时间：________
         分数：__________
     </p>
-    <p id="pMaxNumWrap">你希望是多少以内的加减法:<input id="txtMaxNum" type="text" value="100" /><input type="button" id="btnExcute" value="随机生成100题" /> <input type="button" value="打印" id="btnPrint" /></p>
+    <p id="pMaxNumWrap">你希望是多少以内的加减法:<input id="txtMaxNum" class="txt" type="text" value="100" /><input type="button" id="btnExcute" value="随机生成100题" /> <input type="button" value="打印" id="btnPrint" /></p>
     <ul id="ulProbemList"></ul>
     <script>
         $(document).ready(function(){
