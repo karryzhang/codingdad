@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>随机生成100道乘法数学题（打印版）</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" charset="utf-8"></script>
+
+    <style>
+        body {
+            width: 754px;
+            padding: 20px;
+            font-size: 18px;
+            background: #FCFCFC;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        p {
+            text-align: center;
+            padding: 10px;
+        }
+
+        ul {
+            padding: 10px;
+            clear: both;
+        }
+
+        li {
+            float: left;
+            padding: 7px 10px;
+            width: 160px;
+            height: 20px;
+            border: 1px solid;
+            list-style: none;
+        }
+
+        input {
+            width: 100px;
+            height: 25px;
+            border: 1px solid #333;
+            margin-right: 10px;
+            background: #ccc;
+        }
+
+        input.txt {
+            background: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><span id="spanMaxNum"></span>以内乘法</h1>
+    <p>
+        日期：_________
+        开始时间：________
+        结束时间：________
+        分数：__________
+    </p>
+    <p id="pMaxNumWrap">
+        你希望是多少以内的乘法:
+        <input id="txtMaxNum" class="txt" type="text" value="10" />
+        <input type="button" id="btnExcute" value="随机生成题" />
+        <input type="button" value="打印" id="btnPrint" />
+    </p>
+    <ul id="ulProbemList"></ul>
+    <script>
+        $(document).ready(function () {
+            $("#txtMaxNum").focus();
+            $("#txtMaxNum").select();
+        });
+        $("#btnExcute").click(function () {
+            var html = "";
+            var maxNum = $("#txtMaxNum").val();  //设置多少以内的乘法
+            var problemNum = 100
+            if (isNaN(maxNum) || maxNum <= 0) {
+                maxNum = 100;
+                $("#txtMaxNum").val("100");
+            }
+            $("#spanMaxNum").html(maxNum);
+            for (var i = 0; i < problemNum; i++) {
+                html += "<li>";
+                var num1 = Math.floor(Math.random() * 1234321) % maxNum;
+                if (num1 == 0) {
+                    num1 = Math.floor(Math.random() * 34567) % maxNum;
+                }
+                var num2 = Math.floor(Math.random() * 654321) % maxNum;
+                if (num2 == 0) {
+                    num2 = Math.floor(Math.random() * 21451) % maxNum;
+                }
+                if (i % 3 == 0) {
+                    html += num1 + " X  (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)  = "+num1*num2;           
+                }else{
+                    html += num1 + " X " + num2 + " = ";
+                }
+                html += "</li>"
+            }
+            $("#ulProbemList").html(html);
+        });
+        $("#btnPrint").click(function () {
+            window.print();
+        });
+        window.onbeforeprint = function () {
+            $("#pMaxNumWrap").hide();
+        }
+        window.onafterprint = function () {
+            $("#pMaxNumWrap").show();
+        }
+
+    </script>
+</body>
+
+</html>

@@ -66,8 +66,11 @@
         <label><select id="selectIsMultinomial">
                 <option value="0">否</option>
                 <option value="1">是</option>
-            </select></label><br />
-        <input type="button" id="btnExcute" value="随机生成100题" />
+            </select></label><br /><label>简单模式<select id="selectIsSimple">
+                <option value="0">否</option>
+                <option value="1">是</option>
+            </select></label>
+        <input type="button" id="btnExcute" value="随机生成题" />
         <input type="button" value="打印" id="btnPrint" /></p>
     <ul id="ulProbemList"></ul>
     <script>
@@ -78,14 +81,18 @@
         $("#btnExcute").click(function () {
             var html = "";
             var maxNum = $("#txtMaxNum").val();  //设置多少以内的加减法
+            var problemNum = 100
             if (isNaN(maxNum) || maxNum <= 0) {
                 maxNum = 100;
                 $("#txtMaxNum").val("100");
             }
             var isMultinomial = $("#selectIsMultinomial").val();
-            console.log(isMultinomial);
+            var isSimple = parseInt($("#selectIsSimple").val());
+            if(isSimple){
+                problemNum=40;
+            }
             $("#spanMaxNum").html(maxNum);
-            for (var i = 0; i < 100; i++) {
+            for (var i = 0; i < problemNum; i++) {
                 var num1 = Math.floor(Math.random() * 1234321) % maxNum;
                 var num2 = Math.floor(Math.random() * 654321) % maxNum;
                 var num3 = Math.floor(Math.random() * 35897) % maxNum;
@@ -94,7 +101,7 @@
                 }
                 html += "<li>";
 
-                if (i % 3 == 0) {
+                if (false) {
                     if (num1 > num2) {
                         html += num1 + " - ( &nbsp;&nbsp;&nbsp;&nbsp;) = " + num2;
                     }
@@ -102,7 +109,7 @@
                         preprocessNum();
                         html += "(  &nbsp;&nbsp;&nbsp;&nbsp;) + " + num1 + " = " + num2;
                     }
-                } else if (isMultinomial & i % 5 == 0) {  //混合多项式
+                } else if (isMultinomial & i % 5 == 0&isSimple) {  //混合多项式
                     var num3 = Math.floor(Math.random() * 654321) % maxNum;
                     if (num1 > num2 + num3) {
                         html += num1 + " - " + num2 + " - " + num3 + " = ";
@@ -137,6 +144,12 @@
                 }
             }
             $("#ulProbemList").html(html);
+            if(isSimple){
+                $("ul li").css({
+                    "padding":"20px 10px",
+                    "font-size":"24px"
+                });
+            }
         });
         $("#btnPrint").click(function () {
             window.print();
