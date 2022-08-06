@@ -12,6 +12,7 @@
             font-size: 18px;
             background: #FCFCFC;
         }
+
         h1 {
             text-align: center;
             font-size: 24px;
@@ -70,7 +71,8 @@
                 <option value="1">是</option>
             </select></label>
         <input type="button" id="btnExcute" value="随机生成题" />
-        <input type="button" value="打印" id="btnPrint" /></p>
+        <input type="button" value="打印" id="btnPrint" />
+    </p>
     <ul id="ulProbemList"></ul>
     <script>
         $(document).ready(function () {
@@ -87,36 +89,43 @@
             }
             var isMultinomial = $("#selectIsMultinomial").val();
             var isSimple = parseInt($("#selectIsSimple").val());
-            if(isSimple){
-                problemNum=42;
+            if (isSimple) {
+                problemNum = 42;
             }
             $("#spanMaxNum").html(maxNum);
             for (var i = 0; i < problemNum; i++) {
                 var num1 = Math.floor(Math.random() * 1234321) % maxNum;
                 var num2 = Math.floor(Math.random() * 654321) % maxNum;
                 var num3 = Math.floor(Math.random() * 35897) % maxNum;
-                if (num1 == num2 || num2 == 0) {  //减少两个数字完全相等的情况
+                if (num1 == 0 || num2 == 0) {  //减少两个数字完全相等的情况
                     num1 = Math.floor(Math.random() * 1234321) % maxNum;
                     num2 = Math.floor(Math.random() * 3214321) % maxNum;
                 }
                 html += "<li>";
 
-                if (isMultinomial==false && isSimple==false) {
-                    if (num1 > num2&&(num1*num2)%3==0) {
-                          html += num1 + " - ( &nbsp;&nbsp;&nbsp;&nbsp;) = " + num2;
+                if (isMultinomial == false && isSimple == false) {
+                    if (num1 > num2 && (num1 * num2) % 2 == 0) {
+                        html += num1 + " - ( &nbsp;&nbsp;&nbsp;&nbsp;) = " + num2;
                     }
                     else {
                         preprocessNum();
                         html += "(  &nbsp;&nbsp;&nbsp;&nbsp;) + " + num1 + " = " + num2;
                     }
-                } 
-                else if(isSimple){
-                    if (num1 > num2&&(num1+num2)%3==0) {
-                          html += num1 + " - "+num2+" = ";
+                }
+                else if (isSimple) {
+                    if (num1 > num2 && (num1 + num2) % 2 == 0) {
+                        html += num1 + " - " + num2 + " = ";
                     }
                     else {
                         preprocessNum();
-                        html += num1+" + "+num2+" = ";
+                        if ((num1 * num2) % 2 == 0) {
+                            var temp = num1;
+                            num1 = num2;
+                            num2 = temp;
+
+                        }
+                        html += num1 + " + " + num2 + " = ";
+
                     }
                 }
                 else {  //混合多项式
@@ -132,12 +141,12 @@
                     } else {
                         html += num1 + " + " + num2 + " - " + num3 + " = ";
                     }
-        
+
                 }
 
                 html += "</li>"
                 function preprocessNum() {  //确保等式两边的3个数，都不超过maxNum
-                  
+
 
                     if (num1 + num2 > maxNum) {
                         num1 = Math.floor(num1 / 2);
@@ -149,10 +158,10 @@
                 }
             }
             $("#ulProbemList").html(html);
-            if(isSimple){
+            if (isSimple) {
                 $("ul li").css({
-                    "padding":"20px 10px",
-                    "font-size":"24px"
+                    "padding": "20px 10px",
+                    "font-size": "24px"
                 });
             }
         });
