@@ -96,10 +96,8 @@
                 var num2 = Math.floor(Math.random() * 654321) % maxNum;
                 var num3 = Math.floor(Math.random() * 35897) % maxNum;
                 if (num1 == num2 || num2 == 0) {  //减少两个数字完全相等的情况
-                    var num2 = Math.floor(Math.random() * 3214321) % maxNum;
-                }
-                if(num1==0){
                     num1 = Math.floor(Math.random() * 1234321) % maxNum;
+                    num2 = Math.floor(Math.random() * 3214321) % maxNum;
                 }
                 html += "<li>";
 
