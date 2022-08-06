@@ -104,7 +104,7 @@
                 html += "<li>";
 
                 if (isMultinomial==false && isSimple==false) {
-                    if (num1 > num2&&(num1+num2)%2==0) {
+                    if (num1 > num2&&(num1*num2)%3==0) {
                           html += num1 + " - ( &nbsp;&nbsp;&nbsp;&nbsp;) = " + num2;
                     }
                     else {
@@ -113,7 +113,7 @@
                     }
                 } 
                 else if(isSimple){
-                    if (num1 > num2&&(num1+num2)%2==0) {
+                    if (num1 > num2&&(num1+num2)%3==0) {
                           html += num1 + " - "+num2+" = ";
                     }
                     else {
