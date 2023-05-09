@@ -107,12 +107,13 @@
                     if (num1 > num2 && (num1 * num2) % 2 == 0) {
                         html += num1 + " - ( &nbsp;&nbsp;&nbsp;&nbsp;) = " + num2;
                     }
-                    else if(num1<num2){
-                        html += num1 + " + " + num2+" = ";
+                    else if(num1 > num2 && (num1 * num2) % 2 == 1) {
+                        
+                        html += "(  &nbsp;&nbsp;&nbsp;&nbsp;) + " + num2 + " = " + num1;
                     }
                     else {
                         preprocessNum();
-                        html += "(  &nbsp;&nbsp;&nbsp;&nbsp;) + " + num1 + " = " + num2;
+                        html += num1 + " + " + num2 + " = ";
                     }
                 }
                 else if (isSimple) {
