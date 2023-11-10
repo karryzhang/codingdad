@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>随机生成100道数学题（打印版）-100以内的加减乘除法</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" charset="utf-8"></script>
+
+    <style>
+        body {
+            width: 754px;
+            padding: 20px;
+            font-size: 18px;
+            background: #FCFCFC;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+        }
+
+        p {
+            text-align: center;
+            padding: 10px;
+        }
+
+        ul {
+            padding: 10px;
+            clear: both;
+        }
+
+        li {
+            float: left;
+            padding: 13px 10px;
+            width: 220px;
+            height: 20px;
+            border: 1px solid;
+            list-style: none;
+        }
+
+        input {
+            width: 100px;
+            height: 25px;
+            border: 1px solid #333;
+            margin-right: 10px;
+            background: #ccc;
+        }
+
+        input.txt {
+            background: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><span id="spanMaxNum"></span>以内加减乘除法</h1>
+    <p>
+        日期：_________
+        开始时间：________
+        结束时间：________
+        分数：__________
+    </p>
+    <p id="pMaxNumWrap">
+        你希望是多少以内的加减法:
+        <input id="txtMaxNum" class="txt" type="text" value="100" />
+
+        <input type="button" id="btnExcute" value="随机生成题" />
+        <input type="button" value="打印" id="btnPrint" />
+    </p>
+    <ul id="ulProbemList"></ul>
+    <script>
+        $("#btnExcute").click(function () {
+            var html = "";
+            html = generateMathProblemsHTML(60);
+            $("#ulProbemList").html(html);
+
+        });
+        function generateMathProblemsHTML(numProblems) {
+            const problems = [];
+            const operators = ['+', '-', '*', '/'];
+
+            function generateProblem() {
+                let a, b, result, op;
+
+                do {
+                    op = operators[Math.floor(Math.random() * operators.length)];
+                    if (op === '*') {
+                        // 乘法，两个数都是1位数
+                        a = Math.floor(Math.random() * 10);
+                        b = Math.floor(Math.random() * 10);
+                    } else if (op === '/') {
+                        // 除法，确保结果为整数
+                        b = Math.floor(Math.random() * 9) + 1;
+                        a = b * (Math.floor(Math.random() * 10));
+                    } else {
+                        // 加法和减法
+                        a = Math.floor(Math.random() * 101);
+                        b = Math.floor(Math.random() * 101);
+                    }
+
+                    result = eval(`${a}${op}${b}`);
+                } while (result < 0 || !Number.isInteger(result));
+                if(op==='/'){
+                    op="➗";
+                }else if(op==='*'){
+                    op="x";
+                }
+
+                return `<li>${a} ${op} ${b} = </li>`;
+            }
+
+            for (let i = 0; i < numProblems; i++) {
+                problems.push(generateProblem());
+            }
+            return `${problems.join('')}`;
+        }
+
+
+        $("#btnPrint").click(function () {
+            $("#pMaxNumWrap").hide();
+            window.print();
+            
+        });
+
+
+    </script>
+</body>
+
+</html>
