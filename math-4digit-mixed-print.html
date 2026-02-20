@@ -63,6 +63,30 @@
             text-align: right;
         }
 
+        .answer-sheet-title {
+            font-size: 18px;
+            text-align: center;
+            margin: 12px 0;
+            font-weight: 600;
+        }
+
+        ul.answer-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 16px;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.answer-list li {
+            list-style: none;
+            border: 1px dashed #666;
+            padding: 6px 10px;
+            font-size: 16px;
+            min-height: 24px;
+            line-height: 24px;
+        }
+
         ul.problem-list {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -115,10 +139,12 @@
             <option value="withBrackets">含括号混合</option>
         </select>
         <button id="btnGenerate">生成题库</button>
-        <button id="btnPrint">打印</button>
+        <button id="btnPrint">打印题目</button>
+        <button id="btnPrintAnswers">打印答案页</button>
     </div>
 
     <div id="sheetContainer"></div>
+    <div id="answerContainer" style="display:none;"></div>
 
     <script>
         const PROBLEMS_PER_SHEET = 20;
@@ -170,6 +196,8 @@
             return Number.isFinite(n) && Number.isInteger(n) && n >= 0;
         }
 
+        let currentProblems = [];
+
         function buildProblem(withBrackets) {
             // 题型：a op1 b op2 c（可选括号）
             for (let t = 0; t < 500; t++) {
@@ -186,15 +214,10 @@
                     b = random4Digit();
                 }
 
-                if (op2 === '/') {
-                    // c 作为除数时，仅在计算顺序需要除法时生效
-                    c = random4Digit();
-                } else {
-                    c = random4Digit();
-                }
+                c = random4Digit();
 
                 let result;
-                let text;
+                let expr;
 
                 if (withBrackets) {
                     const leftBracket = Math.random() < 0.5;
@@ -205,7 +228,6 @@
 
                         let rightA = first, rightB = c;
                         if (op2 === '/') {
-                            // 保证整除
                             const q = randomInt(1, 9);
                             rightB = random4Digit();
                             rightA = rightB * q;
@@ -213,7 +235,7 @@
                         result = calc(rightA, op2, rightB);
                         if (!isValidResult(result)) continue;
 
-                        text = `(${a} ${opShow(op1)} ${b}) ${opShow(op2)} ${rightB} = <span class="answer-line"></span>`;
+                        expr = `(${a} ${opShow(op1)} ${b}) ${opShow(op2)} ${rightB}`;
                     } else {
                         // a op1 (b op2 c)
                         let innerB = b, innerC = c;
@@ -234,7 +256,7 @@
                         result = calc(leftA, op1, leftB);
                         if (!isValidResult(result)) continue;
 
-                        text = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC}) = <span class="answer-line"></span>`;
+                        expr = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC})`;
                     }
                 } else {
                     // 标准：按四则优先级计算
@@ -252,11 +274,9 @@
                         r = calc(rightA, op2, rightB);
                         if (!isValidResult(r)) continue;
 
-                        if (op2 === '/') {
-                            text = `${a} ${opShow(op1)} ${b} ${opShow(op2)} ${rightB} = <span class="answer-line"></span>`;
-                        } else {
-                            text = `${a} ${opShow(op1)} ${b} ${opShow(op2)} ${c} = <span class="answer-line"></span>`;
-                        }
+                        expr = op2 === '/'
+                            ? `${a} ${opShow(op1)} ${b} ${opShow(op2)} ${rightB}`
+                            : `${a} ${opShow(op1)} ${b} ${opShow(op2)} ${c}`;
                     } else {
                         let innerB = b, innerC = c;
                         if (op2 === '/') {
@@ -276,35 +296,34 @@
                         r = calc(leftA, op1, leftB);
                         if (!isValidResult(r)) continue;
 
-                        if (op1 === '/') {
-                            text = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC}) = <span class="answer-line"></span>`;
-                        } else {
-                            text = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC}) = <span class="answer-line"></span>`;
-                        }
+                        expr = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC})`;
                     }
                     result = r;
                 }
 
-                // 防止结果极端大，保持可练习性
                 if (result > 99999999) continue;
 
-                return text;
+                return {
+                    expr,
+                    result
+                };
             }
 
-            // 兜底
-            return `${random4Digit()} + ${random4Digit()} - ${random4Digit()} = <span class="answer-line"></span>`;
+            const a = random4Digit(), b = random4Digit(), c = random4Digit();
+            return {
+                expr: `${a} + ${b} - ${c}`,
+                result: a + b - c
+            };
         }
 
-        function generateSheets() {
-            const sheetCount = Math.max(1, Math.min(20, parseInt($('#sheetCount').val(), 10) || 1));
-            const withBrackets = $('#difficulty').val() === 'withBrackets';
+        function renderSheets(problems, sheetCount) {
             const all = [];
-
             for (let s = 1; s <= sheetCount; s++) {
                 let list = '';
                 for (let i = 1; i <= PROBLEMS_PER_SHEET; i++) {
                     const idx = (s - 1) * PROBLEMS_PER_SHEET + i;
-                    list += `<li>${idx}. ${buildProblem(withBrackets)}</li>`;
+                    const p = problems[idx - 1];
+                    list += `<li>${idx}. ${p.expr} = <span class="answer-line"></span></li>`;
                 }
                 all.push(`
                     <section class="sheet">
@@ -313,16 +332,60 @@
                     </section>
                 `);
             }
-
             $('#sheetContainer').html(all.join(''));
         }
 
-        $('#btnGenerate').on('click', generateSheets);
-        $('#btnPrint').on('click', function () {
-            if (!$('#sheetContainer').children().length) {
-                generateSheets();
+        function renderAnswerSheets(problems, sheetCount) {
+            const all = [];
+            for (let s = 1; s <= sheetCount; s++) {
+                let list = '';
+                for (let i = 1; i <= PROBLEMS_PER_SHEET; i++) {
+                    const idx = (s - 1) * PROBLEMS_PER_SHEET + i;
+                    const p = problems[idx - 1];
+                    list += `<li>${idx}. ${p.expr} = <strong>${p.result}</strong></li>`;
+                }
+                all.push(`
+                    <section class="sheet">
+                        <div class="answer-sheet-title">答案页（第 ${s} / ${sheetCount} 页）</div>
+                        <ul class="answer-list">${list}</ul>
+                    </section>
+                `);
             }
+            $('#answerContainer').html(all.join(''));
+        }
+
+        function generateSheets() {
+            const sheetCount = Math.max(1, Math.min(20, parseInt($('#sheetCount').val(), 10) || 1));
+            const withBrackets = $('#difficulty').val() === 'withBrackets';
+            const total = sheetCount * PROBLEMS_PER_SHEET;
+
+            currentProblems = [];
+            for (let i = 0; i < total; i++) {
+                currentProblems.push(buildProblem(withBrackets));
+            }
+
+            renderSheets(currentProblems, sheetCount);
+            renderAnswerSheets(currentProblems, sheetCount);
+            $('#sheetContainer').show();
+            $('#answerContainer').hide();
+        }
+
+        $('#btnGenerate').on('click', generateSheets);
+
+        $('#btnPrint').on('click', function () {
+            if (!currentProblems.length) generateSheets();
+            $('#sheetContainer').show();
+            $('#answerContainer').hide();
             window.print();
+        });
+
+        $('#btnPrintAnswers').on('click', function () {
+            if (!currentProblems.length) generateSheets();
+            $('#sheetContainer').hide();
+            $('#answerContainer').show();
+            window.print();
+            $('#answerContainer').hide();
+            $('#sheetContainer').show();
         });
 
         $(document).ready(function () {
