@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+<rect width="960" height="540" fill="#ffe4e6"/>
+<rect x="30" y="30" width="900" height="480" rx="24" fill="white" stroke="#cbd5e1" stroke-width="3"/>
+<text x="60" y="90" font-size="42" font-family="Arial, sans-serif" fill="#0f172a" font-weight="700">Online Kindness</text>
+<rect x="60" y="130" width="260" height="320" rx="16" fill="#eff6ff" stroke="#93c5fd"/>
+<rect x="350" y="130" width="260" height="320" rx="16" fill="#f8fafc" stroke="#94a3b8"/>
+<rect x="640" y="130" width="260" height="320" rx="16" fill="#f0fdf4" stroke="#86efac"/>
+<text x="95" y="170" font-size="24" font-family="Arial" fill="#1e3a8a">Picture 1</text>
+<text x="385" y="170" font-size="24" font-family="Arial" fill="#334155">Picture 2</text>
+<text x="675" y="170" font-size="24" font-family="Arial" fill="#166534">Picture 3</text>
+<circle cx="190" cy="270" r="52" fill="#93c5fd"/>
+<rect x="150" y="320" width="80" height="90" rx="12" fill="#60a5fa"/>
+<circle cx="480" cy="270" r="52" fill="#cbd5e1"/>
+<rect x="440" y="320" width="80" height="90" rx="12" fill="#94a3b8"/>
+<circle cx="770" cy="270" r="52" fill="#86efac"/>
+<rect x="730" y="320" width="80" height="90" rx="12" fill="#4ade80"/>
+<text x="60" y="490" font-size="24" font-family="Arial" fill="#334155">Use this as a visual prompt strip: beginning → problem → ending.</text>
+</svg>
