@@ -16,6 +16,17 @@
     .meta{display:flex;justify-content:space-between;color:#475569;font-size:13px}
     img{width:100%;border-radius:10px;border:1px solid #dbeafe;margin:10px 0}
     ul{margin:4px 0 0 18px}
+    .print-btn{margin-top:10px;padding:8px 12px;border-radius:8px;border:1px solid #93c5fd;background:#eff6ff;color:#1d4ed8;cursor:pointer}
+
+    @page { size: A4 portrait; margin: 10mm; }
+    @media print {
+      body { background: #fff; }
+      .wrap { max-width: none; margin: 0; padding: 0; }
+      h1, .sub, .tips, .toolbar, .print-btn { display: none !important; }
+      .card { display: none !important; border: none; margin: 0; padding: 0; }
+      .card.print-target { display: block !important; }
+      .card.print-target img { max-height: 105mm; object-fit: contain; }
+    }
   </style>
 </head>
 <body>
@@ -46,9 +57,29 @@
 
 </div>
 <script>
-const btns=document.querySelectorAll('button[data-grade]');
-const cards=document.querySelectorAll('.card');
-btns.forEach(b=>b.onclick=()=>{btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');const g=b.dataset.grade;cards.forEach(c=>c.style.display=(g==='all'||c.dataset.grade===g)?'block':'none')});
+const btns = document.querySelectorAll('button[data-grade]');
+const cards = document.querySelectorAll('.card');
+
+btns.forEach(b => b.onclick = () => {
+  btns.forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  const g = b.dataset.grade;
+  cards.forEach(c => c.style.display = (g === 'all' || c.dataset.grade === g) ? 'block' : 'none');
+});
+
+cards.forEach((card, idx) => {
+  const btn = document.createElement('button');
+  btn.className = 'print-btn';
+  btn.type = 'button';
+  btn.textContent = `🖨️ Print this topic (A4) #${idx + 1}`;
+  btn.addEventListener('click', () => {
+    cards.forEach(c => c.classList.remove('print-target'));
+    card.classList.add('print-target');
+    window.print();
+    setTimeout(() => card.classList.remove('print-target'), 300);
+  });
+  card.appendChild(btn);
+});
 </script>
 </body>
 </html>
