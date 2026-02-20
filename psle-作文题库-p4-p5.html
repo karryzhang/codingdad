@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>新加坡 P4/P5 看图作文题库（PSLE导向）</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --line: #e5e7eb;
+      --tag: #eef2ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 980px; margin: 24px auto 40px; padding: 0 16px; }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    .desc { color: var(--muted); margin: 0 0 16px; }
+    .tip {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      color: #374151;
+      font-size: 14px;
+    }
+    .toolbar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    button {
+      border: 1px solid #c7d2fe;
+      background: #fff;
+      color: #1e3a8a;
+      padding: 8px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.04);
+    }
+    .meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .tag { background: var(--tag); color: #3730a3; padding: 3px 8px; border-radius: 999px; font-size: 12px; }
+    h3 { margin: 6px 0 6px; font-size: 17px; }
+    .sec-title { font-weight: 700; margin-top: 8px; margin-bottom: 4px; font-size: 14px; }
+    ul { margin: 0; padding-left: 18px; }
+    .req { margin-top: 8px; font-size: 14px; color: #374151; }
+    footer { margin-top: 22px; color: var(--muted); font-size: 13px; }
+    @media print {
+      .toolbar { display: none; }
+      body { background: #fff; }
+      .card { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>新加坡小学四/五年级看图作文题库（20题）</h1>
+    <p class="desc">按 PSLE 导向设计：重视内容完整、情节连贯、语言准确、价值观表达。每题建议写 <strong>150字以内</strong>。</p>
+
+    <div class="tip">
+      <strong>评分参考（PSLE导向简版）</strong>：
+      1) 是否紧扣三图并有完整起因-经过-结果；
+      2) 语言是否通顺、标点和用词是否准确；
+      3) 是否有人物感受与反思（责任、诚实、合作、尊重等）。
+    </div>
+
+    <div class="toolbar">
+      <button class="active" data-grade="all">全部</button>
+      <button data-grade="P4">四年级 P4</button>
+      <button data-grade="P5">五年级 P5</button>
+    </div>
+
+    <div class="grid" id="grid">
+      <!-- P4 -->
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-01</span><span class="tag">四年级</span></div><h3>雨天借伞</h3><div class="sec-title">三图提示</div><ul><li>放学时突然下大雨。</li><li>同学没带伞，站在走廊发愁。</li><li>你把伞借给他，自己和家人共撑一把。</li></ul><div class="sec-title">引导</div><ul><li>你当时怎么想？</li><li>同学后来有什么反应？</li></ul><p class="req">写作要求：150字以内，突出助人为乐。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-02</span><span class="tag">四年级</span></div><h3>图书馆的安静角落</h3><div class="sec-title">三图提示</div><ul><li>你在图书馆看书。</li><li>两位同学大声讲话。</li><li>你礼貌提醒，大家恢复安静。</li></ul><div class="sec-title">引导</div><ul><li>你用了什么礼貌用语？</li><li>安静后你的感受如何？</li></ul><p class="req">写作要求：150字以内，表现尊重公共空间。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-03</span><span class="tag">四年级</span></div><h3>丢失的钱包</h3><div class="sec-title">三图提示</div><ul><li>操场边发现一个钱包。</li><li>你和朋友查看学生证信息。</li><li>把钱包交到办公室，失主来认领。</li></ul><div class="sec-title">引导</div><ul><li>你为什么选择上交？</li><li>失主说了什么？</li></ul><p class="req">写作要求：150字以内，强调诚实品格。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-04</span><span class="tag">四年级</span></div><h3>第一次做早餐</h3><div class="sec-title">三图提示</div><ul><li>周末早上你想给妈妈惊喜。</li><li>在爸爸指导下做三明治。</li><li>全家一起吃早餐并夸奖你。</li></ul><div class="sec-title">引导</div><ul><li>过程中遇到什么小困难？</li><li>你学会了什么？</li></ul><p class="req">写作要求：150字以内，体现感恩与成长。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-05</span><span class="tag">四年级</span></div><h3>班级植物角</h3><div class="sec-title">三图提示</div><ul><li>老师安排照顾植物。</li><li>你忘记浇水，叶子发黄。</li><li>你补救并坚持每天记录。</li></ul><div class="sec-title">引导</div><ul><li>你怎样承担责任？</li><li>后来植物有什么变化？</li></ul><p class="req">写作要求：150字以内，写出责任感。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-06</span><span class="tag">四年级</span></div><h3>地铁上的让座</h3><div class="sec-title">三图提示</div><ul><li>放学乘地铁，人很多。</li><li>一位老人上车没有座位。</li><li>你起身让座，老人微笑道谢。</li></ul><div class="sec-title">引导</div><ul><li>你起身前在想什么？</li><li>这件事让你明白了什么？</li></ul><p class="req">写作要求：150字以内，体现礼让精神。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-07</span><span class="tag">四年级</span></div><h3>操场上的误会</h3><div class="sec-title">三图提示</div><ul><li>踢球时同学被球打到。</li><li>他误会是你故意的。</li><li>你解释并道歉，最后和好。</li></ul><div class="sec-title">引导</div><ul><li>你如何平静沟通？</li><li>和好后你学到了什么？</li></ul><p class="req">写作要求：150字以内，突出沟通与包容。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-08</span><span class="tag">四年级</span></div><h3>垃圾分类小行动</h3><div class="sec-title">三图提示</div><ul><li>社区举行环保活动。</li><li>你发现大家分类不清楚。</li><li>你做了提示卡，活动更顺利。</li></ul><div class="sec-title">引导</div><ul><li>你做了哪些准备？</li><li>大家对你的做法有什么反应？</li></ul><p class="req">写作要求：150字以内，体现主动与环保意识。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-09</span><span class="tag">四年级</span></div><h3>比赛前的紧张</h3><div class="sec-title">三图提示</div><ul><li>你要参加朗读比赛。</li><li>上台前非常紧张，手心冒汗。</li><li>你深呼吸并完成朗读。</li></ul><div class="sec-title">引导</div><ul><li>是谁给了你鼓励？</li><li>比赛后你的心情怎样？</li></ul><p class="req">写作要求：150字以内，写出克服紧张的过程。</p></article>
+
+      <article class="card" data-grade="P4"><div class="meta"><span class="tag">P4-10</span><span class="tag">四年级</span></div><h3>邻里节的帮忙</h3><div class="sec-title">三图提示</div><ul><li>邻里节前大家布置场地。</li><li>一位阿姨搬不动桌子。</li><li>你和朋友一起帮忙，活动顺利开始。</li></ul><div class="sec-title">引导</div><ul><li>你做了哪些具体事情？</li><li>你对“社区”有了什么新理解？</li></ul><p class="req">写作要求：150字以内，强调合作与关怀。</p></article>
+
+      <!-- P5 -->
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-11</span><span class="tag">五年级</span></div><h3>小组任务分工失败后</h3><div class="sec-title">三图提示</div><ul><li>小组作业截止前，进度严重落后。</li><li>组员互相抱怨，气氛紧张。</li><li>你重新分工并带领大家完成。</li></ul><div class="sec-title">引导</div><ul><li>你如何化解冲突？</li><li>这次经历让你如何看待领导力？</li></ul><p class="req">写作要求：150字以内，突出解决问题能力。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-12</span><span class="tag">五年级</span></div><h3>手机与承诺</h3><div class="sec-title">三图提示</div><ul><li>你答应先完成功课再玩手机。</li><li>朋友发来游戏邀请，你动摇了。</li><li>你坚持完成作业后再玩。</li></ul><div class="sec-title">引导</div><ul><li>你如何克制自己？</li><li>守承诺有什么意义？</li></ul><p class="req">写作要求：150字以内，体现自律精神。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-13</span><span class="tag">五年级</span></div><h3>考试失利后的转变</h3><div class="sec-title">三图提示</div><ul><li>数学测验成绩不理想。</li><li>你情绪低落，想放弃。</li><li>在老师建议下改进方法，下一次进步。</li></ul><div class="sec-title">引导</div><ul><li>你调整了哪些学习习惯？</li><li>这次失败给了你什么启发？</li></ul><p class="req">写作要求：150字以内，写出成长心态。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-14</span><span class="tag">五年级</span></div><h3>志愿服务的一天</h3><div class="sec-title">三图提示</div><ul><li>学校组织到养老院做志愿服务。</li><li>你陪长者聊天、教他用平板。</li><li>离开时长者握手感谢你。</li></ul><div class="sec-title">引导</div><ul><li>你最难忘的一个细节是什么？</li><li>你对“服务”有何新认识？</li></ul><p class="req">写作要求：150字以内，突出同理心。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-15</span><span class="tag">五年级</span></div><h3>一场突如其来的停电</h3><div class="sec-title">三图提示</div><ul><li>晚上写作业时突然停电。</li><li>家人分工找手电、检查电箱、安抚弟妹。</li><li>恢复供电后你总结应急经验。</li></ul><div class="sec-title">引导</div><ul><li>你在停电时扮演了什么角色？</li><li>团队合作如何帮助解决问题？</li></ul><p class="req">写作要求：150字以内，体现冷静与协作。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-16</span><span class="tag">五年级</span></div><h3>网络留言的误伤</h3><div class="sec-title">三图提示</div><ul><li>你在班级群里发了玩笑话。</li><li>同学因此难过并沉默。</li><li>你公开道歉并学习网络礼仪。</li></ul><div class="sec-title">引导</div><ul><li>你为什么意识到问题严重？</li><li>以后你会怎样表达更合适？</li></ul><p class="req">写作要求：150字以内，强调责任与尊重。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-17</span><span class="tag">五年级</span></div><h3>科学实验失败了</h3><div class="sec-title">三图提示</div><ul><li>小组实验结果与预期不同。</li><li>有人急着怪别人操作错误。</li><li>你建议复盘步骤并重新实验成功。</li></ul><div class="sec-title">引导</div><ul><li>你如何带动大家理性分析？</li><li>失败对学习有什么价值？</li></ul><p class="req">写作要求：150字以内，突出探究精神。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-18</span><span class="tag">五年级</span></div><h3>陌生人的求助</h3><div class="sec-title">三图提示</div><ul><li>商场里一位小孩找不到家人。</li><li>你先安抚他，再找保安协助。</li><li>家长赶到后连连道谢。</li></ul><div class="sec-title">引导</div><ul><li>你为什么没有单独带他离开？</li><li>这件事让你明白哪些安全原则？</li></ul><p class="req">写作要求：150字以内，体现安全意识与冷静判断。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-19</span><span class="tag">五年级</span></div><h3>当我成为“学习伙伴”</h3><div class="sec-title">三图提示</div><ul><li>老师安排你帮助新转学同学。</li><li>他听不懂课堂节奏，常常着急。</li><li>你陪他复习，期末他明显进步。</li></ul><div class="sec-title">引导</div><ul><li>你采取了哪些具体方法？</li><li>帮助别人时你自己有什么收获？</li></ul><p class="req">写作要求：150字以内，强调耐心与责任。</p></article>
+
+      <article class="card" data-grade="P5"><div class="meta"><span class="tag">P5-20</span><span class="tag">五年级</span></div><h3>一次勇敢的道歉</h3><div class="sec-title">三图提示</div><ul><li>你不小心弄坏同学的文具。</li><li>一开始害怕承担责任，想躲避。</li><li>你鼓起勇气道歉并赔偿，对方原谅了你。</li></ul><div class="sec-title">引导</div><ul><li>你内心经历了怎样的挣扎？</li><li>这次道歉如何改变了你？</li></ul><p class="req">写作要求：150字以内，写出诚实与担当。</p></article>
+    </div>
+
+    <footer>
+      使用建议：每次练习先用 3 分钟口头构思（起因-经过-结果），再写作。完成后按“内容完整、语言准确、价值表达”三项自评。
+    </footer>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('button[data-grade]');
+    const cards = document.querySelectorAll('.card');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const grade = btn.dataset.grade;
+
+        cards.forEach(card => {
+          const show = grade === 'all' || card.dataset.grade === grade;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
