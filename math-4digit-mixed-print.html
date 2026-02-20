@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>四位数四则混合运算（打印版）</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <style>
+        body {
+            width: 780px;
+            margin: 0 auto;
+            padding: 16px;
+            font-size: 18px;
+            background: #fcfcfc;
+            color: #111;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin: 8px 0;
+        }
+
+        p.info {
+            text-align: center;
+            padding: 4px 0 10px;
+            margin: 0;
+        }
+
+        .toolbar {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .toolbar input,
+        .toolbar button,
+        .toolbar select {
+            height: 30px;
+            margin: 0 4px;
+            border: 1px solid #333;
+            background: #fff;
+            font-size: 14px;
+        }
+
+        .toolbar input {
+            width: 70px;
+            text-align: center;
+        }
+
+        .sheet {
+            page-break-after: always;
+            margin-bottom: 24px;
+        }
+
+        .sheet:last-child {
+            page-break-after: auto;
+        }
+
+        .sheet-title {
+            font-size: 14px;
+            color: #666;
+            margin: 4px 0 8px;
+            text-align: right;
+        }
+
+        ul.problem-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.problem-list li {
+            list-style: none;
+            border: 1px solid #222;
+            padding: 10px 12px;
+            min-height: 28px;
+            line-height: 28px;
+            font-size: 21px;
+            letter-spacing: 0.5px;
+        }
+
+        .answer-line {
+            display: inline-block;
+            min-width: 84px;
+            border-bottom: 1px solid #222;
+            transform: translateY(-2px);
+        }
+
+        @media print {
+            .toolbar {
+                display: none;
+            }
+
+            body {
+                background: #fff;
+                width: auto;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>四位数四则混合运算（每页20题）</h1>
+    <p class="info">日期：_________&nbsp;&nbsp;开始时间：_________&nbsp;&nbsp;结束时间：_________&nbsp;&nbsp;分数：_________</p>
+
+    <div class="toolbar" id="toolbar">
+        打印页数：
+        <input id="sheetCount" type="number" min="1" max="20" value="1" />
+        题型：
+        <select id="difficulty">
+            <option value="normal" selected>标准混合</option>
+            <option value="withBrackets">含括号混合</option>
+        </select>
+        <button id="btnGenerate">生成题库</button>
+        <button id="btnPrint">打印</button>
+    </div>
+
+    <div id="sheetContainer"></div>
+
+    <script>
+        const PROBLEMS_PER_SHEET = 20;
+        const OPS = ['+', '-', '*', '/'];
+
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function random4Digit() {
+            return randomInt(1000, 9999);
+        }
+
+        function opShow(op) {
+            if (op === '*') return '×';
+            if (op === '/') return '÷';
+            return op;
+        }
+
+        function calc(a, op, b) {
+            if (op === '+') return a + b;
+            if (op === '-') return a - b;
+            if (op === '*') return a * b;
+            if (op === '/') return b !== 0 ? a / b : NaN;
+            return NaN;
+        }
+
+        function precedence(op) {
+            return (op === '*' || op === '/') ? 2 : 1;
+        }
+
+        function makeDivPair() {
+            // 生成 4 位数 ÷ 4 位数 且结果为整数（1~3）
+            const q = randomInt(1, 3);
+            const divisorMax = Math.floor(9999 / q);
+            const divisor = randomInt(1000, Math.max(1000, divisorMax));
+            const dividend = divisor * q;
+            return { a: dividend, b: divisor };
+        }
+
+        function makeOperand(op) {
+            if (op === '/') {
+                return makeDivPair();
+            }
+            return { a: random4Digit(), b: random4Digit() };
+        }
+
+        function isValidResult(n) {
+            return Number.isFinite(n) && Number.isInteger(n) && n >= 0;
+        }
+
+        function buildProblem(withBrackets) {
+            // 题型：a op1 b op2 c（可选括号）
+            for (let t = 0; t < 500; t++) {
+                const op1 = OPS[randomInt(0, OPS.length - 1)];
+                const op2 = OPS[randomInt(0, OPS.length - 1)];
+
+                let a, b, c;
+
+                if (op1 === '/') {
+                    const p = makeDivPair();
+                    a = p.a; b = p.b;
+                } else {
+                    a = random4Digit();
+                    b = random4Digit();
+                }
+
+                if (op2 === '/') {
+                    // c 作为除数时，仅在计算顺序需要除法时生效
+                    c = random4Digit();
+                } else {
+                    c = random4Digit();
+                }
+
+                let result;
+                let text;
+
+                if (withBrackets) {
+                    const leftBracket = Math.random() < 0.5;
+                    if (leftBracket) {
+                        // (a op1 b) op2 c
+                        const first = calc(a, op1, b);
+                        if (!isValidResult(first)) continue;
+
+                        let rightA = first, rightB = c;
+                        if (op2 === '/') {
+                            // 保证整除
+                            const q = randomInt(1, 9);
+                            rightB = random4Digit();
+                            rightA = rightB * q;
+                        }
+                        result = calc(rightA, op2, rightB);
+                        if (!isValidResult(result)) continue;
+
+                        text = `(${a} ${opShow(op1)} ${b}) ${opShow(op2)} ${rightB} = <span class="answer-line"></span>`;
+                    } else {
+                        // a op1 (b op2 c)
+                        let innerB = b, innerC = c;
+                        if (op2 === '/') {
+                            const pair = makeDivPair();
+                            innerB = pair.a;
+                            innerC = pair.b;
+                        }
+                        const inner = calc(innerB, op2, innerC);
+                        if (!isValidResult(inner)) continue;
+
+                        let leftA = a, leftB = inner;
+                        if (op1 === '/') {
+                            const q = randomInt(1, 9);
+                            leftB = random4Digit();
+                            leftA = leftB * q;
+                        }
+                        result = calc(leftA, op1, leftB);
+                        if (!isValidResult(result)) continue;
+
+                        text = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC}) = <span class="answer-line"></span>`;
+                    }
+                } else {
+                    // 标准：按四则优先级计算
+                    let r;
+                    if (precedence(op1) >= precedence(op2)) {
+                        const first = calc(a, op1, b);
+                        if (!isValidResult(first)) continue;
+
+                        let rightA = first, rightB = c;
+                        if (op2 === '/') {
+                            const q = randomInt(1, 9);
+                            rightB = random4Digit();
+                            rightA = rightB * q;
+                        }
+                        r = calc(rightA, op2, rightB);
+                        if (!isValidResult(r)) continue;
+
+                        if (op2 === '/') {
+                            text = `${a} ${opShow(op1)} ${b} ${opShow(op2)} ${rightB} = <span class="answer-line"></span>`;
+                        } else {
+                            text = `${a} ${opShow(op1)} ${b} ${opShow(op2)} ${c} = <span class="answer-line"></span>`;
+                        }
+                    } else {
+                        let innerB = b, innerC = c;
+                        if (op2 === '/') {
+                            const pair = makeDivPair();
+                            innerB = pair.a;
+                            innerC = pair.b;
+                        }
+                        const second = calc(innerB, op2, innerC);
+                        if (!isValidResult(second)) continue;
+
+                        let leftA = a, leftB = second;
+                        if (op1 === '/') {
+                            const q = randomInt(1, 9);
+                            leftB = random4Digit();
+                            leftA = leftB * q;
+                        }
+                        r = calc(leftA, op1, leftB);
+                        if (!isValidResult(r)) continue;
+
+                        if (op1 === '/') {
+                            text = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC}) = <span class="answer-line"></span>`;
+                        } else {
+                            text = `${leftA} ${opShow(op1)} (${innerB} ${opShow(op2)} ${innerC}) = <span class="answer-line"></span>`;
+                        }
+                    }
+                    result = r;
+                }
+
+                // 防止结果极端大，保持可练习性
+                if (result > 99999999) continue;
+
+                return text;
+            }
+
+            // 兜底
+            return `${random4Digit()} + ${random4Digit()} - ${random4Digit()} = <span class="answer-line"></span>`;
+        }
+
+        function generateSheets() {
+            const sheetCount = Math.max(1, Math.min(20, parseInt($('#sheetCount').val(), 10) || 1));
+            const withBrackets = $('#difficulty').val() === 'withBrackets';
+            const all = [];
+
+            for (let s = 1; s <= sheetCount; s++) {
+                let list = '';
+                for (let i = 1; i <= PROBLEMS_PER_SHEET; i++) {
+                    const idx = (s - 1) * PROBLEMS_PER_SHEET + i;
+                    list += `<li>${idx}. ${buildProblem(withBrackets)}</li>`;
+                }
+                all.push(`
+                    <section class="sheet">
+                        <div class="sheet-title">第 ${s} / ${sheetCount} 页（每页 ${PROBLEMS_PER_SHEET} 题）</div>
+                        <ul class="problem-list">${list}</ul>
+                    </section>
+                `);
+            }
+
+            $('#sheetContainer').html(all.join(''));
+        }
+
+        $('#btnGenerate').on('click', generateSheets);
+        $('#btnPrint').on('click', function () {
+            if (!$('#sheetContainer').children().length) {
+                generateSheets();
+            }
+            window.print();
+        });
+
+        $(document).ready(function () {
+            generateSheets();
+        });
+    </script>
+</body>
+
+</html>
