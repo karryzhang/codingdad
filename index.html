@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coding Dad 学习资源导航</title>
+  <style>
+    :root{--bg:#f6f8fc;--card:#fff;--text:#1f2937;--muted:#6b7280;--line:#e5e7eb;--pri:#2563eb}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif}
+    .wrap{max-width:960px;margin:24px auto;padding:0 16px}
+    h1{margin:0 0 8px}.desc{color:var(--muted);margin-bottom:16px}
+    .sec{margin:18px 0}
+    .sec h2{font-size:20px;margin:0 0 10px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+    .card{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;text-decoration:none;color:inherit}
+    .card:hover{border-color:#bfdbfe;box-shadow:0 4px 14px rgba(37,99,235,.12)}
+    .card .t{font-weight:700;margin-bottom:4px}.card .d{font-size:13px;color:var(--muted)}
+    .badge{display:inline-block;background:#eff6ff;color:#1d4ed8;font-size:12px;padding:2px 8px;border-radius:999px;margin-bottom:8px}
+    footer{margin:20px 0;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Coding Dad 学习资源导航</h1>
+    <div class="desc">一站式索引数学、英语与作文练习页面。</div>
+
+    <section class="sec">
+      <h2>数学（math/）</h2>
+      <div class="grid">
+        <a class="card" href="math/math.html"><div class="badge">Math</div><div class="t">基础加减法题目</div><div class="d">随机生成打印版练习</div></a>
+        <a class="card" href="math/math-multiplication.html"><div class="badge">Math</div><div class="t">10以内乘法题</div><div class="d">随机生成打印版练习</div></a>
+        <a class="card" href="math/math-quest.html"><div class="badge">Math</div><div class="t">100以内四则运算</div><div class="d">加减乘除随机题</div></a>
+        <a class="card" href="math/math-4digit-mixed-print.html"><div class="badge">Math</div><div class="t">五年级四则混合运算</div><div class="d">每页20题，含答案页</div></a>
+        <a class="card" href="math/math-NEW.html"><div class="badge">Math</div><div class="t">数学练习（NEW）</div><div class="d">实验/扩展页面</div></a>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>英语与写作（english/）</h2>
+      <div class="grid">
+        <a class="card" href="english/flashcard.html"><div class="badge">English</div><div class="t">英语单词闪卡</div><div class="d">词汇记忆与复习</div></a>
+        <a class="card" href="english/psle-p4-p5-picture-composition-bank.html"><div class="badge">PSLE</div><div class="t">P4/P5 看图作文题库（20题）</div><div class="d">150字以内，含引导问题</div></a>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>游戏（game/）</h2>
+      <div class="grid">
+        <a class="card" href="game/README.md"><div class="badge">Game</div><div class="t">小游戏规划入口</div><div class="d">拼词 / 速算 / 记忆配对（待开发）</div></a>
+      </div>
+    </section>
+
+    <footer>建议将本页作为项目首页：<code>codingdad/index.html</code></footer>
+  </div>
+</body>
+</html>

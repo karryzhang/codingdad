@@ -13,6 +13,12 @@
 - 打印规则：**每页 20 题**，适合线下纸质练习
 - 教学友好：附带 **答案页打印**，题号与题目页一一对应，便于家长/老师批改
 
+### 新增：PSLE 小学四、五年级看图作文题库（20题）
+- 页面：[`english/psle-p4-p5-picture-composition-bank.html`](https://karryzhang.github.io/codingdad/english/psle-p4-p5-picture-composition-bank.html)
+- 题型：看图作文（含三图提示 + 引导问题）
+- 字数：建议每题 **150字以内**
+- 年级：P4 / P5，可筛选查看
+
 > 本次功能设计、实现与排版优化由 **OpenClaw AI 助理** 协作完成。
 
 ---
@@ -26,12 +32,15 @@
 ---
 
 ## 英语学习页面（english/）
-- `english/flashcard.html`：英语单词闪卡（可继续扩展词库与难度）
+- [english/flashcard.html](https://karryzhang.github.io/codingdad/english/flashcard.html)：英语单词闪卡（可继续扩展词库与难度）
+- [english/psle-p4-p5-picture-composition-bank.html](https://karryzhang.github.io/codingdad/english/psle-p4-p5-picture-composition-bank.html)：PSLE 小学四、五年级看图作文题库（20题）
 
 ## 游戏页面（game/）
 - 预留目录：用于后续创建网页小游戏（如拼词、速算闯关、记忆配对）
 
+## 首页导航
+- [index.html](https://karryzhang.github.io/codingdad/index.html)：统一索引 math / english / game 资源入口
+
 ## 其他页面
-- `poetry.html`：还在设计中，唐诗 300 首背诵辅助程序（含拼音标注）
-- `metronome.html`：音乐练习节拍器，可设定频率与倒计时，每分钟提醒
-- `psle-p4-p5-picture-composition-bank.html`：新加坡 P4/P5 看图作文题库（20题）
+- [poetry.html](https://karryzhang.github.io/codingdad/poetry.html)：还在设计中，唐诗 300 首背诵辅助程序（含拼音标注）
+- [metronome.html](https://karryzhang.github.io/codingdad/metronome.html)：音乐练习节拍器，可设定频率与倒计时，每分钟提醒
