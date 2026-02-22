@@ -697,16 +697,16 @@
             <span class="chip chip-review">🔁 {{qs.reviewCount}}</span>
             <span class="chip chip-master">🏆 {{masteredCount}}</span>
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
-            <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}天</span>
+            <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
         <span class="level-badge">{{levelInfo.icon}} {{levelInfo.name}}</span>
         <div class="hd-btns">
             <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
-                    :title="autoPlay ? '自动朗读：开（点击关闭）' : '自动朗读：关（点击开启）'">
+                    :title="autoPlay ? ui.autoPlayOn : ui.autoPlayOff">
                 🔊
             </button>
-            <button class="btn-hd" @click="exportProgress" title="导出进度">💾</button>
-            <button class="btn-hd danger" @click="confirmReset">重置</button>
+            <button class="btn-hd" @click="exportProgress" :title="ui.exportBtn">💾</button>
+            <button class="btn-hd danger" @click="confirmReset">{{ui.resetBtn}}</button>
         </div>
     </div>
 
@@ -723,44 +723,44 @@
     <!-- Loading -->
     <div v-if="loading" class="loading-scr">
         <div class="spinner"></div>
-        <p>正在加载词汇...</p>
+        <p>{{ui.loading}}</p>
     </div>
 
     <!-- Session Done -->
     <div v-else-if="sessionDone" class="done-scr">
         <div class="done-emoji">🎉</div>
-        <div class="done-title">今日任务完成！</div>
+        <div class="done-title">{{ui.doneTitle}}</div>
         <div class="done-stats">
             <div class="done-stat">
                 <div class="done-stat-val">{{todayLearnedCount}}</div>
-                <div class="done-stat-label">今日新学</div>
+                <div class="done-stat-label">{{ui.doneTodayLearned}}</div>
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{sessionCorrect}}</div>
-                <div class="done-stat-label">本次答对</div>
+                <div class="done-stat-label">{{ui.doneSessionCorrect}}</div>
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{masteredCount}}</div>
-                <div class="done-stat-label">已掌握</div>
+                <div class="done-stat-label">{{ui.doneMastered}}</div>
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{dailyStreak}}</div>
-                <div class="done-stat-label">📅 连续天数</div>
+                <div class="done-stat-label">{{ui.doneDailyStreak}}</div>
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{totalReviewed}}</div>
-                <div class="done-stat-label">累计答题</div>
+                <div class="done-stat-label">{{ui.doneTotalReviewed}}</div>
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{points}}</div>
-                <div class="done-stat-label">积分</div>
+                <div class="done-stat-label">{{ui.donePoints}}</div>
             </div>
         </div>
         <div class="done-level">{{levelInfo.icon}} {{levelInfo.name}} · {{levelInfo.desc}}</div>
         <div v-if="achievements.length > 0" style="font-size:0.82rem;color:var(--muted);">
-            成就：<span v-for="id in achievements" :key="id">{{achIcon(id)}}</span>
+            {{ui.achLabel}}：<span v-for="id in achievements" :key="id">{{achIcon(id)}}</span>
         </div>
-        <button class="btn-more" @click="loadMore">继续学习更多</button>
+        <button class="btn-more" @click="loadMore">{{ui.doneContinue}}</button>
     </div>
 
     <!-- Main -->
@@ -770,7 +770,7 @@
             <div class="prog-track">
                 <div class="prog-fill" :style="{width: sessionPct + '%'}"></div>
             </div>
-            <div class="prog-text">{{queue.length}} 剩余</div>
+            <div class="prog-text">{{queue.length}} {{ui.remaining}}</div>
         </div>
 
         <!-- Card -->
@@ -792,9 +792,9 @@
                     </div>
                     <button class="audio-btn" :class="{playing: audioPlaying}"
                             @click.stop="playAudio(cur.word)">
-                        <span>🔊</span> <span>{{audioPlaying ? '播放中…' : '发音'}}</span>
+                        <span>🔊</span> <span>{{audioPlaying ? ui.audioPlaying : ui.audioPlay}}</span>
                     </button>
-                    <div class="front-hint">点击翻转 · 按空格键</div>
+                    <div class="front-hint">{{ui.flipHint}}</div>
                 </div>
 
                 <!-- Back -->
@@ -822,35 +822,33 @@
         <transition name="fade">
             <div v-if="flipped" key="controls" class="controls">
                 <button class="cb cb-again" @click="answer('again')">
-                    <span class="cb-label">忘了</span>
+                    <span class="cb-label">{{ui.btnAgain}}</span>
                     <span class="cb-interval">{{iv('again')}}</span>
                 </button>
                 <button class="cb cb-hard" @click="answer('hard')">
-                    <span class="cb-label">模糊</span>
+                    <span class="cb-label">{{ui.btnHard}}</span>
                     <span class="cb-interval">{{iv('hard')}}</span>
                 </button>
                 <button class="cb cb-good" @click="answer('good')">
-                    <span class="cb-label">记住了</span>
+                    <span class="cb-label">{{ui.btnGood}}</span>
                     <span class="cb-interval">{{iv('good')}}</span>
                 </button>
                 <button class="cb cb-easy" @click="answer('easy')">
-                    <span class="cb-label">很熟</span>
+                    <span class="cb-label">{{ui.btnEasy}}</span>
                     <span class="cb-interval">{{iv('easy')}}</span>
                 </button>
             </div>
-            <div v-else key="hint" class="key-hint">
-                空格翻转 &nbsp;·&nbsp; 翻转后：← 忘了 &nbsp; ↓ 模糊 &nbsp; → 记住 &nbsp; ↑ 很熟
-            </div>
+            <div v-else key="hint" class="key-hint" v-html="ui.keyHint"></div>
         </transition>
     </main>
 
     <!-- Footer -->
     <div v-if="!loading && !sessionDone" class="ft">
         <div class="ft-row">
-            <span>积分 <strong>{{points}}</strong></span>
-            <span>连击 <strong>{{streak}}</strong></span>
-            <span>掌握 <strong>{{masteredCount}}</strong> / {{allWords.length}}</span>
-            <span>总复习 <strong>{{totalReviewed}}</strong></span>
+            <span>{{ui.ftPoints}} <strong>{{points}}</strong></span>
+            <span>{{ui.ftStreak}} <strong>{{streak}}</strong></span>
+            <span>{{ui.ftMastered}} <strong>{{masteredCount}}</strong> / {{allWords.length}}</span>
+            <span>{{ui.ftTotalReviewed}} <strong>{{totalReviewed}}</strong></span>
         </div>
         <div class="xp-row">
             <span class="xp-label">{{levelInfo.icon}} {{levelInfo.name}}</span>
@@ -858,7 +856,7 @@
                 <div class="xp-fill" :style="{width: levelProgress + '%'}"></div>
             </div>
             <span class="xp-next" v-if="nextLevelInfo">{{nextLevelInfo.icon}} {{nextLevelInfo.name}}</span>
-            <span class="xp-next" v-else>👑 满级</span>
+            <span class="xp-next" v-else>{{ui.ftMaxLevel}}</span>
         </div>
     </div>
 
@@ -876,10 +874,10 @@
     <img class="pwa-icon" src="icons/apple-touch-icon.png" alt="VocabLoop">
     <div class="pwa-text">
         <strong>VocabLoop</strong>
-        <span>添加到主屏幕，随时随地刷词</span>
+        <span id="pwa-android-desc"></span>
     </div>
-    <button id="pwa-install-btn">安装</button>
-    <button id="pwa-dismiss-android" aria-label="关闭">✕</button>
+    <button id="pwa-install-btn"></button>
+    <button id="pwa-dismiss-android" aria-label="dismiss">✕</button>
 </div>
 
 <!-- ── iOS "Add to Home Screen" guide ────────────────────────────────── -->
@@ -888,37 +886,175 @@
         <div class="pwa-header">
             <img src="icons/apple-touch-icon.png" alt="VocabLoop icon">
             <div class="pwa-header-text">
-                <h3>添加 VocabLoop 到主屏幕</h3>
-                <p>像 App 一样随时打开，无需浏览器</p>
+                <h3 id="pwa-ios-title"></h3>
+                <p id="pwa-ios-desc"></p>
             </div>
         </div>
         <div class="pwa-steps">
             <div class="pwa-step">
                 <div class="step-num">1</div>
-                <div class="step-text">点击底部工具栏的 <em>分享</em> 按钮</div>
+                <div class="step-text" id="pwa-step1"></div>
                 <div class="step-icon">⬆️</div>
             </div>
             <div class="pwa-step">
                 <div class="step-num">2</div>
-                <div class="step-text">向下滑动，选择 <em>「添加到主屏幕」</em></div>
+                <div class="step-text" id="pwa-step2"></div>
                 <div class="step-icon">📲</div>
             </div>
             <div class="pwa-step">
                 <div class="step-num">3</div>
-                <div class="step-text">点击右上角 <em>「添加」</em>，大功告成！</div>
+                <div class="step-text" id="pwa-step3"></div>
                 <div class="step-icon">✅</div>
             </div>
         </div>
-        <button id="pwa-dismiss-ios">我知道了</button>
+        <button id="pwa-dismiss-ios"></button>
     </div>
 </div>
 
 <script>
+// ── Internationalisation ────────────────────────────────────────────────────
+const LANG = /^zh/i.test(navigator.language) ? 'zh' : 'en';
+const STRINGS = {
+  zh: {
+    deckPET: 'PET 词汇', deckCrypto: 'Crypto 词汇', deckDaily: '日常口语',
+    autoPlayOn:  '自动朗读：开（点击关闭）', autoPlayOff: '自动朗读：关（点击开启）',
+    exportBtn: '导出进度', resetBtn: '重置', dayUnit: '天',
+    loading: '正在加载词汇...',
+    doneTitle: '今日任务完成！',
+    doneTodayLearned: '今日新学', doneSessionCorrect: '本次答对',
+    doneMastered: '已掌握', doneDailyStreak: '📅 连续天数',
+    doneTotalReviewed: '累计答题', donePoints: '积分',
+    doneContinue: '继续学习更多', achLabel: '成就',
+    audioPlaying: '播放中…', audioPlay: '发音',
+    flipHint: '点击翻转 · 按空格键',
+    btnAgain: '忘了', btnHard: '模糊', btnGood: '记住了', btnEasy: '很熟',
+    keyHint: '空格翻转 &nbsp;·&nbsp; 翻转后：← 忘了 &nbsp; ↓ 模糊 &nbsp; → 记住 &nbsp; ↑ 很熟',
+    ftPoints: '积分', ftStreak: '连击', ftMastered: '掌握',
+    ftTotalReviewed: '总复习', ftMaxLevel: '👑 满级', remaining: '剩余',
+    now: '现在', min: ' 分钟', day: ' 天',
+    graduated:  '🎓 初步掌握！',
+    mastered:   (n) => `🏆 已掌握 ${n} 个单词！`,
+    reviewToday: (n) => `🔄 再刷一遍今日 ${n} 个词！`,
+    noMoreWords:  '所有词汇都学完了！\n请明天继续复习到期的单词。',
+    loadError:    (msg, file) => `加载词汇失败：${msg}\n请确保文件 ${file} 存在。`,
+    confirmReset: (name) => `确定重置【${name}】的学习进度吗？\n词典缓存会保留。`,
+    achievementUnlocked: (icon, name) => `${icon} 成就解锁：${name}`,
+    againMsgs: ['没关系，再来！💪', '继续加油！🔄', '复习一次！📖', '不怕，慢慢来！🌱'],
+    goodMsgs:  ['✓ 很好！', '👍 记住了！', '💪 不错！', '✨ 棒！', '🎯 准确！', '👏 继续！', '💡 清晰！', '🌟 很棒！'],
+    easyMsgs:  ['太棒了！🌟', '完美！⭐', '出色！🚀', '厉害！💎', '超强！⚡', '满分！🎯'],
+    streakToasts: {
+      3:  { msg: '👍 连击 3！',            type: 'good' },
+      5:  { msg: '🔥 连击 5！',            type: 'bonus' },
+      7:  { msg: '⚡ 连击 7！燃起来！',    type: 'bonus' },
+      10: { msg: '🔥 连击 10！超厉害！',   type: 'bonus' },
+      15: { msg: '💎 连击 15！无敌！',     type: 'bonus' },
+      20: { msg: '👑 连击 20！传奇！',     type: 'bonus' },
+      30: { msg: '🌟 连击 30！封神！',     type: 'bonus' },
+      50: { msg: '🚀 连击 50！无人能及！', type: 'bonus' },
+    },
+    stages: { new: '新词', learning: '学习中', young: '熟悉', mature: '已掌握', relearn: '重学' },
+    levels: [
+      { min:    0, icon: '🌱', name: '初学者', desc: '继续加油！' },
+      { min:   50, icon: '📘', name: '入门者', desc: '进步神速！' },
+      { min:  150, icon: '⭐', name: '进阶者', desc: '词汇量不错！' },
+      { min:  350, icon: '🎯', name: '熟练者', desc: '相当厉害！' },
+      { min:  600, icon: '🏆', name: '精通者', desc: '词汇达人！' },
+      { min: 1000, icon: '👑', name: '宗师',   desc: '登峰造极！' },
+    ],
+    achievements: [
+      { id: 'first_answer',  icon: '🎯', name: '第一步',    desc: '完成第一次答题' },
+      { id: 'streak_5',      icon: '🔥', name: '连击 5',    desc: '单次连击达到 5' },
+      { id: 'streak_20',     icon: '⚡', name: '连击 20',   desc: '单次连击达到 20' },
+      { id: 'daily_3',       icon: '📅', name: '三日连续',  desc: '连续学习 3 天' },
+      { id: 'daily_7',       icon: '🗓️', name: '坚持一周',  desc: '连续学习 7 天' },
+      { id: 'daily_30',      icon: '🏅', name: '月度达人',  desc: '连续学习 30 天' },
+      { id: 'master_1',      icon: '⭐', name: '初掌',      desc: '掌握第 1 个单词' },
+      { id: 'master_10',     icon: '🌟', name: '十词达人',  desc: '掌握 10 个单词' },
+      { id: 'master_100',    icon: '💯', name: '百词大师',  desc: '掌握 100 个单词' },
+      { id: 'reviewed_100',  icon: '📖', name: '百次答题',  desc: '累计答题 100 次' },
+      { id: 'reviewed_500',  icon: '📚', name: '五百勤练',  desc: '累计答题 500 次' },
+    ],
+    pwaAndroidDesc: '添加到主屏幕，随时随地刷词', pwaAndroidInstall: '安装', pwaAndroidDismiss: '关闭',
+    pwaIOSTitle: '添加 VocabLoop 到主屏幕', pwaIOSDesc: '像 App 一样随时打开，无需浏览器',
+    pwaIOSStep1: '点击底部工具栏的 <em>分享</em> 按钮',
+    pwaIOSStep2: '向下滑动，选择 <em>「添加到主屏幕」</em>',
+    pwaIOSStep3: '点击右上角 <em>「添加」</em>，大功告成！',
+    pwaIOSDismiss: '我知道了',
+  },
+  en: {
+    deckPET: 'PET Vocab', deckCrypto: 'Crypto', deckDaily: 'Daily English',
+    autoPlayOn:  'Auto-read: ON (tap to disable)', autoPlayOff: 'Auto-read: OFF (tap to enable)',
+    exportBtn: 'Export progress', resetBtn: 'Reset', dayUnit: 'd',
+    loading: 'Loading vocabulary…',
+    doneTitle: 'Session complete!',
+    doneTodayLearned: 'New today', doneSessionCorrect: 'Correct',
+    doneMastered: 'Mastered', doneDailyStreak: '📅 Day streak',
+    doneTotalReviewed: 'Reviews', donePoints: 'Points',
+    doneContinue: 'Study more', achLabel: 'Badges',
+    audioPlaying: 'Playing…', audioPlay: 'Pronounce',
+    flipHint: 'Tap to flip · Space',
+    btnAgain: 'Again', btnHard: 'Hard', btnGood: 'Good', btnEasy: 'Easy',
+    keyHint: 'Space: flip &nbsp;·&nbsp; After flip: ← Again &nbsp; ↓ Hard &nbsp; → Good &nbsp; ↑ Easy',
+    ftPoints: 'Points', ftStreak: 'Streak', ftMastered: 'Mastered',
+    ftTotalReviewed: 'Reviews', ftMaxLevel: '👑 Max level', remaining: 'left',
+    now: 'now', min: ' min', day: 'd',
+    graduated:  '🎓 Graduated!',
+    mastered:   (n) => `🏆 Mastered ${n} word${n === 1 ? '' : 's'}!`,
+    reviewToday: (n) => `🔄 Re-reviewing today's ${n} words!`,
+    noMoreWords:  "All words done!\nCome back tomorrow for due cards.",
+    loadError:    (msg, file) => `Failed to load: ${msg}\nMake sure ${file} exists.`,
+    confirmReset: (name) => `Reset progress for "${name}"?\n(Dictionary cache is kept.)`,
+    achievementUnlocked: (icon, name) => `${icon} Achievement: ${name}`,
+    againMsgs: ["No worries, try again! 💪", "Keep going! 🔄", "Review time! 📖", "Slow and steady! 🌱"],
+    goodMsgs:  ['✓ Got it!', '👍 Nailed it!', '💪 Nice!', '✨ Great!', '🎯 Spot on!', '👏 Keep it up!', '💡 Clear!', '🌟 Excellent!'],
+    easyMsgs:  ['Awesome! 🌟', 'Perfect! ⭐', 'Outstanding! 🚀', 'Superb! 💎', 'Blazing! ⚡', 'Flawless! 🎯'],
+    streakToasts: {
+      3:  { msg: '👍 3-streak!',          type: 'good' },
+      5:  { msg: '🔥 5-streak!',          type: 'bonus' },
+      7:  { msg: '⚡ 7-streak! On fire!', type: 'bonus' },
+      10: { msg: '🔥 10-streak! Amazing!',type: 'bonus' },
+      15: { msg: '💎 15-streak! Insane!', type: 'bonus' },
+      20: { msg: '👑 20-streak! Legend!', type: 'bonus' },
+      30: { msg: '🌟 30-streak! Godlike!',type: 'bonus' },
+      50: { msg: '🚀 50-streak! Unreal!', type: 'bonus' },
+    },
+    stages: { new: 'New', learning: 'Learning', young: 'Young', mature: 'Mastered', relearn: 'Relearn' },
+    levels: [
+      { min:    0, icon: '🌱', name: 'Beginner',   desc: 'Keep it up!' },
+      { min:   50, icon: '📘', name: 'Novice',     desc: 'Great progress!' },
+      { min:  150, icon: '⭐', name: 'Learner',    desc: 'Nice vocabulary!' },
+      { min:  350, icon: '🎯', name: 'Proficient', desc: 'Impressive!' },
+      { min:  600, icon: '🏆', name: 'Advanced',   desc: 'Vocabulary pro!' },
+      { min: 1000, icon: '👑', name: 'Expert',     desc: 'The pinnacle!' },
+    ],
+    achievements: [
+      { id: 'first_answer',  icon: '🎯', name: 'First Step',    desc: 'Complete your first review' },
+      { id: 'streak_5',      icon: '🔥', name: 'Streak ×5',     desc: 'Hit a 5-card streak' },
+      { id: 'streak_20',     icon: '⚡', name: 'Streak ×20',    desc: 'Hit a 20-card streak' },
+      { id: 'daily_3',       icon: '📅', name: '3-Day Run',     desc: 'Study 3 days in a row' },
+      { id: 'daily_7',       icon: '🗓️', name: 'Full Week',     desc: 'Study 7 days in a row' },
+      { id: 'daily_30',      icon: '🏅', name: 'Monthly Pro',   desc: 'Study 30 days in a row' },
+      { id: 'master_1',      icon: '⭐', name: 'First Word',    desc: 'Master your first word' },
+      { id: 'master_10',     icon: '🌟', name: 'Ten Words',     desc: 'Master 10 words' },
+      { id: 'master_100',    icon: '💯', name: 'Century',       desc: 'Master 100 words' },
+      { id: 'reviewed_100',  icon: '📖', name: '100 Reviews',   desc: 'Complete 100 reviews' },
+      { id: 'reviewed_500',  icon: '📚', name: '500 Reviews',   desc: 'Complete 500 reviews' },
+    ],
+    pwaAndroidDesc: 'Add to home screen for quick access', pwaAndroidInstall: 'Install', pwaAndroidDismiss: 'Dismiss',
+    pwaIOSTitle: 'Add VocabLoop to Home Screen', pwaIOSDesc: 'Open it like an app — no browser needed',
+    pwaIOSStep1: 'Tap the <em>Share</em> button in the toolbar',
+    pwaIOSStep2: 'Scroll down and tap <em>"Add to Home Screen"</em>',
+    pwaIOSStep3: 'Tap <em>"Add"</em> in the top-right corner',
+    pwaIOSDismiss: 'Got it',
+  },
+};
+const UI = STRINGS[LANG];
+
 // ── Constants ──────────────────────────────────────────────────────────────
 const DECKS = [
-    { id: 'pet',    icon: '📚', name: 'PET 词汇',    file: '../game/pet-words-1000.json' },
-    { id: 'crypto', icon: '₿',  name: 'Crypto 词汇', file: '../game/crypto-words-1000.json' },
-    { id: 'daily',  icon: '💬', name: '日常口语',    file: '../game/daily-words-1000.json' },
+    { id: 'pet',    icon: '📚', name: UI.deckPET,    file: '../game/pet-words-1000.json' },
+    { id: 'crypto', icon: '₿',  name: UI.deckCrypto, file: '../game/crypto-words-1000.json' },
+    { id: 'daily',  icon: '💬', name: UI.deckDaily,  file: '../game/daily-words-1000.json' },
 ];
 const DECK_PREF_KEY = 'preferred_deck';
 const DICT_KEY      = 'shared_dict_v1';
@@ -949,11 +1085,11 @@ function today() {
            String(d.getDate()).padStart(2, '0');
 }
 function fmtMs(ms) {
-    if (ms <= 0) return '现在';
+    if (ms <= 0) return UI.now;
     const m = Math.round(ms / 60000);
-    if (m < 60) return m + ' 分钟';
+    if (m < 60) return m + UI.min;
     const d = Math.round(ms / 86400000);
-    return d + ' 天';
+    return d + UI.day;
 }
 
 const POS_ZH = {
@@ -964,51 +1100,13 @@ const POS_ZH = {
     abbreviation: '缩写',
 };
 
-const LEVELS = [
-    { min:    0, icon: '🌱', name: '初学者', desc: '继续加油！' },
-    { min:   50, icon: '📘', name: '入门者', desc: '进步神速！' },
-    { min:  150, icon: '⭐', name: '进阶者', desc: '词汇量不错！' },
-    { min:  350, icon: '🎯', name: '熟练者', desc: '相当厉害！' },
-    { min:  600, icon: '🏆', name: '精通者', desc: '词汇达人！' },
-    { min: 1000, icon: '👑', name: '宗师',   desc: '登峰造极！' },
-];
-
-const GLOBAL_KEY = 'srs_global_v1';
-const ACHIEVEMENTS = [
-    { id: 'first_answer',  icon: '🎯', name: '第一步',    desc: '完成第一次答题' },
-    { id: 'streak_5',      icon: '🔥', name: '连击 5',    desc: '单次连击达到 5' },
-    { id: 'streak_20',     icon: '⚡', name: '连击 20',   desc: '单次连击达到 20' },
-    { id: 'daily_3',       icon: '📅', name: '三日连续',  desc: '连续学习 3 天' },
-    { id: 'daily_7',       icon: '🗓️', name: '坚持一周',  desc: '连续学习 7 天' },
-    { id: 'daily_30',      icon: '🏅', name: '月度达人',  desc: '连续学习 30 天' },
-    { id: 'master_1',      icon: '⭐', name: '初掌',      desc: '掌握第 1 个单词' },
-    { id: 'master_10',     icon: '🌟', name: '十词达人',  desc: '掌握 10 个单词' },
-    { id: 'master_100',    icon: '💯', name: '百词大师',  desc: '掌握 100 个单词' },
-    { id: 'reviewed_100',  icon: '📖', name: '百次答题',  desc: '累计答题 100 次' },
-    { id: 'reviewed_500',  icon: '📚', name: '五百勤练',  desc: '累计答题 500 次' },
-];
-
-// ── Feedback message pools ───────────────────────────────────────────────────
-const AGAIN_MSGS = [
-    '没关系，再来！💪', '继续加油！🔄', '复习一次！📖', '不怕，慢慢来！🌱',
-];
-const GOOD_MSGS = [
-    '✓ 很好！', '👍 记住了！', '💪 不错！', '✨ 棒！', '🎯 准确！',
-    '👏 继续！', '💡 清晰！', '🌟 很棒！',
-];
-const EASY_MSGS = [
-    '太棒了！🌟', '完美！⭐', '出色！🚀', '厉害！💎', '超强！⚡', '满分！🎯',
-];
-const STREAK_TOASTS = {
-    3:  { msg: '👍 连击 3！',          type: 'good' },
-    5:  { msg: '🔥 连击 5！',          type: 'bonus' },
-    7:  { msg: '⚡ 连击 7！燃起来！',  type: 'bonus' },
-    10: { msg: '🔥 连击 10！超厉害！', type: 'bonus' },
-    15: { msg: '💎 连击 15！无敌！',   type: 'bonus' },
-    20: { msg: '👑 连击 20！传奇！',   type: 'bonus' },
-    30: { msg: '🌟 连击 30！封神！',   type: 'bonus' },
-    50: { msg: '🚀 连击 50！无人能及！', type: 'bonus' },
-};
+const LEVELS         = UI.levels;
+const GLOBAL_KEY     = 'srs_global_v1';
+const ACHIEVEMENTS   = UI.achievements;
+const AGAIN_MSGS     = UI.againMsgs;
+const GOOD_MSGS      = UI.goodMsgs;
+const EASY_MSGS      = UI.easyMsgs;
+const STREAK_TOASTS  = UI.streakToasts;
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // ── Vue instance ────────────────────────────────────────────────────────────
@@ -1041,13 +1139,8 @@ new Vue({
             // ── Session ───────────────────────────────────────────────────
             extraNewAllowed:  0,  // cumulative extra new cards from loadMore
             sessionCorrect:   0,  // all correct answers this session (incl. learning)
-            stageLabel: {
-                new:      '新词',
-                learning: '学习中',
-                young:    '熟悉',
-                mature:   '已掌握',
-                relearn:  '重学',
-            },
+            stageLabel:  Object.assign({}, UI.stages),
+            ui:          UI,      // exposes all i18n strings to the template
         };
     },
 
@@ -1145,23 +1238,28 @@ new Vue({
                 if (level === 'again') return fmtMs(LEARN_STEPS[0] * 60000);
                 if (level === 'hard')  return fmtMs(LEARN_STEPS[Math.max(0, step - 1)] * 60000);
                 if (level === 'good') {
-                    if (step >= LEARN_STEPS.length - 1) return GRAD_INT + ' 天';
+                    if (step >= LEARN_STEPS.length - 1) return GRAD_INT + UI.day;
                     return fmtMs(LEARN_STEPS[step + 1] * 60000);
                 }
-                if (level === 'easy') return EASY_INT + ' 天';
+                if (level === 'easy') return EASY_INT + UI.day;
             }
             if (stage === 'relearn') {
-                if (level === 'again') return '10 分钟';
-                return Math.max(1, Math.round(intv * 0.5)) + ' 天';
+                if (level === 'again') return fmtMs(10 * 60000);
+                return Math.max(1, Math.round(intv * 0.5)) + UI.day;
             }
-            if (level === 'again') return '10 分钟';
-            if (level === 'hard')  return Math.round(intv * 1.2) + ' 天';
-            if (level === 'good')  return Math.round(intv * ef)  + ' 天';
-            if (level === 'easy')  return Math.round(intv * ef * 1.3) + ' 天';
+            if (level === 'again') return fmtMs(10 * 60000);
+            if (level === 'hard')  return Math.round(intv * 1.2) + UI.day;
+            if (level === 'good')  return Math.round(intv * ef)  + UI.day;
+            if (level === 'easy')  return Math.round(intv * ef * 1.3) + UI.day;
             return '—';
         },
 
-        posZh(pos) { return POS_ZH[pos] || pos; },
+        posZh(pos) {
+            if (!pos) return '';
+            if (LANG === 'zh') return POS_ZH[pos.toLowerCase()] || pos;
+            // English: capitalise first letter of full API words, pass abbreviations through
+            return pos.length > 4 ? pos.charAt(0).toUpperCase() + pos.slice(1) : pos;
+        },
         achIcon(id) {
             const a = ACHIEVEMENTS.find(x => x.id === id);
             return a ? a.icon : '';
@@ -1262,8 +1360,7 @@ new Vue({
                 }));
                 this.buildQueue();
             } catch (e) {
-                alert('加载词汇失败：' + e.message +
-                      '\n请确保文件 ' + this.currentDeck.file + ' 存在。');
+                alert(UI.loadError(e.message, this.currentDeck.file));
             }
             this.loading = false;
         },
@@ -1434,10 +1531,10 @@ new Vue({
                 if (streakToast) {
                     this.showToast(streakToast.msg, streakToast.type);
                     if (newGraduated) {
-                        setTimeout(() => this.showToast('🎓 初步掌握！', 'bonus'), 2500);
+                        setTimeout(() => this.showToast(UI.graduated, 'bonus'), 2500);
                     }
                 } else if (newGraduated) {
-                    this.showToast('🎓 初步掌握！', 'bonus');
+                    this.showToast(UI.graduated, 'bonus');
                 } else if (level === 'easy') {
                     this.showToast(pick(EASY_MSGS), 'bonus');
                 } else {
@@ -1451,7 +1548,7 @@ new Vue({
                 const mKey = '_milestone_' + mc;
                 if (!this.state[mKey]) {
                     this.$set(this.state, mKey, 1);
-                    setTimeout(() => this.showToast('🏆 已掌握 ' + mc + ' 个单词！', 'bonus'), 800);
+                    setTimeout(() => this.showToast(UI.mastered(mc), 'bonus'), 800);
                 }
             }
 
@@ -1519,7 +1616,7 @@ new Vue({
             }
         },
         confirmReset() {
-            if (confirm('确定重置【' + this.currentDeck.name + '】的学习进度吗？\n词典缓存会保留。')) {
+            if (confirm(UI.confirmReset(this.currentDeck.name))) {
                 localStorage.removeItem(this.storageKey);
                 this.state  = {};
                 this.points = 0;
@@ -1543,14 +1640,14 @@ new Vue({
                 return s && s.firstSeen === tdy;
             });
             if (todayWords.length === 0) {
-                alert('所有词汇都学完了！\n请明天继续复习到期的单词。');
+                alert(UI.noMoreWords);
                 return;
             }
             this.sessionCorrect  = 0;
             this.queue           = shuffle([...todayWords]);
             this.sessionTotal    = this.queue.length;
             this.prefetchAhead();
-            this.showToast('🔄 再刷一遍今日 ' + todayWords.length + ' 个词！', 'good');
+            this.showToast(UI.reviewToday(todayWords.length), 'good');
         },
 
         // ── Global state (daily streak, achievements) ─────────────────────
@@ -1613,7 +1710,7 @@ new Vue({
                 // saveGlobal() called by answer() — no extra write needed here
                 const a = ACHIEVEMENTS.find(x => x.id === earned[earned.length - 1]);
                 if (a) {
-                    setTimeout(() => this.showToast(a.icon + ' 成就解锁：' + a.name, 'bonus'), 1200);
+                    setTimeout(() => this.showToast(UI.achievementUnlocked(a.icon, a.name), 'bonus'), 1200);
                 }
             }
         },
@@ -1695,6 +1792,16 @@ new Vue({
 <!-- ── PWA Install Prompts ──────────────────────────────────────────────── -->
 <script>
 (function () {
+    // Populate i18n text (UI is defined in the main script block above)
+    document.getElementById('pwa-android-desc').textContent = UI.pwaAndroidDesc;
+    document.getElementById('pwa-install-btn').textContent  = UI.pwaAndroidInstall;
+    document.getElementById('pwa-ios-title').textContent    = UI.pwaIOSTitle;
+    document.getElementById('pwa-ios-desc').textContent     = UI.pwaIOSDesc;
+    document.getElementById('pwa-step1').innerHTML          = UI.pwaIOSStep1;
+    document.getElementById('pwa-step2').innerHTML          = UI.pwaIOSStep2;
+    document.getElementById('pwa-step3').innerHTML          = UI.pwaIOSStep3;
+    document.getElementById('pwa-dismiss-ios').textContent  = UI.pwaIOSDismiss;
+
     const SHOWN_KEY = 'pwa_prompt_shown_v1';
 
     // ── Helper: is this already running as a standalone PWA? ──────────────
