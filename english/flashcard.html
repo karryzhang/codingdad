@@ -375,6 +375,15 @@
             letter-spacing: 0.02em;
             padding: 0 12px;
         }
+        .back-word {
+            font-size: 1.0rem;
+            font-weight: 700;
+            color: rgba(255,255,255,.6);
+            text-align: center;
+            letter-spacing: 0.04em;
+            margin-bottom: 4px;
+            padding: 0 12px;
+        }
         .back-zh {
             font-size: 2.1rem;
             font-weight: 800;
@@ -840,6 +849,7 @@
                         {{stageLabel[curStage]}}
                     </div>
                     <div class="back-fullform" v-if="curZhParts.full">{{curZhParts.full}}</div>
+                    <div class="back-word">{{cur.word}}</div>
                     <div class="back-zh">{{curZhParts.zh}}</div>
                     <div class="back-pos" v-if="curDict && curDict.pos">
                         {{posZh(curDict.pos)}}
