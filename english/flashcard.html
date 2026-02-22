@@ -1,13 +1,870 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>
-        flash  card
-    </title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PET 单词卡</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #f0f4f9;
+            --surface: #fff;
+            --border: #e2e8f0;
+            --text: #1e2533;
+            --muted: #7a8299;
+            --blue: #3b82f6;
+            --green: #22c55e;
+            --amber: #f59e0b;
+            --red: #ef4444;
+            --purple: #8b5cf6;
+            --card-back: #1a3a5c;
+            --r: 16px;
+        }
+
+        html, body { height: 100%; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC',
+                         'Microsoft YaHei', 'Segoe UI', Roboto, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ── Header ─────────────────────────── */
+        .hd {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .hd-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--blue);
+            white-space: nowrap;
+        }
+        .chips {
+            display: flex;
+            gap: 5px;
+            flex: 1;
+            flex-wrap: wrap;
+        }
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            padding: 3px 9px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .chip-new    { background: #dbeafe; color: #1d4ed8; }
+        .chip-learn  { background: #fef3c7; color: #92400e; }
+        .chip-review { background: #d1fae5; color: #065f46; }
+        .chip-master { background: #ede9fe; color: #5b21b6; }
+        .chip-streak { background: #ffe4e6; color: #be123c; }
+        .level-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+        .btn-reset {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 3px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .btn-reset:hover { border-color: var(--red); color: var(--red); }
+
+        /* ── Loading ─────────────────────────── */
+        .loading-scr {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            color: var(--muted);
+        }
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid var(--border);
+            border-top-color: var(--blue);
+            border-radius: 50%;
+            animation: spin 0.75s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── Done screen ─────────────────────── */
+        .done-scr {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 32px 20px;
+            gap: 14px;
+        }
+        .done-emoji  { font-size: 5rem; line-height: 1; }
+        .done-title  { font-size: 1.9rem; font-weight: 800; }
+        .done-stats  {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 6px 0;
+        }
+        .done-stat        { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .done-stat-val    { font-size: 2.2rem; font-weight: 800; color: var(--blue); }
+        .done-stat-label  { font-size: 0.78rem; color: var(--muted); }
+        .done-level       { font-size: 1rem; color: var(--purple); font-weight: 700; }
+        .btn-more {
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: background 0.15s, transform 0.1s;
+        }
+        .btn-more:hover  { background: #2563eb; }
+        .btn-more:active { transform: scale(0.97); }
+
+        /* ── Card area ───────────────────────── */
+        .card-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px 14px 18px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* progress */
+        .prog-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+        .prog-track {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .prog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--green), var(--blue));
+            border-radius: 99px;
+            transition: width 0.5s cubic-bezier(.4,0,.2,1);
+        }
+        .prog-text {
+            font-size: 0.76rem;
+            color: var(--muted);
+            min-width: 46px;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        /* card wrapper – carries shake/bounce */
+        .card-wrap {
+            width: 100%;
+            perspective: 1200px;
+            margin-bottom: 20px;
+        }
+        .card-wrap.shaking  { animation: do-shake  0.45s ease; }
+        .card-wrap.bouncing { animation: do-bounce 0.35s ease; }
+
+        @keyframes do-shake {
+            0%,100% { transform: translateX(0); }
+            15%     { transform: translateX(-8px); }
+            30%     { transform: translateX(8px); }
+            50%     { transform: translateX(-5px); }
+            70%     { transform: translateX(5px); }
+            85%     { transform: translateX(-2px); }
+        }
+        @keyframes do-bounce {
+            0%,100% { transform: scale(1); }
+            50%     { transform: scale(1.03); }
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+            cursor: pointer;
+            outline: none;
+        }
+        .card.flipped { transform: rotateY(180deg); }
+        .card:focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 4px;
+            border-radius: var(--r);
+        }
+
+        .face {
+            position: absolute; inset: 0;
+            backface-visibility: hidden;
+            border-radius: var(--r);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-shadow: 0 6px 28px rgba(0,0,0,0.10);
+        }
+        .face.front { background: var(--surface); }
+        .face.back  { background: var(--card-back); color: #fff; transform: rotateY(180deg); }
+
+        .pos-tag {
+            position: absolute; top: 12px; right: 12px;
+            background: #f0f4fa; color: var(--muted);
+            font-size: 0.66rem; font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 8px; border-radius: 99px;
+        }
+        .front-word {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-align: center;
+            line-height: 1.1;
+        }
+        .front-hint {
+            position: absolute; bottom: 13px;
+            font-size: 0.72rem; color: #c0c8d8;
+        }
+
+        .stage-tag {
+            position: absolute; top: 12px; left: 12px;
+            font-size: 0.66rem; font-weight: 700;
+            padding: 2px 8px; border-radius: 99px;
+        }
+        .st-new     { background: rgba(59,130,246,.25);  color: #93c5fd; }
+        .st-learning{ background: rgba(245,158,11,.25);  color: #fcd34d; }
+        .st-young   { background: rgba(34,197,94,.25);   color: #86efac; }
+        .st-mature  { background: rgba(139,92,246,.25);  color: #c4b5fd; }
+        .st-relearn { background: rgba(239,68,68,.25);   color: #fca5a5; }
+
+        .back-zh   { font-size: 2.2rem; font-weight: 800; text-align: center; line-height: 1.2; }
+        .back-word { font-size: 1rem; color: rgba(255,255,255,.5); margin-top: 8px; }
+
+        /* controls */
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            width: 100%;
+        }
+        .cb {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 6px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            gap: 2px;
+            transition: transform 0.1s;
+        }
+        .cb:active { transform: scale(0.94); }
+        .cb-again { background: #fee2e2; color: #b91c1c; }
+        .cb-hard  { background: #fef9c3; color: #854d0e; }
+        .cb-good  { background: #dcfce7; color: #14532d; }
+        .cb-easy  { background: #ede9fe; color: #4c1d95; }
+        .cb-label    { font-size: 0.88rem; }
+        .cb-interval { font-size: 0.68rem; opacity: 0.65; }
+
+        .key-hint {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.76rem;
+            margin-top: 8px;
+        }
+
+        /* toast */
+        .toast-anchor {
+            position: fixed;
+            top: 62px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 300;
+            pointer-events: none;
+        }
+        .toast {
+            padding: 8px 22px;
+            border-radius: 99px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: #fff;
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .t-good  { background: var(--green); }
+        .t-bad   { background: var(--red); }
+        .t-bonus { background: var(--purple); }
+
+        .toast-enter-active, .toast-leave-active { transition: opacity .25s, transform .25s; }
+        .toast-enter  { opacity: 0; transform: translateY(-8px); }
+        .toast-leave-to { opacity: 0; transform: translateY(-8px); }
+
+        .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
+        .fade-enter, .fade-leave-to { opacity: 0; }
+
+        /* footer */
+        .ft {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 8px 16px;
+            text-align: center;
+        }
+        .ft-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+        .ft-row strong { color: var(--text); }
+
+        @media (max-width: 380px) {
+            .front-word { font-size: 2rem; }
+            .back-zh    { font-size: 1.8rem; }
+            .cb-label   { font-size: 0.8rem; }
+        }
+    </style>
 </head>
 <body>
-    
+<div id="app">
+
+    <!-- Header -->
+    <div class="hd">
+        <div class="hd-title">PET 单词卡</div>
+        <div class="chips">
+            <span class="chip chip-new">🆕 {{qs.newCount}}</span>
+            <span class="chip chip-learn">📖 {{qs.learnCount}}</span>
+            <span class="chip chip-review">🔁 {{qs.reviewCount}}</span>
+            <span class="chip chip-master">🏆 {{masteredCount}}</span>
+            <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
+        </div>
+        <span class="level-badge">{{levelInfo.icon}} {{levelInfo.name}}</span>
+        <button class="btn-reset" @click="confirmReset">重置</button>
+    </div>
+
+    <!-- Loading -->
+    <div v-if="loading" class="loading-scr">
+        <div class="spinner"></div>
+        <p>正在加载词汇...</p>
+    </div>
+
+    <!-- Session Done -->
+    <div v-else-if="sessionDone" class="done-scr">
+        <div class="done-emoji">🎉</div>
+        <div class="done-title">今日任务完成！</div>
+        <div class="done-stats">
+            <div class="done-stat">
+                <div class="done-stat-val">{{masteredCount}}</div>
+                <div class="done-stat-label">已掌握</div>
+            </div>
+            <div class="done-stat">
+                <div class="done-stat-val">{{streak}}</div>
+                <div class="done-stat-label">连击</div>
+            </div>
+            <div class="done-stat">
+                <div class="done-stat-val">{{points}}</div>
+                <div class="done-stat-label">总积分</div>
+            </div>
+        </div>
+        <div class="done-level">{{levelInfo.icon}} {{levelInfo.name}} · {{levelInfo.desc}}</div>
+        <button class="btn-more" @click="loadMore">继续学习更多</button>
+    </div>
+
+    <!-- Main -->
+    <main v-else class="card-area">
+        <!-- Progress -->
+        <div class="prog-row">
+            <div class="prog-track">
+                <div class="prog-fill" :style="{width: sessionPct + '%'}"></div>
+            </div>
+            <div class="prog-text">{{queue.length}} 剩余</div>
+        </div>
+
+        <!-- Card -->
+        <div class="card-wrap" :class="{shaking, bouncing}">
+            <div class="card" :class="{flipped}"
+                 @click="onCardClick"
+                 tabindex="0"
+                 ref="card">
+                <div class="face front">
+                    <div class="pos-tag" v-if="cur.pos">{{cur.pos}}</div>
+                    <div class="front-word">{{cur.word}}</div>
+                    <div class="front-hint">点击翻转 · 按空格键</div>
+                </div>
+                <div class="face back">
+                    <div class="stage-tag" :class="'st-' + curStage">{{stageLabel[curStage]}}</div>
+                    <div class="back-zh">{{cur.zh}}</div>
+                    <div class="back-word">{{cur.word}}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons (after flip) -->
+        <transition name="fade">
+            <div v-if="flipped" class="controls">
+                <button class="cb cb-again" @click="answer('again')">
+                    <span class="cb-label">忘了</span>
+                    <span class="cb-interval">{{iv('again')}}</span>
+                </button>
+                <button class="cb cb-hard" @click="answer('hard')">
+                    <span class="cb-label">模糊</span>
+                    <span class="cb-interval">{{iv('hard')}}</span>
+                </button>
+                <button class="cb cb-good" @click="answer('good')">
+                    <span class="cb-label">记住了</span>
+                    <span class="cb-interval">{{iv('good')}}</span>
+                </button>
+                <button class="cb cb-easy" @click="answer('easy')">
+                    <span class="cb-label">很熟</span>
+                    <span class="cb-interval">{{iv('easy')}}</span>
+                </button>
+            </div>
+            <div v-else class="key-hint">
+                空格翻转 &nbsp;·&nbsp; 翻转后：← 忘了 &nbsp; ↓ 模糊 &nbsp; → 记住 &nbsp; ↑ 很熟
+            </div>
+        </transition>
+    </main>
+
+    <!-- Footer -->
+    <div v-if="!loading && !sessionDone" class="ft">
+        <div class="ft-row">
+            <span>积分 <strong>{{points}}</strong></span>
+            <span>连击 <strong>{{streak}}</strong></span>
+            <span>掌握 <strong>{{masteredCount}}</strong> / {{allWords.length}}</span>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-anchor">
+        <transition name="toast">
+            <div v-if="toast" class="toast" :class="'t-' + toast.type">{{toast.msg}}</div>
+        </transition>
+    </div>
+
+</div>
+
+<script>
+const STORAGE_KEY  = 'pet_srs_v3';
+const MAX_NEW_DAY  = 20;          // new cards per day
+const LEARN_STEPS  = [1, 10];     // learning steps in minutes
+const GRAD_INT     = 1;           // graduating interval (days)
+const EASY_INT     = 4;           // easy bonus interval (days)
+const SESSION_MINS = 20;          // re-add to session if next due ≤ this
+
+function ts()      { return Date.now(); }
+function today()   { return new Date().toISOString().slice(0, 10); }
+function fmtMs(ms) {
+    if (ms <= 0) return '现在';
+    const m = Math.round(ms / 60000);
+    if (m < 60) return m + ' 分钟';
+    const d = Math.round(ms / 86400000);
+    return d + ' 天';
+}
+
+const LEVELS = [
+    { min:   0, icon: '🌱', name: '初学者',   desc: '继续加油！' },
+    { min:  50, icon: '📘', name: '入门者',   desc: '进步神速！' },
+    { min: 150, icon: '⭐', name: '进阶者',   desc: '词汇量不错！' },
+    { min: 350, icon: '🎯', name: '熟练者',   desc: '相当厉害！' },
+    { min: 600, icon: '🏆', name: '精通者',   desc: 'PET 达人！' },
+];
+
+new Vue({
+    el: '#app',
+    data() {
+        return {
+            loading:  true,
+            allWords: [],
+            state:    {},       // wordId → srs state
+            queue:    [],
+            sessionTotal: 0,
+            flipped:  false,
+            shaking:  false,
+            bouncing: false,
+            toast:    null,
+            _toastTmr: null,
+            points:   0,
+            streak:   0,
+            stageLabel: {
+                new:      '新词',
+                learning: '学习中',
+                young:    '熟悉',
+                mature:   '已掌握',
+                relearn:  '重学',
+            },
+        };
+    },
+    computed: {
+        sessionDone() { return !this.loading && this.queue.length === 0; },
+        cur()  { return this.queue[0] || { word: '', zh: '', pos: '' }; },
+        curStage() {
+            const s = this.state[this.cur.word];
+            return s ? (s.stage || 'new') : 'new';
+        },
+        sessionPct() {
+            if (!this.sessionTotal) return 100;
+            return Math.round((1 - this.queue.length / this.sessionTotal) * 100);
+        },
+        masteredCount() {
+            return Object.values(this.state).filter(s => s.stage === 'mature').length;
+        },
+        levelInfo() {
+            const n = this.masteredCount;
+            let lv = LEVELS[0];
+            for (const l of LEVELS) { if (n >= l.min) lv = l; }
+            return lv;
+        },
+        qs() {
+            let newCount = 0, learnCount = 0, reviewCount = 0;
+            for (const w of this.queue) {
+                const s = this.state[w.word];
+                if (!s || s.stage === 'new')                              newCount++;
+                else if (s.stage === 'learning' || s.stage === 'relearn') learnCount++;
+                else                                                       reviewCount++;
+            }
+            return { newCount, learnCount, reviewCount };
+        },
+    },
+    methods: {
+        // ── Interval display ────────────────────────────────────────────
+        iv(level) {
+            const wordId = this.cur.word;
+            const s      = this.state[wordId];
+            const stage  = s ? (s.stage || 'new') : 'new';
+            const step   = s ? (s.learningStep || 0) : 0;
+            const intv   = s ? (s.interval || 0) : 0;
+            const ef     = s ? (s.ef || 2.5) : 2.5;
+
+            if (stage === 'new' || stage === 'learning') {
+                if (level === 'again') return fmtMs(LEARN_STEPS[0] * 60000);
+                if (level === 'hard')  return fmtMs(LEARN_STEPS[Math.max(0, step - 1)] * 60000);
+                if (level === 'good') {
+                    if (step >= LEARN_STEPS.length - 1) return GRAD_INT + ' 天';
+                    return fmtMs(LEARN_STEPS[step + 1] * 60000);
+                }
+                if (level === 'easy') return EASY_INT + ' 天';
+            }
+            if (stage === 'relearn') {
+                if (level === 'again') return '10 分钟';
+                return Math.max(1, Math.round(intv * 0.5)) + ' 天';
+            }
+            // young / mature
+            if (level === 'again') return '10 分钟';
+            if (level === 'hard')  return Math.round(intv * 1.2) + ' 天';
+            if (level === 'good')  return Math.round(intv * ef) + ' 天';
+            if (level === 'easy')  return Math.round(intv * ef * 1.3) + ' 天';
+            return '—';
+        },
+
+        // ── Load JSON ───────────────────────────────────────────────────
+        async loadWords() {
+            try {
+                const res = await fetch('../game/pet-words-1000.json');
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                const data = await res.json();
+                this.allWords = data.map(w => ({
+                    word: w.word,
+                    zh:   w.zh || w.word,
+                    pos:  w.pos || '',
+                }));
+                this.buildQueue();
+            } catch (e) {
+                alert('加载词汇失败：' + e.message +
+                      '\n请确保文件 ../game/pet-words-1000.json 存在。');
+            }
+            this.loading = false;
+        },
+
+        // ── Build today's queue ─────────────────────────────────────────
+        buildQueue(extraNew = 0) {
+            const tdy   = today();
+            const state = this.state;
+            const newToday = Object.values(state).filter(s => s.firstSeen === tdy).length;
+            const slots    = Math.max(0, MAX_NEW_DAY - newToday + extraNew);
+
+            const reviews  = [];
+            const learning = [];
+            const newCards = [];
+
+            for (const w of this.allWords) {
+                const s = state[w.word];
+                if (!s) {
+                    if (newCards.length < slots) newCards.push(w);
+                } else if (s.stage === 'learning' || s.stage === 'relearn') {
+                    if ((s.next || 0) <= ts()) learning.push(w);
+                } else if (s.stage === 'young' || s.stage === 'mature') {
+                    if ((s.next || 0) <= ts()) reviews.push(w);
+                }
+            }
+
+            const q = [...learning, ...reviews, ...newCards];
+            this.queue        = q;
+            this.sessionTotal = q.length || 1;
+        },
+
+        // ── Card interaction ────────────────────────────────────────────
+        onCardClick() { if (!this.flipped) this.flipCard(); },
+        flipCard()    { this.flipped = !this.flipped; },
+
+        // ── SRS answer ──────────────────────────────────────────────────
+        answer(level) {
+            if (!this.flipped) return;
+
+            const wordId = this.cur.word;
+            const tdy    = today();
+            let s = this.state[wordId] || {
+                stage: 'new', interval: 0, ef: 2.5,
+                reps: 0, learningStep: 0, next: 0, firstSeen: tdy,
+            };
+            if (!s.firstSeen) s.firstSeen = tdy;
+
+            let nextMs;
+            let reinsert = false;
+
+            if (s.stage === 'new' || s.stage === 'learning') {
+                if (level === 'again') {
+                    s.learningStep = 0;
+                    nextMs = LEARN_STEPS[0] * 60000;
+                    s.stage = 'learning';
+                    reinsert = true;
+                    this.streak = 0;
+
+                } else if (level === 'hard') {
+                    const step = Math.max(0, (s.learningStep || 0) - 1);
+                    s.learningStep = step;
+                    nextMs = LEARN_STEPS[step] * 60000;
+                    s.stage = 'learning';
+                    reinsert = nextMs <= SESSION_MINS * 60000;
+
+                } else if (level === 'good') {
+                    const step = s.learningStep || 0;
+                    if (step >= LEARN_STEPS.length - 1) {
+                        s.stage    = 'young';
+                        s.interval = GRAD_INT;
+                        s.reps     = 1;
+                        nextMs     = GRAD_INT * 86400000;
+                    } else {
+                        s.learningStep = step + 1;
+                        nextMs  = LEARN_STEPS[s.learningStep] * 60000;
+                        s.stage = 'learning';
+                        reinsert = nextMs <= SESSION_MINS * 60000;
+                    }
+
+                } else { // easy
+                    s.stage    = EASY_INT >= 21 ? 'mature' : 'young';
+                    s.interval = EASY_INT;
+                    s.reps     = 1;
+                    nextMs     = EASY_INT * 86400000;
+                }
+
+            } else if (s.stage === 'relearn') {
+                if (level === 'again') {
+                    nextMs = 10 * 60000;
+                    reinsert = true;
+                    this.streak = 0;
+                } else {
+                    s.interval = Math.max(1, Math.round(s.interval * 0.5));
+                    s.stage    = s.interval >= 21 ? 'mature' : 'young';
+                    nextMs     = s.interval * 86400000;
+                }
+
+            } else {
+                // young / mature – full review
+                if (level === 'again') {
+                    s.stage  = 'relearn';
+                    s.reps   = 0;
+                    nextMs   = 10 * 60000;
+                    reinsert = true;
+                    this.streak = 0;
+
+                } else {
+                    const ef = s.ef || 2.5;
+                    if (level === 'hard') {
+                        s.ef       = Math.max(1.3, ef - 0.15);
+                        s.interval = Math.max(1, Math.round(s.interval * 1.2));
+                    } else if (level === 'good') {
+                        s.interval = Math.max(1, Math.round(s.interval * ef));
+                    } else {
+                        s.ef       = Math.min(3.0, ef + 0.15);
+                        s.interval = Math.max(1, Math.round(s.interval * ef * 1.3));
+                    }
+                    s.stage = s.interval >= 21 ? 'mature' : 'young';
+                    s.reps  = (s.reps || 0) + 1;
+                    nextMs  = s.interval * 86400000;
+
+                    const pts = level === 'hard' ? 10 : level === 'good' ? 20 : 30;
+                    this.points += pts;
+                    this.streak += 1;
+                }
+            }
+
+            s.next = ts() + nextMs;
+            this.$set(this.state, wordId, { ...s });
+            this.flipped = false;
+            this.saveState();
+
+            // feedback
+            const prevStreak = this.streak;
+            if (level === 'again') {
+                this.doShake();
+                this.showToast('没关系，再来！💪', 'bad');
+            } else if (level === 'easy') {
+                this.doBounce();
+                this.showToast('太棒了！🌟', 'bonus');
+            } else if (prevStreak > 0 && prevStreak % 10 === 0) {
+                this.doBounce();
+                this.showToast('🔥 连击 ' + prevStreak + '！超厉害！', 'bonus');
+            } else if (prevStreak > 0 && prevStreak % 5 === 0) {
+                this.doBounce();
+                this.showToast('🔥 连击 ' + prevStreak + '！', 'bonus');
+            } else if (level === 'good') {
+                this.doBounce();
+                this.showToast('✓ 很好！', 'good');
+            }
+
+            // milestone
+            const mc = this.masteredCount;
+            if (mc > 0 && mc % 50 === 0 && s.stage === 'mature' &&
+                !this.state[wordId + '_milestone_' + mc]) {
+                this.state[wordId + '_milestone_' + mc] = 1;
+                setTimeout(() => this.showToast('🏆 恭喜！已掌握 ' + mc + ' 个单词！', 'bonus'), 800);
+            }
+
+            // queue
+            if (reinsert) {
+                const card = this.queue.shift();
+                this.queue.push(card);
+            } else {
+                this.queue.shift();
+            }
+        },
+
+        // ── Animations ──────────────────────────────────────────────────
+        doShake() {
+            this.shaking = false;
+            this.$nextTick(() => { this.shaking = true; });
+            setTimeout(() => { this.shaking = false; }, 500);
+        },
+        doBounce() {
+            this.bouncing = false;
+            this.$nextTick(() => { this.bouncing = true; });
+            setTimeout(() => { this.bouncing = false; }, 400);
+        },
+        showToast(msg, type = 'good') {
+            clearTimeout(this._toastTmr);
+            this.toast = null;
+            this.$nextTick(() => {
+                this.toast = { msg, type };
+                this._toastTmr = setTimeout(() => { this.toast = null; }, 2400);
+            });
+        },
+
+        // ── Persistence ─────────────────────────────────────────────────
+        loadSaved() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const d     = JSON.parse(raw);
+                    this.state  = d.state  || {};
+                    this.points = d.points || 0;
+                    this.streak = d.streak || 0;
+                }
+            } catch (e) { /* ignore */ }
+        },
+        saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                state:  this.state,
+                points: this.points,
+                streak: this.streak,
+            }));
+        },
+        confirmReset() {
+            if (confirm('确定重置所有学习进度吗？\n此操作不可撤销。')) {
+                localStorage.removeItem(STORAGE_KEY);
+                this.state  = {};
+                this.points = 0;
+                this.streak = 0;
+                this.buildQueue();
+            }
+        },
+        loadMore() {
+            this.buildQueue(MAX_NEW_DAY);
+            if (this.queue.length === 0) {
+                alert('所有词汇都学完了！\n请明天继续复习到期的单词。');
+            }
+        },
+
+        // ── Keyboard ────────────────────────────────────────────────────
+        onKey(e) {
+            if (this.sessionDone || this.loading) return;
+            const tag = document.activeElement && document.activeElement.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'BUTTON') return;
+
+            if (e.code === 'Space') {
+                e.preventDefault();
+                this.flipCard();
+                return;
+            }
+            const arrowMap = {
+                ArrowLeft:  'again',
+                ArrowDown:  'hard',
+                ArrowRight: 'good',
+                ArrowUp:    'easy',
+            };
+            if (arrowMap[e.code]) {
+                e.preventDefault();
+                if (this.flipped) this.answer(arrowMap[e.code]);
+                else              this.flipCard();
+            }
+        },
+    },
+
+    created() {
+        this.loadSaved();
+        this.loadWords();
+    },
+    mounted() {
+        window.addEventListener('keydown', this.onKey);
+    },
+    beforeDestroy() {
+        window.removeEventListener('keydown', this.onKey);
+    },
+});
+</script>
 </body>
 </html>
