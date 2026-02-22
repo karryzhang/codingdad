@@ -1,829 +1,5063 @@
 [
-  {"word":"blockchain","zh":"区块链","pos":"n.","ipa":""},
-  {"word":"consensus","zh":"共识机制","pos":"n.","ipa":""},
-  {"word":"hash","zh":"哈希（单向加密函数）","pos":"n.","ipa":""},
-  {"word":"node","zh":"节点","pos":"n.","ipa":""},
-  {"word":"validator","zh":"验证者","pos":"n.","ipa":""},
-  {"word":"miner","zh":"矿工","pos":"n.","ipa":""},
-  {"word":"block","zh":"区块","pos":"n.","ipa":""},
-  {"word":"transaction","zh":"链上交易","pos":"n.","ipa":""},
-  {"word":"ledger","zh":"账本","pos":"n.","ipa":""},
-  {"word":"decentralized","zh":"去中心化","pos":"adj.","ipa":""},
-  {"word":"immutable","zh":"不可篡改","pos":"adj.","ipa":""},
-  {"word":"cryptography","zh":"密码学","pos":"n.","ipa":""},
-  {"word":"digital signature","zh":"数字签名","pos":"n.","ipa":""},
-  {"word":"public key","zh":"公钥","pos":"n.","ipa":""},
-  {"word":"private key","zh":"私钥","pos":"n.","ipa":""},
-  {"word":"address","zh":"钱包地址","pos":"n.","ipa":""},
-  {"word":"wallet","zh":"钱包","pos":"n.","ipa":""},
-  {"word":"seed phrase","zh":"助记词","pos":"n.","ipa":""},
-  {"word":"mnemonic","zh":"助记词","pos":"n.","ipa":""},
-  {"word":"proof of work","zh":"工作量证明（PoW）","pos":"n.","ipa":""},
-  {"word":"proof of stake","zh":"权益证明（PoS）","pos":"n.","ipa":""},
-  {"word":"genesis block","zh":"创世区块","pos":"n.","ipa":""},
-  {"word":"merkle tree","zh":"默克尔树","pos":"n.","ipa":""},
-  {"word":"fork","zh":"分叉","pos":"n.","ipa":""},
-  {"word":"hard fork","zh":"硬分叉","pos":"n.","ipa":""},
-  {"word":"soft fork","zh":"软分叉","pos":"n.","ipa":""},
-  {"word":"mainnet","zh":"主网","pos":"n.","ipa":""},
-  {"word":"testnet","zh":"测试网","pos":"n.","ipa":""},
-  {"word":"peer-to-peer","zh":"点对点","pos":"adj.","ipa":""},
-  {"word":"protocol","zh":"协议","pos":"n.","ipa":""},
-  {"word":"nonce","zh":"随机数（防重放）","pos":"n.","ipa":""},
-  {"word":"difficulty","zh":"挖矿难度","pos":"n.","ipa":""},
-  {"word":"block reward","zh":"区块奖励","pos":"n.","ipa":""},
-  {"word":"confirmation","zh":"区块确认数","pos":"n.","ipa":""},
-  {"word":"finality","zh":"最终性","pos":"n.","ipa":""},
-  {"word":"scalability","zh":"可扩展性","pos":"n.","ipa":""},
-  {"word":"halving","zh":"减半","pos":"n.","ipa":""},
-  {"word":"epoch","zh":"纪元（以太坊时间单位）","pos":"n.","ipa":""},
-  {"word":"slot","zh":"时隙（以太坊出块单位）","pos":"n.","ipa":""},
-  {"word":"checkpoint","zh":"检查点","pos":"n.","ipa":""},
-  {"word":"hash rate","zh":"算力","pos":"n.","ipa":""},
-  {"word":"mining pool","zh":"矿池","pos":"n.","ipa":""},
-  {"word":"mempool","zh":"内存池（待确认交易池）","pos":"n.","ipa":""},
-  {"word":"full node","zh":"全节点","pos":"n.","ipa":""},
-  {"word":"light node","zh":"轻节点","pos":"n.","ipa":""},
-  {"word":"archive node","zh":"归档节点","pos":"n.","ipa":""},
-  {"word":"reorg","zh":"链重组","pos":"n.","ipa":""},
-  {"word":"orphan block","zh":"孤块","pos":"n.","ipa":""},
-  {"word":"uncle block","zh":"叔块","pos":"n.","ipa":""},
-  {"word":"block height","zh":"区块高度","pos":"n.","ipa":""},
-  {"word":"block time","zh":"出块时间","pos":"n.","ipa":""},
-  {"word":"base fee","zh":"基础费用","pos":"n.","ipa":""},
-  {"word":"priority fee","zh":"优先费（小费）","pos":"n.","ipa":""},
-  {"word":"gas","zh":"Gas（以太坊计算费用单位）","pos":"n.","ipa":""},
-  {"word":"gas limit","zh":"Gas 上限","pos":"n.","ipa":""},
-  {"word":"gas price","zh":"Gas 价格","pos":"n.","ipa":""},
-  {"word":"gwei","zh":"Gwei（ETH 单位，10⁻⁹ ETH）","pos":"n.","ipa":""},
-  {"word":"wei","zh":"Wei（ETH 最小单位，10⁻¹⁸ ETH）","pos":"n.","ipa":""},
-  {"word":"burn","zh":"销毁（代币燃烧）","pos":"v.","ipa":""},
-  {"word":"deflation","zh":"通缩","pos":"n.","ipa":""},
-  {"word":"inflation","zh":"通胀","pos":"n.","ipa":""},
-  {"word":"emission","zh":"代币增发","pos":"n.","ipa":""},
-  {"word":"total supply","zh":"总供应量","pos":"n.","ipa":""},
-  {"word":"circulating supply","zh":"流通量","pos":"n.","ipa":""},
-  {"word":"max supply","zh":"最大供应量","pos":"n.","ipa":""},
-  {"word":"tokenomics","zh":"代币经济学","pos":"n.","ipa":""},
-  {"word":"whitepaper","zh":"白皮书","pos":"n.","ipa":""},
-  {"word":"trustless","zh":"无需信任","pos":"adj.","ipa":""},
-  {"word":"permissionless","zh":"无需许可","pos":"adj.","ipa":""},
-  {"word":"censorship-resistant","zh":"抗审查","pos":"adj.","ipa":""},
-  {"word":"Ethereum","zh":"以太坊","pos":"n.","ipa":""},
-  {"word":"Ether","zh":"以太币（ETH）","pos":"n.","ipa":""},
-  {"word":"EVM","zh":"Ethereum Virtual Machine / 以太坊虚拟机","pos":"n.","ipa":""},
-  {"word":"Solidity","zh":"Solidity 智能合约编程语言","pos":"n.","ipa":""},
-  {"word":"smart contract","zh":"智能合约","pos":"n.","ipa":""},
-  {"word":"dApp","zh":"Decentralized Application / 去中心化应用","pos":"n.","ipa":""},
-  {"word":"DAO","zh":"Decentralized Autonomous Organization / 去中心化自治组织","pos":"n.","ipa":""},
-  {"word":"ERC-20","zh":"ERC-20 Fungible Token Standard / 同质化代币标准","pos":"n.","ipa":""},
-  {"word":"ERC-721","zh":"ERC-721 Non-Fungible Token Standard / NFT 标准","pos":"n.","ipa":""},
-  {"word":"ERC-1155","zh":"ERC-1155 Multi-Token Standard / 多代币标准","pos":"n.","ipa":""},
-  {"word":"ERC-4337","zh":"ERC-4337 Account Abstraction Standard / 账户抽象标准","pos":"n.","ipa":""},
-  {"word":"ABI","zh":"Application Binary Interface / 应用程序二进制接口","pos":"n.","ipa":""},
-  {"word":"bytecode","zh":"字节码","pos":"n.","ipa":""},
-  {"word":"opcode","zh":"操作码","pos":"n.","ipa":""},
-  {"word":"contract address","zh":"合约地址","pos":"n.","ipa":""},
-  {"word":"allowance","zh":"ERC-20 授权额度","pos":"n.","ipa":""},
-  {"word":"approve","zh":"ERC-20 授权操作","pos":"v.","ipa":""},
-  {"word":"event","zh":"合约事件（链上日志）","pos":"n.","ipa":""},
-  {"word":"revert","zh":"交易回滚","pos":"v.","ipa":""},
-  {"word":"proxy contract","zh":"代理合约","pos":"n.","ipa":""},
-  {"word":"transparent proxy","zh":"透明代理合约","pos":"n.","ipa":""},
-  {"word":"UUPS","zh":"Universal Upgradeable Proxy Standard / 通用可升级代理标准","pos":"n.","ipa":""},
-  {"word":"implementation contract","zh":"逻辑实现合约","pos":"n.","ipa":""},
-  {"word":"storage slot","zh":"存储槽","pos":"n.","ipa":""},
-  {"word":"calldata","zh":"调用数据","pos":"n.","ipa":""},
-  {"word":"delegatecall","zh":"委托调用","pos":"n.","ipa":""},
-  {"word":"CREATE2","zh":"CREATE2 确定性合约部署","pos":"n.","ipa":""},
-  {"word":"keccak256","zh":"keccak256 哈希函数","pos":"n.","ipa":""},
-  {"word":"ECDSA","zh":"Elliptic Curve Digital Signature Algorithm / 椭圆曲线数字签名算法","pos":"n.","ipa":""},
-  {"word":"msg.sender","zh":"消息发送者（合约调用者）","pos":"n.","ipa":""},
-  {"word":"msg.value","zh":"消息附带的以太币数量","pos":"n.","ipa":""},
-  {"word":"WETH","zh":"Wrapped Ether / 包装以太币","pos":"n.","ipa":""},
-  {"word":"oracle","zh":"预言机（链下数据提供者）","pos":"n.","ipa":""},
-  {"word":"Chainlink","zh":"Chainlink 去中心化预言机","pos":"n.","ipa":""},
-  {"word":"price feed","zh":"价格预言机数据流","pos":"n.","ipa":""},
-  {"word":"MEV","zh":"Maximal Extractable Value / 最大可提取价值","pos":"n.","ipa":""},
-  {"word":"Flashbots","zh":"Flashbots MEV 研究与基础设施","pos":"n.","ipa":""},
-  {"word":"sandwich attack","zh":"三明治攻击（MEV 攻击手法）","pos":"n.","ipa":""},
-  {"word":"front-running","zh":"抢先交易（MEV 手法）","pos":"n.","ipa":""},
-  {"word":"EIP","zh":"Ethereum Improvement Proposal / 以太坊改进提案","pos":"n.","ipa":""},
-  {"word":"Beacon Chain","zh":"信标链（以太坊 PoS 层）","pos":"n.","ipa":""},
-  {"word":"Merge","zh":"以太坊合并升级（PoW→PoS）","pos":"n.","ipa":""},
-  {"word":"EIP-1559","zh":"EIP-1559 基础费销毁机制","pos":"n.","ipa":""},
-  {"word":"EIP-4844","zh":"EIP-4844 Proto-Danksharding / Blob 数据","pos":"n.","ipa":""},
-  {"word":"blob","zh":"Blob 数据（L2 数据可用性存储）","pos":"n.","ipa":""},
-  {"word":"proto-danksharding","zh":"原始分片方案","pos":"n.","ipa":""},
-  {"word":"danksharding","zh":"完整分片方案","pos":"n.","ipa":""},
-  {"word":"proposer","zh":"区块提议者","pos":"n.","ipa":""},
-  {"word":"attester","zh":"区块证明者","pos":"n.","ipa":""},
-  {"word":"attestation","zh":"证明（PoS 共识投票）","pos":"n.","ipa":""},
-  {"word":"committee","zh":"验证者委员会","pos":"n.","ipa":""},
-  {"word":"beacon node","zh":"信标节点","pos":"n.","ipa":""},
-  {"word":"execution client","zh":"执行客户端","pos":"n.","ipa":""},
-  {"word":"consensus client","zh":"共识客户端","pos":"n.","ipa":""},
-  {"word":"slashing","zh":"罚没（惩罚恶意验证者）","pos":"n.","ipa":""},
-  {"word":"withdrawal","zh":"质押提款","pos":"n.","ipa":""},
-  {"word":"exit queue","zh":"验证者退出队列","pos":"n.","ipa":""},
-  {"word":"MEV-Boost","zh":"MEV-Boost 区块构建外包协议","pos":"n.","ipa":""},
-  {"word":"relay","zh":"中继（MEV 中间层）","pos":"n.","ipa":""},
-  {"word":"builder","zh":"区块构建者","pos":"n.","ipa":""},
-  {"word":"inclusion list","zh":"包含列表（抗审查机制）","pos":"n.","ipa":""},
-  {"word":"inactivity leak","zh":"不活跃泄漏（PoS 惩罚）","pos":"n.","ipa":""},
-  {"word":"gas optimization","zh":"Gas 优化","pos":"n.","ipa":""},
-  {"word":"Yul","zh":"Yul 以太坊汇编语言","pos":"n.","ipa":""},
-  {"word":"reentrancy","zh":"重入攻击","pos":"n.","ipa":""},
-  {"word":"reentrancy guard","zh":"重入锁","pos":"n.","ipa":""},
-  {"word":"access control","zh":"访问控制","pos":"n.","ipa":""},
-  {"word":"integer overflow","zh":"整数溢出漏洞","pos":"n.","ipa":""},
-  {"word":"oracle attack","zh":"预言机攻击","pos":"n.","ipa":""},
-  {"word":"price manipulation","zh":"价格操纵","pos":"n.","ipa":""},
-  {"word":"flash loan attack","zh":"闪电贷攻击","pos":"n.","ipa":""},
-  {"word":"DeFi","zh":"Decentralized Finance / 去中心化金融","pos":"n.","ipa":""},
-  {"word":"AMM","zh":"Automated Market Maker / 自动做市商","pos":"n.","ipa":""},
-  {"word":"liquidity provider","zh":"流动性提供者（LP）","pos":"n.","ipa":""},
-  {"word":"liquidity pool","zh":"流动性池","pos":"n.","ipa":""},
-  {"word":"yield","zh":"收益率","pos":"n.","ipa":""},
-  {"word":"yield farming","zh":"流动性挖矿（收益耕作）","pos":"n.","ipa":""},
-  {"word":"liquidity mining","zh":"流动性挖矿","pos":"n.","ipa":""},
-  {"word":"APY","zh":"Annual Percentage Yield / 年化收益率（含复利）","pos":"n.","ipa":""},
-  {"word":"APR","zh":"Annual Percentage Rate / 年化利率（不含复利）","pos":"n.","ipa":""},
-  {"word":"TVL","zh":"Total Value Locked / 总锁仓量","pos":"n.","ipa":""},
-  {"word":"governance","zh":"链上治理","pos":"n.","ipa":""},
-  {"word":"governance token","zh":"治理代币","pos":"n.","ipa":""},
-  {"word":"voting power","zh":"投票权重","pos":"n.","ipa":""},
-  {"word":"proposal","zh":"治理提案","pos":"n.","ipa":""},
-  {"word":"quorum","zh":"法定投票人数","pos":"n.","ipa":""},
-  {"word":"timelock","zh":"时间锁合约","pos":"n.","ipa":""},
-  {"word":"multisig","zh":"多重签名","pos":"n.","ipa":""},
-  {"word":"treasury","zh":"协议国库","pos":"n.","ipa":""},
-  {"word":"grant","zh":"生态资助","pos":"n.","ipa":""},
-  {"word":"vesting","zh":"代币归属期","pos":"n.","ipa":""},
-  {"word":"cliff","zh":"锁仓悬崖期","pos":"n.","ipa":""},
-  {"word":"lockup period","zh":"锁定期","pos":"n.","ipa":""},
-  {"word":"staking","zh":"质押","pos":"n.","ipa":""},
-  {"word":"unstaking","zh":"解除质押","pos":"n.","ipa":""},
-  {"word":"delegation","zh":"委托（质押或投票）","pos":"n.","ipa":""},
-  {"word":"lending","zh":"借贷","pos":"n.","ipa":""},
-  {"word":"borrowing","zh":"借款","pos":"n.","ipa":""},
-  {"word":"collateral","zh":"抵押品","pos":"n.","ipa":""},
-  {"word":"collateralization ratio","zh":"抵押率","pos":"n.","ipa":""},
-  {"word":"overcollateralized","zh":"超额抵押","pos":"adj.","ipa":""},
-  {"word":"undercollateralized","zh":"欠抵押（信用借贷）","pos":"adj.","ipa":""},
-  {"word":"liquidation","zh":"清算","pos":"n.","ipa":""},
-  {"word":"liquidator","zh":"清算人","pos":"n.","ipa":""},
-  {"word":"health factor","zh":"健康因子（抵押品安全指标）","pos":"n.","ipa":""},
-  {"word":"borrow rate","zh":"借款利率","pos":"n.","ipa":""},
-  {"word":"supply rate","zh":"存款利率","pos":"n.","ipa":""},
-  {"word":"utilization rate","zh":"资金利用率","pos":"n.","ipa":""},
-  {"word":"reserve factor","zh":"储备系数","pos":"n.","ipa":""},
-  {"word":"borrow cap","zh":"借款上限","pos":"n.","ipa":""},
-  {"word":"supply cap","zh":"供应上限","pos":"n.","ipa":""},
-  {"word":"flash loan","zh":"闪电贷","pos":"n.","ipa":""},
-  {"word":"arbitrage","zh":"套利","pos":"n.","ipa":""},
-  {"word":"impermanent loss","zh":"无常损失","pos":"n.","ipa":""},
-  {"word":"price impact","zh":"价格冲击","pos":"n.","ipa":""},
-  {"word":"pool depth","zh":"流动性深度","pos":"n.","ipa":""},
-  {"word":"TWAP","zh":"Time-Weighted Average Price / 时间加权平均价格","pos":"n.","ipa":""},
-  {"word":"VWAP","zh":"Volume-Weighted Average Price / 成交量加权平均价格","pos":"n.","ipa":""},
-  {"word":"funding rate","zh":"资金费率（永续合约）","pos":"n.","ipa":""},
-  {"word":"delta neutral","zh":"Delta 中性（对冲策略）","pos":"adj.","ipa":""},
-  {"word":"vault","zh":"收益金库","pos":"n.","ipa":""},
-  {"word":"auto-compound","zh":"自动复利","pos":"v.","ipa":""},
-  {"word":"rebalance","zh":"再平衡","pos":"v.","ipa":""},
-  {"word":"leverage","zh":"杠杆","pos":"n.","ipa":""},
-  {"word":"margin","zh":"保证金","pos":"n.","ipa":""},
-  {"word":"cross-margin","zh":"全仓模式","pos":"n.","ipa":""},
-  {"word":"isolated margin","zh":"逐仓模式","pos":"n.","ipa":""},
-  {"word":"open interest","zh":"未平仓量","pos":"n.","ipa":""},
-  {"word":"liquidation price","zh":"爆仓价格","pos":"n.","ipa":""},
-  {"word":"mark price","zh":"标记价格","pos":"n.","ipa":""},
-  {"word":"index price","zh":"指数价格","pos":"n.","ipa":""},
-  {"word":"insurance fund","zh":"保险基金","pos":"n.","ipa":""},
-  {"word":"account abstraction","zh":"账户抽象","pos":"n.","ipa":""},
-  {"word":"paymaster","zh":"Gas 代付合约","pos":"n.","ipa":""},
-  {"word":"bundler","zh":"用户操作打包者","pos":"n.","ipa":""},
-  {"word":"concentrated liquidity","zh":"集中流动性","pos":"n.","ipa":""},
-  {"word":"range order","zh":"区间订单","pos":"n.","ipa":""},
-  {"word":"tick","zh":"价格刻度（Uniswap v3）","pos":"n.","ipa":""},
-  {"word":"fee tier","zh":"手续费等级","pos":"n.","ipa":""},
-  {"word":"perpetual","zh":"永续合约","pos":"n.","ipa":""},
-  {"word":"options","zh":"期权","pos":"n.","ipa":""},
-  {"word":"yield aggregator","zh":"收益聚合器","pos":"n.","ipa":""},
-  {"word":"DEX aggregator","zh":"DEX Aggregator / DEX 聚合器","pos":"n.","ipa":""},
-  {"word":"composability","zh":"可组合性（金融乐高）","pos":"n.","ipa":""},
-  {"word":"money lego","zh":"金融乐高","pos":"n.","ipa":""},
-  {"word":"protocol revenue","zh":"协议收入","pos":"n.","ipa":""},
-  {"word":"real yield","zh":"真实收益（扣除通胀后的净收益）","pos":"n.","ipa":""},
-  {"word":"gauge","zh":"流动性计量器（Curve）","pos":"n.","ipa":""},
-  {"word":"vote escrow","zh":"投票托管（veToken）","pos":"n.","ipa":""},
-  {"word":"ve-tokenomics","zh":"veToken 经济模型","pos":"n.","ipa":""},
-  {"word":"bribe","zh":"投票贿赂","pos":"n.","ipa":""},
-  {"word":"emission schedule","zh":"代币排放计划","pos":"n.","ipa":""},
-  {"word":"yield tokenization","zh":"收益代币化","pos":"n.","ipa":""},
-  {"word":"principal token","zh":"本金代币（PT）","pos":"n.","ipa":""},
-  {"word":"yield token","zh":"收益代币（YT）","pos":"n.","ipa":""},
-  {"word":"fixed yield","zh":"固定收益","pos":"n.","ipa":""},
-  {"word":"variable yield","zh":"浮动收益","pos":"n.","ipa":""},
-  {"word":"stablecoin","zh":"稳定币","pos":"n.","ipa":""},
-  {"word":"pegged","zh":"锚定的","pos":"adj.","ipa":""},
-  {"word":"peg","zh":"价格锚定","pos":"n.","ipa":""},
-  {"word":"depeg","zh":"脱锚","pos":"n.","ipa":""},
-  {"word":"depegging","zh":"脱锚过程","pos":"n.","ipa":""},
-  {"word":"algorithmic stablecoin","zh":"算法稳定币","pos":"n.","ipa":""},
-  {"word":"collateral-backed stablecoin","zh":"抵押支撑稳定币","pos":"n.","ipa":""},
-  {"word":"fiat-backed stablecoin","zh":"法币支撑稳定币","pos":"n.","ipa":""},
-  {"word":"crypto-backed stablecoin","zh":"加密资产抵押稳定币","pos":"n.","ipa":""},
-  {"word":"USDC","zh":"USD Coin / Circle 发行的美元稳定币","pos":"n.","ipa":""},
-  {"word":"USDT","zh":"Tether USD / Tether 发行的美元稳定币","pos":"n.","ipa":""},
-  {"word":"DAI","zh":"DAI 去中心化超额抵押稳定币（MakerDAO）","pos":"n.","ipa":""},
-  {"word":"FRAX","zh":"FRAX 混合算法稳定币","pos":"n.","ipa":""},
-  {"word":"PYUSD","zh":"PayPal USD / PayPal 发行的美元稳定币","pos":"n.","ipa":""},
-  {"word":"mint","zh":"铸造代币","pos":"v.","ipa":""},
-  {"word":"redeem","zh":"赎回","pos":"v.","ipa":""},
-  {"word":"redemption","zh":"赎回机制","pos":"n.","ipa":""},
-  {"word":"issuance","zh":"代币发行","pos":"n.","ipa":""},
-  {"word":"reserve","zh":"储备金","pos":"n.","ipa":""},
-  {"word":"reserve ratio","zh":"储备比率","pos":"n.","ipa":""},
-  {"word":"proof of reserves","zh":"储备证明","pos":"n.","ipa":""},
-  {"word":"audit","zh":"智能合约审计","pos":"n.","ipa":""},
-  {"word":"custodian","zh":"托管机构","pos":"n.","ipa":""},
-  {"word":"CDP","zh":"Collateralized Debt Position / 抵押债务头寸","pos":"n.","ipa":""},
-  {"word":"stability fee","zh":"稳定费率（MakerDAO）","pos":"n.","ipa":""},
-  {"word":"DSR","zh":"Dai Savings Rate / DAI 储蓄利率","pos":"n.","ipa":""},
-  {"word":"liquidation ratio","zh":"清算比率","pos":"n.","ipa":""},
-  {"word":"keeper","zh":"清算机器人","pos":"n.","ipa":""},
-  {"word":"PSM","zh":"Peg Stability Module / 锚定稳定模块","pos":"n.","ipa":""},
-  {"word":"stableswap","zh":"稳定币兑换算法（Curve）","pos":"n.","ipa":""},
-  {"word":"amplification factor","zh":"放大系数（Curve A 值）","pos":"n.","ipa":""},
-  {"word":"seigniorage","zh":"铸币税","pos":"n.","ipa":""},
-  {"word":"yield-bearing stablecoin","zh":"生息稳定币","pos":"n.","ipa":""},
-  {"word":"native USDC","zh":"原生 USDC（非桥接）","pos":"n.","ipa":""},
-  {"word":"CCTP","zh":"Cross-Chain Transfer Protocol / Circle 跨链转账协议","pos":"n.","ipa":""},
-  {"word":"blacklist","zh":"黑名单（稳定币合规机制）","pos":"n.","ipa":""},
-  {"word":"compliance","zh":"合规","pos":"n.","ipa":""},
-  {"word":"KYC","zh":"Know Your Customer / 用户身份认证","pos":"n.","ipa":""},
-  {"word":"KYB","zh":"Know Your Business / 企业身份认证","pos":"n.","ipa":""},
-  {"word":"AML","zh":"Anti-Money Laundering / 反洗钱","pos":"n.","ipa":""},
-  {"word":"CBDC","zh":"Central Bank Digital Currency / 中央银行数字货币","pos":"n.","ipa":""},
-  {"word":"RWA","zh":"Real World Asset / 真实世界资产代币化","pos":"n.","ipa":""},
-  {"word":"tokenization","zh":"资产代币化","pos":"n.","ipa":""},
-  {"word":"T-bill","zh":"美国短期国债","pos":"n.","ipa":""},
-  {"word":"money market fund","zh":"货币市场基金","pos":"n.","ipa":""},
-  {"word":"delta neutral stablecoin","zh":"Delta 中性稳定币","pos":"n.","ipa":""},
-  {"word":"basis trade","zh":"基差交易","pos":"n.","ipa":""},
-  {"word":"funding rate capture","zh":"资金费率套利策略","pos":"n.","ipa":""},
-  {"word":"stability mechanism","zh":"价格稳定机制","pos":"n.","ipa":""},
-  {"word":"debt ceiling","zh":"债务上限","pos":"n.","ipa":""},
-  {"word":"emergency shutdown","zh":"紧急关闭","pos":"n.","ipa":""},
-  {"word":"global settlement","zh":"全局清算","pos":"n.","ipa":""},
-  {"word":"synthetic dollar","zh":"合成美元","pos":"n.","ipa":""},
-  {"word":"reserve management","zh":"储备管理","pos":"n.","ipa":""},
-  {"word":"NFT","zh":"Non-Fungible Token / 非同质化代币","pos":"n.","ipa":""},
-  {"word":"fungible","zh":"可替代的（同质化）","pos":"adj.","ipa":""},
-  {"word":"semi-fungible","zh":"半同质化","pos":"adj.","ipa":""},
-  {"word":"metadata","zh":"元数据（NFT 属性信息）","pos":"n.","ipa":""},
-  {"word":"IPFS","zh":"InterPlanetary File System / 星际文件系统","pos":"n.","ipa":""},
-  {"word":"CID","zh":"Content IDentifier / 内容标识符（IPFS 寻址）","pos":"n.","ipa":""},
-  {"word":"Arweave","zh":"Arweave 永久存储网络","pos":"n.","ipa":""},
-  {"word":"collection","zh":"NFT 系列","pos":"n.","ipa":""},
-  {"word":"allowlist","zh":"白名单","pos":"n.","ipa":""},
-  {"word":"Dutch auction","zh":"荷兰拍卖","pos":"n.","ipa":""},
-  {"word":"royalty","zh":"NFT 版税","pos":"n.","ipa":""},
-  {"word":"creator fee","zh":"创作者费用","pos":"n.","ipa":""},
-  {"word":"floor price","zh":"地板价（NFT 最低市场价）","pos":"n.","ipa":""},
-  {"word":"rarity","zh":"稀有度","pos":"n.","ipa":""},
-  {"word":"trait","zh":"NFT 特征属性","pos":"n.","ipa":""},
-  {"word":"provenance","zh":"来源证明","pos":"n.","ipa":""},
-  {"word":"generative art","zh":"生成艺术","pos":"n.","ipa":""},
-  {"word":"PFP","zh":"Profile Picture NFT / 头像型 NFT","pos":"n.","ipa":""},
-  {"word":"blue chip NFT","zh":"蓝筹 NFT","pos":"n.","ipa":""},
-  {"word":"fractionalization","zh":"NFT 碎片化","pos":"n.","ipa":""},
-  {"word":"soulbound token","zh":"灵魂绑定代币（不可转让）","pos":"n.","ipa":""},
-  {"word":"SBT","zh":"Soulbound Token / 灵魂绑定代币","pos":"n.","ipa":""},
-  {"word":"dynamic NFT","zh":"动态 NFT","pos":"n.","ipa":""},
-  {"word":"virtual land","zh":"虚拟土地","pos":"n.","ipa":""},
-  {"word":"metaverse","zh":"元宇宙","pos":"n.","ipa":""},
-  {"word":"play-to-earn","zh":"边玩边赚（P2E）","pos":"adj.","ipa":""},
-  {"word":"GameFi","zh":"Game Finance / 游戏化 DeFi","pos":"n.","ipa":""},
-  {"word":"in-game asset","zh":"游戏内资产","pos":"n.","ipa":""},
-  {"word":"mint pass","zh":"铸造通行证","pos":"n.","ipa":""},
-  {"word":"reveal","zh":"NFT 开盒揭晓","pos":"n.","ipa":""},
-  {"word":"ERC-6551","zh":"ERC-6551 Token Bound Account / 代币绑定账户标准","pos":"n.","ipa":""},
-  {"word":"token bound account","zh":"代币绑定账户","pos":"n.","ipa":""},
-  {"word":"social token","zh":"社交代币","pos":"n.","ipa":""},
-  {"word":"free mint","zh":"免费铸造","pos":"n.","ipa":""},
-  {"word":"on-chain art","zh":"链上艺术","pos":"n.","ipa":""},
-  {"word":"Layer 2","zh":"第二层扩容网络（L2）","pos":"n.","ipa":""},
-  {"word":"rollup","zh":"Rollup 扩容方案","pos":"n.","ipa":""},
-  {"word":"optimistic rollup","zh":"乐观 Rollup","pos":"n.","ipa":""},
-  {"word":"ZK rollup","zh":"零知识 Rollup","pos":"n.","ipa":""},
-  {"word":"zero knowledge proof","zh":"零知识证明","pos":"n.","ipa":""},
-  {"word":"validity proof","zh":"有效性证明","pos":"n.","ipa":""},
-  {"word":"fraud proof","zh":"欺诈证明","pos":"n.","ipa":""},
-  {"word":"challenge period","zh":"挑战期（乐观 Rollup）","pos":"n.","ipa":""},
-  {"word":"sequencer","zh":"排序器（Rollup 中心节点）","pos":"n.","ipa":""},
-  {"word":"batch","zh":"批量交易打包","pos":"n.","ipa":""},
-  {"word":"calldata compression","zh":"Calldata 压缩","pos":"n.","ipa":""},
-  {"word":"data availability","zh":"数据可用性","pos":"n.","ipa":""},
-  {"word":"DA layer","zh":"Data Availability Layer / 数据可用性层","pos":"n.","ipa":""},
-  {"word":"modular blockchain","zh":"模块化区块链","pos":"n.","ipa":""},
-  {"word":"monolithic blockchain","zh":"单体区块链","pos":"n.","ipa":""},
-  {"word":"bridge","zh":"跨链桥","pos":"n.","ipa":""},
-  {"word":"canonical bridge","zh":"官方桥（Layer 2 原生桥）","pos":"n.","ipa":""},
-  {"word":"cross-chain","zh":"跨链","pos":"adj.","ipa":""},
-  {"word":"IBC","zh":"Inter-Blockchain Communication / 链间通信协议（Cosmos）","pos":"n.","ipa":""},
-  {"word":"LayerZero","zh":"LayerZero 全链互操作协议","pos":"n.","ipa":""},
-  {"word":"Wormhole","zh":"Wormhole 跨链桥","pos":"n.","ipa":""},
-  {"word":"state root","zh":"状态根","pos":"n.","ipa":""},
-  {"word":"state transition","zh":"状态转换","pos":"n.","ipa":""},
-  {"word":"execution layer","zh":"执行层","pos":"n.","ipa":""},
-  {"word":"settlement layer","zh":"结算层","pos":"n.","ipa":""},
-  {"word":"consensus layer","zh":"共识层","pos":"n.","ipa":""},
-  {"word":"data layer","zh":"数据层","pos":"n.","ipa":""},
-  {"word":"Arbitrum","zh":"Arbitrum L2（乐观 Rollup）","pos":"n.","ipa":""},
-  {"word":"Optimism","zh":"Optimism L2（乐观 Rollup）","pos":"n.","ipa":""},
-  {"word":"Base","zh":"Base L2（Coinbase 推出的 L2）","pos":"n.","ipa":""},
-  {"word":"Polygon","zh":"Polygon 扩容网络","pos":"n.","ipa":""},
-  {"word":"zkSync","zh":"zkSync ZK Rollup L2","pos":"n.","ipa":""},
-  {"word":"StarkNet","zh":"StarkNet ZK Rollup L2","pos":"n.","ipa":""},
-  {"word":"Scroll","zh":"Scroll ZK Rollup L2","pos":"n.","ipa":""},
-  {"word":"Taiko","zh":"Taiko 基于以太坊的 ZK L2","pos":"n.","ipa":""},
-  {"word":"validium","zh":"Validium（链下数据可用性 ZK 方案）","pos":"n.","ipa":""},
-  {"word":"plasma","zh":"Plasma 扩容方案（早期 L2）","pos":"n.","ipa":""},
-  {"word":"state channel","zh":"状态通道","pos":"n.","ipa":""},
-  {"word":"payment channel","zh":"支付通道","pos":"n.","ipa":""},
-  {"word":"sidechain","zh":"侧链","pos":"n.","ipa":""},
-  {"word":"parachain","zh":"平行链（Polkadot）","pos":"n.","ipa":""},
-  {"word":"Cosmos","zh":"Cosmos 互链宇宙生态","pos":"n.","ipa":""},
-  {"word":"Polkadot","zh":"Polkadot 异构多链网络","pos":"n.","ipa":""},
-  {"word":"shared sequencer","zh":"共享排序器","pos":"n.","ipa":""},
-  {"word":"based rollup","zh":"Based Rollup（基于 L1 排序）","pos":"n.","ipa":""},
-  {"word":"preconfirmation","zh":"预确认","pos":"n.","ipa":""},
-  {"word":"withdrawal delay","zh":"提款延迟（7 天挑战期）","pos":"n.","ipa":""},
-  {"word":"forced inclusion","zh":"强制交易包含（抗排序器审查）","pos":"n.","ipa":""},
-  {"word":"liveness","zh":"活性（系统可用保证）","pos":"n.","ipa":""},
-  {"word":"zkEVM","zh":"ZK Ethereum Virtual Machine / 零知识以太坊虚拟机","pos":"n.","ipa":""},
-  {"word":"zkVM","zh":"ZK Virtual Machine / 零知识虚拟机","pos":"n.","ipa":""},
-  {"word":"STARK","zh":"Scalable Transparent Argument of Knowledge / 可扩展透明知识论证","pos":"n.","ipa":""},
-  {"word":"SNARK","zh":"Succinct Non-Interactive Argument of Knowledge / 简洁非交互式知识论证","pos":"n.","ipa":""},
-  {"word":"PLONK","zh":"PLONK Zero-Knowledge Proof System / PLONK 零知识证明系统","pos":"n.","ipa":""},
-  {"word":"recursive proof","zh":"递归证明","pos":"n.","ipa":""},
-  {"word":"aggregated proof","zh":"聚合证明","pos":"n.","ipa":""},
-  {"word":"prover","zh":"证明者","pos":"n.","ipa":""},
-  {"word":"verifier","zh":"验证者（ZK 语境）","pos":"n.","ipa":""},
-  {"word":"trusted setup","zh":"可信设置","pos":"n.","ipa":""},
-  {"word":"EigenLayer","zh":"EigenLayer 再质押协议","pos":"n.","ipa":""},
-  {"word":"restaking","zh":"再质押","pos":"n.","ipa":""},
-  {"word":"liquid restaking","zh":"流动性再质押","pos":"n.","ipa":""},
-  {"word":"LST","zh":"Liquid Staking Token / 流动质押代币","pos":"n.","ipa":""},
-  {"word":"LRT","zh":"Liquid Restaking Token / 流动再质押代币","pos":"n.","ipa":""},
-  {"word":"AVS","zh":"Actively Validated Service / 主动验证服务","pos":"n.","ipa":""},
-  {"word":"DVT","zh":"Distributed Validator Technology / 分布式验证者技术","pos":"n.","ipa":""},
-  {"word":"shared security","zh":"共享安全性","pos":"n.","ipa":""},
-  {"word":"cryptoeconomic security","zh":"密码经济安全","pos":"n.","ipa":""},
-  {"word":"BLS signature","zh":"BLS 聚合签名","pos":"n.","ipa":""},
-  {"word":"Celestia","zh":"Celestia 模块化数据可用性层","pos":"n.","ipa":""},
-  {"word":"EigenDA","zh":"EigenDA 数据可用性层","pos":"n.","ipa":""},
-  {"word":"hardware wallet","zh":"硬件钱包","pos":"n.","ipa":""},
-  {"word":"software wallet","zh":"软件钱包","pos":"n.","ipa":""},
-  {"word":"hot wallet","zh":"热钱包（联网）","pos":"n.","ipa":""},
-  {"word":"cold wallet","zh":"冷钱包（离线）","pos":"n.","ipa":""},
-  {"word":"paper wallet","zh":"纸钱包","pos":"n.","ipa":""},
-  {"word":"MetaMask","zh":"MetaMask 以太坊浏览器钱包","pos":"n.","ipa":""},
-  {"word":"Ledger","zh":"Ledger 硬件钱包","pos":"n.","ipa":""},
-  {"word":"Trezor","zh":"Trezor 硬件钱包","pos":"n.","ipa":""},
-  {"word":"keystore","zh":"密钥文件","pos":"n.","ipa":""},
-  {"word":"passphrase","zh":"密码短语（额外加密层）","pos":"n.","ipa":""},
-  {"word":"BIP39","zh":"Bitcoin Improvement Proposal 39 / BIP39 助记词标准","pos":"n.","ipa":""},
-  {"word":"BIP44","zh":"Bitcoin Improvement Proposal 44 / BIP44 HD 钱包派生标准","pos":"n.","ipa":""},
-  {"word":"HD wallet","zh":"Hierarchical Deterministic Wallet / 分层确定性钱包","pos":"n.","ipa":""},
-  {"word":"derivation path","zh":"派生路径","pos":"n.","ipa":""},
-  {"word":"multi-signature","zh":"多重签名","pos":"n.","ipa":""},
-  {"word":"threshold signature","zh":"门限签名","pos":"n.","ipa":""},
-  {"word":"Shamir's Secret Sharing","zh":"秘密分割算法","pos":"n.","ipa":""},
-  {"word":"social recovery","zh":"社交恢复钱包","pos":"n.","ipa":""},
-  {"word":"guardian","zh":"守护者（社交恢复）","pos":"n.","ipa":""},
-  {"word":"phishing","zh":"网络钓鱼","pos":"n.","ipa":""},
-  {"word":"rug pull","zh":"跑路骗局","pos":"n.","ipa":""},
-  {"word":"honeypot","zh":"蜜罐合约","pos":"n.","ipa":""},
-  {"word":"approval exploit","zh":"授权漏洞利用","pos":"n.","ipa":""},
-  {"word":"infinite approval","zh":"无限授权","pos":"n.","ipa":""},
-  {"word":"revoke approval","zh":"撤销授权","pos":"v.","ipa":""},
-  {"word":"EIP-712","zh":"EIP-712 结构化数据签名标准","pos":"n.","ipa":""},
-  {"word":"blind signing","zh":"盲签（看不到签名内容）","pos":"n.","ipa":""},
-  {"word":"air-gapped signing","zh":"离线签名","pos":"n.","ipa":""},
-  {"word":"address poisoning","zh":"地址污染攻击","pos":"n.","ipa":""},
-  {"word":"clipboard hijacking","zh":"剪贴板劫持（替换地址）","pos":"n.","ipa":""},
-  {"word":"MPC wallet","zh":"Multi-Party Computation Wallet / 多方计算钱包","pos":"n.","ipa":""},
-  {"word":"smart contract wallet","zh":"智能合约钱包","pos":"n.","ipa":""},
-  {"word":"self-custody","zh":"自托管（掌控私钥）","pos":"n.","ipa":""},
-  {"word":"non-custodial","zh":"非托管","pos":"adj.","ipa":""},
-  {"word":"OpSec","zh":"Operational Security / 操作安全","pos":"n.","ipa":""},
-  {"word":"seed phrase backup","zh":"助记词备份","pos":"n.","ipa":""},
-  {"word":"bug bounty","zh":"漏洞赏金","pos":"n.","ipa":""},
-  {"word":"audit report","zh":"审计报告","pos":"n.","ipa":""},
-  {"word":"responsible disclosure","zh":"负责任披露","pos":"n.","ipa":""},
-  {"word":"zero-day exploit","zh":"零日漏洞利用","pos":"n.","ipa":""},
-  {"word":"Gnosis Safe","zh":"Gnosis Safe 多签钱包","pos":"n.","ipa":""},
-  {"word":"exchange","zh":"交易所","pos":"n.","ipa":""},
-  {"word":"CEX","zh":"Centralized Exchange / 中心化交易所","pos":"n.","ipa":""},
-  {"word":"DEX","zh":"Decentralized Exchange / 去中心化交易所","pos":"n.","ipa":""},
-  {"word":"trading pair","zh":"交易对","pos":"n.","ipa":""},
-  {"word":"base currency","zh":"基础货币","pos":"n.","ipa":""},
-  {"word":"quote currency","zh":"计价货币","pos":"n.","ipa":""},
-  {"word":"market order","zh":"市价单","pos":"n.","ipa":""},
-  {"word":"limit order","zh":"限价单","pos":"n.","ipa":""},
-  {"word":"stop loss","zh":"止损单","pos":"n.","ipa":""},
-  {"word":"take profit","zh":"止盈单","pos":"n.","ipa":""},
-  {"word":"order book","zh":"订单簿","pos":"n.","ipa":""},
-  {"word":"bid","zh":"买单价格","pos":"n.","ipa":""},
-  {"word":"ask","zh":"卖单价格","pos":"n.","ipa":""},
-  {"word":"spread","zh":"买卖价差","pos":"n.","ipa":""},
-  {"word":"maker","zh":"挂单方（提供流动性）","pos":"n.","ipa":""},
-  {"word":"taker","zh":"吃单方（消耗流动性）","pos":"n.","ipa":""},
-  {"word":"trading fee","zh":"交易手续费","pos":"n.","ipa":""},
-  {"word":"volume","zh":"成交量","pos":"n.","ipa":""},
-  {"word":"market cap","zh":"市值","pos":"n.","ipa":""},
-  {"word":"FDV","zh":"Fully Diluted Valuation / 完全稀释估值","pos":"n.","ipa":""},
-  {"word":"sybil attack","zh":"女巫攻击（伪造多身份）","pos":"n.","ipa":""},
-  {"word":"launchpad","zh":"代币发行平台","pos":"n.","ipa":""},
-  {"word":"IDO","zh":"Initial DEX Offering / 去中心化初始代币发行","pos":"n.","ipa":""},
-  {"word":"IEO","zh":"Initial Exchange Offering / 交易所初始代币发行","pos":"n.","ipa":""},
-  {"word":"ICO","zh":"Initial Coin Offering / 首次代币发行","pos":"n.","ipa":""},
-  {"word":"fair launch","zh":"公平发射（无预挖无 VC）","pos":"n.","ipa":""},
-  {"word":"bonding curve","zh":"联合曲线（自动定价机制）","pos":"n.","ipa":""},
-  {"word":"price discovery","zh":"价格发现","pos":"n.","ipa":""},
-  {"word":"candlestick","zh":"K 线图","pos":"n.","ipa":""},
-  {"word":"support level","zh":"支撑位","pos":"n.","ipa":""},
-  {"word":"resistance level","zh":"压力位","pos":"n.","ipa":""},
-  {"word":"bullish","zh":"看涨","pos":"adj.","ipa":""},
-  {"word":"bearish","zh":"看跌","pos":"adj.","ipa":""},
-  {"word":"bull market","zh":"牛市","pos":"n.","ipa":""},
-  {"word":"bear market","zh":"熊市","pos":"n.","ipa":""},
-  {"word":"sideways market","zh":"横盘市场","pos":"n.","ipa":""},
-  {"word":"breakout","zh":"价格突破","pos":"n.","ipa":""},
-  {"word":"pump","zh":"拉盘","pos":"n.","ipa":""},
-  {"word":"dump","zh":"砸盘","pos":"n.","ipa":""},
-  {"word":"ATH","zh":"All-Time High / 历史最高价","pos":"n.","ipa":""},
-  {"word":"ATL","zh":"All-Time Low / 历史最低价","pos":"n.","ipa":""},
-  {"word":"ROI","zh":"Return on Investment / 投资回报率","pos":"n.","ipa":""},
-  {"word":"PnL","zh":"Profit and Loss / 盈亏","pos":"n.","ipa":""},
-  {"word":"realized PnL","zh":"已实现盈亏","pos":"n.","ipa":""},
-  {"word":"unrealized PnL","zh":"未实现盈亏","pos":"n.","ipa":""},
-  {"word":"long position","zh":"做多仓位","pos":"n.","ipa":""},
-  {"word":"short position","zh":"做空仓位","pos":"n.","ipa":""},
-  {"word":"hedge","zh":"对冲","pos":"v.","ipa":""},
-  {"word":"slippage","zh":"滑点","pos":"n.","ipa":""},
-  {"word":"whale","zh":"巨鲸（大户）","pos":"n.","ipa":""},
-  {"word":"retail investor","zh":"散户投资者","pos":"n.","ipa":""},
-  {"word":"institutional investor","zh":"机构投资者","pos":"n.","ipa":""},
-  {"word":"market maker","zh":"做市商","pos":"n.","ipa":""},
-  {"word":"on-chain data","zh":"链上数据","pos":"n.","ipa":""},
-  {"word":"MVRV","zh":"Market Value to Realized Value / 市值与实现价值比","pos":"n.","ipa":""},
-  {"word":"NUPL","zh":"Net Unrealized Profit/Loss / 净未实现利润","pos":"n.","ipa":""},
-  {"word":"realized cap","zh":"实现市值","pos":"n.","ipa":""},
-  {"word":"long-term holder","zh":"长期持有者（LTH）","pos":"n.","ipa":""},
-  {"word":"short-term holder","zh":"短期持有者（STH）","pos":"n.","ipa":""},
-  {"word":"exchange reserve","zh":"交易所储备（链上监控指标）","pos":"n.","ipa":""},
-  {"word":"on-chain analytics","zh":"链上数据分析","pos":"n.","ipa":""},
-  {"word":"Glassnode","zh":"Glassnode 链上数据平台","pos":"n.","ipa":""},
-  {"word":"Nansen","zh":"Nansen 链上地址追踪","pos":"n.","ipa":""},
-  {"word":"Arkham","zh":"Arkham 链上情报平台","pos":"n.","ipa":""},
-  {"word":"Dune Analytics","zh":"Dune Analytics 链上数据仪表盘","pos":"n.","ipa":""},
-  {"word":"RPC","zh":"Remote Procedure Call / 远程过程调用（节点接口）","pos":"n.","ipa":""},
-  {"word":"node provider","zh":"节点服务商","pos":"n.","ipa":""},
-  {"word":"Infura","zh":"Infura 以太坊节点服务","pos":"n.","ipa":""},
-  {"word":"Alchemy","zh":"Alchemy Web3 开发平台","pos":"n.","ipa":""},
-  {"word":"nonce management","zh":"Nonce 管理（防止交易拥堵）","pos":"n.","ipa":""},
-  {"word":"gas estimation","zh":"Gas 估算","pos":"n.","ipa":""},
-  {"word":"simulation","zh":"交易模拟（预执行）","pos":"n.","ipa":""},
-  {"word":"ethers.js","zh":"ethers.js 以太坊 JS 开发库","pos":"n.","ipa":""},
-  {"word":"viem","zh":"viem 现代以太坊 TypeScript 库","pos":"n.","ipa":""},
-  {"word":"wagmi (lib)","zh":"wagmi React Web3 钱包交互库","pos":"n.","ipa":""},
-  {"word":"Foundry","zh":"Foundry 以太坊智能合约开发框架","pos":"n.","ipa":""},
-  {"word":"Hardhat","zh":"Hardhat 以太坊开发测试框架","pos":"n.","ipa":""},
-  {"word":"contract verification","zh":"合约源码验证","pos":"n.","ipa":""},
-  {"word":"Etherscan","zh":"Etherscan 以太坊区块浏览器","pos":"n.","ipa":""},
-  {"word":"block explorer","zh":"区块浏览器","pos":"n.","ipa":""},
-  {"word":"minimal proxy","zh":"最小代理合约（EIP-1167）","pos":"n.","ipa":""},
-  {"word":"multicall","zh":"批量合约调用","pos":"n.","ipa":""},
-  {"word":"private mempool","zh":"私有内存池（MEV 保护）","pos":"n.","ipa":""},
-  {"word":"MEV protection","zh":"MEV 保护","pos":"n.","ipa":""},
-  {"word":"indexer","zh":"索引器（链上事件监听）","pos":"n.","ipa":""},
-  {"word":"subgraph","zh":"子图（The Graph 查询单元）","pos":"n.","ipa":""},
-  {"word":"TheGraph","zh":"The Graph 去中心化数据索引","pos":"n.","ipa":""},
-  {"word":"DefiLlama","zh":"DefiLlama DeFi 数据聚合平台","pos":"n.","ipa":""},
-  {"word":"Token Terminal","zh":"Token Terminal 协议收入分析","pos":"n.","ipa":""},
-  {"word":"circuit breaker","zh":"熔断机制","pos":"n.","ipa":""},
-  {"word":"emergency pause","zh":"紧急暂停","pos":"n.","ipa":""},
-  {"word":"timelocked upgrade","zh":"时间锁升级","pos":"n.","ipa":""},
-  {"word":"MEV bot","zh":"MEV 套利机器人","pos":"n.","ipa":""},
-  {"word":"searcher","zh":"MEV 搜索者","pos":"n.","ipa":""},
-  {"word":"order flow auction","zh":"订单流拍卖（OFA）","pos":"n.","ipa":""},
-  {"word":"intent-based","zh":"基于意图的交易","pos":"adj.","ipa":""},
-  {"word":"solver","zh":"意图求解器","pos":"n.","ipa":""},
-  {"word":"RFQ","zh":"Request For Quote / 询价（做市商报价）","pos":"n.","ipa":""},
-  {"word":"CLOB","zh":"Central Limit Order Book / 中央限价订单簿","pos":"n.","ipa":""},
-  {"word":"batch auction","zh":"批量拍卖","pos":"n.","ipa":""},
-  {"word":"private transaction","zh":"私密交易","pos":"n.","ipa":""},
-  {"word":"HODL","zh":"Hold On for Dear Life / 长期持有","pos":"v.","ipa":""},
-  {"word":"FOMO","zh":"Fear Of Missing Out / 错失恐惧症","pos":"n.","ipa":""},
-  {"word":"FUD","zh":"Fear, Uncertainty, Doubt / 恐惧、不确定性与疑虑","pos":"n.","ipa":""},
-  {"word":"degen","zh":"冒险玩家（去中心化赌徒）","pos":"n.","ipa":""},
-  {"word":"ape in","zh":"无脑冲进（不管风险就买）","pos":"v.","ipa":""},
-  {"word":"paper hands","zh":"纸手（忍不住卖出）","pos":"n.","ipa":""},
-  {"word":"diamond hands","zh":"钻石手（坚定持有不卖）","pos":"n.","ipa":""},
-  {"word":"rekt","zh":"亏到爆（被清算或大亏）","pos":"adj.","ipa":""},
-  {"word":"gm","zh":"Good Morning / Web3 打招呼语","pos":"phrase","ipa":""},
-  {"word":"wagmi","zh":"We're All Gonna Make It / 我们都会成功","pos":"phrase","ipa":""},
-  {"word":"ngmi","zh":"Not Gonna Make It / 你不会成功","pos":"phrase","ipa":""},
-  {"word":"alpha","zh":"内幕信息（投资先机）","pos":"n.","ipa":""},
-  {"word":"NFA","zh":"Not Financial Advice / 非投资建议","pos":"phrase","ipa":""},
-  {"word":"DYOR","zh":"Do Your Own Research / 自行研究尽职调查","pos":"phrase","ipa":""},
-  {"word":"SAFU","zh":"Secure Asset Fund for Users / 资金安全","pos":"adj.","ipa":""},
-  {"word":"exit scam","zh":"退出骗局（项目方卷钱跑路）","pos":"n.","ipa":""},
-  {"word":"soft rug","zh":"软跑路（慢慢撤资不暴雷）","pos":"n.","ipa":""},
-  {"word":"accumulate","zh":"吸筹（低位建仓）","pos":"v.","ipa":""},
-  {"word":"distribution","zh":"派筹（高位出货）","pos":"n.","ipa":""},
-  {"word":"smart money","zh":"聪明钱（机构或早期投资者）","pos":"n.","ipa":""},
-  {"word":"DeFi summer","zh":"DeFi 之夏（2020 年 DeFi 爆发）","pos":"n.","ipa":""},
-  {"word":"crypto winter","zh":"加密寒冬","pos":"n.","ipa":""},
-  {"word":"laser eyes","zh":"激光眼（比特币极大主义信仰）","pos":"n.","ipa":""},
-  {"word":"cope","zh":"自我安慰（亏损后自我开解）","pos":"v.","ipa":""},
-  {"word":"shill","zh":"鼓吹（带节奏推广某项目）","pos":"v.","ipa":""},
-  {"word":"moon","zh":"飞涨到月球","pos":"v.","ipa":""},
-  {"word":"bagholder","zh":"套牢者（持有亏损资产不卖）","pos":"n.","ipa":""},
-  {"word":"ser","zh":"Sir（Web3 用语，称呼他人）","pos":"n.","ipa":""},
-  {"word":"fren","zh":"Friend（Web3 用语，友好称呼）","pos":"n.","ipa":""},
-  {"word":"based","zh":"真实坦率（网络文化用语）","pos":"adj.","ipa":""},
-  {"word":"airdrop hunting","zh":"撸空投","pos":"n.","ipa":""},
-  {"word":"not your keys not your coins","zh":"不是你的私钥就不是你的币","pos":"phrase","ipa":""},
-  {"word":"we are so early","zh":"我们还处于早期","pos":"phrase","ipa":""},
-  {"word":"probably nothing","zh":"很可能是大事（反讽用语）","pos":"phrase","ipa":""},
-  {"word":"token","zh":"代币","pos":"n.","ipa":""},
-  {"word":"coin","zh":"加密货币（主链原生币）","pos":"n.","ipa":""},
-  {"word":"altcoin","zh":"山寨币（比特币之外的加密货币）","pos":"n.","ipa":""},
-  {"word":"cryptocurrency","zh":"加密货币","pos":"n.","ipa":""},
-  {"word":"digital asset","zh":"数字资产","pos":"n.","ipa":""},
-  {"word":"CeFi","zh":"Centralized Finance / 中心化金融","pos":"n.","ipa":""},
-  {"word":"TradFi","zh":"Traditional Finance / 传统金融","pos":"n.","ipa":""},
-  {"word":"Web3","zh":"Web3（基于区块链的互联网新形态）","pos":"n.","ipa":""},
-  {"word":"pseudonymity","zh":"假名性","pos":"n.","ipa":""},
-  {"word":"anonymity","zh":"匿名性","pos":"n.","ipa":""},
-  {"word":"zero knowledge","zh":"零知识（不泄露信息的证明）","pos":"n.","ipa":""},
-  {"word":"airdrop","zh":"空投","pos":"n.","ipa":""},
-  {"word":"snapshot","zh":"快照（记录地址持仓状态）","pos":"n.","ipa":""},
-  {"word":"eligibility","zh":"空投资格","pos":"n.","ipa":""},
-  {"word":"allocation","zh":"代币分配","pos":"n.","ipa":""},
-  {"word":"unlock","zh":"代币解锁","pos":"n.","ipa":""},
-  {"word":"vesting schedule","zh":"代币归属时间表","pos":"n.","ipa":""},
-  {"word":"token distribution","zh":"代币分配方案","pos":"n.","ipa":""},
-  {"word":"network effect","zh":"网络效应","pos":"n.","ipa":""},
-  {"word":"adoption","zh":"用户采用率","pos":"n.","ipa":""},
-  {"word":"retroactive airdrop","zh":"追溯性空投","pos":"n.","ipa":""},
-  {"word":"points","zh":"积分系统（空投前的激励积分）","pos":"n.","ipa":""},
-  {"word":"pre-token","zh":"预代币（积分转换为代币前）","pos":"n.","ipa":""},
-  {"word":"liquid staking","zh":"流动性质押","pos":"n.","ipa":""},
-  {"word":"staking reward","zh":"质押奖励","pos":"n.","ipa":""},
-  {"word":"validator commission","zh":"验证者佣金","pos":"n.","ipa":""},
-  {"word":"ETH staking","zh":"ETH 质押","pos":"n.","ipa":""},
-  {"word":"whitehat","zh":"白帽黑客","pos":"n.","ipa":""},
-  {"word":"exploit","zh":"漏洞利用","pos":"n.","ipa":""},
-  {"word":"hack","zh":"黑客攻击（链上）","pos":"n.","ipa":""},
-  {"word":"post-mortem","zh":"事后分析报告","pos":"n.","ipa":""},
-  {"word":"incident response","zh":"安全事件响应","pos":"n.","ipa":""},
-  {"word":"on-chain vote","zh":"链上投票","pos":"n.","ipa":""},
-  {"word":"off-chain vote","zh":"链下投票","pos":"n.","ipa":""},
-  {"word":"Snapshot governance","zh":"Snapshot 链下治理","pos":"n.","ipa":""},
-  {"word":"delegate","zh":"委托投票","pos":"v.","ipa":""},
-  {"word":"core contributor","zh":"核心贡献者","pos":"n.","ipa":""},
-  {"word":"working group","zh":"工作组（DAO 委员会）","pos":"n.","ipa":""},
-  {"word":"temperature check","zh":"意见温度测试（社区民意调查）","pos":"n.","ipa":""},
-  {"word":"OP Stack","zh":"OP Stack 模块化 L2 技术栈","pos":"n.","ipa":""},
-  {"word":"superchain","zh":"超级链（OP Stack 多链生态）","pos":"n.","ipa":""},
-  {"word":"retroPGF","zh":"Retroactive Public Goods Funding / 追溯性公共产品融资","pos":"n.","ipa":""},
-  {"word":"quadratic funding","zh":"二次方融资","pos":"n.","ipa":""},
-  {"word":"quadratic voting","zh":"二次方投票","pos":"n.","ipa":""},
-  {"word":"public good","zh":"公共物品（无需许可开放使用）","pos":"n.","ipa":""},
-  {"word":"credible neutrality","zh":"可信中立性","pos":"n.","ipa":""},
-  {"word":"rage quit","zh":"愤怒退出（Moloch DAO 机制）","pos":"n.","ipa":""},
-  {"word":"Uniswap","zh":"Uniswap 去中心化交易所","pos":"n.","ipa":""},
-  {"word":"Aave","zh":"Aave 去中心化借贷协议","pos":"n.","ipa":""},
-  {"word":"Compound","zh":"Compound 去中心化借贷协议","pos":"n.","ipa":""},
-  {"word":"Curve Finance","zh":"Curve 稳定币兑换 AMM","pos":"n.","ipa":""},
-  {"word":"MakerDAO","zh":"MakerDAO（DAI 稳定币发行方）","pos":"n.","ipa":""},
-  {"word":"Lido","zh":"Lido 液态质押协议","pos":"n.","ipa":""},
-  {"word":"dYdX","zh":"dYdX 去中心化永续合约交易所","pos":"n.","ipa":""},
-  {"word":"GMX","zh":"GMX 去中心化永续合约平台","pos":"n.","ipa":""},
-  {"word":"Pendle","zh":"Pendle 收益代币化协议","pos":"n.","ipa":""},
-  {"word":"Convex Finance","zh":"Convex Finance Curve 收益聚合","pos":"n.","ipa":""},
-  {"word":"Synthetix","zh":"Synthetix 合成资产协议","pos":"n.","ipa":""},
-  {"word":"Rocket Pool","zh":"Rocket Pool 去中心化 ETH 质押","pos":"n.","ipa":""},
-  {"word":"Frax Finance","zh":"Frax Finance 算法稳定币协议","pos":"n.","ipa":""},
-  {"word":"Balancer","zh":"Balancer 加权流动性 AMM","pos":"n.","ipa":""},
-  {"word":"1inch","zh":"1inch DEX 聚合器","pos":"n.","ipa":""},
-  {"word":"CowSwap","zh":"CowSwap 批量拍卖交易所","pos":"n.","ipa":""},
-  {"word":"hook","zh":"Uniswap v4 Hook（自定义流动性逻辑）","pos":"n.","ipa":""},
-  {"word":"singleton","zh":"单例合约（Uniswap v4 架构）","pos":"n.","ipa":""},
-  {"word":"flash accounting","zh":"闪电记账（Uniswap v4）","pos":"n.","ipa":""},
-  {"word":"Bitcoin","zh":"比特币","pos":"n.","ipa":""},
-  {"word":"Lightning Network","zh":"闪电网络（比特币 L2）","pos":"n.","ipa":""},
-  {"word":"Ordinals","zh":"Ordinals 比特币铭文协议","pos":"n.","ipa":""},
-  {"word":"BRC-20","zh":"BRC-20 比特币铭文代币标准","pos":"n.","ipa":""},
-  {"word":"inscription","zh":"铭刻（Ordinals 数据）","pos":"n.","ipa":""},
-  {"word":"Solana","zh":"Solana 高性能公链","pos":"n.","ipa":""},
-  {"word":"BNB Chain","zh":"BNB Chain（Binance 公链）","pos":"n.","ipa":""},
-  {"word":"Avalanche","zh":"Avalanche 雪崩公链","pos":"n.","ipa":""},
-  {"word":"NEAR Protocol","zh":"NEAR 协议（分片公链）","pos":"n.","ipa":""},
-  {"word":"Aptos","zh":"Aptos（Move 语言公链）","pos":"n.","ipa":""},
-  {"word":"Sui","zh":"Sui（Move 语言公链）","pos":"n.","ipa":""},
-  {"word":"Move language","zh":"Move 编程语言（Aptos/Sui）","pos":"n.","ipa":""},
-  {"word":"Rust","zh":"Rust 编程语言（Solana 等）","pos":"n.","ipa":""},
-  {"word":"Ethereum Foundation","zh":"以太坊基金会","pos":"n.","ipa":""},
-  {"word":"CoinMarketCap","zh":"CoinMarketCap 市值排行网站","pos":"n.","ipa":""},
-  {"word":"CoinGecko","zh":"CoinGecko 加密数据平台","pos":"n.","ipa":""},
-  {"word":"gas tracker","zh":"Gas 追踪器","pos":"n.","ipa":""},
-  {"word":"token approval","zh":"代币授权","pos":"n.","ipa":""},
-  {"word":"WalletConnect","zh":"WalletConnect 钱包连接协议","pos":"n.","ipa":""},
-  {"word":"meta-transaction","zh":"元交易（代付 Gas）","pos":"n.","ipa":""},
-  {"word":"gasless transaction","zh":"无 Gas 交易","pos":"n.","ipa":""},
-  {"word":"relayer","zh":"转发者（代提交交易）","pos":"n.","ipa":""},
-  {"word":"gas sponsorship","zh":"Gas 赞助","pos":"n.","ipa":""},
-  {"word":"permit","zh":"EIP-2612 链下签名授权","pos":"n.","ipa":""},
-  {"word":"ERC-2612","zh":"ERC-2612 Permit 签名授权标准","pos":"n.","ipa":""},
-  {"word":"merkle proof","zh":"默克尔证明","pos":"n.","ipa":""},
-  {"word":"merkle drop","zh":"默克尔空投","pos":"n.","ipa":""},
-  {"word":"fee-on-transfer","zh":"转账税代币","pos":"n.","ipa":""},
-  {"word":"deflationary token","zh":"通缩代币","pos":"n.","ipa":""},
-  {"word":"rebase","zh":"弹性供应调整","pos":"n.","ipa":""},
-  {"word":"rebasing token","zh":"弹性供应代币","pos":"n.","ipa":""},
-  {"word":"wrapped token","zh":"包装代币","pos":"n.","ipa":""},
-  {"word":"cross-chain swap","zh":"跨链兑换","pos":"n.","ipa":""},
-  {"word":"atomic swap","zh":"原子交换","pos":"n.","ipa":""},
-  {"word":"HTLC","zh":"Hash Time-Lock Contract / 哈希时间锁合约","pos":"n.","ipa":""},
-  {"word":"price oracle","zh":"价格预言机","pos":"n.","ipa":""},
-  {"word":"spot price","zh":"现货价格","pos":"n.","ipa":""},
-  {"word":"liquidation threshold","zh":"清算阈值","pos":"n.","ipa":""},
-  {"word":"loan-to-value","zh":"贷款价值比（LTV）","pos":"n.","ipa":""},
-  {"word":"LTV","zh":"Loan-To-Value / 贷款价值比","pos":"n.","ipa":""},
-  {"word":"collateral factor","zh":"抵押系数","pos":"n.","ipa":""},
-  {"word":"borrow limit","zh":"借款限额","pos":"n.","ipa":""},
-  {"word":"net APY","zh":"净年化收益率","pos":"n.","ipa":""},
-  {"word":"interest accrual","zh":"利息累积","pos":"n.","ipa":""},
-  {"word":"compound interest","zh":"复利","pos":"n.","ipa":""},
-  {"word":"credit risk","zh":"信用风险","pos":"n.","ipa":""},
-  {"word":"counterparty risk","zh":"对手方风险","pos":"n.","ipa":""},
-  {"word":"liquidity risk","zh":"流动性风险","pos":"n.","ipa":""},
-  {"word":"market risk","zh":"市场风险","pos":"n.","ipa":""},
-  {"word":"smart contract risk","zh":"智能合约风险","pos":"n.","ipa":""},
-  {"word":"regulatory risk","zh":"监管风险","pos":"n.","ipa":""},
-  {"word":"carry trade","zh":"套息交易","pos":"n.","ipa":""},
-  {"word":"contango","zh":"期货升水","pos":"n.","ipa":""},
-  {"word":"backwardation","zh":"期货贴水","pos":"n.","ipa":""},
-  {"word":"pairs trading","zh":"配对交易","pos":"n.","ipa":""},
-  {"word":"mean reversion","zh":"均值回归","pos":"n.","ipa":""},
-  {"word":"momentum strategy","zh":"动量策略","pos":"n.","ipa":""},
-  {"word":"protocol fee","zh":"协议手续费","pos":"n.","ipa":""},
-  {"word":"fee switch","zh":"费用开关（治理打开协议费）","pos":"n.","ipa":""},
-  {"word":"fee distribution","zh":"手续费分配","pos":"n.","ipa":""},
-  {"word":"buyback","zh":"代币回购","pos":"n.","ipa":""},
-  {"word":"token burn","zh":"代币销毁","pos":"n.","ipa":""},
-  {"word":"deflationary mechanism","zh":"通缩机制","pos":"n.","ipa":""},
-  {"word":"inflation rate","zh":"代币通胀率","pos":"n.","ipa":""},
-  {"word":"dilution","zh":"代币稀释","pos":"n.","ipa":""},
-  {"word":"token unlock","zh":"代币解锁（归属期结束）","pos":"n.","ipa":""},
-  {"word":"sell pressure","zh":"抛售压力","pos":"n.","ipa":""},
-  {"word":"token velocity","zh":"代币流通速度","pos":"n.","ipa":""},
-  {"word":"intrinsic value","zh":"内在价值","pos":"n.","ipa":""},
-  {"word":"discounted cash flow","zh":"折现现金流（DCF）","pos":"n.","ipa":""},
-  {"word":"P/S ratio","zh":"市销率","pos":"n.","ipa":""},
-  {"word":"on-chain revenue","zh":"链上协议收入","pos":"n.","ipa":""},
-  {"word":"protocol treasury","zh":"协议国库","pos":"n.","ipa":""},
-  {"word":"runway","zh":"资金可持续时间","pos":"n.","ipa":""},
-  {"word":"funding round","zh":"融资轮次","pos":"n.","ipa":""},
-  {"word":"seed round","zh":"种子轮融资","pos":"n.","ipa":""},
-  {"word":"Series A","zh":"A 轮融资","pos":"n.","ipa":""},
-  {"word":"venture capital","zh":"风险投资","pos":"n.","ipa":""},
-  {"word":"VC","zh":"Venture Capital / 风险投资机构","pos":"n.","ipa":""},
-  {"word":"angel investor","zh":"天使投资人","pos":"n.","ipa":""},
-  {"word":"token warrant","zh":"代币权证","pos":"n.","ipa":""},
-  {"word":"SAFT","zh":"Simple Agreement for Future Tokens / 未来代币简单协议","pos":"n.","ipa":""},
-  {"word":"valuation","zh":"估值","pos":"n.","ipa":""},
-  {"word":"cap table","zh":"股权表","pos":"n.","ipa":""},
-  {"word":"token table","zh":"代币分配表","pos":"n.","ipa":""},
-  {"word":"ecosystem fund","zh":"生态基金","pos":"n.","ipa":""},
-  {"word":"public sale","zh":"公开销售","pos":"n.","ipa":""},
-  {"word":"private sale","zh":"私募","pos":"n.","ipa":""},
-  {"word":"strategic round","zh":"战略融资轮","pos":"n.","ipa":""},
-  {"word":"OTC","zh":"Over-The-Counter / 场外交易","pos":"n.","ipa":""},
-  {"word":"OTC desk","zh":"场外交易台","pos":"n.","ipa":""},
-  {"word":"block trade","zh":"大宗交易","pos":"n.","ipa":""},
-  {"word":"dark pool","zh":"暗池（隐秘大额交易）","pos":"n.","ipa":""},
-  {"word":"market depth","zh":"市场深度","pos":"n.","ipa":""},
-  {"word":"order flow","zh":"订单流","pos":"n.","ipa":""},
-  {"word":"PFOF","zh":"Payment For Order Flow / 订单流支付","pos":"n.","ipa":""},
-  {"word":"settlement","zh":"结算","pos":"n.","ipa":""},
-  {"word":"clearing","zh":"清算（金融层面）","pos":"n.","ipa":""},
-  {"word":"prime brokerage","zh":"主经纪商服务","pos":"n.","ipa":""},
-  {"word":"lending desk","zh":"借贷台","pos":"n.","ipa":""},
-  {"word":"collateral management","zh":"抵押品管理","pos":"n.","ipa":""},
-  {"word":"margin trading","zh":"保证金交易","pos":"n.","ipa":""},
-  {"word":"derivatives","zh":"衍生品","pos":"n.","ipa":""},
-  {"word":"structured product","zh":"结构化产品","pos":"n.","ipa":""},
-  {"word":"covered call","zh":"备兑看涨期权","pos":"n.","ipa":""},
-  {"word":"put option","zh":"看跌期权","pos":"n.","ipa":""},
-  {"word":"call option","zh":"看涨期权","pos":"n.","ipa":""},
-  {"word":"strike price","zh":"行权价格","pos":"n.","ipa":""},
-  {"word":"expiry","zh":"期权到期日","pos":"n.","ipa":""},
-  {"word":"implied volatility","zh":"隐含波动率","pos":"n.","ipa":""},
-  {"word":"IV","zh":"Implied Volatility / 隐含波动率","pos":"n.","ipa":""},
-  {"word":"gamma","zh":"Gamma（期权希腊字母，Delta 变化率）","pos":"n.","ipa":""},
-  {"word":"delta","zh":"Delta（期权希腊字母，价格敏感度）","pos":"n.","ipa":""},
-  {"word":"theta","zh":"Theta（期权希腊字母，时间衰减）","pos":"n.","ipa":""},
-  {"word":"vega","zh":"Vega（期权希腊字母，波动率敏感度）","pos":"n.","ipa":""},
-  {"word":"power perpetual","zh":"幂次永续合约","pos":"n.","ipa":""},
-  {"word":"everlasting option","zh":"永久期权","pos":"n.","ipa":""},
-  {"word":"DeFi primitive","zh":"DeFi 基础构件","pos":"n.","ipa":""},
-  {"word":"vampire attack","zh":"吸血鬼攻击（分叉竞争流动性）","pos":"n.","ipa":""},
-  {"word":"liquidity migration","zh":"流动性迁移","pos":"n.","ipa":""},
-  {"word":"protocol war","zh":"协议竞争（争夺流动性）","pos":"n.","ipa":""},
-  {"word":"curve war","zh":"Curve 战争（争夺 CRV 投票权）","pos":"n.","ipa":""},
-  {"word":"governance attack","zh":"治理攻击","pos":"n.","ipa":""},
-  {"word":"flash loan governance attack","zh":"闪电贷治理攻击","pos":"n.","ipa":""},
-  {"word":"51% attack","zh":"51% 攻击（算力/权益多数攻击）","pos":"n.","ipa":""},
-  {"word":"long range attack","zh":"长程攻击（PoS 攻击）","pos":"n.","ipa":""},
-  {"word":"eclipse attack","zh":"日食攻击（P2P 节点隔离）","pos":"n.","ipa":""},
-  {"word":"selfish mining","zh":"自私挖矿策略","pos":"n.","ipa":""},
-  {"word":"nothing-at-stake","zh":"无利害关系问题（PoS 早期缺陷）","pos":"n.","ipa":""},
-  {"word":"EIP process","zh":"EIP 提案流程","pos":"n.","ipa":""},
-  {"word":"ERC standard","zh":"Ethereum Request for Comment / 以太坊代币标准","pos":"n.","ipa":""},
-  {"word":"core developer","zh":"以太坊核心开发者","pos":"n.","ipa":""},
-  {"word":"All Core Devs","zh":"All Core Devs 以太坊核心开发者会议","pos":"n.","ipa":""},
-  {"word":"client diversity","zh":"客户端多样性","pos":"n.","ipa":""},
-  {"word":"Geth","zh":"Geth 执行客户端（Go 语言）","pos":"n.","ipa":""},
-  {"word":"Nethermind","zh":"Nethermind 执行客户端","pos":"n.","ipa":""},
-  {"word":"Prysm","zh":"Prysm 共识客户端（Go 语言）","pos":"n.","ipa":""},
-  {"word":"Lighthouse","zh":"Lighthouse 共识客户端（Rust）","pos":"n.","ipa":""},
-  {"word":"staking pool","zh":"质押池","pos":"n.","ipa":""},
-  {"word":"validator node","zh":"验证者节点","pos":"n.","ipa":""},
-  {"word":"withdrawal credential","zh":"提款凭证","pos":"n.","ipa":""},
-  {"word":"deposit contract","zh":"以太坊质押存款合约","pos":"n.","ipa":""},
-  {"word":"node operator","zh":"节点运营者","pos":"n.","ipa":""},
-  {"word":"solo staking","zh":"独立质押（自己运行验证节点）","pos":"n.","ipa":""},
-  {"word":"pooled staking","zh":"联合质押","pos":"n.","ipa":""},
-  {"word":"partial withdrawal","zh":"部分提款（质押奖励）","pos":"n.","ipa":""},
-  {"word":"full withdrawal","zh":"全额提款（退出质押）","pos":"n.","ipa":""},
-  {"word":"activation queue","zh":"验证者激活队列","pos":"n.","ipa":""},
-  {"word":"PayFi","zh":"Payment Finance / 支付金融（链上支付与收益结合）","pos":"n.","ipa":""},
-  {"word":"payment streaming","zh":"流式支付（持续按秒/分钟付款）","pos":"n.","ipa":""},
-  {"word":"programmable payment","zh":"可编程支付","pos":"n.","ipa":""},
-  {"word":"programmable money","zh":"可编程货币","pos":"n.","ipa":""},
-  {"word":"cross-border payment","zh":"跨境支付","pos":"n.","ipa":""},
-  {"word":"remittance","zh":"汇款","pos":"n.","ipa":""},
-  {"word":"payment finality","zh":"支付最终性","pos":"n.","ipa":""},
-  {"word":"fiat on-ramp","zh":"法币入金（法币→加密货币）","pos":"n.","ipa":""},
-  {"word":"fiat off-ramp","zh":"法币出金（加密货币→法币）","pos":"n.","ipa":""},
-  {"word":"payment rails","zh":"支付轨道（底层支付基础设施）","pos":"n.","ipa":""},
-  {"word":"micropayment","zh":"小额支付","pos":"n.","ipa":""},
-  {"word":"recurring payment","zh":"周期性支付","pos":"n.","ipa":""},
-  {"word":"conditional payment","zh":"条件支付","pos":"n.","ipa":""},
-  {"word":"escrow","zh":"第三方托管支付","pos":"n.","ipa":""},
-  {"word":"T+0 settlement","zh":"T+0 即时结算（区块链原生能力）","pos":"n.","ipa":""},
-  {"word":"payment attestation","zh":"链上支付证明","pos":"n.","ipa":""},
-  {"word":"Superfluid","zh":"Superfluid 实时流支付协议","pos":"n.","ipa":""},
-  {"word":"Sablier","zh":"Sablier 代币流支付协议","pos":"n.","ipa":""},
-  {"word":"Huma Finance","zh":"Huma Finance PayFi 应收账款协议","pos":"n.","ipa":""},
-  {"word":"Ondo Finance","zh":"Ondo Finance 代币化美债协议","pos":"n.","ipa":""},
-  {"word":"Maple Finance","zh":"Maple Finance 机构级链上借贷","pos":"n.","ipa":""},
-  {"word":"TrueFi","zh":"TrueFi 无抵押信用借贷协议","pos":"n.","ipa":""},
-  {"word":"Centrifuge","zh":"Centrifuge 真实资产（RWA）融资协议","pos":"n.","ipa":""},
-  {"word":"undercollateralized lending","zh":"欠抵押借贷（信用借贷）","pos":"n.","ipa":""},
-  {"word":"credit protocol","zh":"链上信用借贷协议","pos":"n.","ipa":""},
-  {"word":"on-chain credit","zh":"链上信用记录","pos":"n.","ipa":""},
-  {"word":"NAV","zh":"Net Asset Value / 净资产价值","pos":"n.","ipa":""},
-  {"word":"AUM","zh":"Assets Under Management / 管理资产规模","pos":"n.","ipa":""},
-  {"word":"working capital","zh":"营运资本","pos":"n.","ipa":""},
-  {"word":"trade receivable","zh":"应收账款","pos":"n.","ipa":""},
-  {"word":"invoice financing","zh":"发票融资","pos":"n.","ipa":""},
-  {"word":"securitization","zh":"资产证券化","pos":"n.","ipa":""},
-  {"word":"tranche","zh":"分级层（金融结构化产品分层）","pos":"n.","ipa":""},
-  {"word":"senior tranche","zh":"优先级层（低风险低收益）","pos":"n.","ipa":""},
-  {"word":"junior tranche","zh":"劣后层（高风险高收益）","pos":"n.","ipa":""},
-  {"word":"first-loss capital","zh":"首损资本","pos":"n.","ipa":""},
-  {"word":"yield spread","zh":"收益利差","pos":"n.","ipa":""},
-  {"word":"duration","zh":"久期（债券利率敏感度）","pos":"n.","ipa":""},
-  {"word":"maturity","zh":"到期日（债务期限）","pos":"n.","ipa":""},
-  {"word":"credit rating","zh":"信用评级","pos":"n.","ipa":""},
-  {"word":"default risk","zh":"违约风险","pos":"n.","ipa":""},
-  {"word":"revolving credit","zh":"循环信贷","pos":"n.","ipa":""},
-  {"word":"credit facility","zh":"信贷工具","pos":"n.","ipa":""},
-  {"word":"net interest margin","zh":"净息差（NIM）","pos":"n.","ipa":""},
-  {"word":"tokenized treasury","zh":"代币化国债","pos":"n.","ipa":""},
-  {"word":"interest rate model","zh":"利率模型","pos":"n.","ipa":""},
-  {"word":"accredited investor","zh":"合格投资者","pos":"n.","ipa":""},
-  {"word":"off-chain yield","zh":"链下收益（国债/货币基金等）","pos":"n.","ipa":""},
-  {"word":"prediction market","zh":"预测市场","pos":"n.","ipa":""},
-  {"word":"collateral pool","zh":"抵押资产池","pos":"n.","ipa":""}
+  {
+    "word": "blockchain",
+    "zh": "区块链",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Ethereum is the second-largest blockchain by market capitalization."
+  },
+  {
+    "word": "consensus",
+    "zh": "共识机制",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Bitcoin uses proof-of-work consensus to agree on the valid chain."
+  },
+  {
+    "word": "hash",
+    "zh": "哈希（单向加密函数）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Every block contains the hash of the previous block, forming a chain."
+  },
+  {
+    "word": "node",
+    "zh": "节点",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Running a full node lets you independently verify the entire blockchain."
+  },
+  {
+    "word": "validator",
+    "zh": "验证者",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Validators stake 32 ETH to participate in Ethereum block proposals."
+  },
+  {
+    "word": "miner",
+    "zh": "矿工",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "block",
+    "zh": "区块",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "transaction",
+    "zh": "链上交易",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Each on-chain transaction is signed with the sender's private key."
+  },
+  {
+    "word": "ledger",
+    "zh": "账本",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "decentralized",
+    "zh": "去中心化",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "immutable",
+    "zh": "不可篡改",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "cryptography",
+    "zh": "密码学",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Modern blockchain security relies on public-key cryptography and hash functions."
+  },
+  {
+    "word": "digital signature",
+    "zh": "数字签名",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A digital signature proves that a transaction was authorized by the key owner."
+  },
+  {
+    "word": "public key",
+    "zh": "公钥",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "private key",
+    "zh": "私钥",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "address",
+    "zh": "钱包地址",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "wallet",
+    "zh": "钱包",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A hardware wallet stores your private keys offline for maximum security."
+  },
+  {
+    "word": "seed phrase",
+    "zh": "助记词",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Never share your seed phrase — it gives full control of your funds."
+  },
+  {
+    "word": "mnemonic",
+    "zh": "助记词",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A 12-word mnemonic can restore your wallet on any compatible device."
+  },
+  {
+    "word": "proof of work",
+    "zh": "工作量证明（PoW）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Bitcoin's proof of work requires miners to solve computationally expensive puzzles."
+  },
+  {
+    "word": "proof of stake",
+    "zh": "权益证明（PoS）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Ethereum switched to proof of stake in the Merge, cutting energy use by 99%."
+  },
+  {
+    "word": "genesis block",
+    "zh": "创世区块",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "merkle tree",
+    "zh": "默克尔树",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fork",
+    "zh": "分叉",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A contentious fork can split a blockchain community into two competing chains."
+  },
+  {
+    "word": "hard fork",
+    "zh": "硬分叉",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Ethereum Classic was created after a hard fork over the DAO hack in 2016."
+  },
+  {
+    "word": "soft fork",
+    "zh": "软分叉",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "SegWit was deployed as a soft fork, remaining backward-compatible with old nodes."
+  },
+  {
+    "word": "mainnet",
+    "zh": "主网",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "testnet",
+    "zh": "测试网",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "peer-to-peer",
+    "zh": "点对点",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "protocol",
+    "zh": "协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "nonce",
+    "zh": "随机数（防重放）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "difficulty",
+    "zh": "挖矿难度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "block reward",
+    "zh": "区块奖励",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "confirmation",
+    "zh": "区块确认数",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "finality",
+    "zh": "最终性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "scalability",
+    "zh": "可扩展性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "halving",
+    "zh": "减半",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Bitcoin's halving reduces the block reward by 50% roughly every four years."
+  },
+  {
+    "word": "epoch",
+    "zh": "纪元（以太坊时间单位）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "slot",
+    "zh": "时隙（以太坊出块单位）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "checkpoint",
+    "zh": "检查点",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "hash rate",
+    "zh": "算力",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "mining pool",
+    "zh": "矿池",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "mempool",
+    "zh": "内存池（待确认交易池）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Pending transactions wait in the mempool before miners include them in a block."
+  },
+  {
+    "word": "full node",
+    "zh": "全节点",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "light node",
+    "zh": "轻节点",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "archive node",
+    "zh": "归档节点",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reorg",
+    "zh": "链重组",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "orphan block",
+    "zh": "孤块",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "uncle block",
+    "zh": "叔块",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "block height",
+    "zh": "区块高度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "block time",
+    "zh": "出块时间",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "base fee",
+    "zh": "基础费用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "priority fee",
+    "zh": "优先费（小费）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gas",
+    "zh": "Gas（以太坊计算费用单位）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "High network demand pushes gas prices up, making transactions more expensive."
+  },
+  {
+    "word": "gas limit",
+    "zh": "Gas 上限",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gas price",
+    "zh": "Gas 价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gwei",
+    "zh": "Gwei（ETH 单位，10⁻⁹ ETH）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "wei",
+    "zh": "Wei（ETH 最小单位，10⁻¹⁸ ETH）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "burn",
+    "zh": "销毁（代币燃烧）",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "deflation",
+    "zh": "通缩",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "inflation",
+    "zh": "通胀",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "emission",
+    "zh": "代币增发",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "total supply",
+    "zh": "总供应量",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "circulating supply",
+    "zh": "流通量",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "max supply",
+    "zh": "最大供应量",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "tokenomics",
+    "zh": "代币经济学",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Strong tokenomics align incentives between users, developers, and investors."
+  },
+  {
+    "word": "whitepaper",
+    "zh": "白皮书",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Satoshi Nakamoto published the Bitcoin whitepaper in October 2008."
+  },
+  {
+    "word": "trustless",
+    "zh": "无需信任",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "permissionless",
+    "zh": "无需许可",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "censorship-resistant",
+    "zh": "抗审查",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "Ethereum",
+    "zh": "以太坊",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Ether",
+    "zh": "以太币（ETH）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "EVM",
+    "zh": "Ethereum Virtual Machine / 以太坊虚拟机",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Any EVM-compatible chain can run Ethereum smart contracts without modification."
+  },
+  {
+    "word": "Solidity",
+    "zh": "Solidity 智能合约编程语言",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Developers write Ethereum smart contracts in Solidity, a statically typed language."
+  },
+  {
+    "word": "smart contract",
+    "zh": "智能合约",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The smart contract automatically releases funds once delivery is confirmed."
+  },
+  {
+    "word": "dApp",
+    "zh": "Decentralized Application / 去中心化应用",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Uniswap is a dApp that runs entirely on Ethereum smart contracts."
+  },
+  {
+    "word": "DAO",
+    "zh": "Decentralized Autonomous Organization / 去中心化自治组织",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The DAO voted on-chain to allocate treasury funds to a new development grant."
+  },
+  {
+    "word": "ERC-20",
+    "zh": "ERC-20 Fungible Token Standard / 同质化代币标准",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Most DeFi tokens follow the ERC-20 standard for seamless wallet compatibility."
+  },
+  {
+    "word": "ERC-721",
+    "zh": "ERC-721 Non-Fungible Token Standard / NFT 标准",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "CryptoPunks and Bored Apes are ERC-721 NFT collections on Ethereum."
+  },
+  {
+    "word": "ERC-1155",
+    "zh": "ERC-1155 Multi-Token Standard / 多代币标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ERC-4337",
+    "zh": "ERC-4337 Account Abstraction Standard / 账户抽象标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ABI",
+    "zh": "Application Binary Interface / 应用程序二进制接口",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bytecode",
+    "zh": "字节码",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "opcode",
+    "zh": "操作码",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "contract address",
+    "zh": "合约地址",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "allowance",
+    "zh": "ERC-20 授权额度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "approve",
+    "zh": "ERC-20 授权操作",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "event",
+    "zh": "合约事件（链上日志）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "revert",
+    "zh": "交易回滚",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "proxy contract",
+    "zh": "代理合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "transparent proxy",
+    "zh": "透明代理合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "UUPS",
+    "zh": "Universal Upgradeable Proxy Standard / 通用可升级代理标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "implementation contract",
+    "zh": "逻辑实现合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "storage slot",
+    "zh": "存储槽",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "calldata",
+    "zh": "调用数据",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "delegatecall",
+    "zh": "委托调用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CREATE2",
+    "zh": "CREATE2 确定性合约部署",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "keccak256",
+    "zh": "keccak256 哈希函数",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ECDSA",
+    "zh": "Elliptic Curve Digital Signature Algorithm / 椭圆曲线数字签名算法",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "msg.sender",
+    "zh": "消息发送者（合约调用者）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "msg.value",
+    "zh": "消息附带的以太币数量",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "WETH",
+    "zh": "Wrapped Ether / 包装以太币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "oracle",
+    "zh": "预言机（链下数据提供者）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Chainlink oracles supply DeFi protocols with tamper-resistant price feeds."
+  },
+  {
+    "word": "Chainlink",
+    "zh": "Chainlink 去中心化预言机",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "price feed",
+    "zh": "价格预言机数据流",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MEV",
+    "zh": "Maximal Extractable Value / 最大可提取价值",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "MEV searchers profit by reordering transactions within an Ethereum block."
+  },
+  {
+    "word": "Flashbots",
+    "zh": "Flashbots MEV 研究与基础设施",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "sandwich attack",
+    "zh": "三明治攻击（MEV 攻击手法）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A sandwich attack places buy orders before and sell orders after a victim's trade."
+  },
+  {
+    "word": "front-running",
+    "zh": "抢先交易（MEV 手法）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Bots front-run large DEX trades by paying higher gas to jump the queue."
+  },
+  {
+    "word": "EIP",
+    "zh": "Ethereum Improvement Proposal / 以太坊改进提案",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Beacon Chain",
+    "zh": "信标链（以太坊 PoS 层）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Merge",
+    "zh": "以太坊合并升级（PoW→PoS）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "EIP-1559",
+    "zh": "EIP-1559 基础费销毁机制",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "EIP-4844",
+    "zh": "EIP-4844 Proto-Danksharding / Blob 数据",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "blob",
+    "zh": "Blob 数据（L2 数据可用性存储）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "proto-danksharding",
+    "zh": "原始分片方案",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "danksharding",
+    "zh": "完整分片方案",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "proposer",
+    "zh": "区块提议者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "attester",
+    "zh": "区块证明者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "attestation",
+    "zh": "证明（PoS 共识投票）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "committee",
+    "zh": "验证者委员会",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "beacon node",
+    "zh": "信标节点",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "execution client",
+    "zh": "执行客户端",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "consensus client",
+    "zh": "共识客户端",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "slashing",
+    "zh": "罚没（惩罚恶意验证者）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "withdrawal",
+    "zh": "质押提款",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "exit queue",
+    "zh": "验证者退出队列",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MEV-Boost",
+    "zh": "MEV-Boost 区块构建外包协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "relay",
+    "zh": "中继（MEV 中间层）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "builder",
+    "zh": "区块构建者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "inclusion list",
+    "zh": "包含列表（抗审查机制）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "inactivity leak",
+    "zh": "不活跃泄漏（PoS 惩罚）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gas optimization",
+    "zh": "Gas 优化",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Yul",
+    "zh": "Yul 以太坊汇编语言",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reentrancy",
+    "zh": "重入攻击",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The 2016 DAO hack exploited a reentrancy bug to drain 3.6 million ETH."
+  },
+  {
+    "word": "reentrancy guard",
+    "zh": "重入锁",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "access control",
+    "zh": "访问控制",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "integer overflow",
+    "zh": "整数溢出漏洞",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "oracle attack",
+    "zh": "预言机攻击",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "price manipulation",
+    "zh": "价格操纵",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "flash loan attack",
+    "zh": "闪电贷攻击",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DeFi",
+    "zh": "Decentralized Finance / 去中心化金融",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "DeFi protocols let anyone lend, borrow, and trade without a bank."
+  },
+  {
+    "word": "AMM",
+    "zh": "Automated Market Maker / 自动做市商",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Uniswap's AMM prices tokens automatically using the constant-product formula."
+  },
+  {
+    "word": "liquidity provider",
+    "zh": "流动性提供者（LP）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidity pool",
+    "zh": "流动性池",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "LPs deposit token pairs into a liquidity pool and earn a share of trading fees."
+  },
+  {
+    "word": "yield",
+    "zh": "收益率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "yield farming",
+    "zh": "流动性挖矿（收益耕作）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Yield farmers move capital between protocols to maximize APY."
+  },
+  {
+    "word": "liquidity mining",
+    "zh": "流动性挖矿",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "APY",
+    "zh": "Annual Percentage Yield / 年化收益率（含复利）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "APR",
+    "zh": "Annual Percentage Rate / 年化利率（不含复利）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "TVL",
+    "zh": "Total Value Locked / 总锁仓量",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Aave's TVL surpassed $10 billion at the peak of the DeFi bull market."
+  },
+  {
+    "word": "governance",
+    "zh": "链上治理",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "governance token",
+    "zh": "治理代币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Holding a governance token lets you vote on protocol upgrades and treasury use."
+  },
+  {
+    "word": "voting power",
+    "zh": "投票权重",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "proposal",
+    "zh": "治理提案",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "quorum",
+    "zh": "法定投票人数",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "timelock",
+    "zh": "时间锁合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "multisig",
+    "zh": "多重签名",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Gnosis Safe multisig requires M-of-N signers to approve each transaction."
+  },
+  {
+    "word": "treasury",
+    "zh": "协议国库",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "grant",
+    "zh": "生态资助",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "vesting",
+    "zh": "代币归属期",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Team tokens carry a 4-year vesting schedule to align long-term incentives."
+  },
+  {
+    "word": "cliff",
+    "zh": "锁仓悬崖期",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "lockup period",
+    "zh": "锁定期",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "staking",
+    "zh": "质押",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Staking ETH earns rewards while helping secure the Ethereum network."
+  },
+  {
+    "word": "unstaking",
+    "zh": "解除质押",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "delegation",
+    "zh": "委托（质押或投票）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "lending",
+    "zh": "借贷",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "borrowing",
+    "zh": "借款",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "collateral",
+    "zh": "抵押品",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Borrowers deposit ETH as collateral to mint DAI on MakerDAO."
+  },
+  {
+    "word": "collateralization ratio",
+    "zh": "抵押率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "overcollateralized",
+    "zh": "超额抵押",
+    "pos": "adj.",
+    "ipa": "",
+    "ex": "MakerDAO requires overcollateralized positions to maintain DAI's dollar peg."
+  },
+  {
+    "word": "undercollateralized",
+    "zh": "欠抵押（信用借贷）",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidation",
+    "zh": "清算",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "When collateral drops below 150%, the borrowing position faces liquidation."
+  },
+  {
+    "word": "liquidator",
+    "zh": "清算人",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "health factor",
+    "zh": "健康因子（抵押品安全指标）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "borrow rate",
+    "zh": "借款利率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "supply rate",
+    "zh": "存款利率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "utilization rate",
+    "zh": "资金利用率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reserve factor",
+    "zh": "储备系数",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "borrow cap",
+    "zh": "借款上限",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "supply cap",
+    "zh": "供应上限",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "flash loan",
+    "zh": "闪电贷",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The attacker used a flash loan to manipulate prices and drain the pool."
+  },
+  {
+    "word": "arbitrage",
+    "zh": "套利",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "impermanent loss",
+    "zh": "无常损失",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "LPs suffer impermanent loss when the prices of deposited tokens diverge."
+  },
+  {
+    "word": "price impact",
+    "zh": "价格冲击",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "pool depth",
+    "zh": "流动性深度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "TWAP",
+    "zh": "Time-Weighted Average Price / 时间加权平均价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "VWAP",
+    "zh": "Volume-Weighted Average Price / 成交量加权平均价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "funding rate",
+    "zh": "资金费率（永续合约）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "delta neutral",
+    "zh": "Delta 中性（对冲策略）",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "vault",
+    "zh": "收益金库",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "auto-compound",
+    "zh": "自动复利",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "rebalance",
+    "zh": "再平衡",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "leverage",
+    "zh": "杠杆",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "margin",
+    "zh": "保证金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cross-margin",
+    "zh": "全仓模式",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "isolated margin",
+    "zh": "逐仓模式",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "open interest",
+    "zh": "未平仓量",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidation price",
+    "zh": "爆仓价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "mark price",
+    "zh": "标记价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "index price",
+    "zh": "指数价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "insurance fund",
+    "zh": "保险基金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "account abstraction",
+    "zh": "账户抽象",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "paymaster",
+    "zh": "Gas 代付合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bundler",
+    "zh": "用户操作打包者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "concentrated liquidity",
+    "zh": "集中流动性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "range order",
+    "zh": "区间订单",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "tick",
+    "zh": "价格刻度（Uniswap v3）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fee tier",
+    "zh": "手续费等级",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "perpetual",
+    "zh": "永续合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "options",
+    "zh": "期权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "yield aggregator",
+    "zh": "收益聚合器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DEX aggregator",
+    "zh": "DEX Aggregator / DEX 聚合器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "composability",
+    "zh": "可组合性（金融乐高）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "money lego",
+    "zh": "金融乐高",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "protocol revenue",
+    "zh": "协议收入",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "real yield",
+    "zh": "真实收益（扣除通胀后的净收益）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gauge",
+    "zh": "流动性计量器（Curve）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "vote escrow",
+    "zh": "投票托管（veToken）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ve-tokenomics",
+    "zh": "veToken 经济模型",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bribe",
+    "zh": "投票贿赂",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "emission schedule",
+    "zh": "代币排放计划",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "yield tokenization",
+    "zh": "收益代币化",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "principal token",
+    "zh": "本金代币（PT）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "yield token",
+    "zh": "收益代币（YT）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fixed yield",
+    "zh": "固定收益",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "variable yield",
+    "zh": "浮动收益",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "stablecoin",
+    "zh": "稳定币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Merchants prefer stablecoins to avoid cryptocurrency price volatility."
+  },
+  {
+    "word": "pegged",
+    "zh": "锚定的",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "peg",
+    "zh": "价格锚定",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "depeg",
+    "zh": "脱锚",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "depegging",
+    "zh": "脱锚过程",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "algorithmic stablecoin",
+    "zh": "算法稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "collateral-backed stablecoin",
+    "zh": "抵押支撑稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fiat-backed stablecoin",
+    "zh": "法币支撑稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "crypto-backed stablecoin",
+    "zh": "加密资产抵押稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "USDC",
+    "zh": "USD Coin / Circle 发行的美元稳定币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Circle's USDC is backed 1:1 by cash and short-term US Treasuries."
+  },
+  {
+    "word": "USDT",
+    "zh": "Tether USD / Tether 发行的美元稳定币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "USDT is the most widely used stablecoin for trading pairs on exchanges."
+  },
+  {
+    "word": "DAI",
+    "zh": "DAI 去中心化超额抵押稳定币（MakerDAO）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "DAI maintains its dollar peg through overcollateralized crypto vault positions."
+  },
+  {
+    "word": "FRAX",
+    "zh": "FRAX 混合算法稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PYUSD",
+    "zh": "PayPal USD / PayPal 发行的美元稳定币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "PayPal launched PYUSD as its native stablecoin for commerce and Web3 payments."
+  },
+  {
+    "word": "mint",
+    "zh": "铸造代币",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "redeem",
+    "zh": "赎回",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "redemption",
+    "zh": "赎回机制",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "issuance",
+    "zh": "代币发行",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reserve",
+    "zh": "储备金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reserve ratio",
+    "zh": "储备比率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "proof of reserves",
+    "zh": "储备证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "audit",
+    "zh": "智能合约审计",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "custodian",
+    "zh": "托管机构",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CDP",
+    "zh": "Collateralized Debt Position / 抵押债务头寸",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "stability fee",
+    "zh": "稳定费率（MakerDAO）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DSR",
+    "zh": "Dai Savings Rate / DAI 储蓄利率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidation ratio",
+    "zh": "清算比率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "keeper",
+    "zh": "清算机器人",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PSM",
+    "zh": "Peg Stability Module / 锚定稳定模块",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "stableswap",
+    "zh": "稳定币兑换算法（Curve）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "amplification factor",
+    "zh": "放大系数（Curve A 值）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "seigniorage",
+    "zh": "铸币税",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "yield-bearing stablecoin",
+    "zh": "生息稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "native USDC",
+    "zh": "原生 USDC（非桥接）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CCTP",
+    "zh": "Cross-Chain Transfer Protocol / Circle 跨链转账协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "blacklist",
+    "zh": "黑名单（稳定币合规机制）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "compliance",
+    "zh": "合规",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "KYC",
+    "zh": "Know Your Customer / 用户身份认证",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Most CEXs require KYC verification before allowing fiat currency withdrawals."
+  },
+  {
+    "word": "KYB",
+    "zh": "Know Your Business / 企业身份认证",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "PayFi platforms run KYB checks before onboarding business borrowers."
+  },
+  {
+    "word": "AML",
+    "zh": "Anti-Money Laundering / 反洗钱",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Crypto exchanges implement AML programs to detect and report suspicious activity."
+  },
+  {
+    "word": "CBDC",
+    "zh": "Central Bank Digital Currency / 中央银行数字货币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "RWA",
+    "zh": "Real World Asset / 真实世界资产代币化",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "RWA protocols are bringing billions in US Treasuries and bonds on-chain."
+  },
+  {
+    "word": "tokenization",
+    "zh": "资产代币化",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Real estate tokenization allows fractional ownership of physical property."
+  },
+  {
+    "word": "T-bill",
+    "zh": "美国短期国债",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "money market fund",
+    "zh": "货币市场基金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "delta neutral stablecoin",
+    "zh": "Delta 中性稳定币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "basis trade",
+    "zh": "基差交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "funding rate capture",
+    "zh": "资金费率套利策略",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "stability mechanism",
+    "zh": "价格稳定机制",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "debt ceiling",
+    "zh": "债务上限",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "emergency shutdown",
+    "zh": "紧急关闭",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "global settlement",
+    "zh": "全局清算",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "synthetic dollar",
+    "zh": "合成美元",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reserve management",
+    "zh": "储备管理",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "NFT",
+    "zh": "Non-Fungible Token / 非同质化代币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The artist sold an NFT of her digital painting for 10 ETH at auction."
+  },
+  {
+    "word": "fungible",
+    "zh": "可替代的（同质化）",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "semi-fungible",
+    "zh": "半同质化",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "metadata",
+    "zh": "元数据（NFT 属性信息）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "IPFS",
+    "zh": "InterPlanetary File System / 星际文件系统",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CID",
+    "zh": "Content IDentifier / 内容标识符（IPFS 寻址）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Arweave",
+    "zh": "Arweave 永久存储网络",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "collection",
+    "zh": "NFT 系列",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "allowlist",
+    "zh": "白名单",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Dutch auction",
+    "zh": "荷兰拍卖",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "royalty",
+    "zh": "NFT 版税",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "creator fee",
+    "zh": "创作者费用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "floor price",
+    "zh": "地板价（NFT 最低市场价）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "rarity",
+    "zh": "稀有度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "trait",
+    "zh": "NFT 特征属性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "provenance",
+    "zh": "来源证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "generative art",
+    "zh": "生成艺术",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PFP",
+    "zh": "Profile Picture NFT / 头像型 NFT",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "blue chip NFT",
+    "zh": "蓝筹 NFT",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fractionalization",
+    "zh": "NFT 碎片化",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "soulbound token",
+    "zh": "灵魂绑定代币（不可转让）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "SBT",
+    "zh": "Soulbound Token / 灵魂绑定代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "dynamic NFT",
+    "zh": "动态 NFT",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "virtual land",
+    "zh": "虚拟土地",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "metaverse",
+    "zh": "元宇宙",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "play-to-earn",
+    "zh": "边玩边赚（P2E）",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "GameFi",
+    "zh": "Game Finance / 游戏化 DeFi",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "in-game asset",
+    "zh": "游戏内资产",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "mint pass",
+    "zh": "铸造通行证",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "reveal",
+    "zh": "NFT 开盒揭晓",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ERC-6551",
+    "zh": "ERC-6551 Token Bound Account / 代币绑定账户标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token bound account",
+    "zh": "代币绑定账户",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "social token",
+    "zh": "社交代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "free mint",
+    "zh": "免费铸造",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "on-chain art",
+    "zh": "链上艺术",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Layer 2",
+    "zh": "第二层扩容网络（L2）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Layer 2 solutions like Arbitrum reduce Ethereum fees by 10 to 100 times."
+  },
+  {
+    "word": "rollup",
+    "zh": "Rollup 扩容方案",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Rollups batch hundreds of transactions into one proof posted to Ethereum."
+  },
+  {
+    "word": "optimistic rollup",
+    "zh": "乐观 Rollup",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Optimistic rollups assume transactions are valid unless challenged within 7 days."
+  },
+  {
+    "word": "ZK rollup",
+    "zh": "零知识 Rollup",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "ZK rollups use cryptographic proofs to instantly verify transaction batches."
+  },
+  {
+    "word": "zero knowledge proof",
+    "zh": "零知识证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "validity proof",
+    "zh": "有效性证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fraud proof",
+    "zh": "欺诈证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "challenge period",
+    "zh": "挑战期（乐观 Rollup）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "sequencer",
+    "zh": "排序器（Rollup 中心节点）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "batch",
+    "zh": "批量交易打包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "calldata compression",
+    "zh": "Calldata 压缩",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "data availability",
+    "zh": "数据可用性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DA layer",
+    "zh": "Data Availability Layer / 数据可用性层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "modular blockchain",
+    "zh": "模块化区块链",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "monolithic blockchain",
+    "zh": "单体区块链",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bridge",
+    "zh": "跨链桥",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Cross-chain bridges let you move assets between Ethereum and Polygon."
+  },
+  {
+    "word": "canonical bridge",
+    "zh": "官方桥（Layer 2 原生桥）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cross-chain",
+    "zh": "跨链",
+    "pos": "adj.",
+    "ipa": "",
+    "ex": "Cross-chain interoperability lets value flow freely between different blockchains."
+  },
+  {
+    "word": "IBC",
+    "zh": "Inter-Blockchain Communication / 链间通信协议（Cosmos）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "LayerZero",
+    "zh": "LayerZero 全链互操作协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Wormhole",
+    "zh": "Wormhole 跨链桥",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "state root",
+    "zh": "状态根",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "state transition",
+    "zh": "状态转换",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "execution layer",
+    "zh": "执行层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "settlement layer",
+    "zh": "结算层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "consensus layer",
+    "zh": "共识层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "data layer",
+    "zh": "数据层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Arbitrum",
+    "zh": "Arbitrum L2（乐观 Rollup）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Arbitrum is the largest optimistic rollup by TVL and transaction volume."
+  },
+  {
+    "word": "Optimism",
+    "zh": "Optimism L2（乐观 Rollup）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Optimism's Superchain vision aims to unify multiple OP Stack chains."
+  },
+  {
+    "word": "Base",
+    "zh": "Base L2（Coinbase 推出的 L2）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Polygon",
+    "zh": "Polygon 扩容网络",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "zkSync",
+    "zh": "zkSync ZK Rollup L2",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "zkSync uses ZK proofs to offer cheap, fast Ethereum-compatible transactions."
+  },
+  {
+    "word": "StarkNet",
+    "zh": "StarkNet ZK Rollup L2",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Scroll",
+    "zh": "Scroll ZK Rollup L2",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Taiko",
+    "zh": "Taiko 基于以太坊的 ZK L2",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "validium",
+    "zh": "Validium（链下数据可用性 ZK 方案）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "plasma",
+    "zh": "Plasma 扩容方案（早期 L2）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "state channel",
+    "zh": "状态通道",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "payment channel",
+    "zh": "支付通道",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "sidechain",
+    "zh": "侧链",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "parachain",
+    "zh": "平行链（Polkadot）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Cosmos",
+    "zh": "Cosmos 互链宇宙生态",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Polkadot",
+    "zh": "Polkadot 异构多链网络",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "shared sequencer",
+    "zh": "共享排序器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "based rollup",
+    "zh": "Based Rollup（基于 L1 排序）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "preconfirmation",
+    "zh": "预确认",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "withdrawal delay",
+    "zh": "提款延迟（7 天挑战期）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "forced inclusion",
+    "zh": "强制交易包含（抗排序器审查）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liveness",
+    "zh": "活性（系统可用保证）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "zkEVM",
+    "zh": "ZK Ethereum Virtual Machine / 零知识以太坊虚拟机",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "zkVM",
+    "zh": "ZK Virtual Machine / 零知识虚拟机",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "STARK",
+    "zh": "Scalable Transparent Argument of Knowledge / 可扩展透明知识论证",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "SNARK",
+    "zh": "Succinct Non-Interactive Argument of Knowledge / 简洁非交互式知识论证",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PLONK",
+    "zh": "PLONK Zero-Knowledge Proof System / PLONK 零知识证明系统",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "recursive proof",
+    "zh": "递归证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "aggregated proof",
+    "zh": "聚合证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "prover",
+    "zh": "证明者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "verifier",
+    "zh": "验证者（ZK 语境）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "trusted setup",
+    "zh": "可信设置",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "EigenLayer",
+    "zh": "EigenLayer 再质押协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "restaking",
+    "zh": "再质押",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquid restaking",
+    "zh": "流动性再质押",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "LST",
+    "zh": "Liquid Staking Token / 流动质押代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "LRT",
+    "zh": "Liquid Restaking Token / 流动再质押代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "AVS",
+    "zh": "Actively Validated Service / 主动验证服务",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DVT",
+    "zh": "Distributed Validator Technology / 分布式验证者技术",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "shared security",
+    "zh": "共享安全性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cryptoeconomic security",
+    "zh": "密码经济安全",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "BLS signature",
+    "zh": "BLS 聚合签名",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Celestia",
+    "zh": "Celestia 模块化数据可用性层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "EigenDA",
+    "zh": "EigenDA 数据可用性层",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "hardware wallet",
+    "zh": "硬件钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "software wallet",
+    "zh": "软件钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "hot wallet",
+    "zh": "热钱包（联网）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A hot wallet is convenient but more exposed to phishing and malware."
+  },
+  {
+    "word": "cold wallet",
+    "zh": "冷钱包（离线）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Storing large funds on a cold wallet protects against online hacks."
+  },
+  {
+    "word": "paper wallet",
+    "zh": "纸钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MetaMask",
+    "zh": "MetaMask 以太坊浏览器钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Ledger",
+    "zh": "Ledger 硬件钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Trezor",
+    "zh": "Trezor 硬件钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "keystore",
+    "zh": "密钥文件",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "passphrase",
+    "zh": "密码短语（额外加密层）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "BIP39",
+    "zh": "Bitcoin Improvement Proposal 39 / BIP39 助记词标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "BIP44",
+    "zh": "Bitcoin Improvement Proposal 44 / BIP44 HD 钱包派生标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "HD wallet",
+    "zh": "Hierarchical Deterministic Wallet / 分层确定性钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "derivation path",
+    "zh": "派生路径",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "multi-signature",
+    "zh": "多重签名",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "threshold signature",
+    "zh": "门限签名",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Shamir's Secret Sharing",
+    "zh": "秘密分割算法",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "social recovery",
+    "zh": "社交恢复钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "guardian",
+    "zh": "守护者（社交恢复）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "phishing",
+    "zh": "网络钓鱼",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "rug pull",
+    "zh": "跑路骗局",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "honeypot",
+    "zh": "蜜罐合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "approval exploit",
+    "zh": "授权漏洞利用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "infinite approval",
+    "zh": "无限授权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "revoke approval",
+    "zh": "撤销授权",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "EIP-712",
+    "zh": "EIP-712 结构化数据签名标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "blind signing",
+    "zh": "盲签（看不到签名内容）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "air-gapped signing",
+    "zh": "离线签名",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "address poisoning",
+    "zh": "地址污染攻击",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "clipboard hijacking",
+    "zh": "剪贴板劫持（替换地址）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MPC wallet",
+    "zh": "Multi-Party Computation Wallet / 多方计算钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "smart contract wallet",
+    "zh": "智能合约钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "self-custody",
+    "zh": "自托管（掌控私钥）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "non-custodial",
+    "zh": "非托管",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "OpSec",
+    "zh": "Operational Security / 操作安全",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "seed phrase backup",
+    "zh": "助记词备份",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bug bounty",
+    "zh": "漏洞赏金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "audit report",
+    "zh": "审计报告",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "responsible disclosure",
+    "zh": "负责任披露",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "zero-day exploit",
+    "zh": "零日漏洞利用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Gnosis Safe",
+    "zh": "Gnosis Safe 多签钱包",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "exchange",
+    "zh": "交易所",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CEX",
+    "zh": "Centralized Exchange / 中心化交易所",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Binance is the largest CEX by daily trading volume."
+  },
+  {
+    "word": "DEX",
+    "zh": "Decentralized Exchange / 去中心化交易所",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "On a DEX you trade directly from your wallet without giving up custody."
+  },
+  {
+    "word": "trading pair",
+    "zh": "交易对",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "base currency",
+    "zh": "基础货币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "quote currency",
+    "zh": "计价货币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "market order",
+    "zh": "市价单",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "limit order",
+    "zh": "限价单",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "stop loss",
+    "zh": "止损单",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "take profit",
+    "zh": "止盈单",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "order book",
+    "zh": "订单簿",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bid",
+    "zh": "买单价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ask",
+    "zh": "卖单价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "spread",
+    "zh": "买卖价差",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "maker",
+    "zh": "挂单方（提供流动性）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "taker",
+    "zh": "吃单方（消耗流动性）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "trading fee",
+    "zh": "交易手续费",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "volume",
+    "zh": "成交量",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "market cap",
+    "zh": "市值",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Bitcoin's market cap dominates the crypto sector at over 50% of total value."
+  },
+  {
+    "word": "FDV",
+    "zh": "Fully Diluted Valuation / 完全稀释估值",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "sybil attack",
+    "zh": "女巫攻击（伪造多身份）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "launchpad",
+    "zh": "代币发行平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "IDO",
+    "zh": "Initial DEX Offering / 去中心化初始代币发行",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "IEO",
+    "zh": "Initial Exchange Offering / 交易所初始代币发行",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ICO",
+    "zh": "Initial Coin Offering / 首次代币发行",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fair launch",
+    "zh": "公平发射（无预挖无 VC）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bonding curve",
+    "zh": "联合曲线（自动定价机制）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "price discovery",
+    "zh": "价格发现",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "candlestick",
+    "zh": "K 线图",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "support level",
+    "zh": "支撑位",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "resistance level",
+    "zh": "压力位",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "bullish",
+    "zh": "看涨",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "bearish",
+    "zh": "看跌",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "bull market",
+    "zh": "牛市",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "During the 2021 bull market, Bitcoin reached an all-time high near $69,000."
+  },
+  {
+    "word": "bear market",
+    "zh": "熊市",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The 2022 bear market wiped out over 70% of the total crypto market cap."
+  },
+  {
+    "word": "sideways market",
+    "zh": "横盘市场",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "breakout",
+    "zh": "价格突破",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "pump",
+    "zh": "拉盘",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "dump",
+    "zh": "砸盘",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ATH",
+    "zh": "All-Time High / 历史最高价",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ATL",
+    "zh": "All-Time Low / 历史最低价",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ROI",
+    "zh": "Return on Investment / 投资回报率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PnL",
+    "zh": "Profit and Loss / 盈亏",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "realized PnL",
+    "zh": "已实现盈亏",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "unrealized PnL",
+    "zh": "未实现盈亏",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "long position",
+    "zh": "做多仓位",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "short position",
+    "zh": "做空仓位",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "hedge",
+    "zh": "对冲",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "slippage",
+    "zh": "滑点",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Setting a 0.5% slippage tolerance protects against price movement during swaps."
+  },
+  {
+    "word": "whale",
+    "zh": "巨鲸（大户）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "retail investor",
+    "zh": "散户投资者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "institutional investor",
+    "zh": "机构投资者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "market maker",
+    "zh": "做市商",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "on-chain data",
+    "zh": "链上数据",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MVRV",
+    "zh": "Market Value to Realized Value / 市值与实现价值比",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "NUPL",
+    "zh": "Net Unrealized Profit/Loss / 净未实现利润",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "realized cap",
+    "zh": "实现市值",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "long-term holder",
+    "zh": "长期持有者（LTH）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "short-term holder",
+    "zh": "短期持有者（STH）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "exchange reserve",
+    "zh": "交易所储备（链上监控指标）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "on-chain analytics",
+    "zh": "链上数据分析",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Glassnode",
+    "zh": "Glassnode 链上数据平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Nansen",
+    "zh": "Nansen 链上地址追踪",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Arkham",
+    "zh": "Arkham 链上情报平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Dune Analytics",
+    "zh": "Dune Analytics 链上数据仪表盘",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "RPC",
+    "zh": "Remote Procedure Call / 远程过程调用（节点接口）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "node provider",
+    "zh": "节点服务商",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Infura",
+    "zh": "Infura 以太坊节点服务",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Alchemy",
+    "zh": "Alchemy Web3 开发平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "nonce management",
+    "zh": "Nonce 管理（防止交易拥堵）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gas estimation",
+    "zh": "Gas 估算",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "simulation",
+    "zh": "交易模拟（预执行）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ethers.js",
+    "zh": "ethers.js 以太坊 JS 开发库",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "viem",
+    "zh": "viem 现代以太坊 TypeScript 库",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "wagmi (lib)",
+    "zh": "wagmi React Web3 钱包交互库",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Foundry",
+    "zh": "Foundry 以太坊智能合约开发框架",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Hardhat",
+    "zh": "Hardhat 以太坊开发测试框架",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "contract verification",
+    "zh": "合约源码验证",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Etherscan",
+    "zh": "Etherscan 以太坊区块浏览器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "block explorer",
+    "zh": "区块浏览器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "minimal proxy",
+    "zh": "最小代理合约（EIP-1167）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "multicall",
+    "zh": "批量合约调用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "private mempool",
+    "zh": "私有内存池（MEV 保护）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MEV protection",
+    "zh": "MEV 保护",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "indexer",
+    "zh": "索引器（链上事件监听）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "subgraph",
+    "zh": "子图（The Graph 查询单元）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "TheGraph",
+    "zh": "The Graph 去中心化数据索引",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DefiLlama",
+    "zh": "DefiLlama DeFi 数据聚合平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Token Terminal",
+    "zh": "Token Terminal 协议收入分析",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "circuit breaker",
+    "zh": "熔断机制",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "emergency pause",
+    "zh": "紧急暂停",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "timelocked upgrade",
+    "zh": "时间锁升级",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "MEV bot",
+    "zh": "MEV 套利机器人",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "searcher",
+    "zh": "MEV 搜索者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "order flow auction",
+    "zh": "订单流拍卖（OFA）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "intent-based",
+    "zh": "基于意图的交易",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "solver",
+    "zh": "意图求解器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "RFQ",
+    "zh": "Request For Quote / 询价（做市商报价）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CLOB",
+    "zh": "Central Limit Order Book / 中央限价订单簿",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "batch auction",
+    "zh": "批量拍卖",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "private transaction",
+    "zh": "私密交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "HODL",
+    "zh": "Hold On for Dear Life / 长期持有",
+    "pos": "v.",
+    "ipa": "",
+    "ex": "Long-term investors choose to HODL through market downturns rather than sell."
+  },
+  {
+    "word": "FOMO",
+    "zh": "Fear Of Missing Out / 错失恐惧症",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "FOMO drove retail investors to buy near the peak of the 2021 bull run."
+  },
+  {
+    "word": "FUD",
+    "zh": "Fear, Uncertainty, Doubt / 恐惧、不确定性与疑虑",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "FUD about regulatory crackdowns caused a sharp market sell-off."
+  },
+  {
+    "word": "degen",
+    "zh": "冒险玩家（去中心化赌徒）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ape in",
+    "zh": "无脑冲进（不管风险就买）",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "paper hands",
+    "zh": "纸手（忍不住卖出）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "diamond hands",
+    "zh": "钻石手（坚定持有不卖）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "rekt",
+    "zh": "亏到爆（被清算或大亏）",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "gm",
+    "zh": "Good Morning / Web3 打招呼语",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "wagmi",
+    "zh": "We're All Gonna Make It / 我们都会成功",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "ngmi",
+    "zh": "Not Gonna Make It / 你不会成功",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "alpha",
+    "zh": "内幕信息（投资先机）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "NFA",
+    "zh": "Not Financial Advice / 非投资建议",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "DYOR",
+    "zh": "Do Your Own Research / 自行研究尽职调查",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "SAFU",
+    "zh": "Secure Asset Fund for Users / 资金安全",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "exit scam",
+    "zh": "退出骗局（项目方卷钱跑路）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "soft rug",
+    "zh": "软跑路（慢慢撤资不暴雷）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "accumulate",
+    "zh": "吸筹（低位建仓）",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "distribution",
+    "zh": "派筹（高位出货）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "smart money",
+    "zh": "聪明钱（机构或早期投资者）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DeFi summer",
+    "zh": "DeFi 之夏（2020 年 DeFi 爆发）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "crypto winter",
+    "zh": "加密寒冬",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "laser eyes",
+    "zh": "激光眼（比特币极大主义信仰）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cope",
+    "zh": "自我安慰（亏损后自我开解）",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "shill",
+    "zh": "鼓吹（带节奏推广某项目）",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "moon",
+    "zh": "飞涨到月球",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "bagholder",
+    "zh": "套牢者（持有亏损资产不卖）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ser",
+    "zh": "Sir（Web3 用语，称呼他人）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fren",
+    "zh": "Friend（Web3 用语，友好称呼）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "based",
+    "zh": "真实坦率（网络文化用语）",
+    "pos": "adj.",
+    "ipa": ""
+  },
+  {
+    "word": "airdrop hunting",
+    "zh": "撸空投",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "not your keys not your coins",
+    "zh": "不是你的私钥就不是你的币",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "we are so early",
+    "zh": "我们还处于早期",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "probably nothing",
+    "zh": "很可能是大事（反讽用语）",
+    "pos": "phrase",
+    "ipa": ""
+  },
+  {
+    "word": "token",
+    "zh": "代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "coin",
+    "zh": "加密货币（主链原生币）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "altcoin",
+    "zh": "山寨币（比特币之外的加密货币）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cryptocurrency",
+    "zh": "加密货币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "digital asset",
+    "zh": "数字资产",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CeFi",
+    "zh": "Centralized Finance / 中心化金融",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "TradFi",
+    "zh": "Traditional Finance / 传统金融",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Web3",
+    "zh": "Web3（基于区块链的互联网新形态）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "pseudonymity",
+    "zh": "假名性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "anonymity",
+    "zh": "匿名性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "zero knowledge",
+    "zh": "零知识（不泄露信息的证明）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "airdrop",
+    "zh": "空投",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Uniswap's 400 UNI airdrop surprised early users with unexpected rewards."
+  },
+  {
+    "word": "snapshot",
+    "zh": "快照（记录地址持仓状态）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "A snapshot of all holders was taken at block 18,000,000 to calculate airdrop amounts."
+  },
+  {
+    "word": "eligibility",
+    "zh": "空投资格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "allocation",
+    "zh": "代币分配",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "unlock",
+    "zh": "代币解锁",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "vesting schedule",
+    "zh": "代币归属时间表",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token distribution",
+    "zh": "代币分配方案",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "network effect",
+    "zh": "网络效应",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "adoption",
+    "zh": "用户采用率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "retroactive airdrop",
+    "zh": "追溯性空投",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "points",
+    "zh": "积分系统（空投前的激励积分）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "pre-token",
+    "zh": "预代币（积分转换为代币前）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquid staking",
+    "zh": "流动性质押",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Liquid staking tokens let you earn staking yield while staying liquid in DeFi."
+  },
+  {
+    "word": "staking reward",
+    "zh": "质押奖励",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "validator commission",
+    "zh": "验证者佣金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ETH staking",
+    "zh": "ETH 质押",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "whitehat",
+    "zh": "白帽黑客",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "exploit",
+    "zh": "漏洞利用",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "hack",
+    "zh": "黑客攻击（链上）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "post-mortem",
+    "zh": "事后分析报告",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "incident response",
+    "zh": "安全事件响应",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "on-chain vote",
+    "zh": "链上投票",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "off-chain vote",
+    "zh": "链下投票",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Snapshot governance",
+    "zh": "Snapshot 链下治理",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "delegate",
+    "zh": "委托投票",
+    "pos": "v.",
+    "ipa": ""
+  },
+  {
+    "word": "core contributor",
+    "zh": "核心贡献者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "working group",
+    "zh": "工作组（DAO 委员会）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "temperature check",
+    "zh": "意见温度测试（社区民意调查）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "OP Stack",
+    "zh": "OP Stack 模块化 L2 技术栈",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "superchain",
+    "zh": "超级链（OP Stack 多链生态）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "retroPGF",
+    "zh": "Retroactive Public Goods Funding / 追溯性公共产品融资",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "quadratic funding",
+    "zh": "二次方融资",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "quadratic voting",
+    "zh": "二次方投票",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "public good",
+    "zh": "公共物品（无需许可开放使用）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "credible neutrality",
+    "zh": "可信中立性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "rage quit",
+    "zh": "愤怒退出（Moloch DAO 机制）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Uniswap",
+    "zh": "Uniswap 去中心化交易所",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Uniswap pioneered the AMM model and became the largest DEX by volume."
+  },
+  {
+    "word": "Aave",
+    "zh": "Aave 去中心化借贷协议",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Aave lets users deposit assets to earn interest or borrow against collateral."
+  },
+  {
+    "word": "Compound",
+    "zh": "Compound 去中心化借贷协议",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Compound's cTokens automatically accrue interest for depositors over time."
+  },
+  {
+    "word": "Curve Finance",
+    "zh": "Curve 稳定币兑换 AMM",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Curve Finance specializes in low-slippage stable-to-stable token swaps."
+  },
+  {
+    "word": "MakerDAO",
+    "zh": "MakerDAO（DAI 稳定币发行方）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "MakerDAO governs the DAI stablecoin through MKR token holder votes."
+  },
+  {
+    "word": "Lido",
+    "zh": "Lido 液态质押协议",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Lido lets users stake any amount of ETH and receive liquid stETH in return."
+  },
+  {
+    "word": "dYdX",
+    "zh": "dYdX 去中心化永续合约交易所",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "GMX",
+    "zh": "GMX 去中心化永续合约平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Pendle",
+    "zh": "Pendle 收益代币化协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Convex Finance",
+    "zh": "Convex Finance Curve 收益聚合",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Synthetix",
+    "zh": "Synthetix 合成资产协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Rocket Pool",
+    "zh": "Rocket Pool 去中心化 ETH 质押",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Frax Finance",
+    "zh": "Frax Finance 算法稳定币协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Balancer",
+    "zh": "Balancer 加权流动性 AMM",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "1inch",
+    "zh": "1inch DEX 聚合器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CowSwap",
+    "zh": "CowSwap 批量拍卖交易所",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "hook",
+    "zh": "Uniswap v4 Hook（自定义流动性逻辑）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "singleton",
+    "zh": "单例合约（Uniswap v4 架构）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "flash accounting",
+    "zh": "闪电记账（Uniswap v4）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Bitcoin",
+    "zh": "比特币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Lightning Network",
+    "zh": "闪电网络（比特币 L2）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Ordinals",
+    "zh": "Ordinals 比特币铭文协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "BRC-20",
+    "zh": "BRC-20 比特币铭文代币标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "inscription",
+    "zh": "铭刻（Ordinals 数据）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Solana",
+    "zh": "Solana 高性能公链",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "BNB Chain",
+    "zh": "BNB Chain（Binance 公链）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Avalanche",
+    "zh": "Avalanche 雪崩公链",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "NEAR Protocol",
+    "zh": "NEAR 协议（分片公链）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Aptos",
+    "zh": "Aptos（Move 语言公链）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Sui",
+    "zh": "Sui（Move 语言公链）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Move language",
+    "zh": "Move 编程语言（Aptos/Sui）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Rust",
+    "zh": "Rust 编程语言（Solana 等）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Ethereum Foundation",
+    "zh": "以太坊基金会",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CoinMarketCap",
+    "zh": "CoinMarketCap 市值排行网站",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "CoinGecko",
+    "zh": "CoinGecko 加密数据平台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gas tracker",
+    "zh": "Gas 追踪器",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token approval",
+    "zh": "代币授权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "WalletConnect",
+    "zh": "WalletConnect 钱包连接协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "meta-transaction",
+    "zh": "元交易（代付 Gas）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gasless transaction",
+    "zh": "无 Gas 交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "relayer",
+    "zh": "转发者（代提交交易）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gas sponsorship",
+    "zh": "Gas 赞助",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "permit",
+    "zh": "EIP-2612 链下签名授权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ERC-2612",
+    "zh": "ERC-2612 Permit 签名授权标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "merkle proof",
+    "zh": "默克尔证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "merkle drop",
+    "zh": "默克尔空投",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fee-on-transfer",
+    "zh": "转账税代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "deflationary token",
+    "zh": "通缩代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "rebase",
+    "zh": "弹性供应调整",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "rebasing token",
+    "zh": "弹性供应代币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "wrapped token",
+    "zh": "包装代币",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "WBTC is a wrapped token that brings Bitcoin liquidity into Ethereum DeFi."
+  },
+  {
+    "word": "cross-chain swap",
+    "zh": "跨链兑换",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "atomic swap",
+    "zh": "原子交换",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "HTLC",
+    "zh": "Hash Time-Lock Contract / 哈希时间锁合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "price oracle",
+    "zh": "价格预言机",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "spot price",
+    "zh": "现货价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidation threshold",
+    "zh": "清算阈值",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "loan-to-value",
+    "zh": "贷款价值比（LTV）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "LTV",
+    "zh": "Loan-To-Value / 贷款价值比",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "collateral factor",
+    "zh": "抵押系数",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "borrow limit",
+    "zh": "借款限额",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "net APY",
+    "zh": "净年化收益率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "interest accrual",
+    "zh": "利息累积",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "compound interest",
+    "zh": "复利",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "credit risk",
+    "zh": "信用风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "counterparty risk",
+    "zh": "对手方风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidity risk",
+    "zh": "流动性风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "market risk",
+    "zh": "市场风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "smart contract risk",
+    "zh": "智能合约风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "regulatory risk",
+    "zh": "监管风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "carry trade",
+    "zh": "套息交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "contango",
+    "zh": "期货升水",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "backwardation",
+    "zh": "期货贴水",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "pairs trading",
+    "zh": "配对交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "mean reversion",
+    "zh": "均值回归",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "momentum strategy",
+    "zh": "动量策略",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "protocol fee",
+    "zh": "协议手续费",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fee switch",
+    "zh": "费用开关（治理打开协议费）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fee distribution",
+    "zh": "手续费分配",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "buyback",
+    "zh": "代币回购",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token burn",
+    "zh": "代币销毁",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "deflationary mechanism",
+    "zh": "通缩机制",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "inflation rate",
+    "zh": "代币通胀率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "dilution",
+    "zh": "代币稀释",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token unlock",
+    "zh": "代币解锁（归属期结束）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "sell pressure",
+    "zh": "抛售压力",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token velocity",
+    "zh": "代币流通速度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "intrinsic value",
+    "zh": "内在价值",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "discounted cash flow",
+    "zh": "折现现金流（DCF）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "P/S ratio",
+    "zh": "市销率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "on-chain revenue",
+    "zh": "链上协议收入",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "protocol treasury",
+    "zh": "协议国库",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "runway",
+    "zh": "资金可持续时间",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "funding round",
+    "zh": "融资轮次",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "seed round",
+    "zh": "种子轮融资",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Series A",
+    "zh": "A 轮融资",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "venture capital",
+    "zh": "风险投资",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "VC",
+    "zh": "Venture Capital / 风险投资机构",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "angel investor",
+    "zh": "天使投资人",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token warrant",
+    "zh": "代币权证",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "SAFT",
+    "zh": "Simple Agreement for Future Tokens / 未来代币简单协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "valuation",
+    "zh": "估值",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cap table",
+    "zh": "股权表",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "token table",
+    "zh": "代币分配表",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ecosystem fund",
+    "zh": "生态基金",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "public sale",
+    "zh": "公开销售",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "private sale",
+    "zh": "私募",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "strategic round",
+    "zh": "战略融资轮",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "OTC",
+    "zh": "Over-The-Counter / 场外交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "OTC desk",
+    "zh": "场外交易台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "block trade",
+    "zh": "大宗交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "dark pool",
+    "zh": "暗池（隐秘大额交易）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "market depth",
+    "zh": "市场深度",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "order flow",
+    "zh": "订单流",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PFOF",
+    "zh": "Payment For Order Flow / 订单流支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "settlement",
+    "zh": "结算",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "clearing",
+    "zh": "清算（金融层面）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "prime brokerage",
+    "zh": "主经纪商服务",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "lending desk",
+    "zh": "借贷台",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "collateral management",
+    "zh": "抵押品管理",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "margin trading",
+    "zh": "保证金交易",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "derivatives",
+    "zh": "衍生品",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "structured product",
+    "zh": "结构化产品",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "covered call",
+    "zh": "备兑看涨期权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "put option",
+    "zh": "看跌期权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "call option",
+    "zh": "看涨期权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "strike price",
+    "zh": "行权价格",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "expiry",
+    "zh": "期权到期日",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "implied volatility",
+    "zh": "隐含波动率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "IV",
+    "zh": "Implied Volatility / 隐含波动率",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "gamma",
+    "zh": "Gamma（期权希腊字母，Delta 变化率）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "delta",
+    "zh": "Delta（期权希腊字母，价格敏感度）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "theta",
+    "zh": "Theta（期权希腊字母，时间衰减）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "vega",
+    "zh": "Vega（期权希腊字母，波动率敏感度）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "power perpetual",
+    "zh": "幂次永续合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "everlasting option",
+    "zh": "永久期权",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "DeFi primitive",
+    "zh": "DeFi 基础构件",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "vampire attack",
+    "zh": "吸血鬼攻击（分叉竞争流动性）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "liquidity migration",
+    "zh": "流动性迁移",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "protocol war",
+    "zh": "协议竞争（争夺流动性）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "curve war",
+    "zh": "Curve 战争（争夺 CRV 投票权）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "governance attack",
+    "zh": "治理攻击",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "flash loan governance attack",
+    "zh": "闪电贷治理攻击",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "51% attack",
+    "zh": "51% 攻击（算力/权益多数攻击）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "long range attack",
+    "zh": "长程攻击（PoS 攻击）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "eclipse attack",
+    "zh": "日食攻击（P2P 节点隔离）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "selfish mining",
+    "zh": "自私挖矿策略",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "nothing-at-stake",
+    "zh": "无利害关系问题（PoS 早期缺陷）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "EIP process",
+    "zh": "EIP 提案流程",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "ERC standard",
+    "zh": "Ethereum Request for Comment / 以太坊代币标准",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "core developer",
+    "zh": "以太坊核心开发者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "All Core Devs",
+    "zh": "All Core Devs 以太坊核心开发者会议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "client diversity",
+    "zh": "客户端多样性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Geth",
+    "zh": "Geth 执行客户端（Go 语言）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Nethermind",
+    "zh": "Nethermind 执行客户端",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Prysm",
+    "zh": "Prysm 共识客户端（Go 语言）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Lighthouse",
+    "zh": "Lighthouse 共识客户端（Rust）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "staking pool",
+    "zh": "质押池",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "validator node",
+    "zh": "验证者节点",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "withdrawal credential",
+    "zh": "提款凭证",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "deposit contract",
+    "zh": "以太坊质押存款合约",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "node operator",
+    "zh": "节点运营者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "solo staking",
+    "zh": "独立质押（自己运行验证节点）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "pooled staking",
+    "zh": "联合质押",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "partial withdrawal",
+    "zh": "部分提款（质押奖励）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "full withdrawal",
+    "zh": "全额提款（退出质押）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "activation queue",
+    "zh": "验证者激活队列",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "PayFi",
+    "zh": "Payment Finance / 支付金融（链上支付与收益结合）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "PayFi protocols enable real-time cross-border payroll settlements using stablecoins."
+  },
+  {
+    "word": "payment streaming",
+    "zh": "流式支付（持续按秒/分钟付款）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "With Superfluid, companies can stream salaries to employees second by second."
+  },
+  {
+    "word": "programmable payment",
+    "zh": "可编程支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "programmable money",
+    "zh": "可编程货币",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "cross-border payment",
+    "zh": "跨境支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "remittance",
+    "zh": "汇款",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "payment finality",
+    "zh": "支付最终性",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fiat on-ramp",
+    "zh": "法币入金（法币→加密货币）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "fiat off-ramp",
+    "zh": "法币出金（加密货币→法币）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "payment rails",
+    "zh": "支付轨道（底层支付基础设施）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "micropayment",
+    "zh": "小额支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "recurring payment",
+    "zh": "周期性支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "conditional payment",
+    "zh": "条件支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "escrow",
+    "zh": "第三方托管支付",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "T+0 settlement",
+    "zh": "T+0 即时结算（区块链原生能力）",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Blockchain enables T+0 settlement, replacing the traditional T+2 clearing cycle."
+  },
+  {
+    "word": "payment attestation",
+    "zh": "链上支付证明",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Superfluid",
+    "zh": "Superfluid 实时流支付协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Sablier",
+    "zh": "Sablier 代币流支付协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Huma Finance",
+    "zh": "Huma Finance PayFi 应收账款协议",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Huma Finance tokenizes trade receivables to give businesses instant liquidity."
+  },
+  {
+    "word": "Ondo Finance",
+    "zh": "Ondo Finance 代币化美债协议",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Ondo Finance tokenizes US Treasuries so DeFi users can earn real-world yields."
+  },
+  {
+    "word": "Maple Finance",
+    "zh": "Maple Finance 机构级链上借贷",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Maple Finance provides institutional-grade on-chain lending with transparent terms."
+  },
+  {
+    "word": "TrueFi",
+    "zh": "TrueFi 无抵押信用借贷协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "Centrifuge",
+    "zh": "Centrifuge 真实资产（RWA）融资协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "undercollateralized lending",
+    "zh": "欠抵押借贷（信用借贷）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "credit protocol",
+    "zh": "链上信用借贷协议",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "on-chain credit",
+    "zh": "链上信用记录",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "NAV",
+    "zh": "Net Asset Value / 净资产价值",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "The ETF's NAV is calculated daily from the market value of its holdings."
+  },
+  {
+    "word": "AUM",
+    "zh": "Assets Under Management / 管理资产规模",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "BlackRock's crypto fund AUM exceeded $20 billion within its first year."
+  },
+  {
+    "word": "working capital",
+    "zh": "营运资本",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "trade receivable",
+    "zh": "应收账款",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Huma Finance lets businesses tokenize trade receivables for instant liquidity."
+  },
+  {
+    "word": "invoice financing",
+    "zh": "发票融资",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "Invoice financing lets businesses unlock capital tied up in unpaid invoices."
+  },
+  {
+    "word": "securitization",
+    "zh": "资产证券化",
+    "pos": "n.",
+    "ipa": "",
+    "ex": "RWA securitization brings traditional financial asset structures onto the blockchain."
+  },
+  {
+    "word": "tranche",
+    "zh": "分级层（金融结构化产品分层）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "senior tranche",
+    "zh": "优先级层（低风险低收益）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "junior tranche",
+    "zh": "劣后层（高风险高收益）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "first-loss capital",
+    "zh": "首损资本",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "yield spread",
+    "zh": "收益利差",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "duration",
+    "zh": "久期（债券利率敏感度）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "maturity",
+    "zh": "到期日（债务期限）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "credit rating",
+    "zh": "信用评级",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "default risk",
+    "zh": "违约风险",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "revolving credit",
+    "zh": "循环信贷",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "credit facility",
+    "zh": "信贷工具",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "net interest margin",
+    "zh": "净息差（NIM）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "tokenized treasury",
+    "zh": "代币化国债",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "interest rate model",
+    "zh": "利率模型",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "accredited investor",
+    "zh": "合格投资者",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "off-chain yield",
+    "zh": "链下收益（国债/货币基金等）",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "prediction market",
+    "zh": "预测市场",
+    "pos": "n.",
+    "ipa": ""
+  },
+  {
+    "word": "collateral pool",
+    "zh": "抵押资产池",
+    "pos": "n.",
+    "ipa": ""
+  }
 ]

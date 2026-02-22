@@ -72,6 +72,7 @@
         .chip-review { background: #d1fae5; color: #065f46; }
         .chip-master { background: #ede9fe; color: #5b21b6; }
         .chip-streak { background: #ffe4e6; color: #be123c; }
+        .chip-daily  { background: #fff7ed; color: #c2410c; }
         .level-badge {
             font-size: 0.75rem;
             font-weight: 700;
@@ -242,7 +243,7 @@
         .card {
             position: relative;
             width: 100%;
-            height: 280px;
+            height: 320px;
             transform-style: preserve-3d;
             transition: transform 0.5s cubic-bezier(.4,0,.2,1);
             cursor: pointer;
@@ -358,18 +359,25 @@
             margin-top: 6px;
         }
         .back-example {
-            font-size: 0.8rem;
+            font-size: 0.79rem;
             color: rgba(255,255,255,.72);
             font-style: italic;
             text-align: center;
             margin-top: 8px;
             padding: 0 8px;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.45;
+            line-height: 1.5;
+        }
+        .back-example-src {
+            font-size: 0.62rem;
+            color: rgba(255,255,255,.3);
+            text-align: center;
+            margin-top: 3px;
+            font-style: normal;
         }
         .back-footer {
             position: absolute; bottom: 12px;
@@ -453,8 +461,37 @@
             gap: 20px;
             font-size: 0.78rem;
             color: var(--muted);
+            margin-bottom: 6px;
         }
         .ft-row strong { color: var(--text); }
+        .xp-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .xp-label {
+            font-size: 0.68rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+        .xp-track {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple), var(--blue));
+            border-radius: 99px;
+            transition: width 0.6s cubic-bezier(.4,0,.2,1);
+        }
+        .xp-next {
+            font-size: 0.68rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
 
         @media (max-width: 380px) {
             .front-word { font-size: 2rem; }
@@ -475,6 +512,7 @@
             <span class="chip chip-review">🔁 {{qs.reviewCount}}</span>
             <span class="chip chip-master">🏆 {{masteredCount}}</span>
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
+            <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}天</span>
         </div>
         <span class="level-badge">{{levelInfo.icon}} {{levelInfo.name}}</span>
         <div class="hd-btns">
@@ -482,6 +520,7 @@
                     :title="autoPlay ? '自动朗读：开（点击关闭）' : '自动朗读：关（点击开启）'">
                 🔊
             </button>
+            <button class="btn-hd" @click="exportProgress" title="导出进度">💾</button>
             <button class="btn-hd danger" @click="confirmReset">重置</button>
         </div>
     </div>
@@ -516,11 +555,22 @@
                 <div class="done-stat-label">连击</div>
             </div>
             <div class="done-stat">
+                <div class="done-stat-val">{{dailyStreak}}</div>
+                <div class="done-stat-label">📅 连续天数</div>
+            </div>
+            <div class="done-stat">
+                <div class="done-stat-val">{{totalReviewed}}</div>
+                <div class="done-stat-label">累计答题</div>
+            </div>
+            <div class="done-stat">
                 <div class="done-stat-val">{{points}}</div>
                 <div class="done-stat-label">总积分</div>
             </div>
         </div>
         <div class="done-level">{{levelInfo.icon}} {{levelInfo.name}} · {{levelInfo.desc}}</div>
+        <div v-if="achievements.length > 0" style="font-size:0.82rem;color:var(--muted);">
+            成就：<span v-for="id in achievements" :key="id">{{achIcon(id)}}</span>
+        </div>
         <button class="btn-more" @click="loadMore">继续学习更多</button>
     </div>
 
@@ -568,8 +618,8 @@
                     <div class="back-pos" v-if="curDict && curDict.pos">
                         {{posZh(curDict.pos)}}
                     </div>
-                    <div class="back-example" v-if="curDict && curDict.example">
-                        "{{curDict.example}}"
+                    <div class="back-example" v-if="curExample">
+                        "{{curExample.text}}"
                     </div>
                     <div class="back-footer">
                         {{cur.word}}
@@ -611,6 +661,15 @@
             <span>积分 <strong>{{points}}</strong></span>
             <span>连击 <strong>{{streak}}</strong></span>
             <span>掌握 <strong>{{masteredCount}}</strong> / {{allWords.length}}</span>
+            <span>总复习 <strong>{{totalReviewed}}</strong></span>
+        </div>
+        <div class="xp-row">
+            <span class="xp-label">{{levelInfo.icon}} {{levelInfo.name}}</span>
+            <div class="xp-track">
+                <div class="xp-fill" :style="{width: levelProgress + '%'}"></div>
+            </div>
+            <span class="xp-next" v-if="nextLevelInfo">{{nextLevelInfo.icon}} {{nextLevelInfo.name}}</span>
+            <span class="xp-next" v-else>👑 满级</span>
         </div>
     </div>
 
@@ -674,11 +733,27 @@ const POS_ZH = {
 };
 
 const LEVELS = [
-    { min:   0, icon: '🌱', name: '初学者', desc: '继续加油！' },
-    { min:  50, icon: '📘', name: '入门者', desc: '进步神速！' },
-    { min: 150, icon: '⭐', name: '进阶者', desc: '词汇量不错！' },
-    { min: 350, icon: '🎯', name: '熟练者', desc: '相当厉害！' },
-    { min: 600, icon: '🏆', name: '精通者', desc: '词汇达人！' },
+    { min:    0, icon: '🌱', name: '初学者', desc: '继续加油！' },
+    { min:   50, icon: '📘', name: '入门者', desc: '进步神速！' },
+    { min:  150, icon: '⭐', name: '进阶者', desc: '词汇量不错！' },
+    { min:  350, icon: '🎯', name: '熟练者', desc: '相当厉害！' },
+    { min:  600, icon: '🏆', name: '精通者', desc: '词汇达人！' },
+    { min: 1000, icon: '👑', name: '宗师',   desc: '登峰造极！' },
+];
+
+const GLOBAL_KEY = 'srs_global_v1';
+const ACHIEVEMENTS = [
+    { id: 'first_answer',  icon: '🎯', name: '第一步',    desc: '完成第一次答题' },
+    { id: 'streak_5',      icon: '🔥', name: '连击 5',    desc: '单次连击达到 5' },
+    { id: 'streak_20',     icon: '⚡', name: '连击 20',   desc: '单次连击达到 20' },
+    { id: 'daily_3',       icon: '📅', name: '三日连续',  desc: '连续学习 3 天' },
+    { id: 'daily_7',       icon: '🗓️', name: '坚持一周',  desc: '连续学习 7 天' },
+    { id: 'daily_30',      icon: '🏅', name: '月度达人',  desc: '连续学习 30 天' },
+    { id: 'master_1',      icon: '⭐', name: '初掌',      desc: '掌握第 1 个单词' },
+    { id: 'master_10',     icon: '🌟', name: '十词达人',  desc: '掌握 10 个单词' },
+    { id: 'master_100',    icon: '💯', name: '百词大师',  desc: '掌握 100 个单词' },
+    { id: 'reviewed_100',  icon: '📖', name: '百次答题',  desc: '累计答题 100 次' },
+    { id: 'reviewed_500',  icon: '📚', name: '五百勤练',  desc: '累计答题 500 次' },
 ];
 
 // ── Vue instance ────────────────────────────────────────────────────────────
@@ -700,9 +775,14 @@ new Vue({
             toastTmr:     null,
             points:       0,
             streak:       0,
-            autoPlay:     true,
-            audioPlaying: false,
-            dictCache:    {},   // word → {ipa, audio, pos, definition, example} | null
+            autoPlay:      true,
+            audioPlaying:  false,
+            dictCache:     {},  // word → {ipa, audio, pos, definition, example} | null
+            // ── Global gamification ──────────────────────────────────────
+            dailyStreak:   0,
+            lastStudyDate: '',
+            totalReviewed: 0,
+            achievements:  [],
             stageLabel: {
                 new:      '新词',
                 learning: '学习中',
@@ -722,6 +802,24 @@ new Vue({
                 return { full: zh.slice(0, idx), zh: zh.slice(idx + 3) };
             }
             return { full: '', zh };
+        },
+        // Example: prefer API result, fall back to JSON ex field
+        curExample() {
+            if (this.curDict && this.curDict.example) return { text: this.curDict.example, src: 'dict' };
+            if (this.cur.ex) return { text: this.cur.ex, src: 'json' };
+            return null;
+        },
+        levelProgress() {
+            const mc  = this.masteredCount;
+            const lv  = this.levelInfo;
+            const idx = LEVELS.indexOf(lv);
+            const nxt = LEVELS[idx + 1];
+            if (!nxt) return 100;
+            return Math.min(100, Math.max(0, Math.round((mc - lv.min) / (nxt.min - lv.min) * 100)));
+        },
+        nextLevelInfo() {
+            const idx = LEVELS.indexOf(this.levelInfo);
+            return LEVELS[idx + 1] || null;
         },
         sessionDone() { return !this.loading && this.queue.length === 0; },
         cur()  { return this.queue[0] || { word: '', zh: '', pos: '' }; },
@@ -802,6 +900,10 @@ new Vue({
         },
 
         posZh(pos) { return POS_ZH[pos] || pos; },
+        achIcon(id) {
+            const a = ACHIEVEMENTS.find(x => x.id === id);
+            return a ? a.icon : '';
+        },
 
         // ── Dictionary API ────────────────────────────────────────────────
         async fetchDict(word) {
@@ -894,6 +996,7 @@ new Vue({
                     word: w.word,
                     zh:   w.zh || w.word,
                     pos:  w.pos || '',
+                    ex:   w.ex  || '',
                 }));
                 this.buildQueue();
             } catch (e) {
@@ -954,6 +1057,9 @@ new Vue({
         // ── SRS answer ────────────────────────────────────────────────────
         answer(level) {
             if (!this.flipped) return;
+
+            this.totalReviewed++;
+            this.updateDailyStreak();
 
             const wordId = this.cur.word;
             const tdy    = today();
@@ -1043,6 +1149,7 @@ new Vue({
             this.$set(this.state, wordId, { ...s });
             this.flipped = false;
             this.saveState();
+            this.checkAchievements();
 
             // Feedback
             const ps = this.streak;
@@ -1152,6 +1259,97 @@ new Vue({
             }
         },
 
+        // ── Global state (daily streak, achievements) ─────────────────────
+        loadGlobal() {
+            try {
+                const raw = localStorage.getItem(GLOBAL_KEY);
+                if (raw) {
+                    const d = JSON.parse(raw);
+                    this.dailyStreak   = d.dailyStreak   || 0;
+                    this.lastStudyDate = d.lastStudyDate  || '';
+                    this.totalReviewed = d.totalReviewed  || 0;
+                    this.achievements  = d.achievements   || [];
+                }
+            } catch (e) { /* ignore */ }
+        },
+        saveGlobal() {
+            localStorage.setItem(GLOBAL_KEY, JSON.stringify({
+                dailyStreak:   this.dailyStreak,
+                lastStudyDate: this.lastStudyDate,
+                totalReviewed: this.totalReviewed,
+                achievements:  this.achievements,
+            }));
+        },
+        updateDailyStreak() {
+            const tdy = today();
+            if (this.lastStudyDate === tdy) return;
+            const d = new Date();
+            d.setDate(d.getDate() - 1);
+            const yesterday = d.getFullYear() + '-' +
+                String(d.getMonth() + 1).padStart(2, '0') + '-' +
+                String(d.getDate()).padStart(2, '0');
+            if (this.lastStudyDate === yesterday) {
+                this.dailyStreak += 1;
+            } else {
+                this.dailyStreak = 1;
+            }
+            this.lastStudyDate = tdy;
+            this.saveGlobal();
+        },
+        checkAchievements() {
+            const earned = [];
+            const check = (id, cond) => {
+                if (cond && !this.achievements.includes(id)) {
+                    this.achievements.push(id);
+                    earned.push(id);
+                }
+            };
+            check('first_answer',  this.totalReviewed >= 1);
+            check('streak_5',      this.streak >= 5);
+            check('streak_20',     this.streak >= 20);
+            check('daily_3',       this.dailyStreak >= 3);
+            check('daily_7',       this.dailyStreak >= 7);
+            check('daily_30',      this.dailyStreak >= 30);
+            check('master_1',      this.masteredCount >= 1);
+            check('master_10',     this.masteredCount >= 10);
+            check('master_100',    this.masteredCount >= 100);
+            check('reviewed_100',  this.totalReviewed >= 100);
+            check('reviewed_500',  this.totalReviewed >= 500);
+            if (earned.length > 0) {
+                this.saveGlobal();
+                const a = ACHIEVEMENTS.find(x => x.id === earned[earned.length - 1]);
+                if (a) {
+                    setTimeout(() => this.showToast(a.icon + ' 成就解锁：' + a.name, 'bonus'), 1200);
+                }
+            }
+        },
+        exportProgress() {
+            const allState = {};
+            for (const deck of DECKS) {
+                try {
+                    const raw = localStorage.getItem('srs_' + deck.id + '_v1');
+                    if (raw) allState[deck.id] = JSON.parse(raw);
+                } catch (e) {}
+            }
+            const data = {
+                exportDate:   new Date().toISOString(),
+                global:       {
+                    dailyStreak:   this.dailyStreak,
+                    lastStudyDate: this.lastStudyDate,
+                    totalReviewed: this.totalReviewed,
+                    achievements:  this.achievements,
+                },
+                decks: allState,
+            };
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
+            a.href     = url;
+            a.download = 'flashcard-progress-' + today() + '.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        },
+
         // ── Keyboard ─────────────────────────────────────────────────────
         onKey(e) {
             if (this.sessionDone || this.loading) return;
@@ -1187,6 +1385,7 @@ new Vue({
             if (found) this.currentDeck = found;
         }
         this.loadSaved();
+        this.loadGlobal();
         this.loadDictCache();
         this.loadWords();
     },
