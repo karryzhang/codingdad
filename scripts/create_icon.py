@@ -7,10 +7,10 @@ OUT = pathlib.Path(__file__).parent.parent / 'english' / 'icons'
 OUT.mkdir(exist_ok=True)
 
 # ── Brand colours ────────────────────────────────────────────────────────────
-# Gradient: bright medium-blue (top) → deep navy (bottom)
-# White-on-BG_TOP contrast ratio ≈ 6.2 : 1  (WCAG AA ✓)
-BG_TOP  = (30,  94, 186)   # #1e5eba  vibrant mid-blue
-BG_BOT  = (10,  26,  58)   # #0a1a3a  deep midnight-navy
+# Bright cartoon-style gradient: sky-blue → app-brand-blue
+# Thick white strokes stay clearly visible (3:1+ contrast on graphic elements)
+BG_TOP  = (74, 144, 255)   # #4a90ff  bright sky-blue (playful, modern)
+BG_BOT  = (37,  99, 235)   # #2563eb  brand blue (grounding)
 WHITE   = (255, 255, 255)
 
 SCALE = 4   # supersampling factor for smooth edges
@@ -32,14 +32,6 @@ def make_icon(size):
     md   = ImageDraw.Draw(mask)
     md.rounded_rectangle([0, 0, S - 1, S - 1], radius=radius, fill=255)
     grad.putalpha(mask)
-
-    # ── Soft radial glow at top-centre (adds depth & vibrancy) ──────────────
-    glow   = Image.new('RGBA', (S, S), (0, 0, 0, 0))
-    gd2    = ImageDraw.Draw(glow)
-    gr     = int(S * 0.52)              # glow radius
-    gx, gy = S // 2, int(S * 0.12)     # anchor near top-centre
-    gd2.ellipse([gx - gr, gy - gr, gx + gr, gy + gr], fill=(255, 255, 255, 20))
-    grad   = Image.alpha_composite(grad, glow)
 
     draw = ImageDraw.Draw(grad)
     cx, cy = S // 2, S // 2
