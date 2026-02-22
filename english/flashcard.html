@@ -593,6 +593,14 @@ const PREFETCH_N   = 5;         // prefetch ahead N words
 // Guard against concurrent duplicate fetches (outside Vue, not reactive)
 const _fetching = new Set();
 
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
 function ts()    { return Date.now(); }
 function today() {
     const d = new Date();
@@ -865,7 +873,7 @@ new Vue({
                 }
             }
 
-            const q = [...learning, ...reviews, ...newCards];
+            const q = [...learning, ...shuffle(reviews), ...shuffle(newCards)];
             this.queue        = q;
             this.sessionTotal = q.length || 1;
             this.prefetchAhead();
