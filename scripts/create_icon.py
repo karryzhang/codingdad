@@ -6,9 +6,11 @@ from PIL import Image, ImageDraw
 OUT = pathlib.Path(__file__).parent.parent / 'english' / 'icons'
 OUT.mkdir(exist_ok=True)
 
-# ── Brand colour (#1a3a5c – matches --card-back) ─────────────────────────────
-BG      = (26, 58, 92)   # #1a3a5c
-BG_DARK = (13, 30, 50)   # #0d1e32  subtle depth gradient
+# ── Brand colours ────────────────────────────────────────────────────────────
+# Gradient: bright medium-blue (top) → deep navy (bottom)
+# White-on-BG_TOP contrast ratio ≈ 6.2 : 1  (WCAG AA ✓)
+BG_TOP  = (30,  94, 186)   # #1e5eba  vibrant mid-blue
+BG_BOT  = (10,  26,  58)   # #0a1a3a  deep midnight-navy
 WHITE   = (255, 255, 255)
 
 SCALE = 4   # supersampling factor for smooth edges
@@ -17,12 +19,12 @@ def make_icon(size):
     S      = size * SCALE          # render at 4× resolution
     radius = (size // 5) * SCALE   # iOS-style corner radius
 
-    # ── Gradient background ──────────────────────────────────────────────────
+    # ── Gradient background (top-to-bottom) ─────────────────────────────────
     grad = Image.new('RGBA', (S, S), (0, 0, 0, 0))
     gd   = ImageDraw.Draw(grad)
     for y in range(S):
         t   = y / S
-        col = tuple(int(BG[i] + (BG_DARK[i] - BG[i]) * t) for i in range(3)) + (255,)
+        col = tuple(int(BG_TOP[i] + (BG_BOT[i] - BG_TOP[i]) * t) for i in range(3)) + (255,)
         gd.line([(0, y), (S, y)], fill=col)
 
     # ── Rounded-rect mask ────────────────────────────────────────────────────
@@ -30,6 +32,14 @@ def make_icon(size):
     md   = ImageDraw.Draw(mask)
     md.rounded_rectangle([0, 0, S - 1, S - 1], radius=radius, fill=255)
     grad.putalpha(mask)
+
+    # ── Soft radial glow at top-centre (adds depth & vibrancy) ──────────────
+    glow   = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    gd2    = ImageDraw.Draw(glow)
+    gr     = int(S * 0.52)              # glow radius
+    gx, gy = S // 2, int(S * 0.12)     # anchor near top-centre
+    gd2.ellipse([gx - gr, gy - gr, gx + gr, gy + gr], fill=(255, 255, 255, 20))
+    grad   = Image.alpha_composite(grad, glow)
 
     draw = ImageDraw.Draw(grad)
     cx, cy = S // 2, S // 2
@@ -97,7 +107,7 @@ def make_favicon(size):
     gd   = ImageDraw.Draw(grad)
     for y in range(S):
         t   = y / S
-        col = tuple(int(BG[i] + (BG_DARK[i] - BG[i]) * t) for i in range(3)) + (255,)
+        col = tuple(int(BG_TOP[i] + (BG_BOT[i] - BG_TOP[i]) * t) for i in range(3)) + (255,)
         gd.line([(0, y), (S, y)], fill=col)
 
     mask = Image.new('L', (S, S), 0)
