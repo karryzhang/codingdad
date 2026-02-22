@@ -1076,6 +1076,91 @@
         .btn-practice:hover  { box-shadow: 0 6px 22px rgba(139,92,246,0.45); transform: translateY(-1px); }
         .btn-practice:active { transform: scale(0.97); box-shadow: none; }
 
+        /* ── Reading overlay ───────────────────────────────────────── */
+        .reading-overlay {
+            position: fixed; inset: 0; z-index: 200;
+            background: var(--bg);
+            display: flex; flex-direction: column;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            animation: rdSlideUp 0.28s cubic-bezier(.32,.72,0,1);
+        }
+        @keyframes rdSlideUp {
+            from { transform: translateY(60px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        .reading-hd {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+        }
+        .reading-hd-title { font-size: 1rem; font-weight: 700; }
+        .reading-close {
+            background: none; border: none; font-size: 1.35rem;
+            cursor: pointer; color: var(--muted); padding: 4px 8px; line-height: 1;
+        }
+        .reading-body {
+            flex: 1; overflow-y: auto; padding: 20px 18px 28px;
+            -webkit-overflow-scrolling: touch;
+            display: flex; flex-direction: column; gap: 18px;
+        }
+        .reading-key-box {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 18px 16px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .reading-key-info { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+        .reading-key-link { color: var(--blue); text-decoration: none; font-size: 0.85rem; }
+        .reading-key-row { display: flex; gap: 8px; }
+        .reading-key-input {
+            flex: 1; padding: 11px 14px; border: 1.5px solid var(--border);
+            border-radius: 10px; font-size: 0.88rem; outline: none;
+            font-family: 'SF Mono', monospace; background: var(--bg); color: var(--text);
+            letter-spacing: 0.02em;
+        }
+        .reading-key-input:focus { border-color: var(--blue); }
+        .reading-key-save {
+            padding: 11px 16px; background: var(--blue); color: #fff;
+            border: none; border-radius: 10px; font-weight: 700;
+            cursor: pointer; white-space: nowrap; font-size: 0.9rem;
+        }
+        .reading-loading {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 14px; padding: 40px 0; color: var(--muted); font-size: 0.9rem;
+        }
+        .reading-spinner {
+            width: 26px; height: 26px; border: 3px solid var(--border);
+            border-top-color: var(--blue); border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        .reading-error { color: var(--red); text-align: center; padding: 24px 0; font-size: 0.9rem; }
+        .reading-article {
+            font-size: 1rem; line-height: 1.95; color: var(--text); white-space: pre-wrap;
+        }
+        .vocab-hl {
+            background: #fef9c3; color: #92400e;
+            border-radius: 3px; padding: 0 2px; font-weight: 600;
+        }
+        .reading-word-list {
+            padding-top: 16px; border-top: 1px solid var(--border);
+            font-size: 0.82rem; color: var(--muted); line-height: 1.9;
+        }
+        .reading-word-list strong { color: var(--text); }
+        .reading-regen {
+            width: 100%; padding: 13px; border: 1.5px solid var(--blue);
+            color: var(--blue); background: none; border-radius: 12px;
+            font-weight: 700; cursor: pointer; font-size: 0.9rem;
+        }
+        .btn-reading {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #059669, #047857);
+            color: #fff; border: none; border-radius: 14px;
+            font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 4px;
+            box-shadow: 0 4px 16px rgba(5,150,105,0.3);
+            transition: box-shadow 0.15s, transform 0.1s;
+        }
+        .btn-reading:hover  { box-shadow: 0 6px 22px rgba(5,150,105,0.4); transform: translateY(-1px); }
+        .btn-reading:active { transform: scale(0.97); box-shadow: none; }
+
         /* ── Responsive adjustments for practice ─────────────── */
         @media (max-width: 390px) {
             .prac-area     { padding: 10px 10px 14px; gap: 10px; }
@@ -1318,6 +1403,7 @@
         </div>
         <button class="btn-more" @click="loadMore">{{ui.doneContinue}}</button>
         <button class="btn-practice" @click="startPractice">✏️ {{ui.practiceBtn}}</button>
+        <button class="btn-reading" @click="openReading">📖 {{ui.readingBtn}}</button>
     </div>
 
     <!-- Main -->
@@ -1486,6 +1572,55 @@
         <span class="upd-txt"></span>
     </button>
     <p class="brand-tagline">VocabLoop · Your memory, on a perfect loop.</p>
+
+    <!-- ── Reading overlay ─────────────────────────────────────────── -->
+    <div v-if="readingOpen" class="reading-overlay">
+        <div class="reading-hd">
+            <span class="reading-hd-title">📖 {{ui.readingTitle}}</span>
+            <button class="reading-close" @click="closeReading">✕</button>
+        </div>
+        <div class="reading-body">
+            <!-- No API key yet -->
+            <div v-if="!geminiKey" class="reading-key-box">
+                <div class="reading-key-info">{{ui.readingKeyInfo}}</div>
+                <a class="reading-key-link"
+                   href="https://aistudio.google.com/apikey"
+                   target="_blank" rel="noopener">{{ui.readingKeyLink}}</a>
+                <div class="reading-key-row">
+                    <input class="reading-key-input"
+                           v-model="geminiKeyInput"
+                           :placeholder="ui.readingKeyPh"
+                           @keydown.enter="saveGeminiKey" />
+                    <button class="reading-key-save" @click="saveGeminiKey">{{ui.readingKeySave}}</button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div v-else-if="readingLoading" class="reading-loading">
+                <div class="reading-spinner"></div>
+                <span>{{ui.readingLoading}}</span>
+            </div>
+
+            <!-- Error -->
+            <div v-else-if="readingError" class="reading-error">
+                <div>{{readingError}}</div>
+                <button class="reading-regen" style="margin-top:14px" @click="generateReading">{{ui.readingRegen}}</button>
+            </div>
+
+            <!-- Article -->
+            <template v-else-if="readingArticle">
+                <div class="reading-article" v-html="highlightedArticle"></div>
+                <div class="reading-word-list">
+                    {{ui.readingWordList}}
+                    <span v-for="(w, i) in readingWordObjs" :key="w.word">
+                        <strong>{{w.word}}</strong><span style="color:var(--muted)"> {{w.zh}}</span><span v-if="i < readingWordObjs.length - 1">，</span>
+                    </span>
+                </div>
+                <button class="reading-regen" @click="generateReading">🔄 {{ui.readingRegen}}</button>
+            </template>
+        </div>
+    </div>
+
 </div>
 
 <!-- ── Android PWA install banner ─────────────────────────────────────── -->
@@ -1617,6 +1752,17 @@ const STRINGS = {
     practiceDoneBack:      '返回',
     practicePlayAgain:     '再听一遍',
     practiceExitBtn:       '退出练习',
+    readingBtn:      '延伸阅读',
+    readingTitle:    '今日词汇文章',
+    readingClose:    '关闭',
+    readingKeyInfo:  '需要免费的 Gemini API Key 来生成文章',
+    readingKeyLink:  '点此免费获取 →',
+    readingKeyPh:    '粘贴你的 Gemini API Key',
+    readingKeySave:  '保存并生成',
+    readingLoading:  'AI 正在写作中…',
+    readingError:    '生成失败，请检查 API Key 后重试',
+    readingRegen:    '重新生成',
+    readingWordList: '本篇涵盖词汇：',
     pwaAndroidDesc: '添加到主屏幕，随时随地刷词', pwaAndroidInstall: '安装', pwaAndroidDismiss: '关闭',
     pwaIOSTitle: '添加 VocabLoop 到主屏幕', pwaIOSDesc: '像 App 一样随时打开，无需浏览器',
     pwaIOSStep1: '点击底部工具栏的 <em>分享</em> 按钮',
@@ -1707,6 +1853,17 @@ const STRINGS = {
     practiceDoneBack:      'Back',
     practicePlayAgain:     'Play again',
     practiceExitBtn:       'Exit Practice',
+    readingBtn:      'Story',
+    readingTitle:    "Today's Vocab Story",
+    readingClose:    'Close',
+    readingKeyInfo:  'A free Gemini API Key is needed to generate the story',
+    readingKeyLink:  'Get your free key →',
+    readingKeyPh:    'Paste your Gemini API Key',
+    readingKeySave:  'Save & Generate',
+    readingLoading:  'AI is writing…',
+    readingError:    'Generation failed. Please check your API Key.',
+    readingRegen:    'Regenerate',
+    readingWordList: 'Words covered:',
     pwaAndroidDesc: 'Add to home screen for quick access', pwaAndroidInstall: 'Install', pwaAndroidDismiss: 'Dismiss',
     pwaIOSTitle: 'Add VocabLoop to Home Screen', pwaIOSDesc: 'Open it like an app — no browser needed',
     pwaIOSStep1: 'Tap the <em>Share</em> button in the toolbar',
@@ -1936,6 +2093,14 @@ new Vue({
             practiceInput:    '',
             practiceResult:   null,   // 'correct' | 'wrong'
             practiceDone:     false,
+            // ── Reading overlay ──────────────────────────────────────
+            readingOpen:     false,
+            readingArticle:  '',
+            readingLoading:  false,
+            readingError:    '',
+            readingWordObjs: [],
+            geminiKey:       localStorage.getItem('gemini_key') || '',
+            geminiKeyInput:  '',
         };
     },
 
@@ -2023,6 +2188,20 @@ new Vue({
         },
         practiceCurrent() {
             return this.practiceQueue[this.practiceIndex] || null;
+        },
+        highlightedArticle() {
+            if (!this.readingArticle) return '';
+            // Escape HTML first
+            let html = this.readingArticle
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            // Sort words longest-first to avoid partial replacements
+            const words = [...this.readingWordObjs].sort((a, b) => b.word.length - a.word.length);
+            for (const w of words) {
+                const esc = w.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                html = html.replace(new RegExp(`\\b(${esc})\\b`, 'gi'),
+                    '<mark class="vocab-hl">$1</mark>');
+            }
+            return html;
         },
     },
 
@@ -2630,6 +2809,64 @@ new Vue({
         exitPractice() {
             clearTimeout(this._practiceTimer);
             this.practiceMode = false;
+        },
+
+        // ── Reading overlay ─────────────────────────────────────────
+        openReading() {
+            this.geminiKeyInput = '';
+            this.readingError   = '';
+            this.readingOpen    = true;
+            if (this.geminiKey) this.generateReading();
+        },
+        closeReading() {
+            this.readingOpen    = false;
+            this.readingArticle = '';
+            this.readingError   = '';
+        },
+        saveGeminiKey() {
+            const key = this.geminiKeyInput.trim();
+            if (!key) return;
+            this.geminiKey = key;
+            localStorage.setItem('gemini_key', key);
+            this.generateReading();
+        },
+        async generateReading() {
+            const tdy = today();
+            this.readingWordObjs = this.allWords.filter(w => {
+                const s = this.state[w.word];
+                return s && s.firstSeen === tdy;
+            });
+            if (this.readingWordObjs.length === 0) {
+                this.readingWordObjs = this.getTodayPracticeWords();
+            }
+            const wordList = this.readingWordObjs
+                .map(w => `${w.word} (${w.zh})`).join(', ');
+            const prompt = `You are an English tutor. Write a short, engaging English story (150–200 words) that naturally uses ALL of the following vocabulary words at least once. The story should be coherent, vivid, and suitable for intermediate learners. Return only the story text — no title, no commentary.\n\nVocabulary: ${wordList}`;
+            this.readingLoading  = true;
+            this.readingArticle  = '';
+            this.readingError    = '';
+            try {
+                const res = await fetch(
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.geminiKey}`,
+                    {
+                        method:  'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: prompt }] }],
+                            generationConfig: { maxOutputTokens: 600, temperature: 0.9 }
+                        })
+                    }
+                );
+                if (!res.ok) throw new Error(res.status);
+                const data = await res.json();
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                if (!text) throw new Error('empty');
+                this.readingArticle = text.trim();
+            } catch (e) {
+                this.readingError = this.ui.readingError;
+            } finally {
+                this.readingLoading = false;
+            }
         },
 
         submitPracticeAnswer(val) {
