@@ -103,24 +103,38 @@
             background: var(--surface);
             border-bottom: 1px solid var(--border);
             /* top padding absorbs status-bar height on both iOS & Android */
-            padding: calc(10px + env(safe-area-inset-top)) 14px 10px;
+            padding: calc(10px + env(safe-area-inset-top)) 14px 0;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Row 1: title + action buttons — never wraps */
+        .hd-top {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
-            flex-wrap: wrap;
+            padding-bottom: 8px;
         }
         .hd-title {
             font-size: 1rem;
             font-weight: 800;
             color: var(--blue);
             white-space: nowrap;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
+        /* Row 2: stats chips — always one line, scrollable */
         .chips {
             display: flex;
             gap: 5px;
-            flex: 1;
-            flex-wrap: wrap;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+            padding-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
         }
+        .chips::-webkit-scrollbar { display: none; }
         .chip {
             display: inline-flex;
             align-items: center;
@@ -130,6 +144,7 @@
             font-size: 0.75rem;
             font-weight: 700;
             white-space: nowrap;
+            flex-shrink: 0;
         }
         .chip-new    { background: #dbeafe; color: #1d4ed8; }
         .chip-learn  { background: #fef3c7; color: #92400e; }
@@ -687,7 +702,8 @@
 
         /* ── Small mobile (≤ 390px) ──────────────────────── */
         @media (max-width: 390px) {
-            .hd         { padding: 7px 10px; gap: 5px; }
+            .hd         { padding: calc(6px + env(safe-area-inset-top)) 10px 0; }
+            .hd-top     { padding-bottom: 6px; }
             .hd-title   { font-size: 0.9rem; }
             .chip       { font-size: 0.68rem; padding: 2px 6px; }
             .level-badge{ font-size: 0.7rem; }
@@ -853,7 +869,21 @@
 
     <!-- Header -->
     <div class="hd">
-        <div class="hd-title">{{currentDeck.icon}} {{currentDeck.name}}</div>
+        <!-- Row 1: title + action buttons -->
+        <div class="hd-top">
+            <div class="hd-title">{{currentDeck.icon}} {{currentDeck.name}}</div>
+            <div class="hd-btns">
+                <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
+                        :title="autoPlay ? ui.autoPlayOn : ui.autoPlayOff">🔊</button>
+                <button class="btn-hd" :class="{active: viewMode === 'list'}"
+                        @click="viewMode = viewMode === 'card' ? 'list' : 'card'"
+                        :title="viewMode === 'card' ? ui.viewList : ui.viewCard">
+                    {{ viewMode === 'card' ? '☰' : '⊟' }}
+                </button>
+                <button class="btn-hd danger" @click="confirmReset">{{ui.resetBtn}}</button>
+            </div>
+        </div>
+        <!-- Row 2: stats chips (horizontal scroll, always one line) -->
         <div class="chips">
             <span class="chip chip-new">🆕 {{qs.newCount}}</span>
             <span class="chip chip-learn">📖 {{qs.learnCount}}</span>
@@ -861,16 +891,6 @@
             <span class="chip chip-master">🏆 {{masteredCount}}</span>
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
-        </div>
-        <div class="hd-btns">
-            <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
-                    :title="autoPlay ? ui.autoPlayOn : ui.autoPlayOff">🔊</button>
-            <button class="btn-hd" :class="{active: viewMode === 'list'}"
-                    @click="viewMode = viewMode === 'card' ? 'list' : 'card'"
-                    :title="viewMode === 'card' ? ui.viewList : ui.viewCard">
-                {{ viewMode === 'card' ? '☰' : '⊟' }}
-            </button>
-            <button class="btn-hd danger" @click="confirmReset">{{ui.resetBtn}}</button>
         </div>
     </div>
 
