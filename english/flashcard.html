@@ -1594,7 +1594,7 @@ const STRINGS = {
     ],
     // ── Practice Mode ──────────────────────────────────────────────────────
     practiceBtn:           '练习',
-    practiceNoWords:       '先完成今日学习，再开始练习吧',
+    practiceNoWords:       '还没有学过任何单词，先去学习一些吧',
     practiceMCWordToZh:    '选出正确的中文意思',
     practiceMCZhToWord:    '选出对应的英文单词',
     practiceMCAudioToWord: '听发音，选出对应单词',
@@ -1684,7 +1684,7 @@ const STRINGS = {
     ],
     // ── Practice Mode ──────────────────────────────────────────────────────
     practiceBtn:           'Practice',
-    practiceNoWords:       'Complete today\'s study session first',
+    practiceNoWords:       'No words studied yet — learn some first!',
     practiceMCWordToZh:    'Select the correct meaning',
     practiceMCZhToWord:    'Select the correct English word',
     practiceMCAudioToWord: 'Listen and pick the word',
@@ -2583,21 +2583,21 @@ new Vue({
         /** Return today's learned words; fallback to recently reviewed if too few */
         getTodayPracticeWords() {
             const tdy = today();
-            let words = this.allWords.filter(w => {
+            // Today's words first (prioritised in practice session)
+            const todayWords = this.allWords.filter(w => {
                 const s = this.state[w.word];
                 return s && s.firstSeen === tdy;
             });
-            // Fallback: add recently seen words until we have at least 4
-            if (words.length < 4) {
-                const extra = shuffle(
-                    this.allWords.filter(w => {
-                        const s = this.state[w.word];
-                        return s && s.firstSeen !== tdy;
-                    })
-                ).slice(0, Math.max(0, 8 - words.length));
-                words = [...words, ...extra];
-            }
-            return words;
+            // All other seen words as supplementary pool
+            const otherWords = shuffle(
+                this.allWords.filter(w => {
+                    const s = this.state[w.word];
+                    return s && s.firstSeen !== tdy;
+                })
+            );
+            // Combine: today's words + enough others to reach at least 8 total
+            const needed = Math.max(0, 8 - todayWords.length);
+            return [...todayWords, ...otherWords.slice(0, needed || otherWords.length)];
         },
 
         startPractice() {
