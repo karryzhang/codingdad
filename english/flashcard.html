@@ -745,7 +745,6 @@
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
-        <span class="level-badge">{{levelInfo.icon}} {{levelInfo.name}}</span>
         <div class="hd-btns">
             <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
                     :title="autoPlay ? ui.autoPlayOn : ui.autoPlayOff">
@@ -1221,7 +1220,11 @@ new Vue({
             const idx = LEVELS.indexOf(lv);
             const nxt = LEVELS[idx + 1];
             if (!nxt) return 100;
-            return Math.min(100, Math.max(0, Math.round((mc - lv.min) / (nxt.min - lv.min) * 100)));
+            const base = (mc - lv.min) / (nxt.min - lv.min) * 100;
+            // First level only: add a small review-based boost so day-1 users
+            // see immediate progress (caps at 12% so mastery always feels bigger)
+            const reviewBoost = idx === 0 ? Math.min(12, this.totalReviewed * 0.5) : 0;
+            return Math.min(100, Math.max(0, Math.round(base + reviewBoost)));
         },
         nextLevelInfo() {
             const idx = LEVELS.indexOf(this.levelInfo);
