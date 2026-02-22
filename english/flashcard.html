@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PET 单词卡</title>
+    <title>单词卡</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -93,6 +93,31 @@
         .btn-hd:hover { border-color: var(--blue); color: var(--blue); }
         .btn-hd.active { border-color: var(--blue); color: var(--blue); background: #eff6ff; }
         .btn-hd.danger:hover { border-color: var(--red); color: var(--red); }
+
+        /* ── Deck selector bar ───────────────── */
+        .deck-bar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 6px 14px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+        }
+        .deck-btn {
+            background: none;
+            border: 1.5px solid var(--border);
+            padding: 5px 14px;
+            border-radius: 99px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--muted);
+            white-space: nowrap;
+            transition: all 0.15s;
+            flex-shrink: 0;
+        }
+        .deck-btn:hover { border-color: var(--blue); color: var(--blue); }
+        .deck-btn.active { border-color: var(--blue); color: var(--blue); background: #eff6ff; }
 
         /* ── Loading ─────────────────────────── */
         .loading-scr {
@@ -381,7 +406,7 @@
         /* toast */
         .toast-anchor {
             position: fixed;
-            top: 62px; left: 50%;
+            top: 86px; left: 50%;
             transform: translateX(-50%);
             z-index: 300;
             pointer-events: none;
@@ -434,7 +459,7 @@
 
     <!-- Header -->
     <div class="hd">
-        <div class="hd-title">PET 单词卡</div>
+        <div class="hd-title">{{currentDeck.icon}} {{currentDeck.name}}</div>
         <div class="chips">
             <span class="chip chip-new">🆕 {{qs.newCount}}</span>
             <span class="chip chip-learn">📖 {{qs.learnCount}}</span>
@@ -450,6 +475,16 @@
             </button>
             <button class="btn-hd danger" @click="confirmReset">重置</button>
         </div>
+    </div>
+
+    <!-- Deck Selector -->
+    <div class="deck-bar">
+        <button v-for="d in decks" :key="d.id"
+                class="deck-btn"
+                :class="{active: d.id === currentDeck.id}"
+                @click="switchDeck(d)">
+            {{d.icon}} {{d.name}}
+        </button>
     </div>
 
     <!-- Loading -->
@@ -580,15 +615,19 @@
 
 <script>
 // ── Constants ──────────────────────────────────────────────────────────────
-const STORAGE_KEY  = 'pet_srs_v3';
-const DICT_KEY     = 'pet_dict_v1';
-const MAX_NEW_DAY  = 20;
-const LEARN_STEPS  = [1, 10];   // minutes
-const GRAD_INT     = 1;         // days
-const EASY_INT     = 4;         // days
-const SESSION_MINS = 20;        // re-add to session if ≤ this many minutes
-const DICT_API     = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
-const PREFETCH_N   = 5;         // prefetch ahead N words
+const DECKS = [
+    { id: 'pet',    icon: '📚', name: 'PET 词汇',    file: '../game/pet-words-1000.json' },
+    { id: 'crypto', icon: '₿',  name: 'Crypto 词汇', file: '../game/crypto-words-1000.json' },
+];
+const DECK_PREF_KEY = 'preferred_deck';
+const DICT_KEY      = 'shared_dict_v1';
+const MAX_NEW_DAY   = 20;
+const LEARN_STEPS   = [1, 10];   // minutes
+const GRAD_INT      = 1;         // days
+const EASY_INT      = 4;         // days
+const SESSION_MINS  = 20;        // re-add to session if ≤ this many minutes
+const DICT_API      = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+const PREFETCH_N    = 5;         // prefetch ahead N words
 
 // Guard against concurrent duplicate fetches (outside Vue, not reactive)
 const _fetching = new Set();
@@ -629,7 +668,7 @@ const LEVELS = [
     { min:  50, icon: '📘', name: '入门者', desc: '进步神速！' },
     { min: 150, icon: '⭐', name: '进阶者', desc: '词汇量不错！' },
     { min: 350, icon: '🎯', name: '熟练者', desc: '相当厉害！' },
-    { min: 600, icon: '🏆', name: '精通者', desc: 'PET 达人！' },
+    { min: 600, icon: '🏆', name: '精通者', desc: '词汇达人！' },
 ];
 
 // ── Vue instance ────────────────────────────────────────────────────────────
@@ -637,6 +676,8 @@ new Vue({
     el: '#app',
     data() {
         return {
+            decks:        DECKS,
+            currentDeck:  DECKS[0],
             loading:      true,
             allWords:     [],
             state:        {},
@@ -663,6 +704,7 @@ new Vue({
     },
 
     computed: {
+        storageKey() { return 'srs_' + this.currentDeck.id + '_v1'; },
         sessionDone() { return !this.loading && this.queue.length === 0; },
         cur()  { return this.queue[0] || { word: '', zh: '', pos: '' }; },
         curStage() {
@@ -671,7 +713,6 @@ new Vue({
         },
         curDict() {
             if (!this.cur.word) return undefined;
-            // undefined = not yet fetched, null = not found, object = found
             const v = this.dictCache[this.cur.word];
             return v !== undefined ? v : undefined;
         },
@@ -707,7 +748,6 @@ new Vue({
             this.fetchDict(newWord);
             this.prefetchAhead();
             if (this.autoPlay) {
-                // Delay by card flip animation duration so audio starts after card appears
                 setTimeout(() => this.playAudio(newWord), 520);
             }
         },
@@ -748,8 +788,8 @@ new Vue({
         // ── Dictionary API ────────────────────────────────────────────────
         async fetchDict(word) {
             if (!word) return;
-            if (word in this.dictCache) return;  // already cached
-            if (_fetching.has(word)) return;      // request in flight
+            if (word in this.dictCache) return;
+            if (_fetching.has(word)) return;
             _fetching.add(word);
             try {
                 const res = await fetch(DICT_API + encodeURIComponent(word));
@@ -760,15 +800,11 @@ new Vue({
                     const entry = data[0] || {};
                     const phonetics = entry.phonetics || [];
 
-                    // IPA: prefer text that looks like IPA (contains /)
                     const ipaObj  = phonetics.find(p => p.text && p.text.includes('/'));
                     const ipa     = (ipaObj && ipaObj.text) || entry.phonetic || '';
-
-                    // Audio: first non-empty audio URL
                     const audioObj = phonetics.find(p => p.audio && p.audio !== '');
                     const audio    = (audioObj && audioObj.audio) || '';
 
-                    // POS + best definition + example: scan all meanings for an example
                     let pos = '', definition = '', example = '';
                     for (const m of (entry.meanings || [])) {
                         if (!pos) pos = m.partOfSpeech || '';
@@ -802,7 +838,6 @@ new Vue({
             const d = this.dictCache[word];
 
             if (d && d.audio) {
-                // Use API-provided MP3
                 const audio = new Audio(d.audio);
                 this.audioPlaying = true;
                 audio.play()
@@ -814,7 +849,6 @@ new Vue({
                         this.tts(word);
                     });
             } else {
-                // Fallback: Web Speech API
                 this.tts(word);
             }
         },
@@ -833,8 +867,9 @@ new Vue({
 
         // ── Load JSON ─────────────────────────────────────────────────────
         async loadWords() {
+            this.loading = true;
             try {
-                const res = await fetch('../game/pet-words-1000.json');
+                const res = await fetch(this.currentDeck.file);
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 const data = await res.json();
                 this.allWords = data.map(w => ({
@@ -845,7 +880,7 @@ new Vue({
                 this.buildQueue();
             } catch (e) {
                 alert('加载词汇失败：' + e.message +
-                      '\n请确保文件 ../game/pet-words-1000.json 存在。');
+                      '\n请确保文件 ' + this.currentDeck.file + ' 存在。');
             }
             this.loading = false;
         },
@@ -877,6 +912,21 @@ new Vue({
             this.queue        = q;
             this.sessionTotal = q.length || 1;
             this.prefetchAhead();
+        },
+
+        // ── Deck switching ────────────────────────────────────────────────
+        switchDeck(deck) {
+            if (deck.id === this.currentDeck.id) return;
+            this.saveState();
+            this.currentDeck = deck;
+            localStorage.setItem(DECK_PREF_KEY, deck.id);
+            this.state   = {};
+            this.points  = 0;
+            this.streak  = 0;
+            this.queue   = [];
+            this.flipped = false;
+            this.loadSaved();
+            this.loadWords();
         },
 
         // ── Card interaction ──────────────────────────────────────────────
@@ -1037,7 +1087,7 @@ new Vue({
         // ── Persistence ──────────────────────────────────────────────────
         loadSaved() {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY);
+                const raw = localStorage.getItem(this.storageKey);
                 if (raw) {
                     const d        = JSON.parse(raw);
                     this.state     = d.state    || {};
@@ -1048,7 +1098,7 @@ new Vue({
             } catch (e) { /* ignore */ }
         },
         saveState() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            localStorage.setItem(this.storageKey, JSON.stringify({
                 state:    this.state,
                 points:   this.points,
                 streak:   this.streak,
@@ -1065,13 +1115,12 @@ new Vue({
             try {
                 localStorage.setItem(DICT_KEY, JSON.stringify(this.dictCache));
             } catch (e) {
-                // Quota exceeded – clear and retry
                 localStorage.removeItem(DICT_KEY);
             }
         },
         confirmReset() {
-            if (confirm('确定重置所有学习进度吗？\n词典缓存会保留。')) {
-                localStorage.removeItem(STORAGE_KEY);
+            if (confirm('确定重置【' + this.currentDeck.name + '】的学习进度吗？\n词典缓存会保留。')) {
+                localStorage.removeItem(this.storageKey);
                 this.state  = {};
                 this.points = 0;
                 this.streak = 0;
@@ -1096,7 +1145,6 @@ new Vue({
                 this.flipCard();
                 return;
             }
-            // 'P' key for pronunciation
             if (e.code === 'KeyP') {
                 this.playAudio(this.cur.word);
                 return;
@@ -1114,6 +1162,12 @@ new Vue({
     },
 
     created() {
+        // Restore preferred deck before loading state
+        const savedDeckId = localStorage.getItem(DECK_PREF_KEY);
+        if (savedDeckId) {
+            const found = DECKS.find(d => d.id === savedDeckId);
+            if (found) this.currentDeck = found;
+        }
         this.loadSaved();
         this.loadDictCache();
         this.loadWords();
