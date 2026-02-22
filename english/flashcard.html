@@ -212,6 +212,26 @@
             width: 100%;
         }
 
+        /* ── List view ───────────────────────── */
+        .wl-wrap { width: 100%; overflow-y: auto; flex: 1; }
+        .wl-section { margin-bottom: 14px; }
+        .wl-section-title {
+            font-size: .73rem; font-weight: 600; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .06em;
+            padding: 6px 4px 5px; margin-bottom: 2px;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+        }
+        .wl-row {
+            display: flex; align-items: baseline; gap: 8px;
+            padding: 5px 6px; border-radius: 5px; font-size: .83rem;
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+        .wl-row:last-child { border-bottom: none; }
+        .wl-row:hover { background: rgba(255,255,255,.05); }
+        .wl-word { font-weight: 600; color: #e8f0fe; flex-shrink: 0; min-width: 80px; }
+        .wl-pos  { color: var(--muted); font-size: .7rem; font-style: italic; flex-shrink: 0; min-width: 36px; }
+        .wl-zh   { color: rgba(255,255,255,.72); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
         /* progress */
         .prog-row {
             width: 100%;
@@ -746,9 +766,10 @@
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
         <div class="hd-btns">
-            <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
-                    :title="autoPlay ? ui.autoPlayOn : ui.autoPlayOff">
-                🔊
+            <button class="btn-hd" :class="{active: viewMode === 'list'}"
+                    @click="viewMode = viewMode === 'card' ? 'list' : 'card'"
+                    :title="viewMode === 'card' ? ui.viewList : ui.viewCard">
+                {{ viewMode === 'card' ? '☰' : '⊟' }}
             </button>
             <button class="btn-hd" @click="exportProgress" :title="ui.exportBtn">💾</button>
             <button class="btn-hd danger" @click="confirmReset">{{ui.resetBtn}}</button>
@@ -810,6 +831,35 @@
 
     <!-- Main -->
     <main v-else class="card-area">
+
+        <!-- List view -->
+        <template v-if="viewMode === 'list'">
+            <div class="wl-wrap">
+                <div class="wl-section" v-if="listLearnItems.length">
+                    <div class="wl-section-title">{{ui.listToLearn}} ({{listLearnItems.length}})</div>
+                    <div class="wl-row" v-for="w in listLearnItems" :key="'l-'+w.word">
+                        <span class="wl-word">{{w.word}}</span>
+                        <span class="wl-pos">{{w.pos || '—'}}</span>
+                        <span class="wl-zh">{{w.zh}}</span>
+                    </div>
+                </div>
+                <div class="wl-section" v-if="listReviewItems.length">
+                    <div class="wl-section-title">{{ui.listToReview}} ({{listReviewItems.length}})</div>
+                    <div class="wl-row" v-for="w in listReviewItems" :key="'r-'+w.word">
+                        <span class="wl-word">{{w.word}}</span>
+                        <span class="wl-pos">{{w.pos || '—'}}</span>
+                        <span class="wl-zh">{{w.zh}}</span>
+                    </div>
+                </div>
+                <div v-if="!listLearnItems.length && !listReviewItems.length"
+                     style="text-align:center;color:var(--muted);padding:40px 0;font-size:.9rem;">
+                    {{ui.doneTitle}}
+                </div>
+            </div>
+        </template>
+
+        <!-- Card view -->
+        <template v-else>
         <!-- Progress -->
         <div class="prog-row">
             <div class="prog-track">
@@ -886,6 +936,7 @@
             </div>
             <div v-else key="hint" class="key-hint" v-html="ui.keyHint"></div>
         </transition>
+        </template><!-- end card view -->
     </main>
 
     <!-- Footer -->
@@ -972,6 +1023,8 @@ const STRINGS = {
   zh: {
     deckPET: 'PET 词汇', deckCrypto: 'Crypto 词汇', deckDaily: '日常口语',
     autoPlayOn:  '自动朗读：开（点击关闭）', autoPlayOff: '自动朗读：关（点击开启）',
+    listToLearn: '今日新学', listToReview: '今日复习',
+    viewList: '切换到列表', viewCard: '切换到卡片',
     exportBtn: '导出进度', resetBtn: '重置', dayUnit: '天',
     loading: '正在加载词汇...',
     doneTitle: '今日任务完成！',
@@ -1038,6 +1091,8 @@ const STRINGS = {
   en: {
     deckPET: 'PET Vocab', deckCrypto: 'Crypto', deckDaily: 'Daily English',
     autoPlayOn:  'Auto-read: ON (tap to disable)', autoPlayOff: 'Auto-read: OFF (tap to enable)',
+    listToLearn: 'To Learn', listToReview: 'To Review',
+    viewList: 'Switch to list', viewCard: 'Switch to cards',
     exportBtn: 'Export progress', resetBtn: 'Reset', dayUnit: 'd',
     loading: 'Loading vocabulary…',
     doneTitle: 'Session complete!',
@@ -1182,6 +1237,7 @@ new Vue({
             toastTmr:     null,
             points:       0,
             streak:       0,
+            viewMode:      'card',
             autoPlay:      true,
             audioPlaying:  false,
             dictCache:     {},  // word → {ipa, audio, pos, definition, example} | null
@@ -1248,6 +1304,18 @@ new Vue({
         sessionPct() {
             if (!this.sessionTotal) return 100;
             return Math.round((1 - this.queue.length / this.sessionTotal) * 100);
+        },
+        listLearnItems() {
+            return this.queue.filter(w => {
+                const s = this.state[w.word];
+                return !s || s.stage === 'learning' || s.stage === 'relearn';
+            });
+        },
+        listReviewItems() {
+            return this.queue.filter(w => {
+                const s = this.state[w.word];
+                return s && (s.stage === 'young' || s.stage === 'mature');
+            });
         },
         masteredCount() {
             return Object.values(this.state).filter(s => s && s.stage === 'mature').length;
