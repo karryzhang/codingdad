@@ -2634,7 +2634,13 @@ new Vue({
             this.practiceSelected = String(val);
             this.practiceResult   = isCorrect ? 'correct' : 'wrong';
             this.practiceAnswered = true;
-            if (isCorrect) this.practiceScore++;
+            if (isCorrect) {
+                this.practiceScore++;
+                // Reinforce correct answer with pronunciation (if autoPlay is on)
+                if (this.autoPlay) {
+                    setTimeout(() => this.playAudio(this.practiceCurrent.word.word), 300);
+                }
+            }
         },
 
         nextPracticeQuestion() {
