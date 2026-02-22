@@ -20,6 +20,15 @@
 - 字数：建议每题 **150 words 以内**
 - 标准：按 PSLE 导向（情节完整、语言准确、结尾有反思）
 
+### 新增：Word Explorer（PET 核心词轻量记忆小游戏）
+- 页面：[`game/word-explorer.html`](https://karryzhang.github.io/codingdad/game/word-explorer.html)
+- 定位：适合 **10 岁+**，通过轻交互反复接触 PET 级核心词
+- 特点：
+  - 极简上手（打开即玩）
+  - 兼容 PC / 手机浏览器
+  - 卡通清爽配色，降低学习压力
+  - 适合作为英语学习前的热身小游戏
+
 > 本次功能设计、实现与排版优化由 **OpenClaw AI 助理** 协作完成。
 
 ---
@@ -37,7 +46,8 @@
 - [english/psle-p4-p5-english-composition-with-images.html](https://karryzhang.github.io/codingdad/english/psle-p4-p5-english-composition-with-images.html)：PSLE 小学四、五年级 English Composition（含图片，10题）
 
 ## 游戏页面（game/）
-- 预留目录：用于后续创建网页小游戏（如拼词、速算闯关、记忆配对）
+- [game/word-explorer.html](https://karryzhang.github.io/codingdad/game/word-explorer.html)：PET 核心词轻量记忆小游戏（10岁+，PC/手机适配）
+- 说明：当前版本保持简洁，便于快速上手；后续可迭代加入触控按钮、闯关反馈与词库分级
 
 ## 首页导航
 - [index.html](https://karryzhang.github.io/codingdad/index.html)：统一索引 math / english / game 资源入口
