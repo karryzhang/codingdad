@@ -63,7 +63,13 @@ const DICT_API='https://api.dictionaryapi.dev/api/v2/entries/en/';
 const TRANS_API='https://api.mymemory.translated.net/get';
 const $=id=>document.getElementById(id);
 
-fetch('./pet-words-1000.json').then(r=>r.json()).then(data=>{
+function boldWord(text, word){
+  if(!text) return '';
+  const re=new RegExp(`\\b(${word})\\b`,'gi');
+  return text.replace(re,'<b>$1</b>');
+}
+
+fetch('./pet-words-1000-meta.json').then(r=>r.json()).then(data=>{
   WORDS=data; withZh=WORDS.filter(x=>x.zh);
   $('q').textContent='Word bank ready (1000 words). Click "Start Mixed Challenge".';
   showLearn();
@@ -119,23 +125,24 @@ async function translateExample(text){
 function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
 function pick(a,n){return shuffle(a).slice(0,n)}
 function stats(total=0){$('statMode').textContent='Mode: '+(mode==='mix'?'Challenge':mode==='review'?'Review':'Learn');$('statQ').textContent=`Question: ${Math.min(qi,total)}/${total}`;$('statC').textContent=`Correct: ${correct}`;$('statM').textContent=`Mistakes: ${mistakes.length}`}
-function renderCard(w,pos,ipa,example,exampleZh){
-  const ex = example || `This is a ${w.word}.`;
-  const exZh = exampleZh || '（中文释义加载中...）';
-  $('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${pos}<br>IPA: ${ipa}<br>Meaning: ${w.zh||'Not filled in quick version yet'}<br><div style="margin-top:8px;padding:8px;border-left:3px solid #93c5fd;background:#f8fafc"><div><b>EN</b>: ${ex}</div><div style="margin-top:4px"><b>中文</b>: ${exZh}</div></div>`;
+function renderCard(w){
+  const pos = w.pos || 'n.';
+  const ipa = w.ipa || `/${w.word}/`;
+  const ex1 = (w.examples && w.examples[0]) || {en:`This is a ${w.word}.`, zh:`这是一个 ${w.word}。`};
+  const ex2 = (w.examples && w.examples[1]) || {en:`They used ${w.word} in a harder task.`, zh:`他们在更难的任务里使用了 ${w.word}。`};
+  $('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${pos}<br>IPA: ${ipa}<br>Meaning: ${w.zh||'Not filled in quick version yet'}
+  <div style="margin-top:8px;padding:8px;border-left:3px solid #93c5fd;background:#f8fafc">
+    <div><b>Example 1 (Simple)</b></div>
+    <div><b>EN</b>: ${boldWord(ex1.en,w.word)}</div>
+    <div style="margin-top:4px"><b>中文</b>: ${ex1.zh}</div>
+  </div>
+  <div style="margin-top:8px;padding:8px;border-left:3px solid #c4b5fd;background:#faf5ff">
+    <div><b>Example 2 (Advanced)</b></div>
+    <div><b>EN</b>: ${boldWord(ex2.en,w.word)}</div>
+    <div style="margin-top:4px"><b>中文</b>: ${ex2.zh}</div>
+  </div>`;
 }
-function card(w){
-  const meta=dictCache[w.word]||{};
-  const ex=meta.example||`This is a ${w.word}.`;
-  renderCard(w, meta.pos||w.pos||'Loading...', meta.ipa||w.ipa||'Loading...', ex, transCache[ex]||'');
-  fetchMeta(w.word).then(async ()=>{
-    const m=dictCache[w.word]||{};
-    const ex2=m.example||`This is a ${w.word}.`;
-    renderCard(w, m.pos||w.pos||'N/A', m.ipa||w.ipa||'N/A', ex2, transCache[ex2]||'');
-    const zh=await translateExample(ex2);
-    renderCard(w, m.pos||w.pos||'N/A', m.ipa||w.ipa||'N/A', ex2, zh||'（暂无中文释义）');
-  });
-}
+function card(w){ renderCard(w); }
 function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 Learning Word: '+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
 
 function makeQ(word){
