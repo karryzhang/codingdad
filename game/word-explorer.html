@@ -81,8 +81,16 @@ async function fetchMeta(word){
     const e=data[0]||{};
     const ph=e.phonetics||[];
     const ipa=((ph.find(p=>p.text&&p.text.includes('/')))||{}).text||e.phonetic||'';
-    const pos=(((e.meanings||[])[0])||{}).partOfSpeech||'';
-    dictCache[word]={ipa,pos};
+    const meanings=e.meanings||[];
+    const pos=((meanings[0])||{}).partOfSpeech||'';
+    let example='';
+    for(const m of meanings){
+      for(const d of (m.definitions||[])){
+        if(d.example){ example=d.example; break; }
+      }
+      if(example) break;
+    }
+    dictCache[word]={ipa,pos,example};
     localStorage.setItem('pet1000_dict',JSON.stringify(dictCache));
     return dictCache[word];
   }catch(_){ return null; }
@@ -91,15 +99,16 @@ async function fetchMeta(word){
 function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
 function pick(a,n){return shuffle(a).slice(0,n)}
 function stats(total=0){$('statMode').textContent='Mode: '+(mode==='mix'?'Challenge':mode==='review'?'Review':'Learn');$('statQ').textContent=`Question: ${Math.min(qi,total)}/${total}`;$('statC').textContent=`Correct: ${correct}`;$('statM').textContent=`Mistakes: ${mistakes.length}`}
-function renderCard(w,pos,ipa){
-  $('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${pos}<br>IPA: ${ipa}<br>Meaning: ${w.zh||'Not filled in quick version yet'}<br>Example: This is a <b>${w.word}</b>.`;
+function renderCard(w,pos,ipa,example){
+  const ex = example || `This is a ${w.word}.`;
+  $('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${pos}<br>IPA: ${ipa}<br>Meaning: ${w.zh||'Not filled in quick version yet'}<br>Example: ${ex}`;
 }
 function card(w){
   const meta=dictCache[w.word]||{};
-  renderCard(w, meta.pos||w.pos||'Loading...', meta.ipa||w.ipa||'Loading...');
+  renderCard(w, meta.pos||w.pos||'Loading...', meta.ipa||w.ipa||'Loading...', meta.example||'');
   fetchMeta(w.word).then(()=>{
     const m=dictCache[w.word]||{};
-    renderCard(w, m.pos||w.pos||'N/A', m.ipa||w.ipa||'N/A');
+    renderCard(w, m.pos||w.pos||'N/A', m.ipa||w.ipa||'N/A', m.example||'');
   });
 }
 function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 Learning Word: '+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
