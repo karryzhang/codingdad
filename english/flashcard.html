@@ -164,19 +164,20 @@
         .done-stat-label { font-size: 0.78rem; color: var(--muted); }
         .done-level      { font-size: 1rem; color: var(--purple); font-weight: 700; }
         .btn-more {
-            background: var(--blue);
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             color: #fff;
             border: none;
-            padding: 12px 28px;
-            border-radius: 12px;
+            padding: 14px 36px;
+            border-radius: 14px;
             font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 6px;
-            transition: background 0.15s, transform 0.1s;
+            margin-top: 8px;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+            transition: box-shadow 0.15s, transform 0.1s;
         }
-        .btn-more:hover  { background: #2563eb; }
-        .btn-more:active { transform: scale(0.97); }
+        .btn-more:hover  { box-shadow: 0 6px 22px rgba(59,130,246,0.45); transform: translateY(-1px); }
+        .btn-more:active { transform: scale(0.97); box-shadow: none; }
 
         /* ── Card area ───────────────────────── */
         .card-area {
@@ -199,7 +200,7 @@
             margin-bottom: 14px;
         }
         .prog-track {
-            flex: 1; height: 8px;
+            flex: 1; height: 10px;
             background: var(--border);
             border-radius: 99px;
             overflow: hidden;
@@ -221,7 +222,7 @@
         /* card wrapper */
         .card-wrap {
             width: 100%;
-            perspective: 1200px;
+            perspective: 1400px;
             margin-bottom: 20px;
         }
         .card-wrap.shaking  { animation: do-shake  0.45s ease; }
@@ -237,7 +238,8 @@
         }
         @keyframes do-bounce {
             0%,100% { transform: scale(1); }
-            50%     { transform: scale(1.03); }
+            40%     { transform: scale(1.045); }
+            70%     { transform: scale(0.985); }
         }
 
         .card {
@@ -264,11 +266,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            box-shadow: 0 6px 28px rgba(0,0,0,0.10);
+            padding: 22px 20px 20px;
+            box-shadow: 0 12px 40px rgba(30,64,175,0.13), 0 2px 8px rgba(0,0,0,0.07);
         }
-        .face.front { background: var(--surface); }
-        .face.back  { background: var(--card-back); color: #fff; transform: rotateY(180deg); }
+        .face.front {
+            background: linear-gradient(160deg, #ffffff 0%, #f0f5ff 100%);
+            border: 1px solid rgba(59,130,246,0.10);
+        }
+        .face.back  {
+            background: linear-gradient(148deg, #1e4480 0%, #0c1f3d 100%);
+            color: #fff;
+            transform: rotateY(180deg);
+        }
 
         /* front face elements */
         .pos-tag {
@@ -284,12 +293,13 @@
             letter-spacing: -0.5px;
             text-align: center;
             line-height: 1.1;
+            color: #1a2540;
         }
         .front-ipa {
             font-size: 0.9rem;
             color: var(--muted);
-            margin-top: 5px;
-            letter-spacing: 0.02em;
+            margin-top: 6px;
+            letter-spacing: 0.03em;
             min-height: 1.3em;
         }
         .front-ipa.fetching {
@@ -304,12 +314,13 @@
             background: none;
             border: 1.5px solid var(--border);
             border-radius: 99px;
-            padding: 4px 14px;
-            margin-top: 10px;
+            padding: 6px 18px;
+            margin-top: 12px;
             cursor: pointer;
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             color: var(--muted);
             transition: border-color 0.15s, color 0.15s, background 0.15s;
+            min-height: 36px;
         }
         .audio-btn:hover { border-color: var(--blue); color: var(--blue); }
         .audio-btn.playing {
@@ -390,28 +401,31 @@
         .controls {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
             width: 100%;
         }
         .cb {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px 6px;
+            padding: 12px 6px;
             border: none;
-            border-radius: 12px;
+            border-radius: 16px;
             cursor: pointer;
             font-weight: 700;
-            gap: 2px;
-            transition: transform 0.1s;
+            gap: 4px;
+            transition: transform 0.12s, box-shadow 0.12s;
+            min-height: 64px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
-        .cb:active { transform: scale(0.94); }
+        .cb:hover  { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
+        .cb:active { transform: scale(0.93); box-shadow: none; }
         .cb-again { background: #fee2e2; color: #b91c1c; }
         .cb-hard  { background: #fef9c3; color: #854d0e; }
         .cb-good  { background: #dcfce7; color: #14532d; }
         .cb-easy  { background: #ede9fe; color: #4c1d95; }
-        .cb-label    { font-size: 0.88rem; }
-        .cb-interval { font-size: 0.68rem; opacity: 0.65; }
+        .cb-label    { font-size: 0.9rem; }
+        .cb-interval { font-size: 0.68rem; opacity: 0.7; }
 
         .key-hint {
             text-align: center;
@@ -476,7 +490,7 @@
         }
         .xp-track {
             flex: 1;
-            height: 6px;
+            height: 8px;
             background: var(--border);
             border-radius: 99px;
             overflow: hidden;
@@ -493,10 +507,55 @@
             white-space: nowrap;
         }
 
-        @media (max-width: 380px) {
-            .front-word { font-size: 2rem; }
-            .back-zh    { font-size: 1.8rem; }
+        /* ── Small mobile (≤ 390px) ──────────────────────── */
+        @media (max-width: 390px) {
+            .hd         { padding: 7px 10px; gap: 5px; }
+            .hd-title   { font-size: 0.9rem; }
+            .chip       { font-size: 0.68rem; padding: 2px 6px; }
+            .level-badge{ font-size: 0.7rem; }
+            .btn-hd     { padding: 2px 7px; font-size: 0.72rem; }
+            .deck-btn   { font-size: 0.75rem; padding: 4px 10px; }
+            .card       { height: 292px; }
+            .front-word { font-size: 2.1rem; }
+            .back-zh    { font-size: 1.75rem; }
+            .cb         { min-height: 56px; padding: 10px 4px; border-radius: 14px; }
             .cb-label   { font-size: 0.8rem; }
+            .cb-interval{ font-size: 0.62rem; }
+            .controls   { gap: 7px; }
+            .card-area  { padding: 10px 10px 14px; }
+            .back-example{ font-size: 0.74rem; }
+            .done-stat-val { font-size: 1.8rem; }
+        }
+
+        /* ── Regular mobile (391–599px) ──────────────────── */
+        @media (min-width: 391px) and (max-width: 599px) {
+            .card { height: 308px; }
+        }
+
+        /* ── Tablet / iPad (≥ 600px) ─────────────────────── */
+        @media (min-width: 600px) {
+            .card-area  { max-width: 680px; }
+            .card       { height: 350px; }
+            .front-word { font-size: 3rem; }
+            .back-zh    { font-size: 2.4rem; }
+            .back-example { font-size: 0.85rem; }
+            .cb         { padding: 14px 10px; min-height: 72px; border-radius: 18px; }
+            .cb-label   { font-size: 0.95rem; }
+            .cb-interval{ font-size: 0.72rem; }
+            .controls   { gap: 14px; }
+            .prog-track { height: 12px; }
+            .xp-track   { height: 10px; }
+            .done-stat-val { font-size: 2.5rem; }
+            .done-title { font-size: 2.1rem; }
+            .btn-more   { padding: 16px 48px; font-size: 1rem; }
+        }
+
+        /* ── iPad Pro / Desktop (≥ 900px) ────────────────── */
+        @media (min-width: 900px) {
+            .card-area  { max-width: 720px; }
+            .card       { height: 360px; }
+            .front-word { font-size: 3.2rem; }
+            .back-zh    { font-size: 2.5rem; }
         }
     </style>
 </head>
@@ -759,6 +818,29 @@ const ACHIEVEMENTS = [
     { id: 'reviewed_100',  icon: '📖', name: '百次答题',  desc: '累计答题 100 次' },
     { id: 'reviewed_500',  icon: '📚', name: '五百勤练',  desc: '累计答题 500 次' },
 ];
+
+// ── Feedback message pools ───────────────────────────────────────────────────
+const AGAIN_MSGS = [
+    '没关系，再来！💪', '继续加油！🔄', '复习一次！📖', '不怕，慢慢来！🌱',
+];
+const GOOD_MSGS = [
+    '✓ 很好！', '👍 记住了！', '💪 不错！', '✨ 棒！', '🎯 准确！',
+    '👏 继续！', '💡 清晰！', '🌟 很棒！',
+];
+const EASY_MSGS = [
+    '太棒了！🌟', '完美！⭐', '出色！🚀', '厉害！💎', '超强！⚡', '满分！🎯',
+];
+const STREAK_TOASTS = {
+    3:  { msg: '👍 连击 3！',          type: 'good' },
+    5:  { msg: '🔥 连击 5！',          type: 'bonus' },
+    7:  { msg: '⚡ 连击 7！燃起来！',  type: 'bonus' },
+    10: { msg: '🔥 连击 10！超厉害！', type: 'bonus' },
+    15: { msg: '💎 连击 15！无敌！',   type: 'bonus' },
+    20: { msg: '👑 连击 20！传奇！',   type: 'bonus' },
+    30: { msg: '🌟 连击 30！封神！',   type: 'bonus' },
+    50: { msg: '🚀 连击 50！无人能及！', type: 'bonus' },
+};
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 // ── Vue instance ────────────────────────────────────────────────────────────
 new Vue({
@@ -1083,7 +1165,8 @@ new Vue({
             if (!s.firstSeen) s.firstSeen = tdy;
 
             let nextMs;
-            let reinsert = false;
+            let reinsert     = false;
+            let newGraduated = false;   // new/learning → young/mature
 
             if (s.stage === 'new' || s.stage === 'learning') {
                 if (level === 'again') {
@@ -1107,6 +1190,7 @@ new Vue({
                         s.reps     = 1;
                         nextMs     = GRAD_INT * 86400000;
                         this.points += 15; this.sessionCorrect++;
+                        newGraduated = true;
                     } else {
                         s.learningStep = step + 1;
                         nextMs   = LEARN_STEPS[s.learningStep] * 60000;
@@ -1120,6 +1204,7 @@ new Vue({
                     s.reps     = 1;
                     nextMs     = EASY_INT * 86400000;
                     this.points += 20; this.sessionCorrect++;
+                    newGraduated = true;
                 }
 
             } else if (s.stage === 'relearn') {
@@ -1173,19 +1258,22 @@ new Vue({
             const ps = this.streak;
             if (level === 'again') {
                 this.doShake();
-                this.showToast('没关系，再来！💪', 'bad');
-            } else if (level === 'easy') {
+                this.showToast(pick(AGAIN_MSGS), 'bad');
+            } else {
                 this.doBounce();
-                this.showToast('太棒了！🌟', 'bonus');
-            } else if (ps > 0 && ps % 10 === 0) {
-                this.doBounce();
-                this.showToast('🔥 连击 ' + ps + '！超厉害！', 'bonus');
-            } else if (ps > 0 && ps % 5 === 0) {
-                this.doBounce();
-                this.showToast('🔥 连击 ' + ps + '！', 'bonus');
-            } else if (level === 'good') {
-                this.doBounce();
-                this.showToast('✓ 很好！', 'good');
+                const streakToast = STREAK_TOASTS[ps];
+                if (streakToast) {
+                    this.showToast(streakToast.msg, streakToast.type);
+                    if (newGraduated) {
+                        setTimeout(() => this.showToast('🎓 初步掌握！', 'bonus'), 2500);
+                    }
+                } else if (newGraduated) {
+                    this.showToast('🎓 初步掌握！', 'bonus');
+                } else if (level === 'easy') {
+                    this.showToast(pick(EASY_MSGS), 'bonus');
+                } else {
+                    this.showToast(pick(GOOD_MSGS), 'good');
+                }
             }
 
             // Milestone
