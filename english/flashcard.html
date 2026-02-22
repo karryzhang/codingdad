@@ -214,38 +214,44 @@
 
         /* ── List view ───────────────────────── */
         .wl-wrap { width: 100%; overflow-y: auto; flex: 1; }
-        .wl-section { margin-bottom: 18px; }
+        .wl-section { margin-bottom: 20px; }
         .wl-section-title {
             font-size: .69rem; font-weight: 700; color: var(--muted);
             text-transform: uppercase; letter-spacing: .08em;
-            padding: 0 4px 7px; border-bottom: 1px solid rgba(255,255,255,.12);
+            padding: 0 2px 7px; border-bottom: 1px solid var(--border);
         }
         .wl-row {
-            padding: 9px 8px; border-radius: 8px; cursor: pointer;
+            padding: 9px 6px; border-radius: 8px; cursor: pointer;
             transition: background .12s;
-            border-bottom: 1px solid rgba(255,255,255,.04);
+            border-bottom: 1px solid var(--border);
         }
         .wl-row:last-child { border-bottom: none; }
-        .wl-row:hover { background: rgba(255,255,255,.05); }
-        .wl-row.open { background: rgba(255,255,255,.07); border-bottom-color: transparent; margin-bottom: 2px; }
+        .wl-row:hover { background: rgba(59,130,246,.06); }
+        .wl-row.open {
+            background: var(--surface); border-bottom-color: transparent;
+            margin-bottom: 3px; box-shadow: 0 1px 4px rgba(0,0,0,.07);
+        }
         .wl-row-head { display: flex; align-items: center; gap: 9px; }
         .wl-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-        .wl-dot-new    { background: #4ade80; }
-        .wl-dot-learn  { background: #fb923c; }
-        .wl-dot-review { background: #60a5fa; }
-        .wl-word { font-weight: 600; color: #e8f0fe; flex-shrink: 0; min-width: 72px; font-size: .88rem; }
-        .wl-zh-short { flex: 1; color: rgba(255,255,255,.56); font-size: .81rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .wl-chevron { color: rgba(255,255,255,.28); font-size: .78rem; flex-shrink: 0; transition: transform .2s; line-height: 1; }
+        .wl-dot-new    { background: #22c55e; }
+        .wl-dot-learn  { background: #f97316; }
+        .wl-dot-review { background: #3b82f6; }
+        .wl-word { font-weight: 700; color: var(--text); flex-shrink: 0; min-width: 76px; font-size: .9rem; }
+        .wl-zh-short { flex: 1; color: var(--muted); font-size: .82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .wl-chevron { color: #c0c8d8; font-size: .78rem; flex-shrink: 0; transition: transform .2s; line-height: 1; }
         .wl-row.open .wl-chevron { transform: rotate(90deg); color: var(--blue); }
         .wl-detail {
-            margin-top: 7px; padding: 8px 10px; border-radius: 7px;
-            background: rgba(255,255,255,.07);
+            margin-top: 8px; padding: 9px 10px; border-radius: 7px;
+            background: #f0f4f9;
             display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px;
         }
-        .wl-ipa { font-family: 'SF Mono', Menlo, monospace; color: rgba(255,255,255,.48); font-size: .76rem; }
-        .wl-pos-badge { background: rgba(100,160,255,.2); border-radius: 4px; padding: 1px 7px; font-size: .7rem; color: #93c5fd; }
-        .wl-zh-full { color: rgba(255,255,255,.88); font-size: .87rem; width: 100%; margin-top: 1px; }
-        .wl-example-text { color: rgba(255,255,255,.38); font-size: .74rem; font-style: italic; width: 100%; margin-top: 3px; }
+        .wl-ipa { font-family: 'SF Mono', Menlo, monospace; color: var(--muted); font-size: .78rem; }
+        .wl-pos-badge {
+            background: #dbeafe; border-radius: 4px;
+            padding: 1px 7px; font-size: .7rem; color: #1d4ed8; font-weight: 600;
+        }
+        .wl-zh-full { color: var(--text); font-size: .88rem; width: 100%; margin-top: 2px; font-weight: 500; }
+        .wl-example-text { color: var(--muted); font-size: .76rem; font-style: italic; width: 100%; margin-top: 4px; }
 
         /* progress */
         .prog-row {
