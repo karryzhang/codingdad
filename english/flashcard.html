@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>VocabLoop</title>
 
-    <!-- PWA / Home Screen -->
+    <!-- ── SEO ─────────────────────────────────────────────────────── -->
+    <title>VocabLoop – 智能英语单词记忆 | 间隔重复闪卡 · PET / 口语 / 加密</title>
+    <meta name="description" content="VocabLoop 是基于间隔重复算法的英语词汇学习 PWA，涵盖 PET 考试词汇、日常口语短语、网络缩写和加密金融术语。支持离线使用、真人发音、学习进度追踪。">
+    <meta name="keywords" content="英语单词,间隔重复,闪卡,PET词汇,英语学习,口语短语,vocabulary,flashcard,spaced repetition,英语背单词">
+    <meta name="author" content="VocabLoop">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://karryzhang.github.io/codingdad/english/flashcard.html">
+
+    <!-- ── PWA / Home Screen ────────────────────────────────────────── -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1a3a5c">
     <meta name="mobile-web-app-capable" content="yes">
@@ -16,10 +23,46 @@
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-    <!-- Open Graph / share preview -->
-    <meta property="og:title" content="VocabLoop">
-    <meta property="og:description" content="间隔重复词汇卡片 – 随时随地背单词">
-    <meta property="og:image" content="icons/icon-512.png">
+
+    <!-- ── Open Graph (Facebook / WeChat / Slack 等预览) ─────────────── -->
+    <meta property="og:type"        content="website">
+    <meta property="og:site_name"   content="VocabLoop">
+    <meta property="og:url"         content="https://karryzhang.github.io/codingdad/english/flashcard.html">
+    <meta property="og:title"       content="VocabLoop – 智能英语单词记忆">
+    <meta property="og:description" content="基于间隔重复算法的英语词汇 PWA，PET 考试 · 日常口语 · 加密金融词汇，支持离线与真人发音。">
+    <meta property="og:image"       content="https://karryzhang.github.io/codingdad/english/icons/icon-512.png">
+    <meta property="og:image:width"  content="512">
+    <meta property="og:image:height" content="512">
+    <meta property="og:image:alt"   content="VocabLoop 图标 – 蓝色背景白色 V 字母与循环箭头">
+    <meta property="og:locale"      content="zh_CN">
+
+    <!-- ── Twitter / X Card ────────────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary">
+    <meta name="twitter:title"       content="VocabLoop – 智能英语单词记忆">
+    <meta name="twitter:description" content="间隔重复闪卡 PWA，PET 考试 · 日常口语 · 加密词汇，随时随地背单词。">
+    <meta name="twitter:image"       content="https://karryzhang.github.io/codingdad/english/icons/icon-512.png">
+
+    <!-- ── JSON-LD 结构化数据 ─────────────────────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "VocabLoop",
+      "url": "https://karryzhang.github.io/codingdad/english/flashcard.html",
+      "description": "基于间隔重复算法的英语词汇学习 PWA，涵盖 PET 考试词汇、日常口语短语和加密金融术语，支持离线使用与真人发音。",
+      "applicationCategory": "EducationApplication",
+      "operatingSystem": "Web, iOS, Android",
+      "inLanguage": ["zh-CN", "en"],
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "image": "https://karryzhang.github.io/codingdad/english/icons/icon-512.png",
+      "featureList": ["间隔重复算法", "PET词汇", "日常口语短语", "网络缩写", "加密金融词汇", "离线PWA", "真人发音"]
+    }
+    </script>
+
+    <!-- ── 性能预连接 ─────────────────────────────────────────────────── -->
+    <link rel="preconnect" href="https://api.dictionaryapi.dev">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <style>

@@ -1,16 +1,25 @@
 {
-  "name": "VocabLoop",
+  "id": "/codingdad/english/flashcard.html",
+  "name": "VocabLoop – 智能英语单词记忆",
   "short_name": "VocabLoop",
-  "description": "间隔重复词汇学习卡片 – PET / Crypto / 日常口语",
+  "description": "基于间隔重复算法的英语词汇 PWA，涵盖 PET 考试词汇、日常口语短语、网络缩写和加密金融术语，支持离线使用与真人发音。",
   "start_url": "./flashcard.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#1a3a5c",
   "background_color": "#1a3a5c",
-  "lang": "zh",
-  "categories": ["education"],
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "categories": ["education", "utilities"],
+  "keywords": ["英语单词", "间隔重复", "闪卡", "PET", "vocabulary", "flashcard", "spaced repetition"],
   "icons": [
+    {
+      "src": "icons/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "icons/icon-192.png",
       "sizes": "192x192",
@@ -22,6 +31,38 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "VocabLoop 闪卡学习界面"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "PET 词汇",
+      "short_name": "PET",
+      "description": "开始学习 PET 考试词汇",
+      "url": "./flashcard.html#pet",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "日常口语",
+      "short_name": "口语",
+      "description": "开始学习日常英语口语",
+      "url": "./flashcard.html#daily",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
 }
