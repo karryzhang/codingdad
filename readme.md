@@ -20,6 +20,16 @@
 - 字数：建议每题 **150 words 以内**
 - 标准：按 PSLE 导向（情节完整、语言准确、结尾有反思）
 
+### 更新：PET 单词卡（Flashcard）学习系统升级
+- 页面：[`english/flashcard.html`](https://karryzhang.github.io/codingdad/english/flashcard.html)
+- 新能力：
+  - SRS 间隔复习（忘了 / 模糊 / 记住了 / 很熟）
+  - 学习阶段分层（新词、学习中、复习、已掌握）
+  - 自动词典增强（音标、词性、例句）
+  - 发音支持（在线音频 + 浏览器语音回退）
+  - 连击、积分、等级与里程碑反馈
+  - 键盘快捷键（空格翻卡，方向键作答，P 发音）
+
 ### 新增：Word Explorer（PET 核心词轻量记忆小游戏）
 - 页面：[`game/word-explorer.html`](https://karryzhang.github.io/codingdad/game/word-explorer.html)
 - 定位：适合 **10 岁+**，通过轻交互反复接触 PET 级核心词
@@ -49,8 +59,10 @@
 - [game/word-explorer.html](https://karryzhang.github.io/codingdad/game/word-explorer.html)：PET 核心词轻量记忆小游戏（10岁+，PC/手机适配）
 - 说明：当前版本保持简洁，便于快速上手；后续可迭代加入触控按钮、闯关反馈与词库分级
 
-## 首页导航
+## 快速索引（推荐入口）
 - [index.html](https://karryzhang.github.io/codingdad/index.html)：统一索引 math / english / game 资源入口
+- [english/flashcard.html](https://karryzhang.github.io/codingdad/english/flashcard.html)：PET 单词卡（SRS 间隔复习 + 发音 + 音标词性）
+- [game/word-explorer.html](https://karryzhang.github.io/codingdad/game/word-explorer.html)：PET 词汇互动挑战游戏
 
 ## 其他页面
 - [poetry.html](https://karryzhang.github.io/codingdad/poetry.html)：还在设计中，唐诗 300 首背诵辅助程序（含拼音标注）
