@@ -2,8 +2,25 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>单词卡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>VocabLoop</title>
+
+    <!-- PWA / Home Screen -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563EB">
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="VocabLoop">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+    <!-- Open Graph / share preview -->
+    <meta property="og:title" content="VocabLoop">
+    <meta property="og:description" content="间隔重复词汇卡片 – 随时随地背单词">
+    <meta property="og:image" content="icons/icon-512.png">
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -557,6 +574,115 @@
             .front-word { font-size: 3.2rem; }
             .back-zh    { font-size: 2.5rem; }
         }
+
+        /* ── Add-to-Home-Screen prompts ───────────────────────────────── */
+
+        /* Android install banner (bottom bar) */
+        #pwa-android {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 9999;
+            padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+            background: #fff;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.14);
+            border-radius: 16px 16px 0 0;
+            align-items: center;
+            gap: 12px;
+            animation: slideUp 0.35s ease;
+        }
+        #pwa-android.show { display: flex; }
+        #pwa-android .pwa-icon {
+            width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+        }
+        #pwa-android .pwa-text { flex: 1; }
+        #pwa-android .pwa-text strong { display: block; font-size: 0.97rem; color: #1e2533; }
+        #pwa-android .pwa-text span   { font-size: 0.8rem; color: #64748b; }
+        #pwa-install-btn {
+            padding: 9px 18px;
+            background: linear-gradient(135deg,#2563EB,#6D28D9);
+            color: #fff; border: none; border-radius: 20px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            white-space: nowrap;
+        }
+        #pwa-dismiss-android {
+            background: none; border: none; font-size: 1.3rem; cursor: pointer;
+            color: #94a3b8; padding: 4px 6px; flex-shrink: 0;
+        }
+
+        /* iOS guide overlay (full-screen) */
+        #pwa-ios {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            align-items: flex-end;
+            justify-content: center;
+        }
+        #pwa-ios.show { display: flex; animation: fadeInBg 0.3s ease; }
+
+        #pwa-ios-card {
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            padding: 24px 24px max(24px, env(safe-area-inset-bottom));
+            width: 100%; max-width: 480px;
+            animation: slideUp 0.38s cubic-bezier(0.34,1.3,0.64,1);
+        }
+        #pwa-ios-card .pwa-header {
+            display: flex; align-items: center; gap: 14px; margin-bottom: 20px;
+        }
+        #pwa-ios-card .pwa-header img {
+            width: 56px; height: 56px; border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+        }
+        #pwa-ios-card .pwa-header-text h3 {
+            font-size: 1.1rem; font-weight: 700; color: #1e2533;
+        }
+        #pwa-ios-card .pwa-header-text p {
+            font-size: 0.82rem; color: #64748b; margin-top: 2px;
+        }
+        #pwa-ios-card .pwa-steps {
+            background: #f8faff; border-radius: 16px;
+            padding: 16px 18px; margin-bottom: 18px;
+        }
+        #pwa-ios-card .pwa-step {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 0;
+        }
+        #pwa-ios-card .pwa-step + .pwa-step {
+            border-top: 1px solid #e9eef6;
+        }
+        #pwa-ios-card .step-num {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: linear-gradient(135deg,#2563EB,#6D28D9);
+            color: #fff; font-size: 0.82rem; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        #pwa-ios-card .step-text { font-size: 0.9rem; color: #2d3748; line-height: 1.4; }
+        #pwa-ios-card .step-text em { font-style: normal; font-weight: 600; color: #2563EB; }
+        #pwa-ios-card .step-icon {
+            margin-left: auto; font-size: 1.3rem; flex-shrink: 0;
+        }
+        #pwa-dismiss-ios {
+            width: 100%;
+            padding: 13px;
+            background: #f1f5f9; border: none; border-radius: 14px;
+            color: #475569; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+        @keyframes fadeInBg {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -743,6 +869,48 @@
         </transition>
     </div>
 
+</div>
+
+<!-- ── Android PWA install banner ─────────────────────────────────────── -->
+<div id="pwa-android">
+    <img class="pwa-icon" src="icons/apple-touch-icon.png" alt="VocabLoop">
+    <div class="pwa-text">
+        <strong>VocabLoop</strong>
+        <span>添加到主屏幕，随时随地刷词</span>
+    </div>
+    <button id="pwa-install-btn">安装</button>
+    <button id="pwa-dismiss-android" aria-label="关闭">✕</button>
+</div>
+
+<!-- ── iOS "Add to Home Screen" guide ────────────────────────────────── -->
+<div id="pwa-ios">
+    <div id="pwa-ios-card">
+        <div class="pwa-header">
+            <img src="icons/apple-touch-icon.png" alt="VocabLoop icon">
+            <div class="pwa-header-text">
+                <h3>添加 VocabLoop 到主屏幕</h3>
+                <p>像 App 一样随时打开，无需浏览器</p>
+            </div>
+        </div>
+        <div class="pwa-steps">
+            <div class="pwa-step">
+                <div class="step-num">1</div>
+                <div class="step-text">点击底部工具栏的 <em>分享</em> 按钮</div>
+                <div class="step-icon">⬆️</div>
+            </div>
+            <div class="pwa-step">
+                <div class="step-num">2</div>
+                <div class="step-text">向下滑动，选择 <em>「添加到主屏幕」</em></div>
+                <div class="step-icon">📲</div>
+            </div>
+            <div class="pwa-step">
+                <div class="step-num">3</div>
+                <div class="step-text">点击右上角 <em>「添加」</em>，大功告成！</div>
+                <div class="step-icon">✅</div>
+            </div>
+        </div>
+        <button id="pwa-dismiss-ios">我知道了</button>
+    </div>
 </div>
 
 <script>
@@ -1522,6 +1690,87 @@ new Vue({
         window.removeEventListener('keydown', this.onKey);
     },
 });
+</script>
+
+<!-- ── PWA Install Prompts ──────────────────────────────────────────────── -->
+<script>
+(function () {
+    const SHOWN_KEY = 'pwa_prompt_shown_v1';
+
+    // ── Helper: is this already running as a standalone PWA? ──────────────
+    function isStandalone() {
+        return window.matchMedia('(display-mode: standalone)').matches
+            || window.navigator.standalone === true;   // iOS
+    }
+
+    if (isStandalone()) return;   // already installed → skip everything
+
+    // ── Detect platform ───────────────────────────────────────────────────
+    const ua  = navigator.userAgent;
+    const isIOS     = /iphone|ipad|ipod/i.test(ua);
+    const isSafari  = /safari/i.test(ua) && !/chrome|crios|fxios/i.test(ua);
+    const isAndroid = /android/i.test(ua);
+
+    // ── iOS: show guide after a 2 s delay on first visit ─────────────────
+    if (isIOS && isSafari && !localStorage.getItem(SHOWN_KEY)) {
+        const overlay  = document.getElementById('pwa-ios');
+        const dismissBtn = document.getElementById('pwa-dismiss-ios');
+
+        setTimeout(function () {
+            overlay.classList.add('show');
+        }, 2000);
+
+        dismissBtn.addEventListener('click', function () {
+            overlay.classList.remove('show');
+            localStorage.setItem(SHOWN_KEY, '1');
+        });
+
+        // Also dismiss on backdrop tap
+        overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) {
+                overlay.classList.remove('show');
+                localStorage.setItem(SHOWN_KEY, '1');
+            }
+        });
+        return;
+    }
+
+    // ── Android / Chrome: capture beforeinstallprompt ─────────────────────
+    let deferredPrompt = null;
+    const banner     = document.getElementById('pwa-android');
+    const installBtn = document.getElementById('pwa-install-btn');
+    const dismissBtn = document.getElementById('pwa-dismiss-android');
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        if (localStorage.getItem(SHOWN_KEY)) return;   // dismissed before
+
+        setTimeout(function () {
+            banner.classList.add('show');
+        }, 2500);
+    });
+
+    installBtn.addEventListener('click', async function () {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        deferredPrompt = null;
+        banner.classList.remove('show');
+        localStorage.setItem(SHOWN_KEY, '1');
+    });
+
+    dismissBtn.addEventListener('click', function () {
+        banner.classList.remove('show');
+        localStorage.setItem(SHOWN_KEY, '1');
+    });
+
+    // Hide banner once installed
+    window.addEventListener('appinstalled', function () {
+        banner.classList.remove('show');
+    });
+})();
 </script>
 </body>
 </html>
