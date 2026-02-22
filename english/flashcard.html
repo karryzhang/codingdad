@@ -1223,6 +1223,9 @@
                 <button class="btn-hd" :class="{active: practiceMode}"
                         @click="practiceMode ? exitPractice() : startPractice()"
                         :title="ui.practiceBtn">✏️</button>
+                <button class="btn-hd" :class="{active: readingOpen}"
+                        @click="readingOpen ? closeReading() : openReading()"
+                        :title="ui.readingBtn">📖</button>
                 <button class="btn-hd danger" @click="confirmReset">{{ui.resetBtn}}</button>
             </div>
         </div>
