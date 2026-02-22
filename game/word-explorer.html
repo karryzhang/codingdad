@@ -5,20 +5,30 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Word Explorer 1000 - Enhanced</title>
   <style>
-    :root{--ok:#16a34a;--bad:#dc2626;--bg:#0ea5e9;--card:#ffffff;--ink:#0f172a;--soft:#e2e8f0}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(140deg,#7dd3fc,#a7f3d0);color:var(--ink)}
-    .wrap{max-width:980px;margin:auto;padding:12px}.card{background:var(--card);border-radius:16px;padding:12px;margin:10px 0;box-shadow:0 8px 20px rgba(0,0,0,.08)}
-    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.badge{background:#f1f5f9;border-radius:999px;padding:6px 10px;font-weight:700}
-    button{border:0;border-radius:10px;padding:10px 12px;background:#0891b2;color:#fff;font-weight:700;cursor:pointer}
-    button.alt{background:#6366f1} button.warn{background:#f59e0b} button.gray{background:#6b7280}.ghost{background:#fff;color:#0f172a;border:2px solid #cbd5e1}
-    .q{font-size:1.2rem;font-weight:800;margin:8px 0}.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    :root{--ok:#16a34a;--bad:#dc2626;--ink:#0f172a;--soft:#e2e8f0;--card:rgba(255,255,255,.88)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:
+      radial-gradient(1200px 500px at -10% -20%,#c4b5fd 10%,transparent 60%),
+      radial-gradient(900px 400px at 120% -10%,#7dd3fc 10%,transparent 58%),
+      linear-gradient(145deg,#dbeafe,#dcfce7)}
+    .wrap{max-width:980px;margin:auto;padding:14px}
+    h2{margin:8px 2px 12px;font-size:clamp(1.25rem,2.4vw,1.8rem);letter-spacing:.2px}
+    .card{background:var(--card);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.5);border-radius:18px;padding:14px;margin:10px 0;box-shadow:0 10px 30px rgba(15,23,42,.08)}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.badge{background:#f8fafc;border:1px solid #e2e8f0;border-radius:999px;padding:6px 10px;font-weight:700;font-size:.92rem}
+    button{border:0;border-radius:12px;padding:10px 13px;background:linear-gradient(180deg,#06b6d4,#0891b2);color:#fff;font-weight:700;cursor:pointer;transition:transform .12s,filter .12s,box-shadow .12s;box-shadow:0 6px 14px rgba(8,145,178,.28)}
+    button:hover{filter:brightness(1.05)} button:active{transform:translateY(1px)}
+    button.alt{background:linear-gradient(180deg,#818cf8,#6366f1);box-shadow:0 6px 14px rgba(99,102,241,.28)}
+    button.warn{background:linear-gradient(180deg,#fbbf24,#f59e0b);box-shadow:0 6px 14px rgba(245,158,11,.28)}
+    button.gray{background:linear-gradient(180deg,#94a3b8,#64748b);box-shadow:0 6px 14px rgba(100,116,139,.25)}
+    .ghost{background:#fff;color:#0f172a;border:1px solid #cbd5e1;box-shadow:none}
+    .q{font-size:1.2rem;font-weight:800;margin:8px 0 10px}.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     .opt{background:#fff;color:#111827;border:2px solid #bfdbfe}.opt:hover{border-color:#38bdf8}
     #result{min-height:26px;font-weight:800}.ok{color:var(--ok)}.bad{color:var(--bad)}
-    input[type=text]{padding:10px;border:2px solid #cbd5e1;border-radius:10px;font-size:1rem;width:100%}
+    input[type=text]{padding:11px;border:2px solid #cbd5e1;border-radius:12px;font-size:1rem;width:100%}
     .bar{height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#22c55e,#06b6d4);width:0%;transition:.25s}
     .pulse{animation:pulse .35s ease}.shake{animation:shake .35s ease}
-    .learn{line-height:1.6}.split{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    @keyframes pulse{50%{transform:scale(1.02)}} @keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+    .learn{line-height:1.62}.split{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @keyframes pulse{50%{transform:scale(1.015)}} @keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
     @media(max-width:700px){.opts,.split{grid-template-columns:1fr}}
   </style>
 </head>
