@@ -1,0 +1,6002 @@
+[
+  {
+    "word": "accept",
+    "zh": "接受",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "achieve",
+    "zh": "实现",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "across",
+    "zh": "穿过",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "advice",
+    "zh": "建议",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "afford",
+    "zh": "负担得起",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "against",
+    "zh": "反对",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "agree",
+    "zh": "同意",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "allow",
+    "zh": "允许",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "although",
+    "zh": "尽管",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "amount",
+    "zh": "数量",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ancient",
+    "zh": "古老的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "anger",
+    "zh": "愤怒",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "announce",
+    "zh": "宣布",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "anxious",
+    "zh": "焦虑的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "apologize",
+    "zh": "道歉",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "appear",
+    "zh": "出现",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "argue",
+    "zh": "争论",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "arrange",
+    "zh": "安排",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "attend",
+    "zh": "出席",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "attract",
+    "zh": "吸引",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "average",
+    "zh": "平均的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "avoid",
+    "zh": "避免",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "background",
+    "zh": "背景",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "balance",
+    "zh": "平衡",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "basic",
+    "zh": "基础的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "behave",
+    "zh": "表现",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "belong",
+    "zh": "属于",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "benefit",
+    "zh": "益处",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "beyond",
+    "zh": "超出",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "borrow",
+    "zh": "借入",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "brain",
+    "zh": "大脑",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "branch",
+    "zh": "树枝/分部",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "breath",
+    "zh": "呼吸",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "breathe",
+    "zh": "呼吸（动词）",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "bright",
+    "zh": "明亮的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "budget",
+    "zh": "预算",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "business",
+    "zh": "生意",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cancel",
+    "zh": "取消",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "careful",
+    "zh": "小心的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cause",
+    "zh": "导致",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "certain",
+    "zh": "确定的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "chance",
+    "zh": "机会",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "character",
+    "zh": "角色/性格",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "charge",
+    "zh": "收费/充电",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "choice",
+    "zh": "选择",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "choose",
+    "zh": "选择（动词）",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "citizen",
+    "zh": "公民",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "clever",
+    "zh": "聪明的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "climate",
+    "zh": "气候",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "coach",
+    "zh": "教练",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "collect",
+    "zh": "收集",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "comfortable",
+    "zh": "舒适的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "common",
+    "zh": "常见的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "compare",
+    "zh": "比较",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "complete",
+    "zh": "完成",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "connect",
+    "zh": "连接",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "consider",
+    "zh": "考虑",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "contain",
+    "zh": "包含",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "continue",
+    "zh": "继续",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "control",
+    "zh": "控制",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "correct",
+    "zh": "正确的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "costume",
+    "zh": "服装",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "couple",
+    "zh": "一对/几个",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "course",
+    "zh": "课程",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "create",
+    "zh": "创造",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "culture",
+    "zh": "文化",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "curious",
+    "zh": "好奇的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "customer",
+    "zh": "顾客",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "damage",
+    "zh": "损害",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "danger",
+    "zh": "危险",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "decide",
+    "zh": "决定",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "decorate",
+    "zh": "装饰",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "deep",
+    "zh": "深的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "degree",
+    "zh": "程度/学位",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "depend",
+    "zh": "依赖",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "describe",
+    "zh": "描述",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "develop",
+    "zh": "发展",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "difference",
+    "zh": "差异",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "difficult",
+    "zh": "困难的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "direct",
+    "zh": "直接的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "disappear",
+    "zh": "消失",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "discover",
+    "zh": "发现",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "discuss",
+    "zh": "讨论",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "disease",
+    "zh": "疾病",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "distance",
+    "zh": "距离",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "divide",
+    "zh": "分开/除",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "double",
+    "zh": "双倍",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "dream",
+    "zh": "梦想",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "during",
+    "zh": "在…期间",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "earth",
+    "zh": "地球",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "education",
+    "zh": "教育",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "effect",
+    "zh": "影响（名词）",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "effort",
+    "zh": "努力",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "either",
+    "zh": "任一",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "electric",
+    "zh": "电的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "embarrassed",
+    "zh": "尴尬的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "encourage",
+    "zh": "鼓励",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "energy",
+    "zh": "能量",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "engineer",
+    "zh": "工程师",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "enough",
+    "zh": "足够的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "environment",
+    "zh": "环境",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "especially",
+    "zh": "尤其",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "excellent",
+    "zh": "优秀的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "except",
+    "zh": "除…外",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "excited",
+    "zh": "兴奋的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "exercise",
+    "zh": "锻炼",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "experience",
+    "zh": "经历",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "explain",
+    "zh": "解释",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "expression",
+    "zh": "表达",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "extra",
+    "zh": "额外的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "famous",
+    "zh": "著名的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "fashion",
+    "zh": "时尚",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "feature",
+    "zh": "特点",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "festival",
+    "zh": "节日",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "finally",
+    "zh": "最后",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "focus",
+    "zh": "专注",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "foreign",
+    "zh": "外国的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "forget",
+    "zh": "忘记",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "forward",
+    "zh": "向前",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "friendly",
+    "zh": "友好的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "function",
+    "zh": "功能",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "future",
+    "zh": "未来",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "general",
+    "zh": "普遍的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "generous",
+    "zh": "慷慨的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "gentle",
+    "zh": "温柔的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "government",
+    "zh": "政府",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "grammar",
+    "zh": "语法",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "habit",
+    "zh": "习惯",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "health",
+    "zh": "健康",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "honest",
+    "zh": "诚实的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "however",
+    "zh": "然而",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "human",
+    "zh": "人类",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hungry",
+    "zh": "饥饿的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "identify",
+    "zh": "识别",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "imagine",
+    "zh": "想象",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "improve",
+    "zh": "改善",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "include",
+    "zh": "包括",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "increase",
+    "zh": "增加",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "independent",
+    "zh": "独立的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "influence",
+    "zh": "影响（动词）",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "information",
+    "zh": "信息",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "instead",
+    "zh": "代替",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "introduce",
+    "zh": "介绍",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "invent",
+    "zh": "发明",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "invite",
+    "zh": "邀请",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "island",
+    "zh": "岛屿",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "journey",
+    "zh": "旅行",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "judge",
+    "zh": "判断",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "knowledge",
+    "zh": "知识",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "language",
+    "zh": "语言",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "laugh",
+    "zh": "大笑",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "leader",
+    "zh": "领导者",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "learn",
+    "zh": "学习",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "least",
+    "zh": "最少",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "length",
+    "zh": "长度",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "library",
+    "zh": "图书馆",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "likely",
+    "zh": "可能的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "local",
+    "zh": "本地的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "location",
+    "zh": "地点",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "lonely",
+    "zh": "孤独的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "manage",
+    "zh": "管理",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "memory",
+    "zh": "记忆",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "message",
+    "zh": "消息",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "method",
+    "zh": "方法",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "middle",
+    "zh": "中间",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "million",
+    "zh": "百万",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "minute",
+    "zh": "分钟",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "mistake",
+    "zh": "错误",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "modern",
+    "zh": "现代的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "moment",
+    "zh": "时刻",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "nature",
+    "zh": "自然",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "nervous",
+    "zh": "紧张的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "notice",
+    "zh": "注意到",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "opinion",
+    "zh": "观点",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "opposite",
+    "zh": "相反的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "organize",
+    "zh": "组织",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "patient",
+    "zh": "有耐心的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "perhaps",
+    "zh": "也许",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "personal",
+    "zh": "个人的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "popular",
+    "zh": "受欢迎的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "possible",
+    "zh": "可能的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "prefer",
+    "zh": "更喜欢",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "prepare",
+    "zh": "准备",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "present",
+    "zh": "礼物/现在",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "prevent",
+    "zh": "阻止",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "private",
+    "zh": "私人的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "probably",
+    "zh": "很可能",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pronounce",
+    "zh": "发音",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "protect",
+    "zh": "保护",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "provide",
+    "zh": "提供",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "public",
+    "zh": "公共的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "purpose",
+    "zh": "目的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "quality",
+    "zh": "质量",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "quickly",
+    "zh": "快速地",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "quiet",
+    "zh": "安静的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "realize",
+    "zh": "意识到",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "recent",
+    "zh": "最近的",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "recommend",
+    "zh": "推荐",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reduce",
+    "zh": "减少",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "refuse",
+    "zh": "拒绝",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "the",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "of",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "and",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "to",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "a",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "in",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "for",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "is",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "on",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "that",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "by",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "this",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "with",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "i",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "you",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "it",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "not",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "or",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "be",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "are",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "from",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "at",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "as",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "your",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "all",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "have",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "new",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "more",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "an",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "was",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "we",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "will",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "home",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "can",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "us",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "about",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "if",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "page",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "my",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "has",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "search",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "free",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "but",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "our",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "one",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "other",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "do",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "no",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "time",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "they",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "site",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "he",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "up",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "may",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "what",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "which",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "their",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "news",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "out",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "use",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "any",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "there",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "see",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "only",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "so",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "his",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "when",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "contact",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "here",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "who",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "web",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "also",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "now",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "help",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "get",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pm",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "view",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "online",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "c",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "e",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "first",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "am",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "been",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "would",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "how",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "were",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "me",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "s",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "services",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "some",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "these",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "click",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "its",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "like",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "service",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "x",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "than",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "find",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "price",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "date",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "back",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "top",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "people",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "had",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "list",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "name",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "just",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "over",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "state",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "year",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "day",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "into",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "email",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "two",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "n",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "world",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "re",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "next",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "used",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "go",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "b",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "work",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "last",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "most",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "products",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "music",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "buy",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "data",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "make",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "them",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "should",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "product",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "system",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "post",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "her",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "city",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "t",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "add",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "policy",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "number",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "such",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "please",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "available",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "copyright",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "support",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "after",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "best",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "software",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "then",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "jan",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "good",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "video",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "well",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "d",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "where",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "info",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rights",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "books",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "high",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "school",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "through",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "m",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "each",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "links",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "she",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "review",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "years",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "order",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "very",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "privacy",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "book",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "items",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "company",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "r",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "read",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "group",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sex",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "need",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "many",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "user",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "said",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "de",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "does",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "set",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "under",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "research",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "university",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "january",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "mail",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "full",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "map",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reviews",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "program",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "life",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "know",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "games",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "way",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "days",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "management",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "p",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "part",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "could",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "great",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "united",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hotel",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "real",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "f",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "item",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "international",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "center",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ebay",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "must",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "store",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "travel",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "comments",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "made",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "development",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "report",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "off",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "member",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "details",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "line",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "terms",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "before",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hotels",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "did",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "send",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "right",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "type",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "because",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "those",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "using",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "results",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "office",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "national",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "car",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "design",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "take",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "posted",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "internet",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "address",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "community",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "within",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "states",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "area",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "want",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "phone",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "dvd",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "shipping",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reserved",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "subject",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "between",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "forum",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "family",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "l",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "long",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "based",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "w",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "code",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "show",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "o",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "even",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "black",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "check",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "special",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "prices",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "website",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "index",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "being",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "women",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "much",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sign",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "file",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "link",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "open",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "today",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "technology",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "south",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "case",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "project",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "same",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pages",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "uk",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "version",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "section",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "own",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "found",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sports",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "house",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "related",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "security",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "both",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "g",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "county",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "american",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "photo",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "game",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "members",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "power",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "while",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "care",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "network",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "down",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "computer",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "systems",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "three",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "total",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "place",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "end",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "following",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "download",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "h",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "him",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "without",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "per",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "access",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "think",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "north",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "resources",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "current",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "posts",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "big",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "media",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "law",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "water",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "history",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pictures",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "size",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "art",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "since",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "including",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "guide",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "shop",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "directory",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "board",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "change",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "white",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "text",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "small",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rating",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rate",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "children",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "usa",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "return",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "students",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "v",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "shopping",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "account",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "times",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sites",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "level",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "digital",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "profile",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "previous",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "form",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "events",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "love",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "old",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "john",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "main",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "call",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hours",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "image",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "department",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "title",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "description",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "non",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "k",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "y",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "insurance",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "another",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "why",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "shall",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "property",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "class",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cd",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "still",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "money",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "every",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "listing",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "content",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "country",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "little",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "visit",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "save",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "tools",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "low",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reply",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "december",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "movies",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "college",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "value",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "article",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "york",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "man",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "card",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "jobs",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "j",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "food",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "source",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "author",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "different",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "press",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "u",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sale",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "around",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "print",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "job",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "canada",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "process",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "teen",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "room",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "stock",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "training",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "too",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "credit",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "point",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "join",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "science",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "men",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "categories",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "advanced",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "west",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sales",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "look",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "english",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "left",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "team",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "estate",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "box",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "conditions",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "select",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "windows",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "photos",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "gay",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "thread",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "week",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "category",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "note",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "live",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "large",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "gallery",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "table",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "register",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "june",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "october",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "november",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "market",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "really",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "action",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "start",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "series",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "model",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "features",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "air",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "industry",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "plan",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "provided",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "tv",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "yes",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "required",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "second",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hot",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "accessories",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cost",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "movie",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "forums",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "march",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "la",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "september",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "better",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "say",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "questions",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "july",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "yahoo",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "going",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "medical",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "test",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "friend",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "come",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "dec",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "server",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pc",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "study",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "application",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cart",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "staff",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "articles",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "san",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "feedback",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "again",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "play",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "looking",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "issues",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "april",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "never",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "users",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "street",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "topic",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "comment",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "financial",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "things",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "working",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "standard",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "tax",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "person",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "below",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "mobile",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "less",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "got",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "blog",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "party",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "payment",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "equipment",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "login",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "student",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "let",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "programs",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "offers",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "legal",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "above",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "park",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "stores",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "side",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "act",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "problem",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "red",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "give",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "performance",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "social",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "q",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "august",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "quote",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "story",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sell",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "options",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rates",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "key",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "body",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "young",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "america",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "important",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "field",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "few",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "east",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "paper",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "single",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ii",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "age",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "activities",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "club",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "example",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "girls",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "additional",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "password",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "z",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "latest",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "something",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "road",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "gift",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "question",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "changes",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "night",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ca",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hard",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "texas",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "oct",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pay",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "four",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "poker",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "status",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "browse",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "issue",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "range",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "building",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "seller",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "court",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "february",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "always",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "result",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "audio",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "light",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "write",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "war",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "nov",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "offer",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "blue",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "groups",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "al",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "easy",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "given",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "files",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "event",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "release",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "analysis",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "request",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "fax",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "china",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "making",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "picture",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "needs",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "might",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "professional",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "yet",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "month",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "major",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "star",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "areas",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "space",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "committee",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hand",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sun",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cards",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "problems",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "london",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "washington",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "meeting",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rss",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "become",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "interest",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "id",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "child",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "keep",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "enter",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "california",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "porn",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "share",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "similar",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "garden",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "schools",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "added",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reference",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "companies",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "listed",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "baby",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "learning",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "run",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "delivery",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "net",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "term",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "film",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "stories",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "put",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "computers",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "journal",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reports",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "co",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "try",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "welcome",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "central",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "images",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "president",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "god",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "original",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "head",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "radio",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "until",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cell",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "color",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "self",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "council",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "away",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "includes",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "track",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "australia",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "discussion",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "archive",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "once",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "others",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "entertainment",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "agreement",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "format",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "society",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "months",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "log",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "safety",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "friends",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sure",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "faq",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "trade",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "edition",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cars",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "messages",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "marketing",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "tell",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "further",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "updated",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "association",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "able",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "having",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "provides",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "david",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "fun",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "already",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "green",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "studies",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "close",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "drive",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "specific",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "several",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "gold",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "feb",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "living",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sep",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "collection",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "called",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "short",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "arts",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "lot",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ask",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "display",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "limited",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "powered",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "solutions",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "means",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "director",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "daily",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "beach",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "past",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "natural",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "whether",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "due",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "et",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "electronics",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "five",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "upon",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "period",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "planning",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "database",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "says",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "official",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "weather",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "mar",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "land",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "done",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "technical",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "window",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "france",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "pro",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "region",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "record",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "microsoft",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "conference",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "records",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "st",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "district",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "calendar",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "costs",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "style",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "url",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "front",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "statement",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "update",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "parts",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "aug",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ever",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "downloads",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "early",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "miles",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "sound",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "resource",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "applications",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "ago",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "document",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "word",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "works",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "material",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "bill",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "apr",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "written",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "talk",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "federal",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "hosting",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rules",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "final",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "adult",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "tickets",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "thing",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "centre",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "requirements",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "via",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "cheap",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "nude",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "kids",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "finance",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "true",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "minutes",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "else",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "mark",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "third",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "rock",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "gifts",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "europe",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "reading",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "topics",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "bad",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "individual",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "tips",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "plus",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  },
+  {
+    "word": "auto",
+    "zh": "",
+    "pos": "",
+    "ipa": ""
+  }
+]

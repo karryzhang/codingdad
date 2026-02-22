@@ -1,249 +1,122 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Word Explorer PET 200</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Word Explorer 1000</title>
   <style>
-    :root{
-      --bg1:#7bdff2;--bg2:#b2f7ef;--bg3:#eff7f6;--ink:#243b53;--ok:#22c55e;--bad:#ef4444;--card:#ffffff;
-      --accent:#ff9f1c;--accent2:#2ec4b6;--purple:#7c3aed;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family: "Comic Sans MS","Trebuchet MS","PingFang SC",sans-serif;
-      color:var(--ink);
-      background: linear-gradient(160deg,var(--bg1),var(--bg2),var(--bg3));
-      min-height:100vh;
-    }
-    .wrap{max-width:980px;margin:0 auto;padding:14px}
-    .title{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-    h1{margin:4px 0;font-size:clamp(1.2rem,3.7vw,2rem)}
-    .badge{background:#fff;border-radius:999px;padding:6px 10px;font-weight:700;border:2px solid #e2e8f0}
-    .panel{background:rgba(255,255,255,.95);border-radius:16px;padding:14px;box-shadow:0 8px 25px rgba(0,0,0,.08);margin-top:12px}
-    .grid{display:grid;grid-template-columns:1fr;gap:10px}
-    .stats{display:flex;gap:8px;flex-wrap:wrap}
-    .btns{display:flex;gap:8px;flex-wrap:wrap}
-    button{
-      border:none;border-radius:12px;padding:10px 14px;font-size:1rem;font-weight:700;cursor:pointer;color:#fff;
-      background:var(--accent2);box-shadow:0 4px 0 rgba(0,0,0,.15)
-    }
-    button.secondary{background:#64748b}
-    button.warn{background:var(--accent)}
-    button.purple{background:var(--purple)}
-    button:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.15)}
-    .question{font-size:clamp(1.1rem,4vw,1.5rem);font-weight:800;margin:4px 0 10px}
-    .small{opacity:.85;font-size:.92rem}
-    .choices{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .choice{background:#fff;color:var(--ink);border:2px solid #dbeafe}
-    .choice:hover{border-color:#60a5fa}
-    .result{font-weight:800;min-height:1.5em}
-    .ok{color:var(--ok)} .bad{color:var(--bad)}
-    .meter{height:14px;background:#e2e8f0;border-radius:999px;overflow:hidden}
-    .meter > div{height:100%;background:linear-gradient(90deg,#34d399,#10b981)}
-    .word-card{line-height:1.65}
-    .footer-note{font-size:.85rem;opacity:.8;margin-top:10px}
-    @media (max-width:640px){
-      .choices{grid-template-columns:1fr}
-      button{width:100%}
-    }
+    body{margin:0;font-family:Arial,"PingFang SC",sans-serif;background:linear-gradient(135deg,#8ee3ff,#c8f7dc);color:#1f2937}
+    .wrap{max-width:980px;margin:auto;padding:12px}
+    .card{background:#fff;border-radius:14px;padding:12px;margin:10px 0;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    .row{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{background:#f3f4f6;border-radius:999px;padding:6px 10px;font-weight:700}
+    button{border:0;border-radius:10px;padding:10px 12px;background:#14b8a6;color:#fff;font-weight:700}
+    button.alt{background:#6366f1} button.warn{background:#f59e0b} button.gray{background:#6b7280}
+    .q{font-size:1.2rem;font-weight:800;margin:8px 0}
+    .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .opt{background:#fff;color:#111827;border:2px solid #bfdbfe}
+    #result{min-height:24px;font-weight:800}
+    .ok{color:#16a34a}.bad{color:#dc2626}
+    input[type=text]{padding:10px;border:2px solid #cbd5e1;border-radius:10px;font-size:1rem;width:100%}
+    @media(max-width:680px){.opts{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="title">
-      <h1>🎮 Word Explorer · PET 200 易错词挑战</h1>
-      <span class="badge" id="modeTag">模式：学习</span>
-    </div>
-
-    <div class="panel">
-      <strong>玩法说明</strong>
-      <div class="small">① 先点“开始挑战”进入 20 题闯关（每次随机，四选一）<br>② 答错会进入“错题本”，可点“错题复习”针对记忆<br>③ 每道题都提供：词义 + 例句 + 易错提醒，帮助理解和记住</div>
-      <div class="btns" style="margin-top:10px">
-        <button onclick="startChallenge()">开始挑战</button>
-        <button class="warn" onclick="nextLearn()">学习下一词</button>
-        <button class="purple" onclick="startReview()">错题复习</button>
-        <button class="secondary" onclick="resetProgress()">重置进度</button>
-      </div>
-    </div>
-
-    <div class="panel grid">
-      <div class="stats">
-        <span class="badge" id="qNo">题目：0/0</span>
-        <span class="badge" id="score">正确：0</span>
-        <span class="badge" id="streak">连对：0</span>
-        <span class="badge" id="mistakeCount">错题：0</span>
-      </div>
-      <div class="meter"><div id="progressBar" style="width:0%"></div></div>
-      <div class="question" id="question">点“学习下一词”开始热身。</div>
-      <div class="choices" id="choices"></div>
-      <div class="result" id="result"></div>
-      <div class="panel word-card" id="explain">
-        <strong>学习卡片</strong>
-        <div class="small">这里会展示词义、例句、易错点。</div>
-      </div>
-      <div class="footer-note">词库：PET/B1 常见且易混淆核心词 200 个（筛选用于记忆训练）。</div>
+<div class="wrap">
+  <h2>🎮 Word Explorer（快版）· 1000词挑战</h2>
+  <div class="card">
+    <b>玩法说明</b><br>
+    1) 题型随机：词义选择 / 听音选词 / 拼写填空。<br>
+    2) 学习卡片含：词性、音标（快版先占位）、发音按钮（浏览器语音）。<br>
+    3) 错题自动记录，可反复复习。
+    <div class="row" style="margin-top:8px">
+      <button onclick="start('mix')">开始混合挑战</button>
+      <button class="alt" onclick="start('review')">错题复习</button>
+      <button class="warn" onclick="showLearn()">学习下一词</button>
+      <button class="gray" onclick="resetAll()">重置</button>
     </div>
   </div>
 
-  <script>
-    const WORDS = [
-      ['accept','接受'], ['achieve','实现'], ['across','穿过'], ['advice','建议'], ['afford','负担得起'], ['against','反对'], ['agree','同意'], ['allow','允许'], ['although','尽管'], ['amount','数量'],
-      ['ancient','古老的'], ['anger','愤怒'], ['announce','宣布'], ['anxious','焦虑的'], ['apologize','道歉'], ['appear','出现'], ['argue','争论'], ['arrange','安排'], ['attend','出席'], ['attract','吸引'],
-      ['average','平均的'], ['avoid','避免'], ['background','背景'], ['balance','平衡'], ['basic','基础的'], ['behave','表现'], ['belong','属于'], ['benefit','益处'], ['beyond','超出'], ['borrow','借入'],
-      ['brain','大脑'], ['branch','树枝/分部'], ['breath','呼吸'], ['breathe','呼吸（动词）'], ['bright','明亮的'], ['budget','预算'], ['business','生意'], ['cancel','取消'], ['careful','小心的'], ['cause','导致'],
-      ['certain','确定的'], ['chance','机会'], ['character','角色/性格'], ['charge','收费/充电'], ['choice','选择'], ['choose','选择（动词）'], ['citizen','公民'], ['clever','聪明的'], ['climate','气候'], ['coach','教练'],
-      ['collect','收集'], ['comfortable','舒适的'], ['common','常见的'], ['compare','比较'], ['complete','完成'], ['connect','连接'], ['consider','考虑'], ['contain','包含'], ['continue','继续'], ['control','控制'],
-      ['correct','正确的'], ['costume','服装'], ['couple','一对/几个'], ['course','课程'], ['create','创造'], ['culture','文化'], ['curious','好奇的'], ['customer','顾客'], ['damage','损害'], ['danger','危险'],
-      ['decide','决定'], ['decorate','装饰'], ['deep','深的'], ['degree','程度/学位'], ['depend','依赖'], ['describe','描述'], ['develop','发展'], ['difference','差异'], ['difficult','困难的'], ['direct','直接的'],
-      ['disappear','消失'], ['discover','发现'], ['discuss','讨论'], ['disease','疾病'], ['distance','距离'], ['divide','分开/除'], ['double','双倍'], ['dream','梦想'], ['during','在…期间'], ['earth','地球'],
-      ['education','教育'], ['effect','影响（名词）'], ['effort','努力'], ['either','任一'], ['electric','电的'], ['embarrassed','尴尬的'], ['encourage','鼓励'], ['energy','能量'], ['engineer','工程师'], ['enough','足够的'],
-      ['environment','环境'], ['especially','尤其'], ['excellent','优秀的'], ['except','除…外'], ['excited','兴奋的'], ['exercise','锻炼'], ['experience','经历'], ['explain','解释'], ['expression','表达'], ['extra','额外的'],
-      ['famous','著名的'], ['fashion','时尚'], ['feature','特点'], ['festival','节日'], ['finally','最后'], ['focus','专注'], ['foreign','外国的'], ['forget','忘记'], ['forward','向前'], ['friendly','友好的'],
-      ['function','功能'], ['future','未来'], ['general','普遍的'], ['generous','慷慨的'], ['gentle','温柔的'], ['government','政府'], ['grammar','语法'], ['habit','习惯'], ['health','健康'], ['honest','诚实的'],
-      ['however','然而'], ['human','人类'], ['hungry','饥饿的'], ['identify','识别'], ['imagine','想象'], ['improve','改善'], ['include','包括'], ['increase','增加'], ['independent','独立的'], ['influence','影响（动词）'],
-      ['information','信息'], ['instead','代替'], ['introduce','介绍'], ['invent','发明'], ['invite','邀请'], ['island','岛屿'], ['journey','旅行'], ['judge','判断'], ['knowledge','知识'], ['language','语言'],
-      ['laugh','大笑'], ['leader','领导者'], ['learn','学习'], ['least','最少'], ['length','长度'], ['library','图书馆'], ['likely','可能的'], ['local','本地的'], ['location','地点'], ['lonely','孤独的'],
-      ['manage','管理'], ['memory','记忆'], ['message','消息'], ['method','方法'], ['middle','中间'], ['million','百万'], ['minute','分钟'], ['mistake','错误'], ['modern','现代的'], ['moment','时刻'],
-      ['nature','自然'], ['nervous','紧张的'], ['notice','注意到'], ['opinion','观点'], ['opposite','相反的'], ['organize','组织'], ['patient','有耐心的'], ['perhaps','也许'], ['personal','个人的'], ['popular','受欢迎的'],
-      ['possible','可能的'], ['prefer','更喜欢'], ['prepare','准备'], ['present','礼物/现在'], ['prevent','阻止'], ['private','私人的'], ['probably','很可能'], ['pronounce','发音'], ['protect','保护'], ['provide','提供'],
-      ['public','公共的'], ['purpose','目的'], ['quality','质量'], ['quickly','快速地'], ['quiet','安静的'], ['realize','意识到'], ['recent','最近的'], ['recommend','推荐'], ['reduce','减少'], ['refuse','拒绝']
-    ];
+  <div class="card row">
+    <span class="badge" id="statMode">模式：学习</span>
+    <span class="badge" id="statQ">题目：0/0</span>
+    <span class="badge" id="statC">正确：0</span>
+    <span class="badge" id="statM">错题：0</span>
+  </div>
 
-    const TIPS = {
-      advice:'注意 advice(建议,不可数) ≠ advise(建议,动词)',
-      breath:'breath(名词) ≠ breathe(动词)',
-      effect:'effect(名词) ≠ affect(动词)',
-      quiet:'quiet(安静的) ≠ quite(相当)',
-      weather:'weather(天气) ≠ whether(是否)',
-      accept:'accept(接受) ≠ except(除了)',
-      borrow:'borrow(借入) ≠ lend(借出)',
-      discover:'discover(发现) ≠ invent(发明)',
-      suggest:'suggest 后常接 doing，不直接接 to do',
-      maybe:'maybe(副词) ≠ may be(可能是)'
-    };
+  <div class="card">
+    <div class="q" id="q">加载词库中...</div>
+    <div id="answerArea"></div>
+    <div id="result"></div>
+  </div>
 
-    let mode = 'learn';
-    let learnIndex = 0;
-    let challengeSet = [];
-    let current = null;
-    let qIndex = 0;
-    let correct = 0;
-    let streak = 0;
-    let mistakes = JSON.parse(localStorage.getItem('pet_mistakes')||'[]');
+  <div class="card" id="learnCard"></div>
+</div>
 
-    const modeTag = document.getElementById('modeTag');
-    const qNo = document.getElementById('qNo');
-    const score = document.getElementById('score');
-    const streakEl = document.getElementById('streak');
-    const mistakeCount = document.getElementById('mistakeCount');
-    const question = document.getElementById('question');
-    const choices = document.getElementById('choices');
-    const result = document.getElementById('result');
-    const explain = document.getElementById('explain');
-    const progressBar = document.getElementById('progressBar');
+<script>
+let WORDS=[], withZh=[], idx=0, set=[], qi=0, correct=0, mode='learn', mistakes=JSON.parse(localStorage.getItem('pet1000_mistakes')||'[]'), cur=null;
+const $=id=>document.getElementById(id);
 
-    function shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); }
-    function pick(n, pool){ return shuffle(pool).slice(0,n); }
-    function updateStats(total=0){
-      qNo.textContent = `题目：${Math.min(qIndex,total)}/${total}`;
-      score.textContent = `正确：${correct}`;
-      streakEl.textContent = `连对：${streak}`;
-      mistakeCount.textContent = `错题：${mistakes.length}`;
-      progressBar.style.width = total?`${(Math.min(qIndex,total)/total)*100}%`:'0%';
-    }
+fetch('./pet-words-1000.json').then(r=>r.json()).then(data=>{
+  WORDS=data; withZh=WORDS.filter(x=>x.zh);
+  $('q').textContent='词库已就绪（1000词）。点击“开始混合挑战”。';
+  showLearn();
+});
 
-    function showCard(item){
-      const tip = TIPS[item[0]] || '记忆技巧：把这个词放进你自己的句子里再说一遍。';
-      explain.innerHTML = `<strong>学习卡片</strong><div>单词：<b>${item[0]}</b></div><div>词义：${item[1]}</div><div>例句：I need to <b>${item[0]}</b> this in my daily life.</div><div class="small">易错点：${tip}</div>`;
-    }
+function speak(word){
+  const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=0.9; speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
+function pick(a,n){return shuffle(a).slice(0,n)}
+function stats(total=0){$('statMode').textContent='模式：'+(mode==='mix'?'挑战':mode==='review'?'复习':'学习');$('statQ').textContent=`题目：${Math.min(qi,total)}/${total}`;$('statC').textContent=`正确：${correct}`;$('statM').textContent=`错题：${mistakes.length}`}
+function card(w){$('learnCard').innerHTML=`<b>学习卡片</b><br>单词：<b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 发音</button><br>词性：${w.pos||'待补充'}<br>音标：${w.ipa||'待补充'}<br>词义：${w.zh||'快版暂未补全'}<br>例句：This is a <b>${w.word}</b>.`;}
+function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 学习词：'+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
 
-    function nextLearn(){
-      mode='learn'; modeTag.textContent='模式：学习';
-      const item = WORDS[learnIndex % WORDS.length];
-      learnIndex++;
-      question.textContent = `📘 热身词：${item[0]}`;
-      choices.innerHTML='';
-      result.textContent='';
-      showCard(item);
-      updateStats(0);
-    }
+function makeQ(word){
+  const type = ['meaning','listen','spell'][Math.floor(Math.random()*3)];
+  if(type==='meaning' && word.zh){
+    const opts=shuffle([word.zh,...pick(withZh.filter(x=>x.word!==word.word).map(x=>x.zh),3)]);
+    return {type,word,opts,answer:word.zh};
+  }
+  if(type==='listen'){
+    const opts=shuffle([word.word,...pick(WORDS.filter(x=>x.word!==word.word).map(x=>x.word),3)]);
+    return {type:'listen',word,opts,answer:word.word};
+  }
+  return {type:'spell',word,answer:word.word};
+}
 
-    function makeQuestion(item){
-      const wrong = pick(3, WORDS.filter(w=>w[0]!==item[0])).map(w=>w[1]);
-      const opts = shuffle([item[1], ...wrong]);
-      return {item, opts, answer:item[1]};
-    }
+function render(){
+  const total=set.length;
+  if(qi>=total){$('q').textContent=`🎉 完成：${correct}/${total}`;$('answerArea').innerHTML='';$('result').innerHTML='<span class="ok">建议：做一轮错题复习</span>';stats(total);return;}
+  cur=makeQ(set[qi]);
+  if(cur.type==='meaning'){
+    $('q').textContent=`${qi+1}. ${cur.word.word} 的中文是？`;
+    $('answerArea').innerHTML=`<div class="opts">${cur.opts.map(o=>`<button class='opt' onclick="ans('${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>`;
+  }else if(cur.type==='listen'){
+    $('q').innerHTML=`${qi+1}. 听发音选择单词 <button onclick="speak('${cur.word.word}')">🔊 播放</button>`;
+    $('answerArea').innerHTML=`<div class="opts">${cur.opts.map(o=>`<button class='opt' onclick="ans('${o}')">${o}</button>`).join('')}</div>`;
+    setTimeout(()=>speak(cur.word.word),200);
+  }else{
+    const hint=cur.word.word[0]+' _ '.repeat(Math.max(cur.word.word.length-2,1))+cur.word.word.slice(-1);
+    $('q').textContent=`${qi+1}. 拼写这个词（提示：${hint}）`;
+    $('answerArea').innerHTML=`<input id='spellInput' type='text' placeholder='输入完整单词'/><div style='margin-top:8px'><button onclick='submitSpell()'>提交</button></div>`;
+  }
+  $('result').textContent='';card(cur.word);stats(total);
+}
 
-    function renderQuestion(total){
-      if(qIndex>=total){
-        question.textContent = `🎉 完成！本轮 ${correct}/${total}，正确率 ${Math.round(correct/total*100)}%`;
-        choices.innerHTML='';
-        result.innerHTML = '<span class="ok">建议：先做“错题复习”，再开新一轮挑战。</span>';
-        modeTag.textContent='模式：完成';
-        return;
-      }
-      current = makeQuestion(challengeSet[qIndex]);
-      question.textContent = `第 ${qIndex+1} 题：${current.item[0]} 的正确中文是？`;
-      choices.innerHTML = current.opts.map(opt=>`<button class="choice" onclick="answer('${opt.replace(/'/g,"\\'")}')">${opt}</button>`).join('');
-      result.textContent='';
-      showCard(current.item);
-      updateStats(total);
-    }
+function markMistake(w){ if(!mistakes.find(x=>x.word===w.word)){mistakes.push(w);localStorage.setItem('pet1000_mistakes',JSON.stringify(mistakes));}}
+function ans(v){const ok=v===cur.answer; if(ok){correct++;$('result').innerHTML='<span class="ok">✅ 正确</span>';}else{$('result').innerHTML=`<span class='bad'>❌ 正确答案：${cur.answer}</span>`;markMistake(cur.word);}qi++;stats(set.length);setTimeout(render,500)}
+function submitSpell(){const v=($('spellInput').value||'').trim().toLowerCase();ans(v)}
 
-    function saveMistake(word){
-      if(!mistakes.find(m=>m[0]===word[0])) mistakes.push(word);
-      localStorage.setItem('pet_mistakes', JSON.stringify(mistakes));
-    }
-
-    function answer(opt){
-      const total = challengeSet.length;
-      const right = opt===current.answer;
-      if(right){
-        correct++; streak++;
-        result.innerHTML = '<span class="ok">✅ 正确！继续冲刺！</span>';
-      }else{
-        streak=0;
-        result.innerHTML = `<span class="bad">❌ 错了。正确答案：${current.answer}</span>`;
-        saveMistake(current.item);
-      }
-      qIndex++;
-      updateStats(total);
-      setTimeout(()=>renderQuestion(total), 550);
-    }
-
-    function startChallenge(){
-      mode='challenge'; modeTag.textContent='模式：挑战';
-      challengeSet = pick(20, WORDS);
-      qIndex=0; correct=0; streak=0;
-      renderQuestion(challengeSet.length);
-    }
-
-    function startReview(){
-      mode='review'; modeTag.textContent='模式：错题复习';
-      if(mistakes.length===0){
-        question.textContent='当前没有错题，先去挑战一轮吧！';
-        choices.innerHTML=''; result.textContent='';
-        explain.innerHTML='<strong>学习卡片</strong><div class="small">你还没有错题记录，继续保持！</div>';
-        updateStats(0);
-        return;
-      }
-      challengeSet = pick(Math.min(20,mistakes.length), mistakes);
-      qIndex=0; correct=0; streak=0;
-      renderQuestion(challengeSet.length);
-    }
-
-    function resetProgress(){
-      if(!confirm('确认重置挑战与错题记录？')) return;
-      mistakes=[]; localStorage.removeItem('pet_mistakes');
-      qIndex=0; correct=0; streak=0; updateStats(0);
-      question.textContent='已重置。点“开始挑战”重新开始。';
-      choices.innerHTML=''; result.textContent='';
-      explain.innerHTML='<strong>学习卡片</strong><div class="small">进度已清空。</div>';
-    }
-
-    window.answer = answer;
-    nextLearn();
-  </script>
+function start(m){
+  if(!WORDS.length)return;
+  mode=m==='review'?'review':'mix';qi=0;correct=0;
+  set = mode==='review' ? (mistakes.length?pick(mistakes,Math.min(20,mistakes.length)):[]) : pick(WORDS,20);
+  if(mode==='review' && !set.length){$('q').textContent='还没有错题，先开始挑战。';$('answerArea').innerHTML='';$('result').textContent='';stats(0);return;}
+  render();
+}
+function resetAll(){if(!confirm('确认重置？'))return;mistakes=[];localStorage.removeItem('pet1000_mistakes');qi=0;correct=0;showLearn();}
+window.start=start;window.showLearn=showLearn;window.resetAll=resetAll;window.speak=speak;window.ans=ans;window.submitSpell=submitSpell;
+</script>
 </body>
 </html>
