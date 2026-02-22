@@ -1609,16 +1609,6 @@
         </transition>
     </div>
 
-</div>
-
-<!-- ── Force-refresh zone ──────────────────────────────────────────────── -->
-<div id="upd-zone">
-    <button id="upd-btn">
-        <span class="upd-ring">↻</span>
-        <span class="upd-txt"></span>
-    </button>
-    <p class="brand-tagline">VocabLoop · Your memory, on a perfect loop.</p>
-
     <!-- ── Reading overlay ─────────────────────────────────────────── -->
     <div v-if="readingOpen" class="reading-overlay">
         <div class="reading-hd">
@@ -1630,7 +1620,7 @@
             <div v-if="readingLoading" class="reading-loading">
                 <div class="reading-spinner"></div>
                 <span class="reading-loading-main">{{ui.readingLoading}}</span>
-                <span class="reading-loading-sub">✨ {{readingWordObjs.length > 0 ? readingWordObjs.length + (lang === 'zh' ? ' 个词汇' : ' words') : ''}}</span>
+                <span class="reading-loading-sub">✨ {{readingWordObjs.length > 0 ? readingWordObjs.length + (LANG === 'zh' ? ' 个词汇' : ' words') : ''}}</span>
             </div>
 
             <!-- Error -->
@@ -1654,6 +1644,15 @@
         </div>
     </div>
 
+</div>
+
+<!-- ── Force-refresh zone ──────────────────────────────────────────────── -->
+<div id="upd-zone">
+    <button id="upd-btn">
+        <span class="upd-ring">↻</span>
+        <span class="upd-txt"></span>
+    </button>
+    <p class="brand-tagline">VocabLoop · Your memory, on a perfect loop.</p>
 </div>
 
 <!-- ── Android PWA install banner ─────────────────────────────────────── -->
