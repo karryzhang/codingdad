@@ -959,8 +959,10 @@
         .prac-opt:hover:not(:disabled) { border-color: var(--blue); background: #eff6ff; }
         .prac-opt:active:not(:disabled) { transform: scale(0.98); }
         .prac-opt:disabled { cursor: default; }
-        .prac-opt.correct  { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; }
-        .prac-opt.wrong    { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; }
+        .prac-opt { display: flex; justify-content: space-between; align-items: center; }
+        .prac-opt.correct  { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
+        .prac-opt.wrong    { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
+        .prac-opt-icon { font-size: 1rem; font-weight: 800; flex-shrink: 0; margin-left: 8px; }
 
         /* True/False buttons */
         .prac-tf-btns { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -979,8 +981,9 @@
         .prac-tf-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
         .prac-tf-btn:active:not(:disabled){ transform: scale(0.97); }
         .prac-tf-btn:disabled { cursor: default; transform: none; box-shadow: none; }
-        .prac-tf-btn.correct { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; }
-        .prac-tf-btn.wrong   { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; }
+        .prac-tf-btn { display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .prac-tf-btn.correct { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
+        .prac-tf-btn.wrong   { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
 
         /* Spelling */
         .prac-spell-wrap {
@@ -1022,32 +1025,23 @@
         .prac-correct-ans { font-size: 0.86rem; color: var(--muted); text-align: center; }
         .prac-correct-ans strong { color: var(--green); }
 
-        /* Feedback */
-        .prac-feedback {
-            font-size: 1rem;
-            font-weight: 700;
-            padding: 8px 22px;
-            border-radius: 99px;
-        }
-        .prac-feedback.correct { background: #f0fdf4; color: #14532d; }
-        .prac-feedback.wrong   { background: #fef2f2; color: #b91c1c; }
+        /* Card slide transition */
+        .prac-q-enter-active { transition: opacity 0.22s ease, transform 0.22s ease; }
+        .prac-q-leave-active { transition: opacity 0.15s ease, transform 0.15s ease; }
+        .prac-q-enter        { opacity: 0; transform: translateX(28px); }
+        .prac-q-leave-to     { opacity: 0; transform: translateX(-20px); }
 
-        /* Next question button */
-        .prac-next-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: #fff;
-            border: none;
-            border-radius: 14px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(59,130,246,0.35);
-            transition: box-shadow 0.15s, transform 0.1s;
+        /* Correct/wrong micro-animations */
+        @keyframes prac-pop {
+            0%   { transform: scale(1); }
+            45%  { transform: scale(1.04); }
+            100% { transform: scale(1); }
         }
-        .prac-next-btn:hover  { box-shadow: 0 6px 22px rgba(59,130,246,0.45); transform: translateY(-1px); }
-        .prac-next-btn:active { transform: scale(0.97); box-shadow: none; }
+        @keyframes prac-shake {
+            0%, 100% { transform: translateX(0); }
+            25%       { transform: translateX(-5px); }
+            75%       { transform: translateX(5px); }
+        }
 
         /* Practice done screen */
         .prac-done {
@@ -1161,7 +1155,7 @@
         <!-- Question screen -->
         <template v-else-if="practiceCurrent">
 
-            <!-- Progress bar -->
+            <!-- Progress bar (outside transition so it stays stable) -->
             <div class="prac-progress">
                 <div class="prac-prog-track">
                     <div class="prac-prog-fill" :style="{width: (practiceIndex / practiceQueue.length * 100) + '%'}"></div>
@@ -1169,6 +1163,10 @@
                 <div class="prac-prog-text">{{practiceIndex + 1}} / {{practiceQueue.length}}</div>
                 <div class="prac-score">✦ {{practiceScore}}</div>
             </div>
+
+            <!-- Animated question body -->
+            <transition name="prac-q" mode="out-in">
+            <div :key="practiceIndex" style="width:100%;display:flex;flex-direction:column;gap:14px;align-items:center;">
 
             <!-- Question card -->
             <div class="prac-card">
@@ -1229,7 +1227,9 @@
                         }"
                         :disabled="practiceAnswered"
                         @click="submitPracticeAnswer(opt.value)">
-                    {{opt.label}}
+                    <span>{{opt.label}}</span>
+                    <span v-if="practiceAnswered && opt.value === practiceCurrent.correct" class="prac-opt-icon" style="color:var(--green)">✓</span>
+                    <span v-else-if="practiceAnswered && practiceSelected === opt.value" class="prac-opt-icon" style="color:var(--red)">✗</span>
                 </button>
             </div>
 
@@ -1241,14 +1241,22 @@
                             wrong:   practiceAnswered && practiceSelected === 'true' && practiceCurrent.correct !== 'true',
                         }"
                         :disabled="practiceAnswered"
-                        @click="submitPracticeAnswer('true')">{{ui.practiceTrueBtn}}</button>
+                        @click="submitPracticeAnswer('true')">
+                    <span>{{ui.practiceTrueBtn}}</span>
+                    <span v-if="practiceAnswered && practiceCurrent.correct === 'true'" class="prac-opt-icon" style="color:var(--green)">✓</span>
+                    <span v-else-if="practiceAnswered && practiceSelected === 'true'" class="prac-opt-icon" style="color:var(--red)">✗</span>
+                </button>
                 <button class="prac-tf-btn prac-tf-false"
                         :class="{
                             correct: practiceAnswered && practiceCurrent.correct === 'false',
                             wrong:   practiceAnswered && practiceSelected === 'false' && practiceCurrent.correct !== 'false',
                         }"
                         :disabled="practiceAnswered"
-                        @click="submitPracticeAnswer('false')">{{ui.practiceFalseBtn}}</button>
+                        @click="submitPracticeAnswer('false')">
+                    <span>{{ui.practiceFalseBtn}}</span>
+                    <span v-if="practiceAnswered && practiceCurrent.correct === 'false'" class="prac-opt-icon" style="color:var(--green)">✓</span>
+                    <span v-else-if="practiceAnswered && practiceSelected === 'false'" class="prac-opt-icon" style="color:var(--red)">✗</span>
+                </button>
             </div>
 
             <!-- Spelling input -->
@@ -1268,13 +1276,8 @@
                 </div>
             </div>
 
-            <!-- Feedback + Next button (shown after answering) -->
-            <div v-if="practiceAnswered" class="prac-feedback" :class="practiceResult">
-                {{practiceResult === 'correct' ? ui.practiceCorrect : ui.practiceWrong}}
-            </div>
-            <button v-if="practiceAnswered" class="prac-next-btn" @click="nextPracticeQuestion">
-                {{practiceIndex + 1 < practiceQueue.length ? ui.practiceNext : ui.practiceDoneTitle}}
-            </button>
+            </div><!-- /prac-q key -->
+            </transition>
 
         </template>
     </div>
@@ -2601,6 +2604,7 @@ new Vue({
         },
 
         startPractice() {
+            clearTimeout(this._practiceTimer);
             const words = this.getTodayPracticeWords();
             if (words.length < 2) {
                 this.showToast(this.ui.practiceNoWords, 'bad');
@@ -2624,6 +2628,7 @@ new Vue({
         },
 
         exitPractice() {
+            clearTimeout(this._practiceTimer);
             this.practiceMode = false;
         },
 
@@ -2636,14 +2641,17 @@ new Vue({
             this.practiceAnswered = true;
             if (isCorrect) {
                 this.practiceScore++;
-                // Reinforce correct answer with pronunciation (if autoPlay is on)
                 if (this.autoPlay) {
                     setTimeout(() => this.playAudio(this.practiceCurrent.word.word), 300);
                 }
             }
+            // Auto-advance after 2s
+            clearTimeout(this._practiceTimer);
+            this._practiceTimer = setTimeout(() => this.nextPracticeQuestion(), 2000);
         },
 
         nextPracticeQuestion() {
+            clearTimeout(this._practiceTimer);
             const next = this.practiceIndex + 1;
             if (next >= this.practiceQueue.length) {
                 this.practiceDone = true;
