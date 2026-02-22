@@ -1158,6 +1158,25 @@
         }
         .reading-loading-main { font-size: 0.95rem; font-weight: 600; color: var(--text); }
         .reading-loading-sub  { font-size: 0.82rem; color: var(--muted); }
+        .reading-key-area {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 12px; padding: 32px 16px; text-align: center;
+        }
+        .reading-key-info { font-size: 0.92rem; color: var(--text); font-weight: 600; }
+        .reading-key-link { font-size: 0.82rem; color: var(--blue); text-decoration: none; }
+        .reading-key-link:hover { text-decoration: underline; }
+        .reading-key-input {
+            width: 100%; max-width: 320px; padding: 9px 12px;
+            border: 1.5px solid var(--border); border-radius: 8px;
+            background: var(--card); color: var(--text);
+            font-size: 0.85rem; outline: none; box-sizing: border-box;
+        }
+        .reading-key-input:focus { border-color: var(--blue); }
+        .reading-key-save {
+            padding: 9px 22px; border-radius: 8px; border: none; cursor: pointer;
+            background: var(--blue); color: #fff; font-size: 0.9rem; font-weight: 600;
+        }
+        .reading-key-save:hover { opacity: 0.88; }
         .reading-error {
             display: flex; flex-direction: column; align-items: center;
             gap: 8px; padding: 40px 0; text-align: center;
@@ -1619,8 +1638,18 @@
             <button class="reading-close" @click="closeReading">✕</button>
         </div>
         <div class="reading-body">
+            <!-- Key input (no key saved yet) -->
+            <div v-if="!geminiKey" class="reading-key-area">
+                <div class="reading-key-info">🔑 {{ui.readingKeyInfo}}</div>
+                <a class="reading-key-link" href="https://aistudio.google.com/app/apikey" target="_blank">{{ui.readingKeyLink}}</a>
+                <input class="reading-key-input" v-model="geminiKeyInput"
+                       :placeholder="ui.readingKeyPh"
+                       @keyup.enter="saveGeminiKey" />
+                <button class="reading-key-save" @click="saveGeminiKey">{{ui.readingKeySave}}</button>
+            </div>
+
             <!-- Loading -->
-            <div v-if="readingLoading" class="reading-loading">
+            <div v-else-if="readingLoading" class="reading-loading">
                 <div class="reading-spinner"></div>
                 <span class="reading-loading-main">{{ui.readingLoading}}</span>
                 <span class="reading-loading-sub">✨ {{readingWordObjs.length > 0 ? readingWordObjs.length + (LANG === 'zh' ? ' 个词汇' : ' words') : ''}}</span>
@@ -2175,6 +2204,8 @@ new Vue({
             readingLoading:  false,
             readingError:    '',
             readingWordObjs: [],
+            geminiKey:       localStorage.getItem('gemini_key') || '',
+            geminiKeyInput:  '',
         };
     },
 
@@ -2910,11 +2941,21 @@ new Vue({
 
         // ── Reading overlay ─────────────────────────────────────────
         openReading() {
-            // Set loading immediately — overlay opens with spinner, no blank flash
             this.readingError   = '';
             this.readingArticle = '';
-            this.readingLoading = true;
             this.readingOpen    = true;
+            if (this.geminiKey) {
+                this.readingLoading = true;
+                this.generateReading();
+            }
+        },
+        saveGeminiKey() {
+            const k = this.geminiKeyInput.trim();
+            if (!k) return;
+            this.geminiKey = k;
+            localStorage.setItem('gemini_key', k);
+            this.geminiKeyInput = '';
+            this.readingLoading = true;
             this.generateReading();
         },
         closeReading() {
@@ -2924,7 +2965,7 @@ new Vue({
             this.readingLoading = false;
         },
         async generateReading() {
-            const GEMINI_KEY = 'AIzaSyDtNo20F6bNgvWUXsy5spMdYasrm3VmcyQ';
+            const GEMINI_KEY = this.geminiKey;
             const tdy = today();
             this.readingWordObjs = this.allWords.filter(w => {
                 const s = this.state[w.word];
