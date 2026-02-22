@@ -55,6 +55,9 @@
 
 <script>
 let WORDS=[], withZh=[], idx=0, set=[], qi=0, correct=0, mode='learn', mistakes=JSON.parse(localStorage.getItem('pet1000_mistakes')||'[]'), cur=null;
+let dictCache=JSON.parse(localStorage.getItem('pet1000_dict')||'{}');
+const fetching=new Set();
+const DICT_API='https://api.dictionaryapi.dev/api/v2/entries/en/';
 const $=id=>document.getElementById(id);
 
 fetch('./pet-words-1000.json').then(r=>r.json()).then(data=>{
@@ -66,10 +69,39 @@ fetch('./pet-words-1000.json').then(r=>r.json()).then(data=>{
 function speak(word){
   const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=0.9; speechSynthesis.cancel(); speechSynthesis.speak(u);
 }
+async function fetchMeta(word){
+  if(!word) return null;
+  if(dictCache[word]!==undefined) return dictCache[word];
+  if(fetching.has(word)) return null;
+  fetching.add(word);
+  try{
+    const r=await fetch(DICT_API+encodeURIComponent(word));
+    if(!r.ok){ dictCache[word]=null; return null; }
+    const data=await r.json();
+    const e=data[0]||{};
+    const ph=e.phonetics||[];
+    const ipa=((ph.find(p=>p.text&&p.text.includes('/')))||{}).text||e.phonetic||'';
+    const pos=(((e.meanings||[])[0])||{}).partOfSpeech||'';
+    dictCache[word]={ipa,pos};
+    localStorage.setItem('pet1000_dict',JSON.stringify(dictCache));
+    return dictCache[word];
+  }catch(_){ return null; }
+  finally{ fetching.delete(word); }
+}
 function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
 function pick(a,n){return shuffle(a).slice(0,n)}
 function stats(total=0){$('statMode').textContent='Mode: '+(mode==='mix'?'Challenge':mode==='review'?'Review':'Learn');$('statQ').textContent=`Question: ${Math.min(qi,total)}/${total}`;$('statC').textContent=`Correct: ${correct}`;$('statM').textContent=`Mistakes: ${mistakes.length}`}
-function card(w){$('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${w.pos||'To be added'}<br>IPA: ${w.ipa||'To be added'}<br>Meaning: ${w.zh||'Not filled in quick version yet'}<br>Example: This is a <b>${w.word}</b>.`;}
+function renderCard(w,pos,ipa){
+  $('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${pos}<br>IPA: ${ipa}<br>Meaning: ${w.zh||'Not filled in quick version yet'}<br>Example: This is a <b>${w.word}</b>.`;
+}
+function card(w){
+  const meta=dictCache[w.word]||{};
+  renderCard(w, meta.pos||w.pos||'Loading...', meta.ipa||w.ipa||'Loading...');
+  fetchMeta(w.word).then(()=>{
+    const m=dictCache[w.word]||{};
+    renderCard(w, m.pos||w.pos||'N/A', m.ipa||w.ipa||'N/A');
+  });
+}
 function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 Learning Word: '+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
 
 function makeQ(word){
