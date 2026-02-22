@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -23,29 +23,29 @@
 </head>
 <body>
 <div class="wrap">
-  <h2>🎮 Word Explorer（快版）· 1000词挑战</h2>
+  <h2>🎮 Word Explorer (Quick Version) · 1000-Word Challenge</h2>
   <div class="card">
-    <b>玩法说明</b><br>
-    1) 题型随机：词义选择 / 听音选词 / 拼写填空。<br>
-    2) 学习卡片含：词性、音标（快版先占位）、发音按钮（浏览器语音）。<br>
-    3) 错题自动记录，可反复复习。
+    <b>How to Play</b><br>
+    1) Random question types: meaning quiz / listen-and-choose / spelling challenge.<br>
+    2) Learning card includes: part of speech, IPA (placeholder in quick version), and pronunciation button (browser speech).<br>
+    3) Wrong answers are saved automatically for targeted review.
     <div class="row" style="margin-top:8px">
-      <button onclick="start('mix')">开始混合挑战</button>
-      <button class="alt" onclick="start('review')">错题复习</button>
-      <button class="warn" onclick="showLearn()">学习下一词</button>
-      <button class="gray" onclick="resetAll()">重置</button>
+      <button onclick="start('mix')">Start Mixed Challenge</button>
+      <button class="alt" onclick="start('review')">Review Mistakes</button>
+      <button class="warn" onclick="showLearn()">Next Learning Card</button>
+      <button class="gray" onclick="resetAll()">Reset</button>
     </div>
   </div>
 
   <div class="card row">
-    <span class="badge" id="statMode">模式：学习</span>
-    <span class="badge" id="statQ">题目：0/0</span>
-    <span class="badge" id="statC">正确：0</span>
-    <span class="badge" id="statM">错题：0</span>
+    <span class="badge" id="statMode">Mode: Learn</span>
+    <span class="badge" id="statQ">Question: 0/0</span>
+    <span class="badge" id="statC">Correct: 0</span>
+    <span class="badge" id="statM">Mistakes: 0</span>
   </div>
 
   <div class="card">
-    <div class="q" id="q">加载词库中...</div>
+    <div class="q" id="q">Loading word bank...</div>
     <div id="answerArea"></div>
     <div id="result"></div>
   </div>
@@ -59,7 +59,7 @@ const $=id=>document.getElementById(id);
 
 fetch('./pet-words-1000.json').then(r=>r.json()).then(data=>{
   WORDS=data; withZh=WORDS.filter(x=>x.zh);
-  $('q').textContent='词库已就绪（1000词）。点击“开始混合挑战”。';
+  $('q').textContent='Word bank ready (1000 words). Click "Start Mixed Challenge".';
   showLearn();
 });
 
@@ -68,9 +68,9 @@ function speak(word){
 }
 function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
 function pick(a,n){return shuffle(a).slice(0,n)}
-function stats(total=0){$('statMode').textContent='模式：'+(mode==='mix'?'挑战':mode==='review'?'复习':'学习');$('statQ').textContent=`题目：${Math.min(qi,total)}/${total}`;$('statC').textContent=`正确：${correct}`;$('statM').textContent=`错题：${mistakes.length}`}
-function card(w){$('learnCard').innerHTML=`<b>学习卡片</b><br>单词：<b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 发音</button><br>词性：${w.pos||'待补充'}<br>音标：${w.ipa||'待补充'}<br>词义：${w.zh||'快版暂未补全'}<br>例句：This is a <b>${w.word}</b>.`;}
-function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 学习词：'+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
+function stats(total=0){$('statMode').textContent='Mode: '+(mode==='mix'?'Challenge':mode==='review'?'Review':'Learn');$('statQ').textContent=`Question: ${Math.min(qi,total)}/${total}`;$('statC').textContent=`Correct: ${correct}`;$('statM').textContent=`Mistakes: ${mistakes.length}`}
+function card(w){$('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${w.pos||'To be added'}<br>IPA: ${w.ipa||'To be added'}<br>Meaning: ${w.zh||'Not filled in quick version yet'}<br>Example: This is a <b>${w.word}</b>.`;}
+function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 Learning Word: '+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
 
 function makeQ(word){
   const type = ['meaning','listen','spell'][Math.floor(Math.random()*3)];
@@ -87,35 +87,35 @@ function makeQ(word){
 
 function render(){
   const total=set.length;
-  if(qi>=total){$('q').textContent=`🎉 完成：${correct}/${total}`;$('answerArea').innerHTML='';$('result').innerHTML='<span class="ok">建议：做一轮错题复习</span>';stats(total);return;}
+  if(qi>=total){$('q').textContent=`🎉 Completed: ${correct}/${total}`;$('answerArea').innerHTML='';$('result').innerHTML='<span class="ok">Tip: do one round of Review Mistakes.</span>';stats(total);return;}
   cur=makeQ(set[qi]);
   if(cur.type==='meaning'){
-    $('q').textContent=`${qi+1}. ${cur.word.word} 的中文是？`;
+    $('q').textContent=`${qi+1}. ${cur.word.word} - choose the correct meaning:`;
     $('answerArea').innerHTML=`<div class="opts">${cur.opts.map(o=>`<button class='opt' onclick="ans('${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>`;
   }else if(cur.type==='listen'){
-    $('q').innerHTML=`${qi+1}. 听发音选择单词 <button onclick="speak('${cur.word.word}')">🔊 播放</button>`;
+    $('q').innerHTML=`${qi+1}. Listen and choose the word <button onclick="speak('${cur.word.word}')">🔊 Play</button>`;
     $('answerArea').innerHTML=`<div class="opts">${cur.opts.map(o=>`<button class='opt' onclick="ans('${o}')">${o}</button>`).join('')}</div>`;
     setTimeout(()=>speak(cur.word.word),200);
   }else{
     const hint=cur.word.word[0]+' _ '.repeat(Math.max(cur.word.word.length-2,1))+cur.word.word.slice(-1);
-    $('q').textContent=`${qi+1}. 拼写这个词（提示：${hint}）`;
-    $('answerArea').innerHTML=`<input id='spellInput' type='text' placeholder='输入完整单词'/><div style='margin-top:8px'><button onclick='submitSpell()'>提交</button></div>`;
+    $('q').textContent=`${qi+1}. Spell this word (hint: ${hint})`;
+    $('answerArea').innerHTML=`<input id='spellInput' type='text' placeholder='Type the full word'/><div style='margin-top:8px'><button onclick='submitSpell()'>Submit</button></div>`;
   }
   $('result').textContent='';card(cur.word);stats(total);
 }
 
 function markMistake(w){ if(!mistakes.find(x=>x.word===w.word)){mistakes.push(w);localStorage.setItem('pet1000_mistakes',JSON.stringify(mistakes));}}
-function ans(v){const ok=v===cur.answer; if(ok){correct++;$('result').innerHTML='<span class="ok">✅ 正确</span>';}else{$('result').innerHTML=`<span class='bad'>❌ 正确答案：${cur.answer}</span>`;markMistake(cur.word);}qi++;stats(set.length);setTimeout(render,500)}
+function ans(v){const ok=v===cur.answer; if(ok){correct++;$('result').innerHTML='<span class="ok">✅ Correct</span>';}else{$('result').innerHTML=`<span class='bad'>❌ Correct answer: ${cur.answer}</span>`;markMistake(cur.word);}qi++;stats(set.length);setTimeout(render,500)}
 function submitSpell(){const v=($('spellInput').value||'').trim().toLowerCase();ans(v)}
 
 function start(m){
   if(!WORDS.length)return;
   mode=m==='review'?'review':'mix';qi=0;correct=0;
   set = mode==='review' ? (mistakes.length?pick(mistakes,Math.min(20,mistakes.length)):[]) : pick(WORDS,20);
-  if(mode==='review' && !set.length){$('q').textContent='还没有错题，先开始挑战。';$('answerArea').innerHTML='';$('result').textContent='';stats(0);return;}
+  if(mode==='review' && !set.length){$('q').textContent='No mistakes yet. Start a challenge first.';$('answerArea').innerHTML='';$('result').textContent='';stats(0);return;}
   render();
 }
-function resetAll(){if(!confirm('确认重置？'))return;mistakes=[];localStorage.removeItem('pet1000_mistakes');qi=0;correct=0;showLearn();}
+function resetAll(){if(!confirm('Confirm reset?'))return;mistakes=[];localStorage.removeItem('pet1000_mistakes');qi=0;correct=0;showLearn();}
 window.start=start;window.showLearn=showLearn;window.resetAll=resetAll;window.speak=speak;window.ans=ans;window.submitSpell=submitSpell;
 </script>
 </body>
