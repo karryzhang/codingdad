@@ -1447,6 +1447,7 @@ new Vue({
             } else {
                 this.$set(this.expandedWords, word, true);
                 this.fetchDict(word);
+                if (this.autoPlay) this.playAudio(word);
             }
         },
 
