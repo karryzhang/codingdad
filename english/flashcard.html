@@ -1580,23 +1580,8 @@
             <button class="reading-close" @click="closeReading">✕</button>
         </div>
         <div class="reading-body">
-            <!-- No API key yet -->
-            <div v-if="!geminiKey" class="reading-key-box">
-                <div class="reading-key-info">{{ui.readingKeyInfo}}</div>
-                <a class="reading-key-link"
-                   href="https://aistudio.google.com/apikey"
-                   target="_blank" rel="noopener">{{ui.readingKeyLink}}</a>
-                <div class="reading-key-row">
-                    <input class="reading-key-input"
-                           v-model="geminiKeyInput"
-                           :placeholder="ui.readingKeyPh"
-                           @keydown.enter="saveGeminiKey" />
-                    <button class="reading-key-save" @click="saveGeminiKey">{{ui.readingKeySave}}</button>
-                </div>
-            </div>
-
             <!-- Loading -->
-            <div v-else-if="readingLoading" class="reading-loading">
+            <div v-if="readingLoading" class="reading-loading">
                 <div class="reading-spinner"></div>
                 <span>{{ui.readingLoading}}</span>
             </div>
@@ -2099,8 +2084,6 @@ new Vue({
             readingLoading:  false,
             readingError:    '',
             readingWordObjs: [],
-            geminiKey:       localStorage.getItem('gemini_key') || '',
-            geminiKeyInput:  '',
         };
     },
 
@@ -2813,24 +2796,17 @@ new Vue({
 
         // ── Reading overlay ─────────────────────────────────────────
         openReading() {
-            this.geminiKeyInput = '';
             this.readingError   = '';
             this.readingOpen    = true;
-            if (this.geminiKey) this.generateReading();
+            this.generateReading();
         },
         closeReading() {
             this.readingOpen    = false;
             this.readingArticle = '';
             this.readingError   = '';
         },
-        saveGeminiKey() {
-            const key = this.geminiKeyInput.trim();
-            if (!key) return;
-            this.geminiKey = key;
-            localStorage.setItem('gemini_key', key);
-            this.generateReading();
-        },
         async generateReading() {
+            const GEMINI_KEY = 'AIzaSyDtNo20F6bNgvWUXsy5spMdYasrm3VmcyQ';
             const tdy = today();
             this.readingWordObjs = this.allWords.filter(w => {
                 const s = this.state[w.word];
@@ -2847,7 +2823,7 @@ new Vue({
             this.readingError    = '';
             try {
                 const res = await fetch(
-                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.geminiKey}`,
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
                     {
                         method:  'POST',
                         headers: { 'Content-Type': 'application/json' },
