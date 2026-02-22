@@ -1275,8 +1275,25 @@ new Vue({
             this.sessionCorrect   = 0;
             this.buildQueue(this.extraNewAllowed);
             if (this.queue.length === 0) {
-                alert('所有词汇都学完了！\n请明天继续复习到期的单词。');
+                // No new/due cards left — re-review today's words
+                this.loadTodayReview();
             }
+        },
+        loadTodayReview() {
+            const tdy = today();
+            const todayWords = this.allWords.filter(w => {
+                const s = this.state[w.word];
+                return s && s.firstSeen === tdy;
+            });
+            if (todayWords.length === 0) {
+                alert('所有词汇都学完了！\n请明天继续复习到期的单词。');
+                return;
+            }
+            this.sessionCorrect  = 0;
+            this.queue           = shuffle([...todayWords]);
+            this.sessionTotal    = this.queue.length;
+            this.prefetchAhead();
+            this.showToast('🔄 再刷一遍今日 ' + todayWords.length + ' 个词！', 'good');
         },
 
         // ── Global state (daily streak, achievements) ─────────────────────
