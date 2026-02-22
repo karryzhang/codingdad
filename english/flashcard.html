@@ -2349,6 +2349,11 @@ new Vue({
         async fetchDict(word) {
             if (!word) return;
             if (word in this.dictCache) return;
+            // Multi-word phrases aren't supported by the dictionary API
+            if (word.includes(' ')) {
+                this.$set(this.dictCache, word, null);
+                return;
+            }
             if (_fetching.has(word)) return;
             _fetching.add(word);
             try {
@@ -2436,8 +2441,22 @@ new Vue({
                     word: w.word,
                     zh:   w.zh || w.word,
                     pos:  w.pos || '',
+                    ipa:  w.ipa || '',
                     ex:   w.ex  || '',
                 }));
+                // Pre-seed dictCache from embedded word data so display works
+                // immediately for decks that already include pos/ipa/ex fields
+                for (const w of this.allWords) {
+                    if (!(w.word in this.dictCache) && (w.ipa || w.pos || w.ex)) {
+                        this.$set(this.dictCache, w.word, {
+                            ipa:        w.ipa,
+                            audio:      '',
+                            pos:        w.pos,
+                            definition: w.zh,
+                            example:    w.ex,
+                        });
+                    }
+                }
                 this.buildQueue();
             } catch (e) {
                 alert(UI.loadError(e.message, this.currentDeck.file));
