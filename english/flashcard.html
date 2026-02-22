@@ -513,10 +513,18 @@
 
         /* controls */
         .controls {
+            position: absolute;
+            top: 0; left: 0; right: 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+        }
+        .controls.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
         .cb {
             display: flex;
@@ -541,11 +549,29 @@
         .cb-label    { font-size: 0.9rem; }
         .cb-interval { font-size: 0.68rem; opacity: 0.7; }
 
+        .controls-wrap {
+            position: relative;
+            width: 100%;
+            height: 88px;       /* fixed: cb 64px + padding 12px×2 — never changes */
+            overflow: hidden;
+            flex-shrink: 0;
+        }
         .key-hint {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             color: var(--muted);
             font-size: 0.76rem;
-            margin-top: 8px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s;
+        }
+        .key-hint.visible {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* toast */
@@ -573,8 +599,6 @@
         .toast-enter    { opacity: 0; transform: translateY(-8px); }
         .toast-leave-to { opacity: 0; transform: translateY(-8px); }
 
-        .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
-        .fade-enter, .fade-leave-to { opacity: 0; }
 
         /* footer */
         .ft {
@@ -626,6 +650,13 @@
             padding: 16px 0 max(22px, env(safe-area-inset-bottom));
             text-align: center;
         }
+        .brand-tagline {
+            margin-top: 10px;
+            font-size: 0.64rem;
+            color: var(--muted);
+            opacity: 0.45;
+            letter-spacing: 0.04em;
+        }
         #upd-btn {
             background: transparent;
             border: 1.5px solid var(--border);
@@ -669,6 +700,7 @@
             .cb-label   { font-size: 0.8rem; }
             .cb-interval{ font-size: 0.62rem; }
             .controls   { gap: 7px; }
+            .controls-wrap { height: 76px; }   /* 56px + 10px×2 */
             .card-area  { padding: 10px 10px 14px; }
             .back-example{ font-size: 0.74rem; }
             .done-stat-val { font-size: 1.8rem; }
@@ -690,6 +722,7 @@
             .cb-label   { font-size: 0.95rem; }
             .cb-interval{ font-size: 0.72rem; }
             .controls   { gap: 14px; }
+            .controls-wrap { height: 100px; }  /* 72px + 14px×2 */
             .prog-track { height: 12px; }
             .xp-track   { height: 10px; }
             .done-stat-val { font-size: 2.5rem; }
@@ -1002,27 +1035,27 @@
         </div>
 
         <!-- Buttons (after flip) -->
-        <transition name="fade">
-            <div v-if="flipped" key="controls" class="controls">
-                <button class="cb cb-again" @click="answer('again')">
+        <div class="controls-wrap">
+            <div class="controls" :class="{visible: flipped}">
+                <button class="cb cb-again" @click="answer('again')" :disabled="!flipped">
                     <span class="cb-label">{{ui.btnAgain}}</span>
                     <span class="cb-interval">{{iv('again')}}</span>
                 </button>
-                <button class="cb cb-hard" @click="answer('hard')">
+                <button class="cb cb-hard" @click="answer('hard')" :disabled="!flipped">
                     <span class="cb-label">{{ui.btnHard}}</span>
                     <span class="cb-interval">{{iv('hard')}}</span>
                 </button>
-                <button class="cb cb-good" @click="answer('good')">
+                <button class="cb cb-good" @click="answer('good')" :disabled="!flipped">
                     <span class="cb-label">{{ui.btnGood}}</span>
                     <span class="cb-interval">{{iv('good')}}</span>
                 </button>
-                <button class="cb cb-easy" @click="answer('easy')">
+                <button class="cb cb-easy" @click="answer('easy')" :disabled="!flipped">
                     <span class="cb-label">{{ui.btnEasy}}</span>
                     <span class="cb-interval">{{iv('easy')}}</span>
                 </button>
             </div>
-            <div v-else key="hint" class="key-hint" v-html="ui.keyHint"></div>
-        </transition>
+            <div class="key-hint" :class="{visible: !flipped}" v-html="ui.keyHint"></div>
+        </div>
         </template><!-- end card view -->
     </main>
 
@@ -1059,6 +1092,7 @@
         <span class="upd-ring">↻</span>
         <span class="upd-txt"></span>
     </button>
+    <p class="brand-tagline">VocabLoop · Your memory, on a perfect loop.</p>
 </div>
 
 <!-- ── Android PWA install banner ─────────────────────────────────────── -->
