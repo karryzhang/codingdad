@@ -5356,5 +5356,605 @@
     "zh": "广泛的，普遍的",
     "pos": "adj",
     "ipa": ""
+  },
+  {
+    "word": "furthermore",
+    "zh": "此外，而且",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "moreover",
+    "zh": "而且，此外",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "nevertheless",
+    "zh": "尽管如此，然而",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "consequently",
+    "zh": "因此，结果",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "meanwhile",
+    "zh": "与此同时，期间",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "subsequently",
+    "zh": "随后，接着",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "alternatively",
+    "zh": "或者，另一方面",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "whereas",
+    "zh": "然而，而（对比）",
+    "pos": "conj",
+    "ipa": ""
+  },
+  {
+    "word": "despite",
+    "zh": "尽管，不管",
+    "pos": "prep",
+    "ipa": ""
+  },
+  {
+    "word": "accordingly",
+    "zh": "因此，相应地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "nonetheless",
+    "zh": "尽管如此，仍然",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "likewise",
+    "zh": "同样，也",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "conversely",
+    "zh": "相反地，反之",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "simultaneously",
+    "zh": "同时，一起",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "therefore",
+    "zh": "因此，所以",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "thereby",
+    "zh": "从而，因此",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "otherwise",
+    "zh": "否则，要不然",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "regarding",
+    "zh": "关于，就…而言",
+    "pos": "prep",
+    "ipa": ""
+  },
+  {
+    "word": "claim",
+    "zh": "声称，主张",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "suggest",
+    "zh": "建议，暗示",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "imply",
+    "zh": "暗示，意味着",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "reveal",
+    "zh": "揭示，表明",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "highlight",
+    "zh": "突出，强调",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "illustrate",
+    "zh": "说明，举例说明",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "analyse",
+    "zh": "分析，研究",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "explore",
+    "zh": "探讨，探索",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "reflect",
+    "zh": "反映，深思",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "portray",
+    "zh": "描绘，描述",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "convey",
+    "zh": "传达，表达",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "contradict",
+    "zh": "反驳，与…矛盾",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "reinforce",
+    "zh": "加强，巩固",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "establish",
+    "zh": "建立，确立",
+    "pos": "v",
+    "ipa": ""
+  },
+  {
+    "word": "remarkable",
+    "zh": "显著的，非凡的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "crucial",
+    "zh": "关键的，至关重要的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "vital",
+    "zh": "极重要的，必不可少的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "profound",
+    "zh": "深刻的，影响深远的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "subtle",
+    "zh": "微妙的，隐约的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "vivid",
+    "zh": "生动的，鲜明的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "striking",
+    "zh": "引人注目的，显著的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "compelling",
+    "zh": "令人信服的，引人入胜的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "engaging",
+    "zh": "吸引人的，有趣的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "fascinating",
+    "zh": "极有吸引力的，迷人的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "intriguing",
+    "zh": "有趣的，迷人的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "overwhelming",
+    "zh": "压倒性的，势不可挡的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "dramatic",
+    "zh": "戏剧性的，引人注目的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "extraordinary",
+    "zh": "非凡的，特别的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "outstanding",
+    "zh": "杰出的，显著的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "prominent",
+    "zh": "突出的，著名的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "prevalent",
+    "zh": "普遍的，流行的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "apparent",
+    "zh": "明显的，表面上的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "evident",
+    "zh": "明显的，显而易见的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "inherent",
+    "zh": "固有的，内在的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "abstract",
+    "zh": "抽象的，摘要",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "subjective",
+    "zh": "主观的，个人的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "significantly",
+    "zh": "显著地，重大地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "considerably",
+    "zh": "相当地，大量地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "increasingly",
+    "zh": "越来越，日益",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "essentially",
+    "zh": "本质上，实质上",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "particularly",
+    "zh": "尤其，特别",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "generally",
+    "zh": "一般地，通常",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "typically",
+    "zh": "通常，典型地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "frequently",
+    "zh": "频繁地，经常",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "occasionally",
+    "zh": "偶尔，有时",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "ultimately",
+    "zh": "最终，根本上",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "primarily",
+    "zh": "主要地，首先",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "initially",
+    "zh": "起初，最初",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "gradually",
+    "zh": "逐渐地，缓慢地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "deliberately",
+    "zh": "故意地，深思熟虑地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "apparently",
+    "zh": "显然，表面上看来",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "effectively",
+    "zh": "有效地，实际上",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "precisely",
+    "zh": "精确地，恰恰",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "strongly",
+    "zh": "强烈地，坚定地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "widely",
+    "zh": "广泛地，普遍地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "deeply",
+    "zh": "深深地，强烈地",
+    "pos": "adv",
+    "ipa": ""
+  },
+  {
+    "word": "factor",
+    "zh": "因素，要素",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "aspect",
+    "zh": "方面，方面",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "impact",
+    "zh": "影响，冲击",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "notion",
+    "zh": "观念，概念",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "concept",
+    "zh": "概念，观念",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "principle",
+    "zh": "原则，原理",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "implication",
+    "zh": "含义，影响，暗示",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "viewpoint",
+    "zh": "观点，看法",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "argument",
+    "zh": "论点，争论",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "insight",
+    "zh": "见解，洞察力",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "outcome",
+    "zh": "结果，结局",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "obstacle",
+    "zh": "障碍，阻碍",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "alternative",
+    "zh": "替代选择，另一种可能",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "foundation",
+    "zh": "基础，根基",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "framework",
+    "zh": "框架，结构",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "dimension",
+    "zh": "维度，层面",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "scope",
+    "zh": "范围，余地",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "narrative",
+    "zh": "叙述，故事线",
+    "pos": "n",
+    "ipa": ""
+  },
+  {
+    "word": "eloquent",
+    "zh": "雄辩的，有口才的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "concise",
+    "zh": "简洁的，简明的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "coherent",
+    "zh": "连贯的，一致的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "persuasive",
+    "zh": "有说服力的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "comprehensive",
+    "zh": "全面的，综合的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "sophisticated",
+    "zh": "复杂的，精致的，有见识的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "meaningful",
+    "zh": "有意义的，重要的",
+    "pos": "adj",
+    "ipa": ""
+  },
+  {
+    "word": "constructive",
+    "zh": "建设性的，有益的",
+    "pos": "adj",
+    "ipa": ""
   }
 ]
