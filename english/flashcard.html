@@ -528,6 +528,39 @@
             white-space: nowrap;
         }
 
+        /* ── Force-refresh button ────────────────────────── */
+        #upd-zone {
+            padding: 16px 0 max(22px, env(safe-area-inset-bottom));
+            text-align: center;
+        }
+        #upd-btn {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            border-radius: 99px;
+            padding: 5px 14px 5px 10px;
+            font-size: 0.72rem;
+            color: var(--muted);
+            cursor: pointer;
+            opacity: 0.35;
+            transition: opacity 0.25s, border-color 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        #upd-btn:hover  { opacity: 1; border-color: var(--blue); color: var(--blue); }
+        #upd-btn:active { opacity: 1; }
+        .upd-ring { font-size: 0.9rem; display: inline-block; }
+        #upd-btn.upd-go .upd-ring  { animation: updSpin 0.55s linear infinite; }
+        #upd-btn.upd-blast         { animation: updBlast 0.4s ease-in forwards; pointer-events: none; }
+        @keyframes updSpin  { to { transform: rotate(360deg); } }
+        @keyframes updBlast {
+            0%   { opacity: 1; transform: scale(1)    translateY(0); }
+            55%  { opacity: 1; transform: scale(1.18) translateY(-10px); }
+            100% { opacity: 0; transform: scale(0.15) translateY(-60px); }
+        }
+
         /* ── Small mobile (≤ 390px) ──────────────────────── */
         @media (max-width: 390px) {
             .hd         { padding: 7px 10px; gap: 5px; }
@@ -871,6 +904,14 @@
         </transition>
     </div>
 
+</div>
+
+<!-- ── Force-refresh zone ──────────────────────────────────────────────── -->
+<div id="upd-zone">
+    <button id="upd-btn">
+        <span class="upd-ring">↻</span>
+        <span class="upd-txt"></span>
+    </button>
 </div>
 
 <!-- ── Android PWA install banner ─────────────────────────────────────── -->
@@ -1880,6 +1921,48 @@ new Vue({
     // Hide banner once installed
     window.addEventListener('appinstalled', function () {
         banner.classList.remove('show');
+    });
+})();
+</script>
+
+<!-- ── Force-refresh interaction ────────────────────────────────────────── -->
+<script>
+(function () {
+    const zh   = document.documentElement.lang === 'zh';
+    const btn  = document.getElementById('upd-btn');
+    const ring = btn.querySelector('.upd-ring');
+    const txt  = btn.querySelector('.upd-txt');
+
+    txt.textContent = zh ? '检查更新' : 'Check for updates';
+
+    const steps = zh
+        ? ['正在检查…', '3', '2', '1', '🚀 起飞！']
+        : ['Checking…',  '3', '2', '1', '🚀 Launch!'];
+
+    let busy = false;
+    btn.addEventListener('click', function () {
+        if (busy) return;
+        busy = true;
+        btn.classList.add('upd-go');
+        txt.textContent = steps[0];
+
+        let i = 0;
+        const tick = setInterval(function () {
+            i++;
+            if (i < steps.length - 1) {
+                txt.textContent = steps[i];
+            } else {
+                clearInterval(tick);
+                ring.style.animation = 'none';
+                ring.textContent = '🚀';
+                txt.textContent = steps[steps.length - 1];
+                btn.classList.remove('upd-go');
+                btn.classList.add('upd-blast');
+                setTimeout(function () {
+                    window.location.reload(true);
+                }, 420);
+            }
+        }, 520);
     });
 })();
 </script>
