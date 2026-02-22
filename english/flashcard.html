@@ -333,6 +333,15 @@
         .st-mature  { background: rgba(139,92,246,.25);  color: #c4b5fd; }
         .st-relearn { background: rgba(239,68,68,.25);   color: #fca5a5; }
 
+        .back-fullform {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,.55);
+            text-align: center;
+            margin-bottom: 4px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            padding: 0 12px;
+        }
         .back-zh {
             font-size: 2.1rem;
             font-weight: 800;
@@ -554,7 +563,8 @@
                     <div class="stage-tag" :class="'st-' + curStage">
                         {{stageLabel[curStage]}}
                     </div>
-                    <div class="back-zh">{{cur.zh}}</div>
+                    <div class="back-fullform" v-if="curZhParts.full">{{curZhParts.full}}</div>
+                    <div class="back-zh">{{curZhParts.zh}}</div>
                     <div class="back-pos" v-if="curDict && curDict.pos">
                         {{posZh(curDict.pos)}}
                     </div>
@@ -705,6 +715,14 @@ new Vue({
 
     computed: {
         storageKey() { return 'srs_' + this.currentDeck.id + '_v1'; },
+        curZhParts() {
+            const zh = this.cur.zh || '';
+            const idx = zh.indexOf(' / ');
+            if (idx !== -1) {
+                return { full: zh.slice(0, idx), zh: zh.slice(idx + 3) };
+            }
+            return { full: '', zh };
+        },
         sessionDone() { return !this.loading && this.queue.length === 0; },
         cur()  { return this.queue[0] || { word: '', zh: '', pos: '' }; },
         curStage() {
