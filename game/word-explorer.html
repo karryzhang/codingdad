@@ -109,7 +109,7 @@ function render(){
   $('result').textContent='';renderCard(cur.word);stats(total)
 }
 
-function markMistake(w){if(!mistakes.find(x=>x.word===w.word)){mistakes.push(w);localStorage.setItem('pet1000_mistakes',JSON.stringify(mistakes)}}
+function markMistake(w){if(!mistakes.find(x=>x.word===w.word)){mistakes.push(w);localStorage.setItem('pet1000_mistakes',JSON.stringify(mistakes));}}
 function fx(ok){const card=$('qaCard');card.classList.remove('pulse','shake');void card.offsetWidth;card.classList.add(ok?'pulse':'shake');beep(ok?'ok':'bad')}
 function ans(v){const ok=v===cur.answer;if(ok){correct++;combo++;$('result').innerHTML=`<span class='ok'>✅ Correct! +1 (${combo} combo)</span>`;fx(true)}else{combo=0;$('result').innerHTML=`<span class='bad'>❌ Correct answer: ${cur.answer}</span>`;markMistake(cur.word);fx(false)}qi++;stats(set.length);setTimeout(render,450)}
 function submitSpell(){const v=($('spellInput').value||'').trim().toLowerCase();ans(v)}
