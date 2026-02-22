@@ -547,12 +547,16 @@
         <div class="done-title">今日任务完成！</div>
         <div class="done-stats">
             <div class="done-stat">
-                <div class="done-stat-val">{{masteredCount}}</div>
-                <div class="done-stat-label">已掌握</div>
+                <div class="done-stat-val">{{todayLearnedCount}}</div>
+                <div class="done-stat-label">今日新学</div>
             </div>
             <div class="done-stat">
-                <div class="done-stat-val">{{streak}}</div>
-                <div class="done-stat-label">连击</div>
+                <div class="done-stat-val">{{sessionCorrect}}</div>
+                <div class="done-stat-label">本次答对</div>
+            </div>
+            <div class="done-stat">
+                <div class="done-stat-val">{{masteredCount}}</div>
+                <div class="done-stat-label">已掌握</div>
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{dailyStreak}}</div>
@@ -564,7 +568,7 @@
             </div>
             <div class="done-stat">
                 <div class="done-stat-val">{{points}}</div>
-                <div class="done-stat-label">总积分</div>
+                <div class="done-stat-label">积分</div>
             </div>
         </div>
         <div class="done-level">{{levelInfo.icon}} {{levelInfo.name}} · {{levelInfo.desc}}</div>
@@ -779,10 +783,13 @@ new Vue({
             audioPlaying:  false,
             dictCache:     {},  // word → {ipa, audio, pos, definition, example} | null
             // ── Global gamification ──────────────────────────────────────
-            dailyStreak:   0,
-            lastStudyDate: '',
-            totalReviewed: 0,
-            achievements:  [],
+            dailyStreak:      0,
+            lastStudyDate:    '',
+            totalReviewed:    0,
+            achievements:     [],
+            // ── Session ───────────────────────────────────────────────────
+            extraNewAllowed:  0,  // cumulative extra new cards from loadMore
+            sessionCorrect:   0,  // all correct answers this session (incl. learning)
             stageLabel: {
                 new:      '新词',
                 learning: '学习中',
@@ -820,6 +827,10 @@ new Vue({
         nextLevelInfo() {
             const idx = LEVELS.indexOf(this.levelInfo);
             return LEVELS[idx + 1] || null;
+        },
+        todayLearnedCount() {
+            const tdy = today();
+            return Object.values(this.state).filter(s => s && s.firstSeen === tdy).length;
         },
         sessionDone() { return !this.loading && this.queue.length === 0; },
         cur()  { return this.queue[0] || { word: '', zh: '', pos: '' }; },
@@ -1041,11 +1052,13 @@ new Vue({
             this.saveState();
             this.currentDeck = deck;
             localStorage.setItem(DECK_PREF_KEY, deck.id);
-            this.state   = {};
-            this.points  = 0;
-            this.streak  = 0;
-            this.queue   = [];
-            this.flipped = false;
+            this.state           = {};
+            this.points          = 0;
+            this.streak          = 0;
+            this.queue           = [];
+            this.flipped         = false;
+            this.extraNewAllowed = 0;
+            this.sessionCorrect  = 0;
             this.loadSaved();
             this.loadWords();
         },
@@ -1085,6 +1098,7 @@ new Vue({
                     nextMs   = LEARN_STEPS[step] * 60000;
                     s.stage  = 'learning';
                     reinsert = nextMs <= SESSION_MINS * 60000;
+                    this.points += 5; this.sessionCorrect++;
                 } else if (level === 'good') {
                     const step = s.learningStep || 0;
                     if (step >= LEARN_STEPS.length - 1) {
@@ -1092,17 +1106,20 @@ new Vue({
                         s.interval = GRAD_INT;
                         s.reps     = 1;
                         nextMs     = GRAD_INT * 86400000;
+                        this.points += 15; this.sessionCorrect++;
                     } else {
                         s.learningStep = step + 1;
                         nextMs   = LEARN_STEPS[s.learningStep] * 60000;
                         s.stage  = 'learning';
                         reinsert = nextMs <= SESSION_MINS * 60000;
+                        this.points += 5; this.sessionCorrect++;
                     }
-                } else { // easy
+                } else { // easy — graduates immediately
                     s.stage    = EASY_INT >= 21 ? 'mature' : 'young';
                     s.interval = EASY_INT;
                     s.reps     = 1;
                     nextMs     = EASY_INT * 86400000;
+                    this.points += 20; this.sessionCorrect++;
                 }
 
             } else if (s.stage === 'relearn') {
@@ -1150,6 +1167,7 @@ new Vue({
             this.flipped = false;
             this.saveState();
             this.checkAchievements();
+            this.saveGlobal();    // always persist totalReviewed + streak
 
             // Feedback
             const ps = this.streak;
@@ -1253,7 +1271,9 @@ new Vue({
             }
         },
         loadMore() {
-            this.buildQueue(MAX_NEW_DAY);
+            this.extraNewAllowed += MAX_NEW_DAY;
+            this.sessionCorrect   = 0;
+            this.buildQueue(this.extraNewAllowed);
             if (this.queue.length === 0) {
                 alert('所有词汇都学完了！\n请明天继续复习到期的单词。');
             }
@@ -1294,7 +1314,7 @@ new Vue({
                 this.dailyStreak = 1;
             }
             this.lastStudyDate = tdy;
-            this.saveGlobal();
+            // saveGlobal() will be called by answer() after this
         },
         checkAchievements() {
             const earned = [];
@@ -1316,7 +1336,7 @@ new Vue({
             check('reviewed_100',  this.totalReviewed >= 100);
             check('reviewed_500',  this.totalReviewed >= 500);
             if (earned.length > 0) {
-                this.saveGlobal();
+                // saveGlobal() called by answer() — no extra write needed here
                 const a = ACHIEVEMENTS.find(x => x.id === earned[earned.length - 1]);
                 if (a) {
                     setTimeout(() => this.showToast(a.icon + ' 成就解锁：' + a.name, 'bonus'), 1200);
