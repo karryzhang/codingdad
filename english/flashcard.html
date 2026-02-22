@@ -113,7 +113,7 @@
             white-space: nowrap;
         }
         .btn-hd:hover { border-color: var(--blue); color: var(--blue); }
-        .btn-hd.active { border-color: var(--blue); color: var(--blue); background: #eff6ff; }
+        .btn-hd.active { border-color: var(--blue); background: var(--blue); color: #fff; }
         .btn-hd.danger:hover { border-color: var(--red); color: var(--red); }
 
         /* ── Deck selector bar ───────────────── */
@@ -214,23 +214,38 @@
 
         /* ── List view ───────────────────────── */
         .wl-wrap { width: 100%; overflow-y: auto; flex: 1; }
-        .wl-section { margin-bottom: 14px; }
+        .wl-section { margin-bottom: 18px; }
         .wl-section-title {
-            font-size: .73rem; font-weight: 600; color: var(--muted);
-            text-transform: uppercase; letter-spacing: .06em;
-            padding: 6px 4px 5px; margin-bottom: 2px;
-            border-bottom: 1px solid rgba(255,255,255,.1);
+            font-size: .69rem; font-weight: 700; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .08em;
+            padding: 0 4px 7px; border-bottom: 1px solid rgba(255,255,255,.12);
         }
         .wl-row {
-            display: flex; align-items: baseline; gap: 8px;
-            padding: 5px 6px; border-radius: 5px; font-size: .83rem;
+            padding: 9px 8px; border-radius: 8px; cursor: pointer;
+            transition: background .12s;
             border-bottom: 1px solid rgba(255,255,255,.04);
         }
         .wl-row:last-child { border-bottom: none; }
         .wl-row:hover { background: rgba(255,255,255,.05); }
-        .wl-word { font-weight: 600; color: #e8f0fe; flex-shrink: 0; min-width: 80px; }
-        .wl-pos  { color: var(--muted); font-size: .7rem; font-style: italic; flex-shrink: 0; min-width: 36px; }
-        .wl-zh   { color: rgba(255,255,255,.72); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .wl-row.open { background: rgba(255,255,255,.07); border-bottom-color: transparent; margin-bottom: 2px; }
+        .wl-row-head { display: flex; align-items: center; gap: 9px; }
+        .wl-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+        .wl-dot-new    { background: #4ade80; }
+        .wl-dot-learn  { background: #fb923c; }
+        .wl-dot-review { background: #60a5fa; }
+        .wl-word { font-weight: 600; color: #e8f0fe; flex-shrink: 0; min-width: 72px; font-size: .88rem; }
+        .wl-zh-short { flex: 1; color: rgba(255,255,255,.56); font-size: .81rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .wl-chevron { color: rgba(255,255,255,.28); font-size: .78rem; flex-shrink: 0; transition: transform .2s; line-height: 1; }
+        .wl-row.open .wl-chevron { transform: rotate(90deg); color: var(--blue); }
+        .wl-detail {
+            margin-top: 7px; padding: 8px 10px; border-radius: 7px;
+            background: rgba(255,255,255,.07);
+            display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px;
+        }
+        .wl-ipa { font-family: 'SF Mono', Menlo, monospace; color: rgba(255,255,255,.48); font-size: .76rem; }
+        .wl-pos-badge { background: rgba(100,160,255,.2); border-radius: 4px; padding: 1px 7px; font-size: .7rem; color: #93c5fd; }
+        .wl-zh-full { color: rgba(255,255,255,.88); font-size: .87rem; width: 100%; margin-top: 1px; }
+        .wl-example-text { color: rgba(255,255,255,.38); font-size: .74rem; font-style: italic; width: 100%; margin-top: 3px; }
 
         /* progress */
         .prog-row {
@@ -766,12 +781,13 @@
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
         <div class="hd-btns">
+            <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
+                    :title="autoPlay ? ui.autoPlayOn : ui.autoPlayOff">🔊</button>
             <button class="btn-hd" :class="{active: viewMode === 'list'}"
                     @click="viewMode = viewMode === 'card' ? 'list' : 'card'"
                     :title="viewMode === 'card' ? ui.viewList : ui.viewCard">
                 {{ viewMode === 'card' ? '☰' : '⊟' }}
             </button>
-            <button class="btn-hd" @click="exportProgress" :title="ui.exportBtn">💾</button>
             <button class="btn-hd danger" @click="confirmReset">{{ui.resetBtn}}</button>
         </div>
     </div>
@@ -836,19 +852,41 @@
         <template v-if="viewMode === 'list'">
             <div class="wl-wrap">
                 <div class="wl-section" v-if="listLearnItems.length">
-                    <div class="wl-section-title">{{ui.listToLearn}} ({{listLearnItems.length}})</div>
-                    <div class="wl-row" v-for="w in listLearnItems" :key="'l-'+w.word">
-                        <span class="wl-word">{{w.word}}</span>
-                        <span class="wl-pos">{{w.pos || '—'}}</span>
-                        <span class="wl-zh">{{w.zh}}</span>
+                    <div class="wl-section-title">{{ui.listToLearn}} · {{listLearnItems.length}}</div>
+                    <div class="wl-row" :class="{open: expandedWords[w.word]}"
+                         v-for="w in listLearnItems" :key="'l-'+w.word"
+                         @click="toggleListWord(w.word)">
+                        <div class="wl-row-head">
+                            <span class="wl-dot" :class="wlDotClass(w.word)"></span>
+                            <span class="wl-word">{{w.word}}</span>
+                            <span class="wl-zh-short">{{w.zh}}</span>
+                            <span class="wl-chevron">›</span>
+                        </div>
+                        <div class="wl-detail" v-if="expandedWords[w.word]">
+                            <span class="wl-ipa" v-if="dictCache[w.word] && dictCache[w.word].ipa">/{{dictCache[w.word].ipa}}/</span>
+                            <span class="wl-pos-badge" v-if="w.pos">{{posZh(w.pos)}}</span>
+                            <span class="wl-zh-full">{{w.zh}}</span>
+                            <span class="wl-example-text" v-if="dictCache[w.word] && dictCache[w.word].example">"{{dictCache[w.word].example}}"</span>
+                        </div>
                     </div>
                 </div>
                 <div class="wl-section" v-if="listReviewItems.length">
-                    <div class="wl-section-title">{{ui.listToReview}} ({{listReviewItems.length}})</div>
-                    <div class="wl-row" v-for="w in listReviewItems" :key="'r-'+w.word">
-                        <span class="wl-word">{{w.word}}</span>
-                        <span class="wl-pos">{{w.pos || '—'}}</span>
-                        <span class="wl-zh">{{w.zh}}</span>
+                    <div class="wl-section-title">{{ui.listToReview}} · {{listReviewItems.length}}</div>
+                    <div class="wl-row" :class="{open: expandedWords[w.word]}"
+                         v-for="w in listReviewItems" :key="'r-'+w.word"
+                         @click="toggleListWord(w.word)">
+                        <div class="wl-row-head">
+                            <span class="wl-dot" :class="wlDotClass(w.word)"></span>
+                            <span class="wl-word">{{w.word}}</span>
+                            <span class="wl-zh-short">{{w.zh}}</span>
+                            <span class="wl-chevron">›</span>
+                        </div>
+                        <div class="wl-detail" v-if="expandedWords[w.word]">
+                            <span class="wl-ipa" v-if="dictCache[w.word] && dictCache[w.word].ipa">/{{dictCache[w.word].ipa}}/</span>
+                            <span class="wl-pos-badge" v-if="w.pos">{{posZh(w.pos)}}</span>
+                            <span class="wl-zh-full">{{w.zh}}</span>
+                            <span class="wl-example-text" v-if="dictCache[w.word] && dictCache[w.word].example">"{{dictCache[w.word].example}}"</span>
+                        </div>
                     </div>
                 </div>
                 <div v-if="!listLearnItems.length && !listReviewItems.length"
@@ -1238,6 +1276,7 @@ new Vue({
             points:       0,
             streak:       0,
             viewMode:      'card',
+            expandedWords: {},
             autoPlay:      true,
             audioPlaying:  false,
             dictCache:     {},  // word → {ipa, audio, pos, definition, example} | null
@@ -1389,6 +1428,20 @@ new Vue({
         achIcon(id) {
             const a = ACHIEVEMENTS.find(x => x.id === id);
             return a ? a.icon : '';
+        },
+        wlDotClass(word) {
+            const s = this.state[word];
+            if (!s || s.stage === 'new') return 'wl-dot-new';
+            if (s.stage === 'learning' || s.stage === 'relearn') return 'wl-dot-learn';
+            return 'wl-dot-review';
+        },
+        toggleListWord(word) {
+            if (this.expandedWords[word]) {
+                this.$delete(this.expandedWords, word);
+            } else {
+                this.$set(this.expandedWords, word, true);
+                this.fetchDict(word);
+            }
         },
 
         // ── Dictionary API ────────────────────────────────────────────────
