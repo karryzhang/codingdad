@@ -3,32 +3,31 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Word Explorer 1000</title>
+  <title>Word Explorer 1000 - Enhanced</title>
   <style>
-    body{margin:0;font-family:Arial,"PingFang SC",sans-serif;background:linear-gradient(135deg,#8ee3ff,#c8f7dc);color:#1f2937}
-    .wrap{max-width:980px;margin:auto;padding:12px}
-    .card{background:#fff;border-radius:14px;padding:12px;margin:10px 0;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-    .row{display:flex;gap:8px;flex-wrap:wrap}
-    .badge{background:#f3f4f6;border-radius:999px;padding:6px 10px;font-weight:700}
-    button{border:0;border-radius:10px;padding:10px 12px;background:#14b8a6;color:#fff;font-weight:700}
-    button.alt{background:#6366f1} button.warn{background:#f59e0b} button.gray{background:#6b7280}
-    .q{font-size:1.2rem;font-weight:800;margin:8px 0}
-    .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .opt{background:#fff;color:#111827;border:2px solid #bfdbfe}
-    #result{min-height:24px;font-weight:800}
-    .ok{color:#16a34a}.bad{color:#dc2626}
+    :root{--ok:#16a34a;--bad:#dc2626;--bg:#0ea5e9;--card:#ffffff;--ink:#0f172a;--soft:#e2e8f0}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,sans-serif;background:linear-gradient(140deg,#7dd3fc,#a7f3d0);color:var(--ink)}
+    .wrap{max-width:980px;margin:auto;padding:12px}.card{background:var(--card);border-radius:16px;padding:12px;margin:10px 0;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.badge{background:#f1f5f9;border-radius:999px;padding:6px 10px;font-weight:700}
+    button{border:0;border-radius:10px;padding:10px 12px;background:#0891b2;color:#fff;font-weight:700;cursor:pointer}
+    button.alt{background:#6366f1} button.warn{background:#f59e0b} button.gray{background:#6b7280}.ghost{background:#fff;color:#0f172a;border:2px solid #cbd5e1}
+    .q{font-size:1.2rem;font-weight:800;margin:8px 0}.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .opt{background:#fff;color:#111827;border:2px solid #bfdbfe}.opt:hover{border-color:#38bdf8}
+    #result{min-height:26px;font-weight:800}.ok{color:var(--ok)}.bad{color:var(--bad)}
     input[type=text]{padding:10px;border:2px solid #cbd5e1;border-radius:10px;font-size:1rem;width:100%}
-    @media(max-width:680px){.opts{grid-template-columns:1fr}}
+    .bar{height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#22c55e,#06b6d4);width:0%;transition:.25s}
+    .pulse{animation:pulse .35s ease}.shake{animation:shake .35s ease}
+    .learn{line-height:1.6}.split{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    @keyframes pulse{50%{transform:scale(1.02)}} @keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+    @media(max-width:700px){.opts,.split{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <h2>🎮 Word Explorer (Quick Version) · 1000-Word Challenge</h2>
+  <h2>🎮 Word Explorer · Enhanced Practice</h2>
   <div class="card">
     <b>How to Play</b><br>
-    1) Random question types: meaning quiz / listen-and-choose / spelling challenge.<br>
-    2) Learning card includes: part of speech, IPA (placeholder in quick version), and pronunciation button (browser speech).<br>
-    3) Wrong answers are saved automatically for targeted review.
+    Mixed rounds include: meaning quiz / listen-and-choose / spelling input. Fast feedback, combo, and mistake review are built in.
     <div class="row" style="margin-top:8px">
       <button onclick="start('mix')">Start Mixed Challenge</button>
       <button class="alt" onclick="start('review')">Review Mistakes</button>
@@ -37,158 +36,86 @@
     </div>
   </div>
 
-  <div class="card row">
-    <span class="badge" id="statMode">Mode: Learn</span>
-    <span class="badge" id="statQ">Question: 0/0</span>
-    <span class="badge" id="statC">Correct: 0</span>
-    <span class="badge" id="statM">Mistakes: 0</span>
+  <div class="card">
+    <div class="row">
+      <span class="badge" id="statMode">Mode: Learn</span>
+      <span class="badge" id="statQ">Question: 0/0</span>
+      <span class="badge" id="statC">Correct: 0</span>
+      <span class="badge" id="statM">Mistakes: 0</span>
+      <span class="badge" id="statCombo">Combo: 0🔥</span>
+    </div>
+    <div class="bar" style="margin-top:8px"><div class="fill" id="progress"></div></div>
   </div>
 
-  <div class="card">
+  <div class="card" id="qaCard">
     <div class="q" id="q">Loading word bank...</div>
     <div id="answerArea"></div>
     <div id="result"></div>
   </div>
 
-  <div class="card" id="learnCard"></div>
+  <div class="card learn" id="learnCard"></div>
 </div>
 
 <script>
-let WORDS=[], withZh=[], idx=0, set=[], qi=0, correct=0, mode='learn', mistakes=JSON.parse(localStorage.getItem('pet1000_mistakes')||'[]'), cur=null;
-let dictCache=JSON.parse(localStorage.getItem('pet1000_dict')||'{}');
-let transCache=JSON.parse(localStorage.getItem('pet1000_trans')||'{}');
-const fetching=new Set();
-const translating=new Set();
-const DICT_API='https://api.dictionaryapi.dev/api/v2/entries/en/';
-const TRANS_API='https://api.mymemory.translated.net/get';
+let WORDS=[], withZh=[], idx=0, set=[], qi=0, correct=0, combo=0, mode='learn', mistakes=JSON.parse(localStorage.getItem('pet1000_mistakes')||'[]'), cur=null;
 const $=id=>document.getElementById(id);
 
-function boldWord(text, word){
-  if(!text) return '';
-  const re=new RegExp(`\\b(${word})\\b`,'gi');
-  return text.replace(re,'<b>$1</b>');
-}
-
-fetch('./pet-words-1000-meta.json').then(r=>r.json()).then(data=>{
-  WORDS=data; withZh=WORDS.filter(x=>x.zh);
-  $('q').textContent='Word bank ready (1000 words). Click "Start Mixed Challenge".';
-  showLearn();
-});
-
-function speak(word){
-  const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=0.9; speechSynthesis.cancel(); speechSynthesis.speak(u);
-}
-async function fetchMeta(word){
-  if(!word) return null;
-  if(dictCache[word]!==undefined) return dictCache[word];
-  if(fetching.has(word)) return null;
-  fetching.add(word);
-  try{
-    const r=await fetch(DICT_API+encodeURIComponent(word));
-    if(!r.ok){ dictCache[word]=null; return null; }
-    const data=await r.json();
-    const e=data[0]||{};
-    const ph=e.phonetics||[];
-    const ipa=((ph.find(p=>p.text&&p.text.includes('/')))||{}).text||e.phonetic||'';
-    const meanings=e.meanings||[];
-    const pos=((meanings[0])||{}).partOfSpeech||'';
-    let example='';
-    for(const m of meanings){
-      for(const d of (m.definitions||[])){
-        if(d.example){ example=d.example; break; }
-      }
-      if(example) break;
-    }
-    dictCache[word]={ipa,pos,example};
-    localStorage.setItem('pet1000_dict',JSON.stringify(dictCache));
-    return dictCache[word];
-  }catch(_){ return null; }
-  finally{ fetching.delete(word); }
-}
-async function translateExample(text){
-  if(!text) return '';
-  if(transCache[text]!==undefined) return transCache[text];
-  if(translating.has(text)) return '';
-  translating.add(text);
-  try{
-    const url=`${TRANS_API}?q=${encodeURIComponent(text)}&langpair=en|zh-CN`;
-    const r=await fetch(url);
-    if(!r.ok){ transCache[text]=''; return ''; }
-    const data=await r.json();
-    const t=(data?.responseData?.translatedText||'').trim();
-    transCache[text]=t;
-    localStorage.setItem('pet1000_trans', JSON.stringify(transCache));
-    return t;
-  }catch(_){ return ''; }
-  finally{ translating.delete(text); }
-}
+function beep(type='ok'){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.type='sine';o.frequency.value=type==='ok'?760:260;g.gain.value=.03;o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.08);}catch(e){}}
+function speak(word){const u=new SpeechSynthesisUtterance(word);u.lang='en-US';u.rate=.95;speechSynthesis.cancel();speechSynthesis.speak(u)}
 function shuffle(a){return [...a].sort(()=>Math.random()-0.5)}
 function pick(a,n){return shuffle(a).slice(0,n)}
-function stats(total=0){$('statMode').textContent='Mode: '+(mode==='mix'?'Challenge':mode==='review'?'Review':'Learn');$('statQ').textContent=`Question: ${Math.min(qi,total)}/${total}`;$('statC').textContent=`Correct: ${correct}`;$('statM').textContent=`Mistakes: ${mistakes.length}`}
+function boldWord(text,word){const re=new RegExp(`\\b(${word})\\b`,'gi');return text.replace(re,'<b>$1</b>')}
+
+fetch('./pet-words-1000-meta.json').then(r=>r.json()).then(data=>{WORDS=data;withZh=WORDS.filter(x=>x.zh);$('q').textContent='Word bank ready (1000 words). Click "Start Mixed Challenge".';showLearn();});
+
+function stats(total=0){
+  $('statMode').textContent='Mode: '+(mode==='mix'?'Challenge':mode==='review'?'Review':'Learn');
+  $('statQ').textContent=`Question: ${Math.min(qi,total)}/${total}`;
+  $('statC').textContent=`Correct: ${correct}`;
+  $('statM').textContent=`Mistakes: ${mistakes.length}`;
+  $('statCombo').textContent=`Combo: ${combo}🔥`;
+  $('progress').style.width=total?`${Math.min(100,(qi/total)*100)}%`:'0%';
+}
+
 function renderCard(w){
-  const pos = w.pos || 'n.';
-  const ipa = w.ipa || `/${w.word}/`;
-  const ex1 = (w.examples && w.examples[0]) || {en:`This is a ${w.word}.`, zh:`这是一个 ${w.word}。`};
-  const ex2 = (w.examples && w.examples[1]) || {en:`They used ${w.word} in a harder task.`, zh:`他们在更难的任务里使用了 ${w.word}。`};
-  $('learnCard').innerHTML=`<b>Learning Card</b><br>Word: <b>${w.word}</b> <button onclick="speak('${w.word}')">🔊 Pronounce</button><br>Part of speech: ${pos}<br>IPA: ${ipa}<br>Meaning: ${w.zh||'Not filled in quick version yet'}
-  <div style="margin-top:8px;padding:8px;border-left:3px solid #93c5fd;background:#f8fafc">
-    <div><b>Example 1 (Simple)</b></div>
-    <div><b>EN</b>: ${boldWord(ex1.en,w.word)}</div>
-    <div style="margin-top:4px"><b>中文</b>: ${ex1.zh}</div>
-  </div>
-  <div style="margin-top:8px;padding:8px;border-left:3px solid #c4b5fd;background:#faf5ff">
-    <div><b>Example 2 (Advanced)</b></div>
-    <div><b>EN</b>: ${boldWord(ex2.en,w.word)}</div>
-    <div style="margin-top:4px"><b>中文</b>: ${ex2.zh}</div>
+  const ex1=(w.examples&&w.examples[0])||{en:`This is ${w.word}.`,zh:`这是 ${w.word}。`};
+  const ex2=(w.examples&&w.examples[1])||{en:`They used ${w.word} in a harder task.`,zh:`他们在更难任务中使用了 ${w.word}。`};
+  $('learnCard').innerHTML=`<b>Learning Card</b><br>
+  Word: <b>${w.word}</b> <button class='ghost' onclick="speak('${w.word}')">🔊 Pronounce</button><br>
+  POS: ${w.pos||'n.'} | IPA: ${w.ipa||`/${w.word}/`}<br>
+  Meaning: ${w.zh||'N/A'}
+  <div class='split' style='margin-top:8px'>
+    <div style='padding:8px;background:#f8fafc;border-left:3px solid #7dd3fc'><b>Example 1 (Simple)</b><br><b>EN</b>: ${boldWord(ex1.en,w.word)}<br><b>中文</b>: ${ex1.zh||''}</div>
+    <div style='padding:8px;background:#faf5ff;border-left:3px solid #c4b5fd'><b>Example 2 (Advanced)</b><br><b>EN</b>: ${boldWord(ex2.en,w.word)}<br><b>中文</b>: ${ex2.zh||''}</div>
   </div>`;
 }
-function card(w){ renderCard(w); }
-function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 Learning Word: '+w.word;$('answerArea').innerHTML='';$('result').textContent='';card(w);stats(0)}
+
+function showLearn(){if(!WORDS.length)return;mode='learn';const w=WORDS[idx%WORDS.length];idx++;$('q').textContent='📘 Learning Word: '+w.word;$('answerArea').innerHTML='';$('result').textContent='';renderCard(w);stats(0)}
 
 function makeQ(word){
-  const type = ['meaning','listen','spell'][Math.floor(Math.random()*3)];
-  if(type==='meaning' && word.zh){
-    const opts=shuffle([word.zh,...pick(withZh.filter(x=>x.word!==word.word).map(x=>x.zh),3)]);
-    return {type,word,opts,answer:word.zh};
-  }
-  if(type==='listen'){
-    const opts=shuffle([word.word,...pick(WORDS.filter(x=>x.word!==word.word).map(x=>x.word),3)]);
-    return {type:'listen',word,opts,answer:word.word};
-  }
+  const type=['meaning','listen','spell'][Math.floor(Math.random()*3)];
+  if(type==='meaning'&&word.zh){const opts=shuffle([word.zh,...pick(withZh.filter(x=>x.word!==word.word).map(x=>x.zh),3)]);return {type,word,opts,answer:word.zh};}
+  if(type==='listen'){const opts=shuffle([word.word,...pick(WORDS.filter(x=>x.word!==word.word).map(x=>x.word),3)]);return {type:'listen',word,opts,answer:word.word};}
   return {type:'spell',word,answer:word.word};
 }
 
 function render(){
   const total=set.length;
-  if(qi>=total){$('q').textContent=`🎉 Completed: ${correct}/${total}`;$('answerArea').innerHTML='';$('result').innerHTML='<span class="ok">Tip: do one round of Review Mistakes.</span>';stats(total);return;}
+  if(qi>=total){$('q').textContent=`🎉 Completed: ${correct}/${total}`;$('answerArea').innerHTML='';$('result').innerHTML='<span class="ok">Great! Do a mistake review round.</span>';stats(total);return}
   cur=makeQ(set[qi]);
-  if(cur.type==='meaning'){
-    $('q').textContent=`${qi+1}. ${cur.word.word} - choose the correct meaning:`;
-    $('answerArea').innerHTML=`<div class="opts">${cur.opts.map(o=>`<button class='opt' onclick="ans('${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>`;
-  }else if(cur.type==='listen'){
-    $('q').innerHTML=`${qi+1}. Listen and choose the word <button onclick="speak('${cur.word.word}')">🔊 Play</button>`;
-    $('answerArea').innerHTML=`<div class="opts">${cur.opts.map(o=>`<button class='opt' onclick="ans('${o}')">${o}</button>`).join('')}</div>`;
-    setTimeout(()=>speak(cur.word.word),200);
-  }else{
-    const hint=cur.word.word[0]+' _ '.repeat(Math.max(cur.word.word.length-2,1))+cur.word.word.slice(-1);
-    $('q').textContent=`${qi+1}. Spell this word (hint: ${hint})`;
-    $('answerArea').innerHTML=`<input id='spellInput' type='text' placeholder='Type the full word'/><div style='margin-top:8px'><button onclick='submitSpell()'>Submit</button></div>`;
-  }
-  $('result').textContent='';card(cur.word);stats(total);
+  if(cur.type==='meaning'){$('q').textContent=`${qi+1}. ${cur.word.word} — choose the correct meaning:`;$('answerArea').innerHTML=`<div class='opts'>${cur.opts.map(o=>`<button class='opt' onclick="ans('${o.replace(/'/g,"\\'")}')">${o}</button>`).join('')}</div>`}
+  else if(cur.type==='listen'){$('q').innerHTML=`${qi+1}. Listen and choose <button class='ghost' onclick="speak('${cur.word.word}')">🔊 Play</button>`;$('answerArea').innerHTML=`<div class='opts'>${cur.opts.map(o=>`<button class='opt' onclick="ans('${o}')">${o}</button>`).join('')}</div>`;setTimeout(()=>speak(cur.word.word),180)}
+  else{const hint=cur.word.word[0]+' _ '.repeat(Math.max(cur.word.word.length-2,1))+cur.word.word.slice(-1);$('q').textContent=`${qi+1}. Spell this word (hint: ${hint})`;$('answerArea').innerHTML=`<input id='spellInput' type='text' placeholder='Type the full word' onkeydown="if(event.key==='Enter')submitSpell()"/><div style='margin-top:8px' class='row'><button onclick='submitSpell()'>Submit</button><button class='ghost' onclick="speak('${cur.word.word}')">🔊 Hear Again</button></div>`}
+  $('result').textContent='';renderCard(cur.word);stats(total)
 }
 
-function markMistake(w){ if(!mistakes.find(x=>x.word===w.word)){mistakes.push(w);localStorage.setItem('pet1000_mistakes',JSON.stringify(mistakes));}}
-function ans(v){const ok=v===cur.answer; if(ok){correct++;$('result').innerHTML='<span class="ok">✅ Correct</span>';}else{$('result').innerHTML=`<span class='bad'>❌ Correct answer: ${cur.answer}</span>`;markMistake(cur.word);}qi++;stats(set.length);setTimeout(render,500)}
+function markMistake(w){if(!mistakes.find(x=>x.word===w.word)){mistakes.push(w);localStorage.setItem('pet1000_mistakes',JSON.stringify(mistakes)}}
+function fx(ok){const card=$('qaCard');card.classList.remove('pulse','shake');void card.offsetWidth;card.classList.add(ok?'pulse':'shake');beep(ok?'ok':'bad')}
+function ans(v){const ok=v===cur.answer;if(ok){correct++;combo++;$('result').innerHTML=`<span class='ok'>✅ Correct! +1 (${combo} combo)</span>`;fx(true)}else{combo=0;$('result').innerHTML=`<span class='bad'>❌ Correct answer: ${cur.answer}</span>`;markMistake(cur.word);fx(false)}qi++;stats(set.length);setTimeout(render,450)}
 function submitSpell(){const v=($('spellInput').value||'').trim().toLowerCase();ans(v)}
 
-function start(m){
-  if(!WORDS.length)return;
-  mode=m==='review'?'review':'mix';qi=0;correct=0;
-  set = mode==='review' ? (mistakes.length?pick(mistakes,Math.min(20,mistakes.length)):[]) : pick(WORDS,20);
-  if(mode==='review' && !set.length){$('q').textContent='No mistakes yet. Start a challenge first.';$('answerArea').innerHTML='';$('result').textContent='';stats(0);return;}
-  render();
-}
-function resetAll(){if(!confirm('Confirm reset?'))return;mistakes=[];localStorage.removeItem('pet1000_mistakes');qi=0;correct=0;showLearn();}
+function start(m){if(!WORDS.length)return;mode=m==='review'?'review':'mix';qi=0;correct=0;combo=0;set=mode==='review'?(mistakes.length?pick(mistakes,Math.min(20,mistakes.length)):[]):pick(WORDS,20);if(mode==='review'&&!set.length){$('q').textContent='No mistakes yet. Start a challenge first.';$('answerArea').innerHTML='';$('result').textContent='';stats(0);return}render()}
+function resetAll(){if(!confirm('Confirm reset?'))return;mistakes=[];localStorage.removeItem('pet1000_mistakes');qi=0;correct=0;combo=0;showLearn()}
 window.start=start;window.showLearn=showLearn;window.resetAll=resetAll;window.speak=speak;window.ans=ans;window.submitSpell=submitSpell;
 </script>
 </body>
