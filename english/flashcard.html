@@ -78,17 +78,21 @@
             color: var(--muted);
             white-space: nowrap;
         }
-        .btn-reset {
+        .hd-btns { display: flex; gap: 6px; align-items: center; }
+        .btn-hd {
             background: none;
             border: 1px solid var(--border);
-            color: var(--muted);
-            padding: 3px 10px;
+            padding: 3px 9px;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 0.75rem;
-            transition: color 0.15s, border-color 0.15s;
+            font-size: 0.78rem;
+            color: var(--muted);
+            transition: all 0.15s;
+            white-space: nowrap;
         }
-        .btn-reset:hover { border-color: var(--red); color: var(--red); }
+        .btn-hd:hover { border-color: var(--blue); color: var(--blue); }
+        .btn-hd.active { border-color: var(--blue); color: var(--blue); background: #eff6ff; }
+        .btn-hd.danger:hover { border-color: var(--red); color: var(--red); }
 
         /* ── Loading ─────────────────────────── */
         .loading-scr {
@@ -129,10 +133,10 @@
             justify-content: center;
             margin: 6px 0;
         }
-        .done-stat        { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-        .done-stat-val    { font-size: 2.2rem; font-weight: 800; color: var(--blue); }
-        .done-stat-label  { font-size: 0.78rem; color: var(--muted); }
-        .done-level       { font-size: 1rem; color: var(--purple); font-weight: 700; }
+        .done-stat       { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .done-stat-val   { font-size: 2.2rem; font-weight: 800; color: var(--blue); }
+        .done-stat-label { font-size: 0.78rem; color: var(--muted); }
+        .done-level      { font-size: 1rem; color: var(--purple); font-weight: 700; }
         .btn-more {
             background: var(--blue);
             color: #fff;
@@ -169,8 +173,7 @@
             margin-bottom: 14px;
         }
         .prog-track {
-            flex: 1;
-            height: 8px;
+            flex: 1; height: 8px;
             background: var(--border);
             border-radius: 99px;
             overflow: hidden;
@@ -189,7 +192,7 @@
             white-space: nowrap;
         }
 
-        /* card wrapper – carries shake/bounce */
+        /* card wrapper */
         .card-wrap {
             width: 100%;
             perspective: 1200px;
@@ -214,7 +217,7 @@
         .card {
             position: relative;
             width: 100%;
-            height: 240px;
+            height: 280px;
             transform-style: preserve-3d;
             transition: transform 0.5s cubic-bezier(.4,0,.2,1);
             cursor: pointer;
@@ -241,9 +244,10 @@
         .face.front { background: var(--surface); }
         .face.back  { background: var(--card-back); color: #fff; transform: rotateY(180deg); }
 
+        /* front face elements */
         .pos-tag {
             position: absolute; top: 12px; right: 12px;
-            background: #f0f4fa; color: var(--muted);
+            background: #eef2fb; color: var(--blue);
             font-size: 0.66rem; font-weight: 700;
             text-transform: uppercase;
             padding: 2px 8px; border-radius: 99px;
@@ -255,11 +259,44 @@
             text-align: center;
             line-height: 1.1;
         }
+        .front-ipa {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-top: 5px;
+            letter-spacing: 0.02em;
+            min-height: 1.3em;
+        }
+        .front-ipa.fetching {
+            color: #ccd;
+            animation: blink 1.4s ease-in-out infinite;
+        }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .audio-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: 1.5px solid var(--border);
+            border-radius: 99px;
+            padding: 4px 14px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            color: var(--muted);
+            transition: border-color 0.15s, color 0.15s, background 0.15s;
+        }
+        .audio-btn:hover { border-color: var(--blue); color: var(--blue); }
+        .audio-btn.playing {
+            border-color: var(--green);
+            color: var(--green);
+            background: #f0fdf4;
+        }
         .front-hint {
             position: absolute; bottom: 13px;
             font-size: 0.72rem; color: #c0c8d8;
         }
 
+        /* back face elements */
         .stage-tag {
             position: absolute; top: 12px; left: 12px;
             font-size: 0.66rem; font-weight: 700;
@@ -271,8 +308,41 @@
         .st-mature  { background: rgba(139,92,246,.25);  color: #c4b5fd; }
         .st-relearn { background: rgba(239,68,68,.25);   color: #fca5a5; }
 
-        .back-zh   { font-size: 2.2rem; font-weight: 800; text-align: center; line-height: 1.2; }
-        .back-word { font-size: 1rem; color: rgba(255,255,255,.5); margin-top: 8px; }
+        .back-zh {
+            font-size: 2.1rem;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .back-pos {
+            display: inline-block;
+            background: rgba(255,255,255,.15);
+            border-radius: 99px;
+            padding: 2px 10px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .back-example {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,.72);
+            font-style: italic;
+            text-align: center;
+            margin-top: 8px;
+            padding: 0 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.45;
+        }
+        .back-footer {
+            position: absolute; bottom: 12px;
+            font-size: 0.76rem;
+            color: rgba(255,255,255,.4);
+            letter-spacing: 0.01em;
+        }
 
         /* controls */
         .controls {
@@ -311,8 +381,7 @@
         /* toast */
         .toast-anchor {
             position: fixed;
-            top: 62px;
-            left: 50%;
+            top: 62px; left: 50%;
             transform: translateX(-50%);
             z-index: 300;
             pointer-events: none;
@@ -331,7 +400,7 @@
         .t-bonus { background: var(--purple); }
 
         .toast-enter-active, .toast-leave-active { transition: opacity .25s, transform .25s; }
-        .toast-enter  { opacity: 0; transform: translateY(-8px); }
+        .toast-enter    { opacity: 0; transform: translateY(-8px); }
         .toast-leave-to { opacity: 0; transform: translateY(-8px); }
 
         .fade-enter-active, .fade-leave-active { transition: opacity .2s; }
@@ -374,7 +443,13 @@
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
         </div>
         <span class="level-badge">{{levelInfo.icon}} {{levelInfo.name}}</span>
-        <button class="btn-reset" @click="confirmReset">重置</button>
+        <div class="hd-btns">
+            <button class="btn-hd" :class="{active: autoPlay}" @click="autoPlay = !autoPlay"
+                    :title="autoPlay ? '自动朗读：开（点击关闭）' : '自动朗读：关（点击开启）'">
+                🔊
+            </button>
+            <button class="btn-hd danger" @click="confirmReset">重置</button>
+        </div>
     </div>
 
     <!-- Loading -->
@@ -421,22 +496,47 @@
                  @click="onCardClick"
                  tabindex="0"
                  ref="card">
+
+                <!-- Front -->
                 <div class="face front">
-                    <div class="pos-tag" v-if="cur.pos">{{cur.pos}}</div>
+                    <div class="pos-tag" v-if="curDict && curDict.pos">
+                        {{posZh(curDict.pos)}}
+                    </div>
                     <div class="front-word">{{cur.word}}</div>
+                    <div class="front-ipa"
+                         :class="{fetching: cur.word && !(cur.word in dictCache)}">
+                        {{curDict && curDict.ipa ? curDict.ipa : (cur.word && !(cur.word in dictCache) ? '···' : '')}}
+                    </div>
+                    <button class="audio-btn" :class="{playing: audioPlaying}"
+                            @click.stop="playAudio(cur.word)">
+                        <span>🔊</span> <span>{{audioPlaying ? '播放中…' : '发音'}}</span>
+                    </button>
                     <div class="front-hint">点击翻转 · 按空格键</div>
                 </div>
+
+                <!-- Back -->
                 <div class="face back">
-                    <div class="stage-tag" :class="'st-' + curStage">{{stageLabel[curStage]}}</div>
+                    <div class="stage-tag" :class="'st-' + curStage">
+                        {{stageLabel[curStage]}}
+                    </div>
                     <div class="back-zh">{{cur.zh}}</div>
-                    <div class="back-word">{{cur.word}}</div>
+                    <div class="back-pos" v-if="curDict && curDict.pos">
+                        {{posZh(curDict.pos)}}
+                    </div>
+                    <div class="back-example" v-if="curDict && curDict.example">
+                        "{{curDict.example}}"
+                    </div>
+                    <div class="back-footer">
+                        {{cur.word}}
+                        <span v-if="curDict && curDict.ipa"> · {{curDict.ipa}}</span>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Buttons (after flip) -->
         <transition name="fade">
-            <div v-if="flipped" class="controls">
+            <div v-if="flipped" key="controls" class="controls">
                 <button class="cb cb-again" @click="answer('again')">
                     <span class="cb-label">忘了</span>
                     <span class="cb-interval">{{iv('again')}}</span>
@@ -454,7 +554,7 @@
                     <span class="cb-interval">{{iv('easy')}}</span>
                 </button>
             </div>
-            <div v-else class="key-hint">
+            <div v-else key="hint" class="key-hint">
                 空格翻转 &nbsp;·&nbsp; 翻转后：← 忘了 &nbsp; ↓ 模糊 &nbsp; → 记住 &nbsp; ↑ 很熟
             </div>
         </transition>
@@ -479,15 +579,27 @@
 </div>
 
 <script>
+// ── Constants ──────────────────────────────────────────────────────────────
 const STORAGE_KEY  = 'pet_srs_v3';
-const MAX_NEW_DAY  = 20;          // new cards per day
-const LEARN_STEPS  = [1, 10];     // learning steps in minutes
-const GRAD_INT     = 1;           // graduating interval (days)
-const EASY_INT     = 4;           // easy bonus interval (days)
-const SESSION_MINS = 20;          // re-add to session if next due ≤ this
+const DICT_KEY     = 'pet_dict_v1';
+const MAX_NEW_DAY  = 20;
+const LEARN_STEPS  = [1, 10];   // minutes
+const GRAD_INT     = 1;         // days
+const EASY_INT     = 4;         // days
+const SESSION_MINS = 20;        // re-add to session if ≤ this many minutes
+const DICT_API     = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+const PREFETCH_N   = 5;         // prefetch ahead N words
 
-function ts()      { return Date.now(); }
-function today()   { return new Date().toISOString().slice(0, 10); }
+// Guard against concurrent duplicate fetches (outside Vue, not reactive)
+const _fetching = new Set();
+
+function ts()    { return Date.now(); }
+function today() {
+    const d = new Date();
+    return d.getFullYear() + '-' +
+           String(d.getMonth() + 1).padStart(2, '0') + '-' +
+           String(d.getDate()).padStart(2, '0');
+}
 function fmtMs(ms) {
     if (ms <= 0) return '现在';
     const m = Math.round(ms / 60000);
@@ -496,30 +608,42 @@ function fmtMs(ms) {
     return d + ' 天';
 }
 
+const POS_ZH = {
+    noun: '名词', verb: '动词', adjective: '形容词',
+    adverb: '副词', pronoun: '代词', preposition: '介词',
+    conjunction: '连词', interjection: '感叹词', exclamation: '感叹词',
+    article: '冠词', determiner: '限定词', number: '数词',
+    abbreviation: '缩写',
+};
+
 const LEVELS = [
-    { min:   0, icon: '🌱', name: '初学者',   desc: '继续加油！' },
-    { min:  50, icon: '📘', name: '入门者',   desc: '进步神速！' },
-    { min: 150, icon: '⭐', name: '进阶者',   desc: '词汇量不错！' },
-    { min: 350, icon: '🎯', name: '熟练者',   desc: '相当厉害！' },
-    { min: 600, icon: '🏆', name: '精通者',   desc: 'PET 达人！' },
+    { min:   0, icon: '🌱', name: '初学者', desc: '继续加油！' },
+    { min:  50, icon: '📘', name: '入门者', desc: '进步神速！' },
+    { min: 150, icon: '⭐', name: '进阶者', desc: '词汇量不错！' },
+    { min: 350, icon: '🎯', name: '熟练者', desc: '相当厉害！' },
+    { min: 600, icon: '🏆', name: '精通者', desc: 'PET 达人！' },
 ];
 
+// ── Vue instance ────────────────────────────────────────────────────────────
 new Vue({
     el: '#app',
     data() {
         return {
-            loading:  true,
-            allWords: [],
-            state:    {},       // wordId → srs state
-            queue:    [],
+            loading:      true,
+            allWords:     [],
+            state:        {},
+            queue:        [],
             sessionTotal: 0,
-            flipped:  false,
-            shaking:  false,
-            bouncing: false,
-            toast:    null,
-            _toastTmr: null,
-            points:   0,
-            streak:   0,
+            flipped:      false,
+            shaking:      false,
+            bouncing:     false,
+            toast:        null,
+            toastTmr:     null,
+            points:       0,
+            streak:       0,
+            autoPlay:     true,
+            audioPlaying: false,
+            dictCache:    {},   // word → {ipa, audio, pos, definition, example} | null
             stageLabel: {
                 new:      '新词',
                 learning: '学习中',
@@ -529,6 +653,7 @@ new Vue({
             },
         };
     },
+
     computed: {
         sessionDone() { return !this.loading && this.queue.length === 0; },
         cur()  { return this.queue[0] || { word: '', zh: '', pos: '' }; },
@@ -536,12 +661,18 @@ new Vue({
             const s = this.state[this.cur.word];
             return s ? (s.stage || 'new') : 'new';
         },
+        curDict() {
+            if (!this.cur.word) return undefined;
+            // undefined = not yet fetched, null = not found, object = found
+            const v = this.dictCache[this.cur.word];
+            return v !== undefined ? v : undefined;
+        },
         sessionPct() {
             if (!this.sessionTotal) return 100;
             return Math.round((1 - this.queue.length / this.sessionTotal) * 100);
         },
         masteredCount() {
-            return Object.values(this.state).filter(s => s.stage === 'mature').length;
+            return Object.values(this.state).filter(s => s && s.stage === 'mature').length;
         },
         levelInfo() {
             const n = this.masteredCount;
@@ -553,15 +684,29 @@ new Vue({
             let newCount = 0, learnCount = 0, reviewCount = 0;
             for (const w of this.queue) {
                 const s = this.state[w.word];
-                if (!s || s.stage === 'new')                              newCount++;
+                if (!s || s.stage === 'new')                               newCount++;
                 else if (s.stage === 'learning' || s.stage === 'relearn') learnCount++;
-                else                                                       reviewCount++;
+                else                                                        reviewCount++;
             }
             return { newCount, learnCount, reviewCount };
         },
     },
+
+    watch: {
+        // When a new card appears: fetch its dict data and prefetch ahead
+        'cur.word'(newWord) {
+            if (!newWord) return;
+            this.fetchDict(newWord);
+            this.prefetchAhead();
+            if (this.autoPlay) {
+                // Delay by card flip animation duration so audio starts after card appears
+                setTimeout(() => this.playAudio(newWord), 520);
+            }
+        },
+    },
+
     methods: {
-        // ── Interval display ────────────────────────────────────────────
+        // ── Interval display ──────────────────────────────────────────────
         iv(level) {
             const wordId = this.cur.word;
             const s      = this.state[wordId];
@@ -583,15 +728,102 @@ new Vue({
                 if (level === 'again') return '10 分钟';
                 return Math.max(1, Math.round(intv * 0.5)) + ' 天';
             }
-            // young / mature
             if (level === 'again') return '10 分钟';
             if (level === 'hard')  return Math.round(intv * 1.2) + ' 天';
-            if (level === 'good')  return Math.round(intv * ef) + ' 天';
+            if (level === 'good')  return Math.round(intv * ef)  + ' 天';
             if (level === 'easy')  return Math.round(intv * ef * 1.3) + ' 天';
             return '—';
         },
 
-        // ── Load JSON ───────────────────────────────────────────────────
+        posZh(pos) { return POS_ZH[pos] || pos; },
+
+        // ── Dictionary API ────────────────────────────────────────────────
+        async fetchDict(word) {
+            if (!word) return;
+            if (word in this.dictCache) return;  // already cached
+            if (_fetching.has(word)) return;      // request in flight
+            _fetching.add(word);
+            try {
+                const res = await fetch(DICT_API + encodeURIComponent(word));
+                if (!res.ok) {
+                    this.$set(this.dictCache, word, null);
+                } else {
+                    const data = await res.json();
+                    const entry = data[0] || {};
+                    const phonetics = entry.phonetics || [];
+
+                    // IPA: prefer text that looks like IPA (contains /)
+                    const ipaObj  = phonetics.find(p => p.text && p.text.includes('/'));
+                    const ipa     = (ipaObj && ipaObj.text) || entry.phonetic || '';
+
+                    // Audio: first non-empty audio URL
+                    const audioObj = phonetics.find(p => p.audio && p.audio !== '');
+                    const audio    = (audioObj && audioObj.audio) || '';
+
+                    // POS + best definition + example: scan all meanings for an example
+                    let pos = '', definition = '', example = '';
+                    for (const m of (entry.meanings || [])) {
+                        if (!pos) pos = m.partOfSpeech || '';
+                        for (const def of (m.definitions || [])) {
+                            if (!definition) definition = def.definition || '';
+                            if (!example && def.example) {
+                                example = def.example;
+                                break;
+                            }
+                        }
+                        if (example) break;
+                    }
+
+                    this.$set(this.dictCache, word, { ipa, audio, pos, definition, example });
+                    this.saveDictCache();
+                }
+            } catch (e) {
+                this.$set(this.dictCache, word, null);
+            } finally {
+                _fetching.delete(word);
+            }
+        },
+
+        prefetchAhead() {
+            this.queue.slice(0, PREFETCH_N).forEach(w => this.fetchDict(w.word));
+        },
+
+        // ── Audio ─────────────────────────────────────────────────────────
+        playAudio(word) {
+            if (!word) return;
+            const d = this.dictCache[word];
+
+            if (d && d.audio) {
+                // Use API-provided MP3
+                const audio = new Audio(d.audio);
+                this.audioPlaying = true;
+                audio.play()
+                    .then(() => {
+                        audio.addEventListener('ended', () => { this.audioPlaying = false; });
+                    })
+                    .catch(() => {
+                        this.audioPlaying = false;
+                        this.tts(word);
+                    });
+            } else {
+                // Fallback: Web Speech API
+                this.tts(word);
+            }
+        },
+
+        tts(word) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            const u = new SpeechSynthesisUtterance(word);
+            u.lang  = 'en-US';
+            u.rate  = 0.85;
+            this.audioPlaying = true;
+            u.onend = () => { this.audioPlaying = false; };
+            u.onerror = () => { this.audioPlaying = false; };
+            window.speechSynthesis.speak(u);
+        },
+
+        // ── Load JSON ─────────────────────────────────────────────────────
         async loadWords() {
             try {
                 const res = await fetch('../game/pet-words-1000.json');
@@ -610,12 +842,13 @@ new Vue({
             this.loading = false;
         },
 
-        // ── Build today's queue ─────────────────────────────────────────
+        // ── Build today's queue ───────────────────────────────────────────
         buildQueue(extraNew = 0) {
             const tdy   = today();
             const state = this.state;
-            const newToday = Object.values(state).filter(s => s.firstSeen === tdy).length;
-            const slots    = Math.max(0, MAX_NEW_DAY - newToday + extraNew);
+            const newToday = Object.values(state)
+                .filter(s => s && s.firstSeen === tdy).length;
+            const slots = Math.max(0, MAX_NEW_DAY - newToday + extraNew);
 
             const reviews  = [];
             const learning = [];
@@ -635,13 +868,14 @@ new Vue({
             const q = [...learning, ...reviews, ...newCards];
             this.queue        = q;
             this.sessionTotal = q.length || 1;
+            this.prefetchAhead();
         },
 
-        // ── Card interaction ────────────────────────────────────────────
+        // ── Card interaction ──────────────────────────────────────────────
         onCardClick() { if (!this.flipped) this.flipCard(); },
         flipCard()    { this.flipped = !this.flipped; },
 
-        // ── SRS answer ──────────────────────────────────────────────────
+        // ── SRS answer ────────────────────────────────────────────────────
         answer(level) {
             if (!this.flipped) return;
 
@@ -659,18 +893,16 @@ new Vue({
             if (s.stage === 'new' || s.stage === 'learning') {
                 if (level === 'again') {
                     s.learningStep = 0;
-                    nextMs = LEARN_STEPS[0] * 60000;
-                    s.stage = 'learning';
+                    nextMs   = LEARN_STEPS[0] * 60000;
+                    s.stage  = 'learning';
                     reinsert = true;
                     this.streak = 0;
-
                 } else if (level === 'hard') {
                     const step = Math.max(0, (s.learningStep || 0) - 1);
                     s.learningStep = step;
-                    nextMs = LEARN_STEPS[step] * 60000;
-                    s.stage = 'learning';
+                    nextMs   = LEARN_STEPS[step] * 60000;
+                    s.stage  = 'learning';
                     reinsert = nextMs <= SESSION_MINS * 60000;
-
                 } else if (level === 'good') {
                     const step = s.learningStep || 0;
                     if (step >= LEARN_STEPS.length - 1) {
@@ -680,11 +912,10 @@ new Vue({
                         nextMs     = GRAD_INT * 86400000;
                     } else {
                         s.learningStep = step + 1;
-                        nextMs  = LEARN_STEPS[s.learningStep] * 60000;
-                        s.stage = 'learning';
+                        nextMs   = LEARN_STEPS[s.learningStep] * 60000;
+                        s.stage  = 'learning';
                         reinsert = nextMs <= SESSION_MINS * 60000;
                     }
-
                 } else { // easy
                     s.stage    = EASY_INT >= 21 ? 'mature' : 'young';
                     s.interval = EASY_INT;
@@ -694,7 +925,7 @@ new Vue({
 
             } else if (s.stage === 'relearn') {
                 if (level === 'again') {
-                    nextMs = 10 * 60000;
+                    nextMs   = 10 * 60000;
                     reinsert = true;
                     this.streak = 0;
                 } else {
@@ -704,14 +935,13 @@ new Vue({
                 }
 
             } else {
-                // young / mature – full review
+                // young / mature
                 if (level === 'again') {
                     s.stage  = 'relearn';
                     s.reps   = 0;
                     nextMs   = 10 * 60000;
                     reinsert = true;
                     this.streak = 0;
-
                 } else {
                     const ef = s.ef || 2.5;
                     if (level === 'hard') {
@@ -738,34 +968,36 @@ new Vue({
             this.flipped = false;
             this.saveState();
 
-            // feedback
-            const prevStreak = this.streak;
+            // Feedback
+            const ps = this.streak;
             if (level === 'again') {
                 this.doShake();
                 this.showToast('没关系，再来！💪', 'bad');
             } else if (level === 'easy') {
                 this.doBounce();
                 this.showToast('太棒了！🌟', 'bonus');
-            } else if (prevStreak > 0 && prevStreak % 10 === 0) {
+            } else if (ps > 0 && ps % 10 === 0) {
                 this.doBounce();
-                this.showToast('🔥 连击 ' + prevStreak + '！超厉害！', 'bonus');
-            } else if (prevStreak > 0 && prevStreak % 5 === 0) {
+                this.showToast('🔥 连击 ' + ps + '！超厉害！', 'bonus');
+            } else if (ps > 0 && ps % 5 === 0) {
                 this.doBounce();
-                this.showToast('🔥 连击 ' + prevStreak + '！', 'bonus');
+                this.showToast('🔥 连击 ' + ps + '！', 'bonus');
             } else if (level === 'good') {
                 this.doBounce();
                 this.showToast('✓ 很好！', 'good');
             }
 
-            // milestone
+            // Milestone
             const mc = this.masteredCount;
-            if (mc > 0 && mc % 50 === 0 && s.stage === 'mature' &&
-                !this.state[wordId + '_milestone_' + mc]) {
-                this.state[wordId + '_milestone_' + mc] = 1;
-                setTimeout(() => this.showToast('🏆 恭喜！已掌握 ' + mc + ' 个单词！', 'bonus'), 800);
+            if (mc > 0 && mc % 50 === 0 && s.stage === 'mature') {
+                const mKey = '_milestone_' + mc;
+                if (!this.state[mKey]) {
+                    this.$set(this.state, mKey, 1);
+                    setTimeout(() => this.showToast('🏆 已掌握 ' + mc + ' 个单词！', 'bonus'), 800);
+                }
             }
 
-            // queue
+            // Queue management
             if (reinsert) {
                 const card = this.queue.shift();
                 this.queue.push(card);
@@ -774,7 +1006,7 @@ new Vue({
             }
         },
 
-        // ── Animations ──────────────────────────────────────────────────
+        // ── Animations ───────────────────────────────────────────────────
         doShake() {
             this.shaking = false;
             this.$nextTick(() => { this.shaking = true; });
@@ -786,35 +1018,51 @@ new Vue({
             setTimeout(() => { this.bouncing = false; }, 400);
         },
         showToast(msg, type = 'good') {
-            clearTimeout(this._toastTmr);
+            clearTimeout(this.toastTmr);
             this.toast = null;
             this.$nextTick(() => {
                 this.toast = { msg, type };
-                this._toastTmr = setTimeout(() => { this.toast = null; }, 2400);
+                this.toastTmr = setTimeout(() => { this.toast = null; }, 2400);
             });
         },
 
-        // ── Persistence ─────────────────────────────────────────────────
+        // ── Persistence ──────────────────────────────────────────────────
         loadSaved() {
             try {
                 const raw = localStorage.getItem(STORAGE_KEY);
                 if (raw) {
-                    const d     = JSON.parse(raw);
-                    this.state  = d.state  || {};
-                    this.points = d.points || 0;
-                    this.streak = d.streak || 0;
+                    const d        = JSON.parse(raw);
+                    this.state     = d.state    || {};
+                    this.points    = d.points   || 0;
+                    this.streak    = d.streak   || 0;
+                    this.autoPlay  = d.autoPlay !== undefined ? d.autoPlay : true;
                 }
             } catch (e) { /* ignore */ }
         },
         saveState() {
             localStorage.setItem(STORAGE_KEY, JSON.stringify({
-                state:  this.state,
-                points: this.points,
-                streak: this.streak,
+                state:    this.state,
+                points:   this.points,
+                streak:   this.streak,
+                autoPlay: this.autoPlay,
             }));
         },
+        loadDictCache() {
+            try {
+                const raw = localStorage.getItem(DICT_KEY);
+                if (raw) this.dictCache = JSON.parse(raw);
+            } catch (e) { /* ignore */ }
+        },
+        saveDictCache() {
+            try {
+                localStorage.setItem(DICT_KEY, JSON.stringify(this.dictCache));
+            } catch (e) {
+                // Quota exceeded – clear and retry
+                localStorage.removeItem(DICT_KEY);
+            }
+        },
         confirmReset() {
-            if (confirm('确定重置所有学习进度吗？\n此操作不可撤销。')) {
+            if (confirm('确定重置所有学习进度吗？\n词典缓存会保留。')) {
                 localStorage.removeItem(STORAGE_KEY);
                 this.state  = {};
                 this.points = 0;
@@ -829,7 +1077,7 @@ new Vue({
             }
         },
 
-        // ── Keyboard ────────────────────────────────────────────────────
+        // ── Keyboard ─────────────────────────────────────────────────────
         onKey(e) {
             if (this.sessionDone || this.loading) return;
             const tag = document.activeElement && document.activeElement.tagName;
@@ -840,11 +1088,14 @@ new Vue({
                 this.flipCard();
                 return;
             }
+            // 'P' key for pronunciation
+            if (e.code === 'KeyP') {
+                this.playAudio(this.cur.word);
+                return;
+            }
             const arrowMap = {
-                ArrowLeft:  'again',
-                ArrowDown:  'hard',
-                ArrowRight: 'good',
-                ArrowUp:    'easy',
+                ArrowLeft: 'again', ArrowDown: 'hard',
+                ArrowRight: 'good', ArrowUp:   'easy',
             };
             if (arrowMap[e.code]) {
                 e.preventDefault();
@@ -856,6 +1107,7 @@ new Vue({
 
     created() {
         this.loadSaved();
+        this.loadDictCache();
         this.loadWords();
     },
     mounted() {
