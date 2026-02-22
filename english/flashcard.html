@@ -1682,7 +1682,7 @@ new Vue({
             if (deck.id === this.currentDeck.id) return;
             this.saveState();
             this.currentDeck = deck;
-            localStorage.setItem(DECK_PREF_KEY, deck.id);
+            try { localStorage.setItem(DECK_PREF_KEY, deck.id); } catch (e) {}
             this.state           = {};
             this.points          = 0;
             this.streak          = 0;
@@ -1878,12 +1878,22 @@ new Vue({
             } catch (e) { /* ignore */ }
         },
         saveState() {
-            localStorage.setItem(this.storageKey, JSON.stringify({
+            const payload = JSON.stringify({
                 state:    this.state,
                 points:   this.points,
                 streak:   this.streak,
                 autoPlay: this.autoPlay,
-            }));
+            });
+            try {
+                localStorage.setItem(this.storageKey, payload);
+            } catch (e) {
+                // Quota exceeded: evict dict cache first, then retry
+                try {
+                    localStorage.removeItem(DICT_KEY);
+                    this.dictCache = {};
+                    localStorage.setItem(this.storageKey, payload);
+                } catch (e2) { /* storage unavailable (e.g. private mode) — give up */ }
+            }
         },
         loadDictCache() {
             try {
@@ -1947,12 +1957,14 @@ new Vue({
             } catch (e) { /* ignore */ }
         },
         saveGlobal() {
-            localStorage.setItem(GLOBAL_KEY, JSON.stringify({
-                dailyStreak:   this.dailyStreak,
-                lastStudyDate: this.lastStudyDate,
-                totalReviewed: this.totalReviewed,
-                achievements:  this.achievements,
-            }));
+            try {
+                localStorage.setItem(GLOBAL_KEY, JSON.stringify({
+                    dailyStreak:   this.dailyStreak,
+                    lastStudyDate: this.lastStudyDate,
+                    totalReviewed: this.totalReviewed,
+                    achievements:  this.achievements,
+                }));
+            } catch (e) { /* storage unavailable — give up */ }
         },
         updateDailyStreak() {
             const tdy = today();
@@ -2065,9 +2077,18 @@ new Vue({
     },
     mounted() {
         window.addEventListener('keydown', this.onKey);
+        // Save when user switches tabs / goes to background on mobile
+        this._onVisibility = () => {
+            if (document.hidden) {
+                this.saveState();
+                this.saveGlobal();
+            }
+        };
+        document.addEventListener('visibilitychange', this._onVisibility);
     },
     beforeDestroy() {
         window.removeEventListener('keydown', this.onKey);
+        document.removeEventListener('visibilitychange', this._onVisibility);
     },
 });
 </script>
