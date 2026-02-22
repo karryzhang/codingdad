@@ -959,7 +959,8 @@
         .prac-opt:hover:not(:disabled) { border-color: var(--blue); background: #eff6ff; }
         .prac-opt:active:not(:disabled) { transform: scale(0.98); }
         .prac-opt:disabled { cursor: default; }
-        .prac-opt { display: flex; justify-content: space-between; align-items: center; }
+        .prac-opt:focus, .prac-opt:focus-visible { outline: none; box-shadow: none; }
+        .prac-opt { display: flex; justify-content: space-between; align-items: center; -webkit-tap-highlight-color: transparent; }
         .prac-opt.correct  { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
         .prac-opt.wrong    { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
         .prac-opt-icon { font-size: 1rem; font-weight: 800; flex-shrink: 0; margin-left: 8px; }
@@ -981,7 +982,8 @@
         .prac-tf-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
         .prac-tf-btn:active:not(:disabled){ transform: scale(0.97); }
         .prac-tf-btn:disabled { cursor: default; transform: none; box-shadow: none; }
-        .prac-tf-btn { display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .prac-tf-btn:focus, .prac-tf-btn:focus-visible { outline: none; box-shadow: none; }
+        .prac-tf-btn { display: flex; align-items: center; justify-content: center; gap: 8px; -webkit-tap-highlight-color: transparent; }
         .prac-tf-btn.correct { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
         .prac-tf-btn.wrong   { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
 
@@ -1049,11 +1051,33 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             text-align: center;
             gap: 16px;
             padding: 24px 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
+        .prac-wrong-section {
+            width: 100%; text-align: left;
+            border-top: 1px solid var(--border); padding-top: 18px; margin-top: 4px;
+        }
+        .prac-wrong-title {
+            font-size: 0.78rem; font-weight: 700; color: var(--muted);
+            text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px;
+        }
+        .prac-wrong-item {
+            display: flex; flex-direction: column; gap: 3px;
+            padding: 10px 0; border-bottom: 1px solid var(--border);
+        }
+        .prac-wrong-item:last-child { border-bottom: none; }
+        .prac-wrong-row1 { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+        .prac-wrong-en   { font-size: 1rem; font-weight: 700; color: var(--text); }
+        .prac-wrong-pos  {
+            font-size: 0.72rem; color: var(--muted); background: var(--surface);
+            border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px;
+        }
+        .prac-wrong-ipa  { font-size: 0.8rem; color: var(--muted); font-style: italic; }
+        .prac-wrong-zh   { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
         .prac-done-emoji { font-size: 5rem; line-height: 1; }
         .prac-done-title { font-size: 1.8rem; font-weight: 800; }
         .prac-done-score { font-size: 1.1rem; color: var(--muted); font-weight: 600; }
@@ -1242,6 +1266,20 @@
             <div class="prac-done-bar-wrap">
                 <div class="prac-done-bar-fill" :style="{width: (practiceScore / practiceQueue.length * 100) + '%'}"></div>
             </div>
+
+            <!-- Wrong words list -->
+            <div v-if="practiceWrongWords.length > 0" class="prac-wrong-section">
+                <div class="prac-wrong-title">{{ui.practiceWrongTitle}} · {{practiceWrongWords.length}}</div>
+                <div v-for="w in practiceWrongWords" :key="w.word" class="prac-wrong-item">
+                    <div class="prac-wrong-row1">
+                        <span class="prac-wrong-en">{{w.word}}</span>
+                        <span class="prac-wrong-pos" v-if="w.pos">{{w.pos}}</span>
+                        <span class="prac-wrong-ipa" v-if="dictCache[w.word] && dictCache[w.word].ipa">/{{dictCache[w.word].ipa}}/</span>
+                    </div>
+                    <div class="prac-wrong-zh">{{w.zh}}</div>
+                </div>
+            </div>
+
             <button class="btn-more" @click="exitPractice">{{ui.practiceDoneBack}}</button>
         </div>
 
@@ -1745,6 +1783,7 @@ const STRINGS = {
     practiceDoneTitle:     '练习完成！',
     practiceDoneScore:     (c, t) => `答对 ${c} / ${t} 题`,
     practiceDoneBack:      '返回',
+    practiceWrongTitle:    '需要加强的词汇',
     practicePlayAgain:     '再听一遍',
     practiceExitBtn:       '退出练习',
     readingBtn:      '延伸阅读',
@@ -1850,6 +1889,7 @@ const STRINGS = {
     practiceDoneTitle:     'Practice Complete!',
     practiceDoneScore:     (c, t) => `${c} / ${t} correct`,
     practiceDoneBack:      'Back',
+    practiceWrongTitle:    'Words to reinforce',
     practicePlayAgain:     'Play again',
     practiceExitBtn:       'Exit Practice',
     readingBtn:      'Story',
@@ -1935,6 +1975,36 @@ const GOOD_MSGS      = UI.goodMsgs;
 const EASY_MSGS      = UI.easyMsgs;
 const STREAK_TOASTS  = UI.streakToasts;
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+// ── Feedback sounds (Web Audio API, no external files) ────────────────────────
+function playFeedbackSound(type) {
+    try {
+        const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        const t = ctx.currentTime;
+        if (type === 'correct') {
+            // Soft two-note ascending chime ♪
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, t);
+            osc.frequency.setValueAtTime(1320, t + 0.07);
+            gain.gain.setValueAtTime(0.10, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.28);
+            osc.start(t); osc.stop(t + 0.28);
+        } else {
+            // Soft low descending tone ♩
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(320, t);
+            osc.frequency.exponentialRampToValueAtTime(160, t + 0.18);
+            gain.gain.setValueAtTime(0.10, t);
+            gain.gain.exponentialRampToValueAtTime(0.001, t + 0.22);
+            osc.start(t); osc.stop(t + 0.22);
+        }
+        osc.onended = () => ctx.close();
+    } catch (_) { /* AudioContext unavailable (e.g. server-side) */ }
+}
 
 // ── Practice Mode utilities ───────────────────────────────────────────────────
 const MAX_PRACTICE = 20;
@@ -2096,6 +2166,7 @@ new Vue({
             practiceInput:    '',
             practiceResult:   null,   // 'correct' | 'wrong'
             practiceDone:     false,
+            practiceWrongWords: [],   // word objects answered incorrectly
             // ── Reading overlay ──────────────────────────────────────
             readingOpen:     false,
             readingArticle:  '',
@@ -2801,9 +2872,10 @@ new Vue({
             this.practiceAnswered = false;
             this.practiceSelected = null;
             this.practiceInput    = '';
-            this.practiceResult   = null;
-            this.practiceDone     = false;
-            this.practiceMode     = true;
+            this.practiceResult     = null;
+            this.practiceDone       = false;
+            this.practiceWrongWords = [];
+            this.practiceMode       = true;
             this._afterPracticeQuestion();
         },
 
@@ -2901,6 +2973,14 @@ new Vue({
                 if (this.autoPlay) {
                     setTimeout(() => this.playAudio(this.practiceCurrent.word.word), 300);
                 }
+                playFeedbackSound('correct');
+            } else {
+                // Deduplicate — same word may appear in multiple question types
+                const wobj = this.practiceCurrent.word;
+                if (!this.practiceWrongWords.some(w => w.word === wobj.word)) {
+                    this.practiceWrongWords.push(wobj);
+                }
+                playFeedbackSound('wrong');
             }
             // Auto-advance after 2s
             clearTimeout(this._practiceTimer);
