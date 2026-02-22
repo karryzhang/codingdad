@@ -1,166 +1,5 @@
 [
   {
-    "word": "hello",
-    "zh": "你好",
-    "pos": "interj.",
-    "ipa": "",
-    "ex": "Hello! How are you doing today?"
-  },
-  {
-    "word": "goodbye",
-    "zh": "再见",
-    "pos": "interj.",
-    "ipa": "",
-    "ex": "Goodbye! Have a safe trip home."
-  },
-  {
-    "word": "see you",
-    "zh": "回头见",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "See you tomorrow at the office!"
-  },
-  {
-    "word": "nice to meet you",
-    "zh": "很高兴认识你",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Nice to meet you. I'm Sarah from the marketing team."
-  },
-  {
-    "word": "how are you",
-    "zh": "你好吗",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "How are you? I haven't seen you in ages!"
-  },
-  {
-    "word": "I'm fine",
-    "zh": "我很好",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "I'm fine, thanks for asking. How about you?"
-  },
-  {
-    "word": "please",
-    "zh": "请",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Could you please send me the report by Friday?"
-  },
-  {
-    "word": "thank you",
-    "zh": "谢谢",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Thank you so much for your help today."
-  },
-  {
-    "word": "you're welcome",
-    "zh": "不客气",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "You're welcome! Let me know if you need anything else."
-  },
-  {
-    "word": "sorry",
-    "zh": "对不起",
-    "pos": "interj.",
-    "ipa": "",
-    "ex": "I'm sorry for being late to the meeting."
-  },
-  {
-    "word": "excuse me",
-    "zh": "打扰一下 / 借过",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Excuse me, could you tell me where the restroom is?"
-  },
-  {
-    "word": "pardon",
-    "zh": "请再说一遍",
-    "pos": "interj.",
-    "ipa": "",
-    "ex": "Pardon? I didn't quite catch that."
-  },
-  {
-    "word": "no problem",
-    "zh": "没问题",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "No problem at all—I'm happy to help."
-  },
-  {
-    "word": "of course",
-    "zh": "当然",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Of course! I'll take care of it right away."
-  },
-  {
-    "word": "sure",
-    "zh": "好的 / 当然",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Sure, I can meet you at three o'clock."
-  },
-  {
-    "word": "absolutely",
-    "zh": "完全正确 / 绝对",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Absolutely! That's a brilliant idea."
-  },
-  {
-    "word": "maybe",
-    "zh": "也许",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Maybe we should try the new restaurant nearby."
-  },
-  {
-    "word": "perhaps",
-    "zh": "或许",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Perhaps we should reschedule tomorrow's meeting."
-  },
-  {
-    "word": "I think",
-    "zh": "我认为",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "I think we need more time to finish this project."
-  },
-  {
-    "word": "I agree",
-    "zh": "我同意",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "I agree with your proposal completely."
-  },
-  {
-    "word": "I disagree",
-    "zh": "我不同意",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "I disagree—this approach has too many risks."
-  },
-  {
-    "word": "really",
-    "zh": "真的吗 / 真的",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Really? I didn't know that at all!"
-  },
-  {
-    "word": "exactly",
-    "zh": "正是 / 确实",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Exactly! That's what I've been saying all along."
-  },
-  {
     "word": "anyway",
     "zh": "不管怎样",
     "pos": "adv.",
@@ -180,13 +19,6 @@
     "pos": "adv.",
     "ipa": "",
     "ex": "Actually, I prefer the first option you mentioned."
-  },
-  {
-    "word": "honestly",
-    "zh": "说实话",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Honestly, I'm not sure this plan will work."
   },
   {
     "word": "unfortunately",
@@ -229,27 +61,6 @@
     "pos": "adv.",
     "ipa": "",
     "ex": "Can you be more specific about the project deadline?"
-  },
-  {
-    "word": "take care",
-    "zh": "保重 / 注意",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Take care! Stay safe on your trip."
-  },
-  {
-    "word": "good luck",
-    "zh": "祝好运",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Good luck with your job interview tomorrow!"
-  },
-  {
-    "word": "have a nice day",
-    "zh": "祝你有美好的一天",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Have a nice day! See you next week."
   },
   {
     "word": "what do you mean",
@@ -350,60 +161,11 @@
     "ex": "I'm not sure about the exact figures—let me check."
   },
   {
-    "word": "wake up",
-    "zh": "醒来 / 起床",
-    "pos": "phr.v.",
-    "ipa": "",
-    "ex": "I usually wake up at 7 a.m. on weekdays."
-  },
-  {
-    "word": "get up",
-    "zh": "起床",
-    "pos": "phr.v.",
-    "ipa": "",
-    "ex": "It's hard to get up early in winter."
-  },
-  {
-    "word": "shower",
-    "zh": "淋浴",
-    "pos": "n./v.",
-    "ipa": "",
-    "ex": "I take a shower every morning before breakfast."
-  },
-  {
-    "word": "brush teeth",
-    "zh": "刷牙",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Don't forget to brush your teeth before bed."
-  },
-  {
-    "word": "get dressed",
-    "zh": "穿衣服",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "She got dressed quickly and rushed to the morning meeting."
-  },
-  {
-    "word": "have breakfast",
-    "zh": "吃早饭",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "I always have breakfast before going to work."
-  },
-  {
     "word": "cook dinner",
     "zh": "做晚饭",
     "pos": "phr.",
     "ipa": "",
     "ex": "Let's cook dinner at home instead of eating out tonight."
-  },
-  {
-    "word": "wash dishes",
-    "zh": "洗碗",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "It's your turn to wash dishes tonight."
   },
   {
     "word": "do laundry",
@@ -427,25 +189,11 @@
     "ex": "Please take out the trash—the bin is overflowing!"
   },
   {
-    "word": "go to bed",
-    "zh": "上床睡觉",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "The kids should go to bed by nine o'clock."
-  },
-  {
     "word": "alarm",
     "zh": "闹钟",
     "pos": "n.",
     "ipa": "",
     "ex": "Set an alarm for 6:30 so we don't oversleep."
-  },
-  {
-    "word": "fridge",
-    "zh": "冰箱",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "There's leftover pizza in the fridge from last night."
   },
   {
     "word": "microwave",
@@ -467,48 +215,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "The washing machine finished—please hang the clothes out."
-  },
-  {
-    "word": "bedroom",
-    "zh": "卧室",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The apartment has two bedrooms and one bathroom."
-  },
-  {
-    "word": "bathroom",
-    "zh": "浴室 / 卫生间",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The bathroom is occupied right now—please wait a moment."
-  },
-  {
-    "word": "kitchen",
-    "zh": "厨房",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "She loves cooking in her spacious, well-equipped kitchen."
-  },
-  {
-    "word": "living room",
-    "zh": "客厅",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Everyone gathered in the living room to watch the game."
-  },
-  {
-    "word": "neighbor",
-    "zh": "邻居",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Our neighbors are very friendly and always say hello."
-  },
-  {
-    "word": "apartment",
-    "zh": "公寓",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I'm looking for a two-bedroom apartment near downtown."
   },
   {
     "word": "rent",
@@ -1463,13 +1169,6 @@
     "ex": "I need to apply for a Schengen visa before I travel to Europe."
   },
   {
-    "word": "ticket",
-    "zh": "票 / 门票",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I booked my train tickets online two weeks in advance."
-  },
-  {
     "word": "flight",
     "zh": "航班",
     "pos": "n.",
@@ -1575,13 +1274,6 @@
     "ex": "The immigration queue at the airport was almost two hours long."
   },
   {
-    "word": "hotel",
-    "zh": "酒店",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I booked a hotel near the city centre for three nights."
-  },
-  {
     "word": "hostel",
     "zh": "青旅 / 青年旅舍",
     "pos": "n.",
@@ -1650,20 +1342,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "The city has dozens of top tourist attractions worth visiting."
-  },
-  {
-    "word": "map",
-    "zh": "地图",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Download an offline map before you travel to save mobile data."
-  },
-  {
-    "word": "taxi",
-    "zh": "出租车",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Let's grab a taxi—it's too far to walk with all this luggage."
   },
   {
     "word": "subway",
@@ -2240,13 +1918,6 @@
     "ex": "Still or sparkling water for the table tonight?"
   },
   {
-    "word": "coffee",
-    "zh": "咖啡",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I'll have a flat white coffee with oat milk, please."
-  },
-  {
     "word": "vegetarian",
     "zh": "素食的 / 素食者",
     "pos": "adj./n.",
@@ -2308,20 +1979,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "The portions here are enormous—we could easily share one dish."
-  },
-  {
-    "word": "takeaway",
-    "zh": "外卖 / 打包",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Is this for dining in or takeaway? I'll pack it for you if needed."
-  },
-  {
-    "word": "delivery",
-    "zh": "外送",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Delivery usually takes around 30 minutes from this restaurant."
   },
   {
     "word": "dine in",
@@ -2392,13 +2049,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "The hotel serves an all-you-can-eat breakfast buffet every morning."
-  },
-  {
-    "word": "reservation",
-    "zh": "预订 / 预约",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I have a reservation under the name Johnson for 7 p.m."
   },
   {
     "word": "waiting list",
@@ -2492,13 +2142,6 @@
     "ex": "There is a small corkage fee if you bring your own wine."
   },
   {
-    "word": "doctor",
-    "zh": "医生",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The doctor said I need to rest for at least a week."
-  },
-  {
     "word": "nurse",
     "zh": "护士",
     "pos": "n.",
@@ -2513,25 +2156,11 @@
     "ex": "The waiting room was full of patients this morning."
   },
   {
-    "word": "appointment",
-    "zh": "就医预约",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I made an appointment with my GP for next Tuesday."
-  },
-  {
     "word": "clinic",
     "zh": "诊所",
     "pos": "n.",
     "ipa": "",
     "ex": "There is a walk-in clinic open on weekends near the station."
-  },
-  {
-    "word": "hospital",
-    "zh": "医院",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "She was admitted to hospital for emergency surgery last night."
   },
   {
     "word": "emergency room",
@@ -2961,13 +2590,6 @@
     "ex": "Everything in the store is 50% off during the annual sale."
   },
   {
-    "word": "discount",
-    "zh": "折扣",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Use this coupon code to get a 20% discount on your next order."
-  },
-  {
     "word": "promotion",
     "zh": "促销活动",
     "pos": "n.",
@@ -3120,13 +2742,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "This limited edition sneaker sold out in under ten minutes."
-  },
-  {
-    "word": "receipt",
-    "zh": "收据",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Keep your receipt—you'll need it if you want a refund."
   },
   {
     "word": "gift wrap",
@@ -3381,25 +2996,11 @@
     "ex": "Move 20% of your paycheck into a savings account each month."
   },
   {
-    "word": "deposit",
-    "zh": "存款 / 存入",
-    "pos": "n./v.",
-    "ipa": "",
-    "ex": "You can deposit cash at any branch or via the ATM."
-  },
-  {
     "word": "withdraw",
     "zh": "取款",
     "pos": "v.",
     "ipa": "",
     "ex": "I need to withdraw some local currency before the trip."
-  },
-  {
-    "word": "transfer",
-    "zh": "转账",
-    "pos": "n./v.",
-    "ipa": "",
-    "ex": "I'll transfer the money to your account by this afternoon."
   },
   {
     "word": "wire transfer",
@@ -3493,13 +3094,6 @@
     "ex": "She decided to invest part of her savings in index funds."
   },
   {
-    "word": "budget",
-    "zh": "预算",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Stick to your monthly budget to avoid overspending."
-  },
-  {
     "word": "debt",
     "zh": "债务",
     "pos": "n.",
@@ -3568,13 +3162,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "Most people now use their smartphone as their primary camera."
-  },
-  {
-    "word": "tablet",
-    "zh": "平板电脑",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "She uses a tablet for reading and watching videos on the commute."
   },
   {
     "word": "app",
@@ -3759,41 +3346,6 @@
     "ex": "Could I borrow a phone charger? My battery is almost dead."
   },
   {
-    "word": "sunny",
-    "zh": "晴朗的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "It's a beautiful sunny day—perfect for a walk in the park."
-  },
-  {
-    "word": "cloudy",
-    "zh": "多云的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "It's cloudy today but it shouldn't rain until this evening."
-  },
-  {
-    "word": "rainy",
-    "zh": "下雨的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "It's been rainy all week—I haven't seen the sun in days."
-  },
-  {
-    "word": "snowy",
-    "zh": "下雪的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "The roads are slippery after a snowy night—drive carefully."
-  },
-  {
-    "word": "windy",
-    "zh": "刮风的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "It's very windy today—hold on to your hat!"
-  },
-  {
     "word": "foggy",
     "zh": "有雾的",
     "pos": "adj.",
@@ -3834,20 +3386,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "Stay away from tall trees during a lightning storm."
-  },
-  {
-    "word": "forecast",
-    "zh": "天气预报",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "According to the forecast, it will rain heavily tomorrow afternoon."
-  },
-  {
-    "word": "temperature",
-    "zh": "温度",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The temperature is expected to drop to below zero overnight."
   },
   {
     "word": "Celsius",
@@ -3906,62 +3444,6 @@
     "ex": "What season is the best time to visit your country?"
   },
   {
-    "word": "spring",
-    "zh": "春天",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Cherry blossoms bloom beautifully in spring across Japan."
-  },
-  {
-    "word": "autumn",
-    "zh": "秋天 / 秋季",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The autumn leaves turn brilliant shades of red and gold."
-  },
-  {
-    "word": "happy",
-    "zh": "开心的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "I'm so happy to hear that you got the job—well done!"
-  },
-  {
-    "word": "sad",
-    "zh": "悲伤的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "She felt sad after saying goodbye to her friends at the airport."
-  },
-  {
-    "word": "angry",
-    "zh": "愤怒的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "He got very angry when he found out about the mistake."
-  },
-  {
-    "word": "excited",
-    "zh": "兴奋的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "The children were so excited about the upcoming school trip."
-  },
-  {
-    "word": "nervous",
-    "zh": "紧张的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "She was nervous before the presentation but did really well."
-  },
-  {
-    "word": "worried",
-    "zh": "担忧的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "I'm worried about my father's health—he hasn't been well lately."
-  },
-  {
     "word": "confused",
     "zh": "困惑的",
     "pos": "adj.",
@@ -4016,20 +3498,6 @@
     "pos": "adj.",
     "ipa": "",
     "ex": "I was so embarrassed when I forgot his name during introductions."
-  },
-  {
-    "word": "bored",
-    "zh": "无聊的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "I'm bored of doing the same tasks every day—I need a new challenge."
-  },
-  {
-    "word": "tired",
-    "zh": "疲惫的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "I'm absolutely tired after working 12 hours straight today."
   },
   {
     "word": "stressed",
@@ -4515,13 +3983,6 @@
     "ex": "I'll get back to you with the figures right away."
   },
   {
-    "word": "what's up",
-    "zh": "怎么了 / 最近咋样",
-    "pos": "phr.",
-    "ipa": "",
-    "ex": "Hey, what's up? You look a bit worried today."
-  },
-  {
     "word": "catch up",
     "zh": "叙旧 / 赶上",
     "pos": "phr.v.",
@@ -4613,13 +4074,6 @@
     "ex": "Let me set up a meeting for the three of us next Monday morning."
   },
   {
-    "word": "check out",
-    "zh": "查看 / 了解",
-    "pos": "phr.v.",
-    "ipa": "",
-    "ex": "Check out this article—it's directly relevant to what we discussed."
-  },
-  {
     "word": "get back to",
     "zh": "回复 / 回头联系",
     "pos": "phr.v.",
@@ -4648,95 +4102,11 @@
     "ex": "It's quarter to eight—we need to leave now or we'll miss the bus."
   },
   {
-    "word": "noon",
-    "zh": "正午",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Let's meet for lunch at noon outside the office."
-  },
-  {
-    "word": "midnight",
-    "zh": "午夜",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The flight lands at midnight, so I'll take a taxi home."
-  },
-  {
-    "word": "morning",
-    "zh": "早上 / 上午",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I'm most productive in the morning before the emails pile up."
-  },
-  {
-    "word": "afternoon",
-    "zh": "下午",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The workshop runs from two to five in the afternoon."
-  },
-  {
-    "word": "evening",
-    "zh": "傍晚 / 晚上",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "We're going to a jazz concert tomorrow evening."
-  },
-  {
-    "word": "tonight",
-    "zh": "今晚",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Are you free for dinner tonight? I know a great new place."
-  },
-  {
-    "word": "yesterday",
-    "zh": "昨天",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "I submitted the report yesterday—did you get a chance to read it?"
-  },
-  {
-    "word": "tomorrow",
-    "zh": "明天",
-    "pos": "adv.",
-    "ipa": "",
-    "ex": "Tomorrow is my last day at this company."
-  },
-  {
     "word": "day after tomorrow",
     "zh": "后天",
     "pos": "phr.",
     "ipa": "",
     "ex": "The parcel is expected to arrive the day after tomorrow."
-  },
-  {
-    "word": "weekend",
-    "zh": "周末",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Do you have any plans for the coming weekend?"
-  },
-  {
-    "word": "weekday",
-    "zh": "工作日",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The office is only open on weekdays, nine to six."
-  },
-  {
-    "word": "Monday",
-    "zh": "周一",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The project kickoff is scheduled for Monday morning."
-  },
-  {
-    "word": "Friday",
-    "zh": "周五",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Everyone looks forward to Friday afternoon."
   },
   {
     "word": "punctual",
@@ -4835,13 +4205,6 @@
     "pos": "prep.",
     "ipa": "",
     "ex": "Please review the materials prior to attending the training."
-  },
-  {
-    "word": "school",
-    "zh": "学校",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "My children go to an international school near our home."
   },
   {
     "word": "university",
@@ -4977,13 +4340,6 @@
     "ex": "Effective note-taking helps you retain information much longer."
   },
   {
-    "word": "homework",
-    "zh": "家庭作业",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The teacher assigns homework every evening to reinforce the lesson."
-  },
-  {
     "word": "ingredient",
     "zh": "食材 / 原料",
     "pos": "n.",
@@ -5040,13 +4396,6 @@
     "ex": "Stock up on frozen food so you always have a quick meal option."
   },
   {
-    "word": "snack",
-    "zh": "零食",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "I keep healthy snacks at my desk to avoid vending machine temptation."
-  },
-  {
     "word": "cuisine",
     "zh": "菜系 / 烹饪风格",
     "pos": "n.",
@@ -5066,20 +4415,6 @@
     "pos": "n.",
     "ipa": "",
     "ex": "Fresh herbs like basil and rosemary enhance any dish."
-  },
-  {
-    "word": "vegetable",
-    "zh": "蔬菜",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Try to include a variety of colourful vegetables in every meal."
-  },
-  {
-    "word": "fruit",
-    "zh": "水果",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Eating two portions of fruit per day is good for your health."
   },
   {
     "word": "protein",
@@ -5271,20 +4606,6 @@
     "ex": "My toothache has been unbearable—I need to see a dentist today."
   },
   {
-    "word": "sleep",
-    "zh": "睡眠 / 睡觉",
-    "pos": "n./v.",
-    "ipa": "",
-    "ex": "Most adults need between seven and nine hours of sleep each night."
-  },
-  {
-    "word": "healthy",
-    "zh": "健康的",
-    "pos": "adj.",
-    "ipa": "",
-    "ex": "Maintaining a healthy lifestyle reduces the risk of many diseases."
-  },
-  {
     "word": "fit",
     "zh": "健康的 / 合适的",
     "pos": "adj.",
@@ -5402,13 +4723,6 @@
     "pos": "adj.",
     "ipa": "",
     "ex": "The awards ceremony is formal, so dress accordingly."
-  },
-  {
-    "word": "size",
-    "zh": "尺码",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "Do you have this jacket in a size large or extra-large?"
   },
   {
     "word": "tight",
@@ -5642,39 +4956,11 @@
     "ex": "Your tone of voice matters as much as the words you choose."
   },
   {
-    "word": "ocean",
-    "zh": "海洋",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The ocean covers more than 70% of the Earth's surface."
-  },
-  {
-    "word": "river",
-    "zh": "河流",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "We went kayaking down the river on a sunny afternoon."
-  },
-  {
-    "word": "forest",
-    "zh": "森林",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "The ancient forest is home to hundreds of rare species."
-  },
-  {
     "word": "desert",
     "zh": "沙漠",
     "pos": "n.",
     "ipa": "",
     "ex": "Temperatures in the Sahara Desert can exceed 50 degrees Celsius."
-  },
-  {
-    "word": "island",
-    "zh": "岛屿",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "We spent a week on a beautiful tropical island."
   },
   {
     "word": "earthquake",
@@ -6389,13 +5675,6 @@
     "pos": "n./v.",
     "ipa": "",
     "ex": "The host raised a glass and made a toast to the new partnership."
-  },
-  {
-    "word": "gift",
-    "zh": "礼物",
-    "pos": "n.",
-    "ipa": "",
-    "ex": "It is polite to bring a small gift when visiting someone's home."
   },
   {
     "word": "host",
