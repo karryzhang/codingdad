@@ -2945,7 +2945,7 @@ new Vue({
             const timeoutId  = setTimeout(() => controller.abort(), 18000);
             try {
                 const res = await fetch(
-                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+                    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`,
                     {
                         method:  'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -2959,9 +2959,11 @@ new Vue({
                 clearTimeout(timeoutId);
                 if (!res.ok) {
                     const status = res.status;
+                    let apiMsg = '';
+                    try { const e = await res.json(); apiMsg = e.error?.message || ''; } catch (_) {}
                     if (status === 429) throw { _type: 'rate_limit' };
-                    if (status === 400 || status === 403) throw { _type: 'key_error' };
-                    throw { _type: 'generic' };
+                    if (status === 403) throw { _type: 'key_error', msg: apiMsg };
+                    throw { _type: 'generic', msg: `HTTP ${status}${apiMsg ? ': ' + apiMsg : ''}` };
                 }
                 const data = await res.json();
                 const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -2974,11 +2976,11 @@ new Vue({
                 } else if (e._type === 'rate_limit') {
                     this.readingError = this.ui.readingErr429;
                 } else if (e._type === 'key_error') {
-                    this.readingError = this.ui.readingErrKey;
+                    this.readingError = this.ui.readingErrKey + (e.msg ? '\n' + e.msg : '');
                 } else if (e instanceof TypeError || !navigator.onLine) {
                     this.readingError = this.ui.readingErrNet;
                 } else {
-                    this.readingError = this.ui.readingError;
+                    this.readingError = (e.msg || this.ui.readingError);
                 }
             } finally {
                 this.readingLoading = false;
