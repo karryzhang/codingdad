@@ -109,6 +109,95 @@
             padding: 20px;
             opacity: 0.8;
         }
+
+        .history-list {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .history-list h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .history-list-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .history-item {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            color: #667eea;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .history-item:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .history-item.active {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        .view-tabs {
+            margin: 20px 0;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            gap: 30px;
+        }
+
+        .view-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .view-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .view-tab:hover {
+            color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #e0e0e0;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -118,9 +207,24 @@
             <p>每日精选行业关键信息 • PayFi • 钱包竞争 • 交易能力</p>
         </header>
 
-        <div class="brief-grid" id="briefGrid"></div>
+        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin-bottom: 30px;">
+            <div class="view-tabs">
+                <div class="view-tab active" onclick="switchView('latest')">📊 最新简报</div>
+                <div class="view-tab" onclick="switchView('history')">📜 历史查询</div>
+            </div>
+        </div>
 
-        <div class="latest-brief" id="latestBrief"></div>
+        <div id="latestView">
+            <div class="latest-brief" id="latestBrief"></div>
+        </div>
+
+        <div id="historyView" style="display: none;">
+            <div class="history-list">
+                <h3>📅 历史简报</h3>
+                <div class="history-list-items" id="historyItems"></div>
+            </div>
+            <div class="latest-brief" id="historyBrief" style="margin-top: 20px;"></div>
+        </div>
 
         <div class="footer">
             <p>© 2026 Bitget Wallet Strategy Hub | 每天 9:00 SGT 更新</p>
@@ -128,51 +232,140 @@
     </div>
 
     <script>
-        // 获取最新的简报
-        fetch('./daily/latest.json')
-            .then(r => r.json())
-            .then(data => {
-                // 渲染最新简报内容
-                const container = document.getElementById('latestBrief');
-                container.innerHTML = `
-                    <div style="margin-bottom: 20px;">
-                        <h2 style="color: #667eea; margin-bottom: 10px;">📰 ${data.date} 最新简报</h2>
-                        <div style="margin-top: 25px;">
-                            ${data.domains.map((domain, idx) => `
-                                <div style="margin-bottom: 30px;">
-                                    <h3 style="color: #764ba2; font-size: 1.2em; margin-bottom: 15px;">${domain.icon} ${domain.name}</h3>
-                                    <div style="margin-left: 10px;">
-                                        ${domain.items.map((item, i) => `
-                                            <div style="margin-bottom: 15px; padding: 12px; background: #f5f5f5; border-left: 3px solid #667eea; border-radius: 4px;">
-                                                <div style="font-weight: bold; margin-bottom: 5px;">#${item.rank}. ${item.title}</div>
-                                                <div style="color: #999; font-size: 0.85em; margin-bottom: 8px;">📰 ${item.source} | ${item.time_relative} | 评分: <strong>${item.scoring.final_score}/100</strong></div>
-                                                <div style="color: #555; margin-bottom: 8px;">💡 ${item.impact}</div>
-                                                <a href="${item.url}" target="_blank" style="color: #667eea; text-decoration: none; font-size: 0.9em;">🔗 查看原文</a>
-                                            </div>
-                                        `).join('')}
+        const DAYS_TO_SHOW = 30;
+        let allBriefs = {};
+        let currentDate = null;
+
+        // 获取日期范围内的所有简报
+        async function loadAllBriefs() {
+            const today = new Date();
+            const dates = [];
+            for (let i = 0; i < DAYS_TO_SHOW; i++) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split('T')[0];
+                dates.push(dateStr);
+            }
+
+            // 尝试加载 latest.json 和日期版本文件
+            for (const date of dates) {
+                try {
+                    const response = await fetch(`./daily/${date}.json`);
+                    if (response.ok) {
+                        allBriefs[date] = await response.json();
+                    }
+                } catch (e) {
+                    // 文件不存在，跳过
+                }
+            }
+
+            // 也加载 latest.json
+            try {
+                const response = await fetch('./daily/latest.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    allBriefs[data.date] = data;
+                    if (!currentDate) currentDate = data.date;
+                }
+            } catch (e) {
+                console.error('Failed to load latest.json:', e);
+            }
+
+            // 初始化视图
+            displayLatest();
+            buildHistoryList();
+        }
+
+        function switchView(view) {
+            const tabs = document.querySelectorAll('.view-tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('latestView').style.display = view === 'latest' ? 'block' : 'none';
+            document.getElementById('historyView').style.display = view === 'history' ? 'block' : 'none';
+        }
+
+        function displayLatest() {
+            if (!currentDate || !allBriefs[currentDate]) {
+                document.getElementById('latestBrief').innerHTML = '<div class="loading"><div class="spinner"></div> 加载中...</div>';
+                return;
+            }
+            const data = allBriefs[currentDate];
+            renderBrief(data, 'latestBrief');
+        }
+
+        function displayBriefByDate(date) {
+            currentDate = date;
+            const items = document.querySelectorAll('.history-item');
+            items.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (allBriefs[date]) {
+                renderBrief(allBriefs[date], 'historyBrief');
+            }
+        }
+
+        function renderBrief(data, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <h2 style="color: #667eea; margin-bottom: 10px;">📰 ${data.date} 简报</h2>
+                    <div style="color: #999; font-size: 0.9em; margin-bottom: 15px;">
+                        共 ${data.summary?.articles_qualified || 9} 条 | 平均评分: ${data.summary?.avg_score?.toFixed(1) || 'N/A'}/100 | ${data.summary?.critical_alerts || 0} 个警报
+                    </div>
+                    <div style="margin-top: 25px;">
+                        ${data.domains.map((domain, idx) => `
+                            <div style="margin-bottom: 30px;">
+                                <h3 style="color: #764ba2; font-size: 1.2em; margin-bottom: 15px;">${domain.icon} ${domain.name}</h3>
+                                <div style="margin-left: 10px;">
+                                    ${domain.items.map((item, i) => `
+                                        <div style="margin-bottom: 15px; padding: 12px; background: #f5f5f5; border-left: 3px solid ${
+                                            item.alert_level === 'CRITICAL' ? '#ff6b6b' :
+                                            item.alert_level === 'HIGH' ? '#ff9800' : '#667eea'
+                                        }; border-radius: 4px;">
+                                            <div style="font-weight: bold; margin-bottom: 5px;">#${item.rank}. ${item.title}</div>
+                                            <div style="color: #999; font-size: 0.85em; margin-bottom: 8px;">📰 ${item.source} | ${item.time_relative} | 评分: <strong>${item.scoring.final_score}/100</strong></div>
+                                            <div style="color: #555; margin-bottom: 8px;">💡 ${item.impact}</div>
+                                            <a href="${item.url}" target="_blank" style="color: #667eea; text-decoration: none; font-size: 0.9em;">🔗 查看原文</a>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${data.alerts && data.alerts.length > 0 ? `
+                        <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #ffe5e5 0%, #fff0f0 100%); border-left: 4px solid #ff6b6b; border-radius: 6px;">
+                            <h3 style="color: #ff6b6b; margin-bottom: 15px;">🚨 紧急警报 (${data.alerts.length})</h3>
+                            ${data.alerts.map(alert => `
+                                <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 4px; border-left: 3px solid ${alert.level === 'CRITICAL' ? '#ff6b6b' : '#ff9800'};">
+                                    <div style="font-weight: bold; color: ${alert.level === 'CRITICAL' ? '#ff6b6b' : '#ff9800'}; margin-bottom: 5px;">
+                                        ${alert.level === 'CRITICAL' ? '🔴' : '⚠️'} ${alert.title}
                                     </div>
+                                    <div style="color: #555; font-size: 0.95em;">→ ${alert.action}</div>
                                 </div>
                             `).join('')}
                         </div>
-                        ${data.alerts && data.alerts.length > 0 ? `
-                            <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #ffe5e5 0%, #fff0f0 100%); border-left: 4px solid #ff6b6b; border-radius: 6px;">
-                                <h3 style="color: #ff6b6b; margin-bottom: 15px;">🚨 紧急警报 (${data.alerts.length})</h3>
-                                ${data.alerts.map(alert => `
-                                    <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 4px; border-left: 3px solid ${alert.level === 'CRITICAL' ? '#ff6b6b' : '#ff9800'};">
-                                        <div style="font-weight: bold; color: ${alert.level === 'CRITICAL' ? '#ff6b6b' : '#ff9800'}; margin-bottom: 5px;">
-                                            ${alert.emoji} ${alert.level === 'CRITICAL' ? '🔴' : '⚠️'} ${alert.title}
-                                        </div>
-                                        <div style="color: #555; font-size: 0.95em;">→ ${alert.action}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            })
-            .catch(e => {
-                document.getElementById('latestBrief').innerHTML = '<p style="color: #999;">暂无最新简报</p>';
-            });
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function buildHistoryList() {
+            const container = document.getElementById('historyItems');
+            const dates = Object.keys(allBriefs).sort().reverse();
+
+            container.innerHTML = dates.map((date, idx) => `
+                <div class="history-item ${idx === 0 ? 'active' : ''}" onclick="displayBriefByDate('${date}')">
+                    ${date}
+                </div>
+            `).join('');
+        }
+
+        // 初始化
+        loadAllBriefs().catch(e => {
+            document.getElementById('latestBrief').innerHTML = '<p style="color: #999;">加载简报失败，请稍后重试</p>';
+            console.error('Error loading briefs:', e);
+        });
     </script>
 </body>
 </html>
