@@ -2523,7 +2523,17 @@ new Vue({
                 }
             }
 
-            const q = [...learning, ...shuffle(reviews), ...shuffle(newCards)];
+            // Interleave new cards into reviews (1 new per 4 reviews)
+            // so users see fresh content throughout instead of all new cards at the end
+            const shuffledRev = shuffle(reviews);
+            const shuffledNew = shuffle(newCards);
+            const interleaved = [];
+            let ri = 0, ni = 0;
+            while (ri < shuffledRev.length || ni < shuffledNew.length) {
+                for (let i = 0; i < 4 && ri < shuffledRev.length; i++) interleaved.push(shuffledRev[ri++]);
+                if (ni < shuffledNew.length) interleaved.push(shuffledNew[ni++]);
+            }
+            const q = [...learning, ...interleaved];
             this.queue        = q;
             this.sessionTotal = q.length || 1;
             this.prefetchAhead();
