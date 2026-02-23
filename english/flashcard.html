@@ -2273,7 +2273,7 @@ new Vue({
             });
         },
         masteredCount() {
-            return Object.values(this.state).filter(s => s && s.stage === 'mature').length;
+            return Object.values(this.state).filter(s => s && s.stage === 'mastered').length;
         },
         levelInfo() {
             const n = this.masteredCount;
@@ -2650,6 +2650,7 @@ new Vue({
                         nextMs     = 9999 * 86400000;
                         this.points += 30;
                         this.streak += 1;
+                        this.sessionCorrect++;
                     } else {
                         const ef = s.ef || 2.5;
                         if (level === 'hard') {
@@ -2665,6 +2666,7 @@ new Vue({
                         const pts = level === 'hard' ? 10 : 20;
                         this.points += pts;
                         this.streak += 1;
+                        this.sessionCorrect++;
                     }
                 }
             }
