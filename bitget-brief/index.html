@@ -144,8 +144,8 @@
                                     <div style="margin-left: 10px;">
                                         ${domain.items.map((item, i) => `
                                             <div style="margin-bottom: 15px; padding: 12px; background: #f5f5f5; border-left: 3px solid #667eea; border-radius: 4px;">
-                                                <div style="font-weight: bold; margin-bottom: 5px;">#${idx*3 + i + 1}. ${item.title}</div>
-                                                <div style="color: #999; font-size: 0.85em; margin-bottom: 8px;">📰 ${item.source} | ${item.time} | 相关度: <strong>${item.score}/10</strong></div>
+                                                <div style="font-weight: bold; margin-bottom: 5px;">#${item.rank}. ${item.title}</div>
+                                                <div style="color: #999; font-size: 0.85em; margin-bottom: 8px;">📰 ${item.source} | ${item.time_relative} | 评分: <strong>${item.scoring.final_score}/100</strong></div>
                                                 <div style="color: #555; margin-bottom: 8px;">💡 ${item.impact}</div>
                                                 <a href="${item.url}" target="_blank" style="color: #667eea; text-decoration: none; font-size: 0.9em;">🔗 查看原文</a>
                                             </div>
@@ -155,9 +155,16 @@
                             `).join('')}
                         </div>
                         ${data.alerts && data.alerts.length > 0 ? `
-                            <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 3px solid #ff6b6b; border-radius: 4px;">
-                                <h4 style="color: #ff6b6b;">🚨 紧急警报</h4>
-                                ${data.alerts.map(alert => `<p style="margin: 8px 0; color: #666;">${alert}</p>`).join('')}
+                            <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #ffe5e5 0%, #fff0f0 100%); border-left: 4px solid #ff6b6b; border-radius: 6px;">
+                                <h3 style="color: #ff6b6b; margin-bottom: 15px;">🚨 紧急警报 (${data.alerts.length})</h3>
+                                ${data.alerts.map(alert => `
+                                    <div style="margin-bottom: 12px; padding: 10px; background: white; border-radius: 4px; border-left: 3px solid ${alert.level === 'CRITICAL' ? '#ff6b6b' : '#ff9800'};">
+                                        <div style="font-weight: bold; color: ${alert.level === 'CRITICAL' ? '#ff6b6b' : '#ff9800'}; margin-bottom: 5px;">
+                                            ${alert.emoji} ${alert.level === 'CRITICAL' ? '🔴' : '⚠️'} ${alert.title}
+                                        </div>
+                                        <div style="color: #555; font-size: 0.95em;">→ ${alert.action}</div>
+                                    </div>
+                                `).join('')}
                             </div>
                         ` : ''}
                     </div>
