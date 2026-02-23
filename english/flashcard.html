@@ -2918,13 +2918,13 @@ new Vue({
             // Today's words first (prioritised in practice session)
             const todayWords = this.allWords.filter(w => {
                 const s = this.state[w.word];
-                return s && s.firstSeen === tdy;
+                return s && s.firstSeen === tdy && s.stage !== 'mastered';
             });
             // All other seen words as supplementary pool
             const otherWords = shuffle(
                 this.allWords.filter(w => {
                     const s = this.state[w.word];
-                    return s && s.firstSeen !== tdy;
+                    return s && s.firstSeen !== tdy && s.stage !== 'mastered';
                 })
             );
             // Combine: today's words + enough others to reach at least 8 total
