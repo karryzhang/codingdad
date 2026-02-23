@@ -2018,8 +2018,8 @@ const STRINGS = {
     practiceExitBtn:       '退出练习',
     undoBtn:               '↩ 撤销',
     wlNew:     '🆕 未学单词',
-    wlLearn:   '📖 学习中',
-    wlReview:  '🔁 复习中',
+    wlLearn:   '📖 学习中（学习 + 早期复习）',
+    wlReview:  '🔁 深度记忆（间隔 ≥ 21 天）',
     wlMastered:'🏆 已完全掌握',
     wlEmpty:   '暂无单词',
     wlClose:   '关闭',
@@ -2132,8 +2132,8 @@ const STRINGS = {
     practiceExitBtn:       'Exit Practice',
     undoBtn:               '↩ Undo',
     wlNew:     '🆕 Not Yet Learned',
-    wlLearn:   '📖 Learning',
-    wlReview:  '🔁 In Review',
+    wlLearn:   '📖 Learning (active + early review)',
+    wlReview:  '🔁 Deep Memory (interval ≥ 21 days)',
     wlMastered:'🏆 Fully Mastered',
     wlEmpty:   'No words here',
     wlClose:   'Close',
@@ -2526,12 +2526,15 @@ new Vue({
         },
         qs() {
             // Count ALL words in deck by stage (not just today's queue)
+            // learning/relearn/young → "in learning" (learning phase + early review, 1min–21d)
+            // mature                → "in review"   (well-established, interval > 21d)
             let newCount = 0, learnCount = 0, reviewCount = 0;
             for (const w of this.allWords) {
                 const s = this.state[w.word];
-                if (!s || s.stage === 'new')                               newCount++;
-                else if (s.stage === 'learning' || s.stage === 'relearn') learnCount++;
-                else if (s.stage !== 'mastered')                           reviewCount++;
+                if (!s || s.stage === 'new')                                         newCount++;
+                else if (s.stage === 'learning' || s.stage === 'relearn' || s.stage === 'young') learnCount++;
+                else if (s.stage === 'mature')                                       reviewCount++;
+                // mastered counted by masteredCount
             }
             return { newCount, learnCount, reviewCount };
         },
@@ -3286,8 +3289,8 @@ new Vue({
         showWordList(stageGroup) {
             const STAGE_GROUPS = {
                 new:      s => !s || s.stage === 'new',
-                learn:    s => s && (s.stage === 'learning' || s.stage === 'relearn'),
-                review:   s => s && (s.stage === 'young' || s.stage === 'mature'),
+                learn:    s => s && (s.stage === 'learning' || s.stage === 'relearn' || s.stage === 'young'),
+                review:   s => s && s.stage === 'mature',
                 mastered: s => s && s.stage === 'mastered',
             };
             const filter = STAGE_GROUPS[stageGroup];
