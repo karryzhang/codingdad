@@ -959,7 +959,7 @@
         .prac-opt:hover:not(:disabled) { border-color: var(--blue); background: #eff6ff; }
         .prac-opt:active:not(:disabled) { transform: scale(0.98); }
         .prac-opt:disabled { cursor: default; }
-        .prac-opt:focus, .prac-opt:focus-visible { outline: none; box-shadow: none; }
+        .prac-opt:focus, .prac-opt:focus-visible { outline: none; box-shadow: none; border-color: var(--border); }
         .prac-opt { display: flex; justify-content: space-between; align-items: center; -webkit-tap-highlight-color: transparent; }
         .prac-opt.correct  { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
         .prac-opt.wrong    { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
@@ -982,7 +982,7 @@
         .prac-tf-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
         .prac-tf-btn:active:not(:disabled){ transform: scale(0.97); }
         .prac-tf-btn:disabled { cursor: default; transform: none; box-shadow: none; }
-        .prac-tf-btn:focus, .prac-tf-btn:focus-visible { outline: none; box-shadow: none; }
+        .prac-tf-btn:focus, .prac-tf-btn:focus-visible { outline: none; box-shadow: none; border-color: var(--border); }
         .prac-tf-btn { display: flex; align-items: center; justify-content: center; gap: 8px; -webkit-tap-highlight-color: transparent; }
         .prac-tf-btn.correct { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
         .prac-tf-btn.wrong   { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
