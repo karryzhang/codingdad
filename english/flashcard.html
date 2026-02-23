@@ -1083,6 +1083,23 @@
         .prac-done-score { font-size: 1.1rem; color: var(--muted); font-weight: 600; }
         .prac-done-bar-wrap { width: 100%; max-width: 280px; background: var(--border); border-radius: 99px; height: 14px; overflow: hidden; }
         .prac-done-bar-fill  { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--green), var(--blue)); transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+        /* ── Matching question ─────────────────────────────────────────── */
+        .prac-match-wrap { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .prac-match-col  { display: flex; flex-direction: column; gap: 8px; }
+        .prac-match-item {
+            width: 100%; min-height: 48px; padding: 10px 8px;
+            border-radius: 10px; border: 1.5px solid var(--border);
+            background: var(--surface); color: var(--text);
+            font-size: 0.85rem; font-weight: 600; cursor: pointer;
+            text-align: center; line-height: 1.3;
+            transition: border-color 0.15s, background 0.15s, opacity 0.35s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .prac-match-item:hover:not(:disabled)  { border-color: var(--blue); background: #eff6ff; }
+        .prac-match-item:focus, .prac-match-item:focus-visible { outline: none; box-shadow: none; }
+        .prac-match-item.sel  { border-color: var(--blue); background: #dbeafe; color: var(--blue); }
+        .prac-match-item.elim { opacity: 0.22; cursor: default; border-color: var(--green); background: #f0fdf4; pointer-events: none; }
+        .prac-match-item.shake { animation: prac-shake 0.35s ease; border-color: var(--red) !important; background: #fef2f2 !important; }
 
         /* Practice start button (done screen + header) */
         .btn-practice {
@@ -1367,10 +1384,46 @@
                         <div class="prac-zh">{{practiceCurrent.displayZh}}</div>
                     </div>
                 </template>
+
+                <!-- matching: type label only in card; grid rendered below -->
+                <template v-else-if="practiceCurrent.type === 'matching'">
+                    <div class="prac-type-label">{{ui.practiceMatching}}</div>
+                    <div style="font-size:0.82rem;color:var(--muted);">
+                        {{matchElim.length}} / {{practiceCurrent.pairs.length}} ✓
+                    </div>
+                </template>
+            </div>
+
+            <!-- Matching grid (outside card, full-width) -->
+            <div v-if="practiceCurrent.type === 'matching'" class="prac-match-wrap">
+                <div class="prac-match-col">
+                    <button v-for="item in practiceCurrent.leftItems" :key="item.key"
+                            class="prac-match-item"
+                            :class="{
+                                sel:   matchSelLeft === item.key,
+                                elim:  matchElim.includes(item.key),
+                                shake: matchShakeKeys.includes(item.key),
+                            }"
+                            @click="selectMatchLeft(item.key)">
+                        {{item.label}}
+                    </button>
+                </div>
+                <div class="prac-match-col">
+                    <button v-for="item in practiceCurrent.rightItems" :key="item.key"
+                            class="prac-match-item"
+                            :class="{
+                                elim:  matchElim.includes(item.key),
+                                shake: matchShakeKeys.includes(item.key),
+                            }"
+                            :style="!matchSelLeft && !matchElim.includes(item.key) ? 'opacity:0.55' : ''"
+                            @click="selectMatchRight(item.key)">
+                        {{item.label}}
+                    </button>
+                </div>
             </div>
 
             <!-- MC options (shared by mc-word-to-zh, mc-zh-to-word, mc-audio-to-word) -->
-            <div v-if="practiceCurrent.type !== 'spelling' && practiceCurrent.type !== 'truefalse'"
+            <div v-if="practiceCurrent.type !== 'spelling' && practiceCurrent.type !== 'truefalse' && practiceCurrent.type !== 'matching'"
                  class="prac-options">
                 <button v-for="opt in practiceCurrent.options" :key="opt.value"
                         class="prac-opt"
@@ -1808,6 +1861,7 @@ const STRINGS = {
     practiceNext:          '下一题 →',
     practiceTrueBtn:       '✓ 正确',
     practiceFalseBtn:      '✗ 错误',
+    practiceMatching:      '连一连 · 选中左边再点右边配对',
     practiceCorrect:       '✓ 正确！',
     practiceWrong:         '✗ 错误',
     practiceCorrectAns:    '正确答案：',
@@ -1914,6 +1968,7 @@ const STRINGS = {
     practiceNext:          'Next →',
     practiceTrueBtn:       '✓ True',
     practiceFalseBtn:      '✗ False',
+    practiceMatching:      'Match · tap left then right to pair',
     practiceCorrect:       '✓ Correct!',
     practiceWrong:         '✗ Wrong',
     practiceCorrectAns:    'Correct: ',
@@ -2129,6 +2184,20 @@ const Q_GENERATORS = {
             displayZh,
         };
     },
+
+    'matching': function(word, pool) {
+        const dist = getDistractors(word, pool, 5);
+        if (dist.length < 5) return null;
+        const pairs = shuffle([word, ...dist]);
+        return {
+            type:       'matching',
+            word,
+            correct:    'done',
+            pairs,
+            leftItems:  pairs.map(w => ({ label: w.word, key: w.word })),
+            rightItems: shuffle(pairs.map(w => ({ label: shortZh(w.zh), key: w.word }))),
+        };
+    },
 };
 
 /**
@@ -2138,17 +2207,23 @@ const Q_GENERATORS = {
  */
 function buildPracticeSession(todayWords, allWords, dictCache) {
     if (todayWords.length < 2) return [];
-    const pool  = allWords.length >= 8 ? allWords : todayWords;
-    const types = Object.keys(Q_GENERATORS);
-    const questions = [];
+    const pool       = allWords.length >= 8 ? allWords : todayWords;
+    const singleTypes = Object.keys(Q_GENERATORS).filter(t => t !== 'matching');
+    const questions  = [];
 
     for (const w of todayWords) {
         const quota  = todayWords.length > 5 ? 2 : 1;
-        const picked = shuffle([...types]).slice(0, quota);
+        const picked = shuffle([...singleTypes]).slice(0, quota);
         for (const t of picked) {
             const q = Q_GENERATORS[t](w, pool, dictCache);
             if (q) questions.push(q);
         }
+    }
+    // Add one matching round if the pool is large enough (needs 5 distractors)
+    if (pool.length >= 6) {
+        const anchor = shuffle([...todayWords])[0];
+        const mq = Q_GENERATORS['matching'](anchor, pool, dictCache);
+        if (mq) questions.push(mq);
     }
     return shuffle(questions).slice(0, MAX_PRACTICE);
 }
@@ -2198,6 +2273,10 @@ new Vue({
             practiceResult:   null,   // 'correct' | 'wrong'
             practiceDone:     false,
             practiceWrongWords: [],   // word objects answered incorrectly
+            // ── Matching question state ───────────────────────────────
+            matchSelLeft:  null,      // key of selected left item
+            matchElim:     [],        // keys of matched pairs
+            matchShakeKeys:[],        // keys currently shaking (wrong match)
             // ── Reading overlay ──────────────────────────────────────
             readingOpen:     false,
             readingArticle:  '',
@@ -3051,6 +3130,37 @@ new Vue({
             }
         },
 
+        selectMatchLeft(key) {
+            if (this.matchElim.includes(key)) return;
+            this.matchSelLeft = (this.matchSelLeft === key) ? null : key;
+        },
+        selectMatchRight(key) {
+            if (!this.matchSelLeft || this.matchElim.includes(key)) return;
+            if (this.matchSelLeft === key) {
+                // Correct pair
+                this.matchElim = [...this.matchElim, key];
+                this.matchSelLeft = null;
+                playFeedbackSound('correct');
+                if (this.matchElim.length === this.practiceCurrent.pairs.length) {
+                    // All matched — count as correct, auto-advance
+                    this.practiceScore++;
+                    this.practiceAnswered = true;
+                    clearTimeout(this._practiceTimer);
+                    this._practiceTimer = setTimeout(() => this.nextPracticeQuestion(), 1200);
+                }
+            } else {
+                // Wrong pair — shake both, track wrong word
+                const leftKey = this.matchSelLeft;
+                this.matchShakeKeys = [leftKey, key];
+                setTimeout(() => { this.matchShakeKeys = []; }, 400);
+                const wobj = this.practiceCurrent.pairs.find(p => p.word === leftKey);
+                if (wobj && !this.practiceWrongWords.some(w => w.word === wobj.word)) {
+                    this.practiceWrongWords.push(wobj);
+                }
+                this.matchSelLeft = null;
+                playFeedbackSound('wrong');
+            }
+        },
         submitPracticeAnswer(val) {
             if (this.practiceAnswered || !this.practiceCurrent) return;
             const norm      = s => s.toLowerCase().trim();
@@ -3089,6 +3199,9 @@ new Vue({
             this.practiceSelected = null;
             this.practiceInput    = '';
             this.practiceResult   = null;
+            this.matchSelLeft     = null;
+            this.matchElim        = [];
+            this.matchShakeKeys   = [];
             this._afterPracticeQuestion();
         },
 
