@@ -1207,6 +1207,10 @@
             font-weight: 800;
             color: var(--blue);
             font-style: normal;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 3px;
         }
         .reading-word-list {
             padding-top: 16px; border-top: 1px solid var(--border);
@@ -1238,6 +1242,39 @@
             .prac-tf-btn   { font-size: 0.9rem; padding: 13px 8px; }
             .prac-card     { padding: 20px 14px 16px; gap: 8px; }
         }
+        /* ── Undo button (floats briefly after each SRS answer) ────────────── */
+        .undo-btn {
+            position: fixed;
+            bottom: calc(72px + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 250;
+            background: rgba(30,37,51,0.86);
+            color: #fff;
+            border: none;
+            padding: 9px 22px;
+            border-radius: 99px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+            pointer-events: auto;
+        }
+        .undo-btn:hover  { background: rgba(30,37,51,0.97); }
+        .undo-btn:active { transform: translateX(-50%) scale(0.96); }
+
+        /* ── Practice exit button (in progress row) ─────────────────────── */
+        .prac-exit-btn {
+            background: none; border: none; cursor: pointer;
+            color: var(--muted); font-size: 1.1rem; padding: 2px 4px;
+            line-height: 1; flex-shrink: 0; border-radius: 6px;
+            transition: color 0.15s;
+        }
+        .prac-exit-btn:hover { color: var(--red); }
+
     </style>
 </head>
 <body>
@@ -1327,11 +1364,12 @@
 
             <!-- Progress bar (outside transition so it stays stable) -->
             <div class="prac-progress">
+                <button class="prac-exit-btn" @click="exitPractice" :title="ui.practiceExitBtn">✕</button>
                 <div class="prac-prog-track">
                     <div class="prac-prog-fill" :style="{width: (practiceIndex / practiceQueue.length * 100) + '%'}"></div>
                 </div>
                 <div class="prac-prog-text">{{practiceIndex + 1}} / {{practiceQueue.length}}</div>
-                <div class="prac-score">✦ {{practiceScore}}</div>
+                <div class="prac-score">{{practiceScore}} ⭐</div>
             </div>
 
             <!-- Animated question body -->
@@ -1415,7 +1453,7 @@
                                 elim:  matchElim.includes(item.key),
                                 shake: matchShakeKeys.includes(item.key),
                             }"
-                            :style="!matchSelLeft && !matchElim.includes(item.key) ? 'opacity:0.55' : ''"
+                            :style="matchSelLeft && !matchElim.includes(item.key) ? 'border-color:var(--blue);background:#eff6ff' : ''"
                             @click="selectMatchRight(item.key)">
                         {{item.label}}
                     </button>
@@ -1660,7 +1698,7 @@
     </main>
 
     <!-- Footer -->
-    <div v-if="!loading && !sessionDone" class="ft">
+    <div v-if="!loading && !sessionDone && !practiceMode" class="ft">
         <div class="ft-row">
             <span>{{ui.ftPoints}} <strong>{{points}}</strong></span>
             <span>{{ui.ftStreak}} <strong>{{streak}}</strong></span>
@@ -1683,6 +1721,11 @@
             <div v-if="toast" class="toast" :class="'t-' + toast.type">{{toast.msg}}</div>
         </transition>
     </div>
+
+    <!-- Undo last answer button (visible for 4s after each SRS answer) -->
+    <transition name="toast">
+        <button v-if="showUndo && !practiceMode" class="undo-btn" @click="undoAnswer">{{ui.undoBtn}}</button>
+    </transition>
 
     <!-- ── Reading overlay ─────────────────────────────────────────── -->
     <div v-if="readingOpen" class="reading-overlay">
@@ -1717,7 +1760,7 @@
 
             <!-- Article -->
             <template v-else-if="readingArticle">
-                <div class="reading-article" v-html="highlightedArticle"></div>
+                <div class="reading-article" v-html="highlightedArticle" @click="onVocabHlClick"></div>
                 <div class="reading-word-list">
                     <span style="font-weight:600;color:var(--text)">{{ui.readingWordList}}</span>
                     <span v-for="(w, i) in readingWordObjs" :key="w.word">
@@ -1825,7 +1868,7 @@ const STRINGS = {
       30: { msg: '🌟 连击 30！封神！',     type: 'bonus' },
       50: { msg: '🚀 连击 50！无人能及！', type: 'bonus' },
     },
-    stages: { new: '新词', learning: '学习中', young: '熟悉', mature: '已掌握', relearn: '重学' },
+    stages: { new: '新词', learning: '学习中', young: '熟悉', mature: '已掌握', relearn: '重学', mastered: '完全掌握' },
     levels: [
       { min:    0, icon: '🌱', name: '初学者', desc: '继续加油！' },
       { min:   50, icon: '📘', name: '入门者', desc: '进步神速！' },
@@ -1871,6 +1914,7 @@ const STRINGS = {
     practiceWrongTitle:    '需要加强的词汇',
     practicePlayAgain:     '再听一遍',
     practiceExitBtn:       '退出练习',
+    undoBtn:               '↩ 撤销',
     readingBtn:      '延伸阅读',
     readingTitle:    '今日词汇文章',
     readingClose:    '关闭',
@@ -1932,7 +1976,7 @@ const STRINGS = {
       30: { msg: '🌟 30-streak! Godlike!',type: 'bonus' },
       50: { msg: '🚀 50-streak! Unreal!', type: 'bonus' },
     },
-    stages: { new: 'New', learning: 'Learning', young: 'Young', mature: 'Mastered', relearn: 'Relearn' },
+    stages: { new: 'New', learning: 'Learning', young: 'Young', mature: 'Seasoned', relearn: 'Relearn', mastered: 'Mastered ✓' },
     levels: [
       { min:    0, icon: '🌱', name: 'Beginner',   desc: 'Keep it up!' },
       { min:   50, icon: '📘', name: 'Novice',     desc: 'Great progress!' },
@@ -1978,6 +2022,7 @@ const STRINGS = {
     practiceWrongTitle:    'Words to reinforce',
     practicePlayAgain:     'Play again',
     practiceExitBtn:       'Exit Practice',
+    undoBtn:               '↩ Undo',
     readingBtn:      'Story',
     readingTitle:    "Today's Vocab Story",
     readingClose:    'Close',
@@ -2286,6 +2331,9 @@ new Vue({
             readingWordObjs: [],
             geminiKey:       localStorage.getItem('gemini_key') || '',
             geminiKeyInput:  '',
+            // ── Undo ────────────────────────────────────────────────────
+            undoSnap:  null,   // pre-answer snapshot
+            showUndo:  false,  // undo button visibility
         };
     },
 
@@ -2384,7 +2432,7 @@ new Vue({
             for (const w of words) {
                 const esc = w.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                 html = html.replace(new RegExp(`\\b(${esc})\\b`, 'gi'),
-                    '<strong class="vocab-hl">$1</strong>');
+                    `<strong class="vocab-hl" data-word="${w.word}">$1</strong>`);
             }
             return html;
         },
@@ -2657,6 +2705,16 @@ new Vue({
             };
             if (!s.firstSeen) s.firstSeen = tdy;
 
+            // Save pre-answer snapshot for undo (totalReviewed already incremented above)
+            const _undoPrev = {
+                wordId,
+                prevState:      this.state[wordId] ? { ...this.state[wordId] } : null,
+                points:         this.points,
+                streak:         this.streak,
+                totalReviewed:  this.totalReviewed - 1,
+                sessionCorrect: this.sessionCorrect,
+            };
+
             let nextMs;
             let reinsert     = false;
             let newGraduated = false;   // new/learning → young/mature
@@ -2766,6 +2824,12 @@ new Vue({
             this.checkAchievements();
             this.saveGlobal();    // always persist totalReviewed + streak
 
+            // Show undo button for 4 seconds
+            this.undoSnap = _undoPrev;
+            this.showUndo = true;
+            clearTimeout(this._undoTimer);
+            this._undoTimer = setTimeout(() => { this.showUndo = false; }, 4000);
+
             // Feedback
             const ps = this.streak;
             if (level === 'again') {
@@ -2790,7 +2854,7 @@ new Vue({
 
             // Milestone
             const mc = this.masteredCount;
-            if (mc > 0 && mc % 50 === 0 && s.stage === 'mature') {
+            if (mc > 0 && mc % 50 === 0 && s.stage === 'mastered') {
                 const mKey = '_milestone_' + mc;
                 if (!this.state[mKey]) {
                     this.$set(this.state, mKey, 1);
@@ -3060,7 +3124,46 @@ new Vue({
 
         exitPractice() {
             clearTimeout(this._practiceTimer);
+            // Show a score summary toast when exiting a started (non-done) session
+            if (!this.practiceDone) {
+                const answered = this.practiceAnswered
+                    ? this.practiceIndex + 1
+                    : this.practiceIndex;
+                if (answered > 0) {
+                    this.showToast(this.ui.practiceDoneScore(this.practiceScore, answered), 'good');
+                }
+            }
             this.practiceMode = false;
+        },
+
+        // Undo the most recent SRS answer
+        undoAnswer() {
+            if (!this.undoSnap) return;
+            clearTimeout(this._undoTimer);
+            const snap = this.undoSnap;
+            // Restore SRS word state
+            if (snap.prevState) {
+                this.$set(this.state, snap.wordId, snap.prevState);
+            } else {
+                this.$delete(this.state, snap.wordId);
+            }
+            // Restore counters
+            this.points         = snap.points;
+            this.streak         = snap.streak;
+            this.totalReviewed  = snap.totalReviewed;
+            this.sessionCorrect = snap.sessionCorrect;
+            // Put card back at front of queue
+            const card = this.allWords.find(w => w.word === snap.wordId);
+            if (card) {
+                const idx = this.queue.indexOf(card);
+                if (idx !== -1) this.queue.splice(idx, 1);
+                this.queue.unshift(card);
+            }
+            this.flipped  = false;
+            this.showUndo = false;
+            this.undoSnap = null;
+            this.saveState();
+            this.saveGlobal();
         },
 
         // ── Reading overlay ─────────────────────────────────────────
@@ -3087,6 +3190,14 @@ new Vue({
             this.readingArticle = '';
             this.readingError   = '';
             this.readingLoading = false;
+        },
+        // Tap on a highlighted vocab word → show its Chinese meaning as a toast
+        onVocabHlClick(e) {
+            const word = e.target.dataset && e.target.dataset.word;
+            if (!word) return;
+            const wobj = this.readingWordObjs.find(w =>
+                w.word.toLowerCase() === word.toLowerCase());
+            if (wobj) this.showToast(`${wobj.word}：${wobj.zh}`, 'good');
         },
         async generateReading() {
             const GEMINI_KEY = this.geminiKey;
@@ -3204,9 +3315,9 @@ new Vue({
                 }
                 playFeedbackSound('wrong');
             }
-            // Auto-advance after 2s
+            // Auto-advance: faster when correct (1.4s), longer when wrong (2.6s) to read correct answer
             clearTimeout(this._practiceTimer);
-            this._practiceTimer = setTimeout(() => this.nextPracticeQuestion(), 2000);
+            this._practiceTimer = setTimeout(() => this.nextPracticeQuestion(), isCorrect ? 1400 : 2600);
         },
 
         nextPracticeQuestion() {
