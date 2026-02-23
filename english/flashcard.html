@@ -2622,6 +2622,7 @@ new Vue({
         // ── Deck switching ────────────────────────────────────────────────
         switchDeck(deck) {
             if (deck.id === this.currentDeck.id) return;
+            if (this.practiceMode) this.exitPractice();
             this.saveState();
             this.currentDeck = deck;
             try { localStorage.setItem(DECK_PREF_KEY, deck.id); } catch (e) {}
