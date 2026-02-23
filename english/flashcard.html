@@ -1275,6 +1275,79 @@
         }
         .prac-exit-btn:hover { color: var(--red); }
 
+        /* ── Clickable chips ─────────────────────────────────────────────── */
+        .chip-btn {
+            cursor: pointer;
+            border: none;
+            transition: filter 0.15s, transform 0.1s;
+        }
+        .chip-btn:hover  { filter: brightness(0.93); }
+        .chip-btn:active { transform: scale(0.95); }
+
+        /* ── Word list modal ─────────────────────────────────────────────── */
+        .wl-overlay {
+            position: fixed; inset: 0; z-index: 500;
+            background: rgba(0,0,0,0.45);
+            display: flex; align-items: flex-end;
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+        }
+        .wl-sheet {
+            width: 100%; max-height: 82vh;
+            background: var(--bg);
+            border-radius: 20px 20px 0 0;
+            display: flex; flex-direction: column;
+            box-shadow: 0 -4px 32px rgba(0,0,0,0.18);
+            overflow: hidden;
+        }
+        .wl-header {
+            display: flex; align-items: center; gap: 10px;
+            padding: 16px 18px 12px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .wl-title {
+            flex: 1; font-size: 1.05rem; font-weight: 700; color: var(--text);
+        }
+        .wl-count {
+            font-size: 0.82rem; color: var(--muted); font-weight: 600;
+        }
+        .wl-close {
+            background: none; border: none; cursor: pointer;
+            color: var(--muted); font-size: 1.25rem; padding: 2px 6px;
+            line-height: 1; border-radius: 8px; transition: color 0.15s;
+        }
+        .wl-close:hover { color: var(--text); }
+        .wl-list {
+            overflow-y: auto; flex: 1;
+            padding: 8px 0 env(safe-area-inset-bottom, 12px);
+        }
+        .wl-empty {
+            text-align: center; color: var(--muted);
+            padding: 40px 20px; font-size: 0.95rem;
+        }
+        .wl-item {
+            display: flex; align-items: baseline; gap: 10px;
+            padding: 10px 18px;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.12s;
+        }
+        .wl-item:last-child { border-bottom: none; }
+        .wl-item:hover { background: var(--surface); }
+        .wl-en   { font-weight: 700; font-size: 1rem; color: var(--text); min-width: 0; }
+        .wl-pos  { font-size: 0.72rem; color: var(--muted); flex-shrink: 0; }
+        .wl-zh   { font-size: 0.88rem; color: var(--blue); flex: 1; min-width: 0; }
+        .wl-stage-badge {
+            font-size: 0.68rem; font-weight: 700; padding: 2px 7px;
+            border-radius: 99px; flex-shrink: 0; white-space: nowrap;
+        }
+        .wl-badge-new     { background: #dbeafe; color: #1d4ed8; }
+        .wl-badge-learning{ background: #fef3c7; color: #92400e; }
+        .wl-badge-relearn { background: #fee2e2; color: #991b1b; }
+        .wl-badge-young   { background: #d1fae5; color: #065f46; }
+        .wl-badge-mature  { background: #bbf7d0; color: #14532d; }
+        .wl-badge-mastered{ background: #ede9fe; color: #5b21b6; }
+
     </style>
 </head>
 <body>
@@ -1304,10 +1377,14 @@
         </div>
         <!-- Row 2: stats chips (horizontal scroll, always one line) -->
         <div class="chips">
-            <span class="chip chip-new">🆕 {{qs.newCount}}</span>
-            <span class="chip chip-learn">📖 {{qs.learnCount}}</span>
-            <span class="chip chip-review">🔁 {{qs.reviewCount}}</span>
-            <span class="chip chip-master">🏆 {{masteredCount}}</span>
+            <button class="chip chip-new chip-btn"   @click="showWordList('new')"
+                    :title="ui.wlNew">🆕 {{qs.newCount}}</button>
+            <button class="chip chip-learn chip-btn" @click="showWordList('learn')"
+                    :title="ui.wlLearn">📖 {{qs.learnCount}}</button>
+            <button class="chip chip-review chip-btn" @click="showWordList('review')"
+                    :title="ui.wlReview">🔁 {{qs.reviewCount}}</button>
+            <button class="chip chip-master chip-btn" @click="showWordList('mastered')"
+                    :title="ui.wlMastered">🏆 {{masteredCount}}</button>
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
@@ -1727,6 +1804,31 @@
         <button v-if="showUndo && !practiceMode" class="undo-btn" @click="undoAnswer">{{ui.undoBtn}}</button>
     </transition>
 
+    <!-- ── Word list modal (bottom sheet) ──────────────────────────── -->
+    <transition name="toast">
+        <div v-if="wordListModal" class="wl-overlay" @click.self="closeWordList">
+            <div class="wl-sheet">
+                <div class="wl-header">
+                    <div class="wl-title">{{wordListModal.title}}</div>
+                    <div class="wl-count">{{wordListModal.words.length}}</div>
+                    <button class="wl-close" @click="closeWordList">✕</button>
+                </div>
+                <div class="wl-list">
+                    <div v-if="wordListModal.words.length === 0" class="wl-empty">{{ui.wlEmpty}}</div>
+                    <div v-for="w in wordListModal.words" :key="w.word" class="wl-item">
+                        <span class="wl-en">{{w.word}}</span>
+                        <span class="wl-pos" v-if="w.pos">{{w.pos}}</span>
+                        <span class="wl-zh">{{w.zh}}</span>
+                        <span class="wl-stage-badge"
+                              :class="'wl-badge-' + (state[w.word] ? state[w.word].stage : 'new')">
+                            {{ui.stages[state[w.word] ? state[w.word].stage : 'new']}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
+
     <!-- ── Reading overlay ─────────────────────────────────────────── -->
     <div v-if="readingOpen" class="reading-overlay">
         <div class="reading-hd">
@@ -1915,6 +2017,12 @@ const STRINGS = {
     practicePlayAgain:     '再听一遍',
     practiceExitBtn:       '退出练习',
     undoBtn:               '↩ 撤销',
+    wlNew:     '🆕 未学单词',
+    wlLearn:   '📖 学习中',
+    wlReview:  '🔁 复习中',
+    wlMastered:'🏆 已完全掌握',
+    wlEmpty:   '暂无单词',
+    wlClose:   '关闭',
     readingBtn:      '延伸阅读',
     readingTitle:    '今日词汇文章',
     readingClose:    '关闭',
@@ -2023,6 +2131,12 @@ const STRINGS = {
     practicePlayAgain:     'Play again',
     practiceExitBtn:       'Exit Practice',
     undoBtn:               '↩ Undo',
+    wlNew:     '🆕 Not Yet Learned',
+    wlLearn:   '📖 Learning',
+    wlReview:  '🔁 In Review',
+    wlMastered:'🏆 Fully Mastered',
+    wlEmpty:   'No words here',
+    wlClose:   'Close',
     readingBtn:      'Story',
     readingTitle:    "Today's Vocab Story",
     readingClose:    'Close',
@@ -2334,6 +2448,7 @@ new Vue({
             // ── Undo ────────────────────────────────────────────────────
             undoSnap:  null,   // pre-answer snapshot
             showUndo:  false,  // undo button visibility
+            wordListModal: null, // { stageGroup, title, words } — word list bottom sheet
         };
     },
 
@@ -2410,12 +2525,13 @@ new Vue({
             return lv;
         },
         qs() {
+            // Count ALL words in deck by stage (not just today's queue)
             let newCount = 0, learnCount = 0, reviewCount = 0;
-            for (const w of this.queue) {
+            for (const w of this.allWords) {
                 const s = this.state[w.word];
                 if (!s || s.stage === 'new')                               newCount++;
                 else if (s.stage === 'learning' || s.stage === 'relearn') learnCount++;
-                else                                                        reviewCount++;
+                else if (s.stage !== 'mastered')                           reviewCount++;
             }
             return { newCount, learnCount, reviewCount };
         },
@@ -3165,6 +3281,26 @@ new Vue({
             this.saveState();
             this.saveGlobal();
         },
+
+        // ── Word list modal ──────────────────────────────────────────
+        showWordList(stageGroup) {
+            const STAGE_GROUPS = {
+                new:      s => !s || s.stage === 'new',
+                learn:    s => s && (s.stage === 'learning' || s.stage === 'relearn'),
+                review:   s => s && (s.stage === 'young' || s.stage === 'mature'),
+                mastered: s => s && s.stage === 'mastered',
+            };
+            const filter = STAGE_GROUPS[stageGroup];
+            const words = this.allWords.filter(w => filter(this.state[w.word]));
+            const titles = {
+                new:      this.ui.wlNew,
+                learn:    this.ui.wlLearn,
+                review:   this.ui.wlReview,
+                mastered: this.ui.wlMastered,
+            };
+            this.wordListModal = { stageGroup, title: titles[stageGroup], words };
+        },
+        closeWordList() { this.wordListModal = null; },
 
         // ── Reading overlay ─────────────────────────────────────────
         openReading() {
