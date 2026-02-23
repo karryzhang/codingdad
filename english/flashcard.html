@@ -592,7 +592,9 @@
         /* toast */
         .toast-anchor {
             position: fixed;
-            top: 86px; left: 50%;
+            /* Push well below header + deck-bar on all devices (incl. iPhone safe-area) */
+            top: calc(170px + env(safe-area-inset-top, 0px));
+            left: 50%;
             transform: translateX(-50%);
             z-index: 300;
             pointer-events: none;
@@ -1283,13 +1285,13 @@
         }
         .chip-btn:hover  { filter: brightness(0.93); }
         .chip-btn:active { transform: scale(0.95); }
-        /* Number pop when chip value changes */
-        .chip-num-enter-active { animation: chipPop 0.35s ease-out; }
-        .chip-num-leave-active { position: absolute; opacity: 0; }
+        /* Number pop when chip value changes (no out-in: old disappears instantly, new pops) */
+        .chip-num-enter-active { animation: chipPop 0.38s ease-out; }
+        .chip-num-leave-active { display: none; }
         @keyframes chipPop {
-            0%   { transform: scale(1);    opacity: 0.4; }
-            55%  { transform: scale(1.55); opacity: 1;   }
-            100% { transform: scale(1);    opacity: 1;   }
+            0%   { transform: scale(0.7); opacity: 0; }
+            60%  { transform: scale(1.4); opacity: 1; }
+            100% { transform: scale(1);   opacity: 1; }
         }
 
         /* ── Word list modal ─────────────────────────────────────────────── */
@@ -1386,13 +1388,13 @@
         <!-- Row 2: stats chips (horizontal scroll, always one line) -->
         <div class="chips">
             <button class="chip chip-new chip-btn"   @click="showWordList('new')"
-                    :title="ui.wlNew">🆕 <transition name="chip-num" mode="out-in"><span :key="qs.newCount">{{qs.newCount}}</span></transition></button>
+                    :title="ui.wlNew">🆕 <transition name="chip-num" <span :key="qs.newCount">{{qs.newCount}}</span></transition></button>
             <button class="chip chip-learn chip-btn" @click="showWordList('learn')"
-                    :title="ui.wlLearn">📖 <transition name="chip-num" mode="out-in"><span :key="qs.learnCount">{{qs.learnCount}}</span></transition></button>
+                    :title="ui.wlLearn">📖 <transition name="chip-num" <span :key="qs.learnCount">{{qs.learnCount}}</span></transition></button>
             <button class="chip chip-review chip-btn" @click="showWordList('review')"
-                    :title="ui.wlReview">🔁 <transition name="chip-num" mode="out-in"><span :key="qs.reviewCount">{{qs.reviewCount}}</span></transition></button>
+                    :title="ui.wlReview">🔁 <transition name="chip-num" <span :key="qs.reviewCount">{{qs.reviewCount}}</span></transition></button>
             <button class="chip chip-master chip-btn" @click="showWordList('mastered')"
-                    :title="ui.wlMastered">🏆 <transition name="chip-num" mode="out-in"><span :key="masteredCount">{{masteredCount}}</span></transition></button>
+                    :title="ui.wlMastered">🏆 <transition name="chip-num" <span :key="masteredCount">{{masteredCount}}</span></transition></button>
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
@@ -2767,8 +2769,12 @@ new Vue({
         buildQueue(extraNew = 0) {
             const tdy   = today();
             const state = this.state;
-            const newToday = Object.values(state)
-                .filter(s => s && s.firstSeen === tdy).length;
+            // Count non-mastered words first-seen today (mastered words don't use up "new" slots)
+            let newToday = 0;
+            for (const w of this.allWords) {
+                const s = state[w.word];
+                if (s && s.firstSeen === tdy && s.stage !== 'mastered') newToday++;
+            }
             const slots = Math.max(0, MAX_NEW_DAY - newToday + extraNew);
 
             const reviews  = [];
@@ -2779,6 +2785,8 @@ new Vue({
                 const s = state[w.word];
                 if (!s) {
                     if (newCards.length < slots) newCards.push(w);
+                } else if (s.stage === 'mastered') {
+                    /* never queue mastered words */
                 } else if (s.stage === 'learning' || s.stage === 'relearn') {
                     if ((s.next || 0) <= ts()) learning.push(w);
                 } else if (s.stage === 'young' || s.stage === 'mature') {
