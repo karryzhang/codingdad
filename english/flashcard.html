@@ -2609,11 +2609,11 @@ new Vue({
                         reinsert = nextMs <= SESSION_MINS * 60000;
                         this.points += 5; this.sessionCorrect++;
                     }
-                } else { // easy — graduates immediately
-                    s.stage    = EASY_INT >= 21 ? 'mature' : 'young';
-                    s.interval = EASY_INT;
+                } else { // easy — fully mastered, never show again
+                    s.stage    = 'mastered';
+                    s.interval = 9999;
                     s.reps     = 1;
-                    nextMs     = EASY_INT * 86400000;
+                    nextMs     = 9999 * 86400000;
                     this.points += 20; this.sessionCorrect++;
                     newGraduated = true;
                 }
@@ -2623,6 +2623,10 @@ new Vue({
                     nextMs   = 10 * 60000;
                     reinsert = true;
                     this.streak = 0;
+                } else if (level === 'easy') {
+                    s.stage    = 'mastered';
+                    s.interval = 9999;
+                    nextMs     = 9999 * 86400000;
                 } else {
                     s.interval = Math.max(1, Math.round(s.interval * 0.5));
                     s.stage    = s.interval >= 21 ? 'mature' : 'young';
@@ -2638,23 +2642,29 @@ new Vue({
                     reinsert = true;
                     this.streak = 0;
                 } else {
-                    const ef = s.ef || 2.5;
-                    if (level === 'hard') {
-                        s.ef       = Math.max(1.3, ef - 0.15);
-                        s.interval = Math.max(1, Math.round(s.interval * 1.2));
-                    } else if (level === 'good') {
-                        s.interval = Math.max(1, Math.round(s.interval * ef));
+                    if (level === 'easy') {
+                        s.stage    = 'mastered';
+                        s.interval = 9999;
+                        s.reps     = (s.reps || 0) + 1;
+                        nextMs     = 9999 * 86400000;
+                        this.points += 30;
+                        this.streak += 1;
                     } else {
-                        s.ef       = Math.min(3.0, ef + 0.15);
-                        s.interval = Math.max(1, Math.round(s.interval * ef * 1.3));
-                    }
-                    s.stage = s.interval >= 21 ? 'mature' : 'young';
-                    s.reps  = (s.reps || 0) + 1;
-                    nextMs  = s.interval * 86400000;
+                        const ef = s.ef || 2.5;
+                        if (level === 'hard') {
+                            s.ef       = Math.max(1.3, ef - 0.15);
+                            s.interval = Math.max(1, Math.round(s.interval * 1.2));
+                        } else {
+                            s.interval = Math.max(1, Math.round(s.interval * ef));
+                        }
+                        s.stage = s.interval >= 21 ? 'mature' : 'young';
+                        s.reps  = (s.reps || 0) + 1;
+                        nextMs  = s.interval * 86400000;
 
-                    const pts = level === 'hard' ? 10 : level === 'good' ? 20 : 30;
-                    this.points += pts;
-                    this.streak += 1;
+                        const pts = level === 'hard' ? 10 : 20;
+                        this.points += pts;
+                        this.streak += 1;
+                    }
                 }
             }
 
