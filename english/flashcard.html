@@ -1388,13 +1388,13 @@
         <!-- Row 2: stats chips (horizontal scroll, always one line) -->
         <div class="chips">
             <button class="chip chip-new chip-btn"   @click="showWordList('new')"
-                    :title="ui.wlNew">🆕 <transition name="chip-num" <span :key="qs.newCount">{{qs.newCount}}</span></transition></button>
+                    :title="ui.wlNew">🆕 <transition name="chip-num"><span :key="qs.newCount">{{qs.newCount}}</span></transition></button>
             <button class="chip chip-learn chip-btn" @click="showWordList('learn')"
-                    :title="ui.wlLearn">📖 <transition name="chip-num" <span :key="qs.learnCount">{{qs.learnCount}}</span></transition></button>
+                    :title="ui.wlLearn">📖 <transition name="chip-num"><span :key="qs.learnCount">{{qs.learnCount}}</span></transition></button>
             <button class="chip chip-review chip-btn" @click="showWordList('review')"
-                    :title="ui.wlReview">🔁 <transition name="chip-num" <span :key="qs.reviewCount">{{qs.reviewCount}}</span></transition></button>
+                    :title="ui.wlReview">🔁 <transition name="chip-num"><span :key="qs.reviewCount">{{qs.reviewCount}}</span></transition></button>
             <button class="chip chip-master chip-btn" @click="showWordList('mastered')"
-                    :title="ui.wlMastered">🏆 <transition name="chip-num" <span :key="masteredCount">{{masteredCount}}</span></transition></button>
+                    :title="ui.wlMastered">🏆 <transition name="chip-num"><span :key="masteredCount">{{masteredCount}}</span></transition></button>
             <span class="chip chip-streak" v-if="streak >= 3">🔥 {{streak}}</span>
             <span class="chip chip-daily"  v-if="dailyStreak >= 2">📅 {{dailyStreak}}{{ui.dayUnit}}</span>
         </div>
