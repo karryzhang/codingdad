@@ -3025,7 +3025,7 @@ new Vue({
             );
             // Combine: today's words + enough others to reach at least 8 total
             const needed = Math.max(0, 8 - todayWords.length);
-            return [...todayWords, ...otherWords.slice(0, needed || otherWords.length)];
+            return [...todayWords, ...otherWords.slice(0, needed)];
         },
 
         startPractice() {
@@ -3035,7 +3035,12 @@ new Vue({
                 this.showToast(this.ui.practiceNoWords, 'bad');
                 return;
             }
-            const qs = buildPracticeSession(words, this.allWords, this.dictCache);
+            // Exclude mastered words from the distractor pool so they never appear as options
+            const practicePool = this.allWords.filter(w => {
+                const s = this.state[w.word];
+                return !s || s.stage !== 'mastered';
+            });
+            const qs = buildPracticeSession(words, practicePool, this.dictCache);
             if (qs.length === 0) {
                 this.showToast(this.ui.practiceNoWords, 'bad');
                 return;
