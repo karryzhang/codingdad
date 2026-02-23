@@ -311,7 +311,10 @@
                 <div style="margin-bottom: 20px;">
                     <h2 style="color: #667eea; margin-bottom: 10px;">📰 ${data.date} 简报</h2>
                     <div style="color: #999; font-size: 0.9em; margin-bottom: 15px;">
-                        共 ${data.summary?.articles_qualified || 9} 条 | 平均评分: ${data.summary?.avg_score?.toFixed(1) || 'N/A'}/100 | ${data.summary?.critical_alerts || 0} 个警报
+                        共 ${data.summary?.articles_qualified || 9} 条 |
+                        ${data.summary?.links_verified ? '✅ ' + data.summary.links_verified + ' 条链接已验证' : ''} |
+                        平均评分: ${data.summary?.avg_score?.toFixed(1) || 'N/A'}/100 |
+                        ${data.summary?.critical_alerts || 0} 个警报
                     </div>
                     <div style="margin-top: 25px;">
                         ${data.domains.map((domain, idx) => `
