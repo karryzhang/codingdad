@@ -2015,6 +2015,7 @@ const MAX_NEW_DAY   = 20;
 const LEARN_STEPS   = [1, 10];   // minutes
 const GRAD_INT      = 1;         // days
 const EASY_INT      = 4;         // days
+const MAX_INTERVAL  = 180;       // days — cap review interval; beyond this auto-master
 const SESSION_MINS  = 20;        // re-add to session if ≤ this many minutes
 const DICT_API      = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 const PREFETCH_N    = 5;         // prefetch ahead N words
@@ -2426,8 +2427,8 @@ new Vue({
                 return Math.max(1, Math.round(intv * 0.5)) + UI.day;
             }
             if (level === 'again') return fmtMs(10 * 60000);
-            if (level === 'hard')  return Math.round(intv * 1.2) + UI.day;
-            if (level === 'good')  return Math.round(intv * ef)  + UI.day;
+            if (level === 'hard')  { const d = Math.round(intv * 1.2); return d >= MAX_INTERVAL ? '✓' : d + UI.day; }
+            if (level === 'good')  { const d = Math.round(intv * ef);  return d >= MAX_INTERVAL ? '✓' : d + UI.day; }
             if (level === 'easy')  return '✓';
             return '—';
         },
@@ -2739,9 +2740,16 @@ new Vue({
                         } else {
                             s.interval = Math.max(1, Math.round(s.interval * ef));
                         }
-                        s.stage = s.interval >= 21 ? 'mature' : 'young';
-                        s.reps  = (s.reps || 0) + 1;
-                        nextMs  = s.interval * 86400000;
+                        s.reps = (s.reps || 0) + 1;
+                        // Cap interval — words known this well are effectively mastered
+                        if (s.interval >= MAX_INTERVAL) {
+                            s.stage    = 'mastered';
+                            s.interval = 9999;
+                            nextMs     = 9999 * 86400000;
+                        } else {
+                            s.stage = s.interval >= 21 ? 'mature' : 'young';
+                            nextMs  = s.interval * 86400000;
+                        }
 
                         const pts = level === 'hard' ? 10 : 20;
                         this.points += pts;
@@ -2829,6 +2837,14 @@ new Vue({
                     this.points    = d.points   || 0;
                     this.streak    = d.streak   || 0;
                     this.autoPlay  = d.autoPlay !== undefined ? d.autoPlay : true;
+                    // Migrate: promote any young/mature cards with giant intervals to mastered
+                    for (const s of Object.values(this.state)) {
+                        if (s && (s.stage === 'young' || s.stage === 'mature') && (s.interval || 0) >= MAX_INTERVAL) {
+                            s.stage    = 'mastered';
+                            s.interval = 9999;
+                            s.next     = Date.now() + 9999 * 86400000;
+                        }
+                    }
                 }
             } catch (e) { /* ignore */ }
         },
