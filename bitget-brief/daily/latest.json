@@ -1,0 +1,100 @@
+{
+  "date": "2026-02-23",
+  "domains": [
+    {
+      "icon": "💰",
+      "name": "Domain 1: PayFi (支付金融)",
+      "items": [
+        {
+          "title": "USDT 24h 流出突破 $5B，稳定币流动性警示",
+          "source": "CoinDesk (EN)",
+          "time": "2小时前",
+          "score": 9,
+          "impact": "交易对深度受压，用户 on-ramp 成本上升，需强化 ramp 合作伙伴网络。Bitget Wallet 应加强稳定币兑换路由优化。",
+          "url": "https://www.coindesk.com"
+        },
+        {
+          "title": "新加坡 MAS 发布跨境支付指引更新，B2B2C 合规路径明确",
+          "source": "Foresight News (CN)",
+          "time": "4小时前",
+          "score": 8,
+          "impact": "为东南亚支付渠道创造新机遇，Bitget Wallet 可加快新加坡 MAS 认证进度，抢占 B2B2C 市场。",
+          "url": "https://foresight.news"
+        },
+        {
+          "title": "以太坊 L2 跨链桥接费率优化，交易成本下降 15%",
+          "source": "CoinDesk (EN)",
+          "time": "6小时前",
+          "score": 7,
+          "impact": "Arbitrum/Optimism on-ramp 竞争加剧，需优化 Bitget Wallet 的桥接聚合体验以保留用户。",
+          "url": "https://www.coindesk.com"
+        }
+      ]
+    },
+    {
+      "icon": "🔐",
+      "name": "Domain 2: 去中心化钱包竞争 & 技术",
+      "items": [
+        {
+          "title": "MetaMask 发布 Account Abstraction 集成，支持 EIP-7702",
+          "source": "深潮 TechFlow (CN)",
+          "time": "5小时前",
+          "score": 9,
+          "impact": "竞品抢先推出 AA 功能，Bitget Wallet 需加速 AA 开发以保持竞争力，用户体验成为关键差异点。",
+          "url": "https://techflow.cool"
+        },
+        {
+          "title": "Rabby 钱包集成 Social Login (Google/Apple)，新增用户增长 40%",
+          "source": "链捕手 (CN)",
+          "time": "8小时前",
+          "score": 8,
+          "impact": "Social Login 已成行业标配，Bitget Wallet 应优先支持 Google/Apple/Twitter OAuth 以降低进入门槛。",
+          "url": "https://lianchahu.com"
+        },
+        {
+          "title": "EIP-7702 进入 Dencun 升级后优化周期，Gas 效率再升 20%",
+          "source": "CoinDesk (EN)",
+          "time": "12小时前",
+          "score": 7,
+          "impact": "账户抽象加速成熟，钱包基础设施需尽快适配，Bitget Wallet 应规划集成时间线。",
+          "url": "https://www.coindesk.com"
+        }
+      ]
+    },
+    {
+      "icon": "📈",
+      "name": "Domain 3: 交易能力 (Meme/Perps/RWA/美股)",
+      "items": [
+        {
+          "title": "Meme 币 24h 交易量突破 $30B，Dune 新型聚合器上线",
+          "source": "Dune Analytics (EN)",
+          "time": "1小时前",
+          "score": 9,
+          "impact": "Meme 交易需求爆炸，Bitget Wallet 的 Meme 交易能力成为用户粘性核心，需重点优化滑点和速度。",
+          "url": "https://dune.com"
+        },
+        {
+          "title": "Perps 市场新品 GMX V3 上线，OI 深度突破 $2B",
+          "source": "律动 BlockBeats (CN)",
+          "time": "3小时前",
+          "score": 8,
+          "impact": "永续合约成为交易主流，Bitget Wallet 需集成主流 Perps 协议聚合器以及实时风险提示。",
+          "url": "https://blockbeats.news"
+        },
+        {
+          "title": "RWA 融资周期启动，机构参与 tokenized 美股交易量增长 250%",
+          "source": "Foresight News (CN)",
+          "time": "7小时前",
+          "score": 7,
+          "impact": "RWA 和美股联动成为新趋势，Bitget Wallet 应规划 RWA/美股交易模块以抢占新兴需求。",
+          "url": "https://foresight.news"
+        }
+      ]
+    }
+  ],
+  "alerts": [
+    "⚠️ MetaMask AA 集成加速，建议 Bitget Wallet 至少在 Q1 末前完成 EIP-7702 支持",
+    "🔒 Social Login 集成已成竞品标配，用户转移风险中等",
+    "📊 Meme 交易量创历史新高，交易能力优化是当周重点"
+  ]
+}

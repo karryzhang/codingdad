@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitget Wallet - 战略简报</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .brief-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .brief-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .brief-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.15);
+        }
+
+        .brief-card h3 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .brief-card .date {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .brief-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .brief-card a {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .brief-card a:hover {
+            background: #764ba2;
+        }
+
+        .latest-brief {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-top: 40px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Bitget Wallet 战略简报</h1>
+            <p>每日精选行业关键信息 • PayFi • 钱包竞争 • 交易能力</p>
+        </header>
+
+        <div class="brief-grid" id="briefGrid"></div>
+
+        <div class="latest-brief" id="latestBrief"></div>
+
+        <div class="footer">
+            <p>© 2026 Bitget Wallet Strategy Hub | 每天 9:00 SGT 更新</p>
+        </div>
+    </div>
+
+    <script>
+        // 获取最新的简报
+        fetch('./daily/latest.json')
+            .then(r => r.json())
+            .then(data => {
+                // 渲染最新简报内容
+                const container = document.getElementById('latestBrief');
+                container.innerHTML = `
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="color: #667eea; margin-bottom: 10px;">📰 ${data.date} 最新简报</h2>
+                        <div style="margin-top: 25px;">
+                            ${data.domains.map((domain, idx) => `
+                                <div style="margin-bottom: 30px;">
+                                    <h3 style="color: #764ba2; font-size: 1.2em; margin-bottom: 15px;">${domain.icon} ${domain.name}</h3>
+                                    <div style="margin-left: 10px;">
+                                        ${domain.items.map((item, i) => `
+                                            <div style="margin-bottom: 15px; padding: 12px; background: #f5f5f5; border-left: 3px solid #667eea; border-radius: 4px;">
+                                                <div style="font-weight: bold; margin-bottom: 5px;">#${idx*3 + i + 1}. ${item.title}</div>
+                                                <div style="color: #999; font-size: 0.85em; margin-bottom: 8px;">📰 ${item.source} | ${item.time} | 相关度: <strong>${item.score}/10</strong></div>
+                                                <div style="color: #555; margin-bottom: 8px;">💡 ${item.impact}</div>
+                                                <a href="${item.url}" target="_blank" style="color: #667eea; text-decoration: none; font-size: 0.9em;">🔗 查看原文</a>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${data.alerts && data.alerts.length > 0 ? `
+                            <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-left: 3px solid #ff6b6b; border-radius: 4px;">
+                                <h4 style="color: #ff6b6b;">🚨 紧急警报</h4>
+                                ${data.alerts.map(alert => `<p style="margin: 8px 0; color: #666;">${alert}</p>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            })
+            .catch(e => {
+                document.getElementById('latestBrief').innerHTML = '<p style="color: #999;">暂无最新简报</p>';
+            });
+    </script>
+</body>
+</html>
