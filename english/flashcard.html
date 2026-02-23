@@ -961,7 +961,7 @@
         .prac-opt:hover:not(:disabled) { border-color: var(--blue); background: #eff6ff; }
         .prac-opt:active:not(:disabled) { transform: scale(0.98); }
         .prac-opt:disabled { cursor: default; }
-        .prac-opt:focus, .prac-opt:focus-visible { outline: none; box-shadow: none; border-color: var(--border); }
+        .prac-opt:focus, .prac-opt:focus-visible { outline: none; box-shadow: none; border-color: var(--border); background: var(--surface); }
         .prac-opt { display: flex; justify-content: space-between; align-items: center; -webkit-tap-highlight-color: transparent; }
         .prac-opt.correct  { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
         .prac-opt.wrong    { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
@@ -984,10 +984,15 @@
         .prac-tf-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
         .prac-tf-btn:active:not(:disabled){ transform: scale(0.97); }
         .prac-tf-btn:disabled { cursor: default; transform: none; box-shadow: none; }
-        .prac-tf-btn:focus, .prac-tf-btn:focus-visible { outline: none; box-shadow: none; border-color: var(--border); }
+        .prac-tf-btn:focus, .prac-tf-btn:focus-visible { outline: none; box-shadow: none; border-color: var(--border); background: var(--surface); }
         .prac-tf-btn { display: flex; align-items: center; justify-content: center; gap: 8px; -webkit-tap-highlight-color: transparent; }
         .prac-tf-btn.correct { border-color: var(--green) !important; background: #f0fdf4 !important; color: #14532d !important; animation: prac-pop 0.32s ease; }
         .prac-tf-btn.wrong   { border-color: var(--red)   !important; background: #fef2f2 !important; color: #b91c1c !important; animation: prac-shake 0.32s ease; }
+        /* On touch-only devices, suppress sticky :hover after tap */
+        @media (hover: none) {
+            .prac-opt:hover:not(:disabled)    { border-color: var(--border); background: var(--surface); }
+            .prac-tf-btn:hover:not(:disabled) { border-color: var(--border); background: var(--surface); transform: none; box-shadow: none; }
+        }
 
         /* Spelling */
         .prac-spell-wrap {
@@ -2409,6 +2414,7 @@ new Vue({
             allWords:     [],
             state:        {},
             queue:        [],
+            sessionQueue: [],  // full set of words introduced this session (for list view)
             sessionTotal: 0,
             flipped:      false,
             shaking:      false,
@@ -2514,13 +2520,13 @@ new Vue({
             return Math.round((1 - this.queue.length / this.sessionTotal) * 100);
         },
         listLearnItems() {
-            return this.queue.filter(w => {
+            return this.sessionQueue.filter(w => {
                 const s = this.state[w.word];
-                return !s || s.stage === 'learning' || s.stage === 'relearn';
+                return !s || s.stage === 'new' || s.stage === 'learning' || s.stage === 'relearn';
             });
         },
         listReviewItems() {
-            return this.queue.filter(w => {
+            return this.sessionQueue.filter(w => {
                 const s = this.state[w.word];
                 return s && (s.stage === 'young' || s.stage === 'mature');
             });
@@ -2807,6 +2813,13 @@ new Vue({
             const q = [...learning, ...interleaved];
             this.queue        = q;
             this.sessionTotal = q.length || 1;
+            // Maintain sessionQueue: reset on fresh build (extraNew=0), extend on loadMore
+            if (extraNew === 0) {
+                this.sessionQueue = [...q];
+            } else {
+                const seen = new Set(this.sessionQueue.map(w => w.word));
+                this.sessionQueue = [...this.sessionQueue, ...q.filter(w => !seen.has(w.word))];
+            }
             this.prefetchAhead();
         },
 
@@ -3116,6 +3129,8 @@ new Vue({
             this.sessionCorrect  = 0;
             this.queue           = shuffle([...todayWords]);
             this.sessionTotal    = this.queue.length;
+            const seenTR = new Set(this.sessionQueue.map(w => w.word));
+            this.sessionQueue = [...this.sessionQueue, ...this.queue.filter(w => !seenTR.has(w.word))];
             this.prefetchAhead();
             this.showToast(UI.reviewToday(todayWords.length), 'good');
         },
