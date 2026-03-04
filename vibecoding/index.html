@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bitget Wallet Aggregator</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0e17;--bg2:#111827;--bg3:#1a2235;
+  --card:#151d2e;--card-border:#1e293b;
+  --text:#e2e8f0;--muted:#94a3b8;--dim:#64748b;
+  --accent:#00d4aa;--accent2:#00b4d8;--accent3:#6366f1;
+  --gradient:linear-gradient(135deg,#00d4aa,#00b4d8,#6366f1);
+  --gradient-card:linear-gradient(145deg,rgba(0,212,170,.08),rgba(99,102,241,.06));
+  --radius:16px;--radius-sm:10px;
+  --max:1200px;
+  --font:-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans SC','Segoe UI',Roboto,sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none}
+img{max-width:100%}
+
+.container{max-width:var(--max);margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+@media(max-width:768px){section{padding:56px 0}.container{padding:0 16px}}
+
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:700;line-height:1.25;margin-bottom:16px}
+h3{font-size:1.15rem;font-weight:600;margin-bottom:8px}
+.section-label{display:inline-block;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--accent);background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);border-radius:20px;padding:4px 14px;margin-bottom:16px}
+.section-desc{color:var(--muted);font-size:1.05rem;max-width:700px;margin-bottom:40px}
+
+/* ── Lang toggle ──────────────────────────────────── */
+.lang-toggle{position:fixed;top:16px;right:16px;z-index:999;display:flex;background:var(--bg3);border:1px solid var(--card-border);border-radius:10px;overflow:hidden}
+.lang-toggle button{background:transparent;border:none;color:var(--muted);padding:8px 16px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.lang-toggle button.active{background:var(--accent);color:var(--bg)}
+
+/* ── Hero ──────────────────────────────────────────── */
+.hero{padding:120px 0 80px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(0,212,170,.12),transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.2);border-radius:24px;padding:6px 18px;font-size:.85rem;color:var(--accent);margin-bottom:24px}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse-dot 2s infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero h1{margin-bottom:20px}
+.hero h1 .gradient-text{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--muted);font-size:clamp(1rem,2vw,1.15rem);max-width:720px;margin:0 auto 36px}
+.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-top:48px}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat .label{font-size:.82rem;color:var(--dim);margin-top:4px}
+@media(max-width:768px){.hero{padding:80px 0 56px}.hero-stats{gap:24px}}
+
+/* ── Buttons ──────────────────────────────────────── */
+.btn-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:12px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--gradient);color:#0a0e17;box-shadow:0 4px 24px rgba(0,212,170,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,212,170,.35)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--card-border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── Chain badges ─────────────────────────────────── */
+.chain-list{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.chain-badge{display:inline-flex;align-items:center;gap:6px;background:var(--bg3);border:1px solid var(--card-border);border-radius:8px;padding:6px 14px;font-size:.82rem;font-weight:500;transition:border-color .2s}
+.chain-badge:hover{border-color:var(--accent)}
+.chain-dot{width:8px;height:8px;border-radius:50%}
+
+/* ── Advantage cards ──────────────────────────────── */
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.adv-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.adv-grid{grid-template-columns:1fr}}
+.adv-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px;transition:transform .2s,border-color .2s;position:relative;overflow:hidden}
+.adv-card:hover{transform:translateY(-4px);border-color:rgba(0,212,170,.3)}
+.adv-card .icon{font-size:1.6rem;margin-bottom:14px}
+.adv-card p{color:var(--muted);font-size:.9rem;line-height:1.7}
+.adv-card.featured{border-color:rgba(0,212,170,.2)}
+.adv-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient)}
+
+/* ── Stats bars ───────────────────────────────────── */
+.stats-section{background:var(--bg2);border-radius:var(--radius);padding:40px;border:1px solid var(--card-border)}
+.stat-row{margin-bottom:24px}
+.stat-row:last-child{margin-bottom:0}
+.stat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.stat-chain{font-weight:600;font-size:.95rem}
+.stat-value{font-weight:700;color:var(--accent);font-size:.95rem}
+.stat-bar-bg{height:10px;border-radius:6px;background:var(--bg3);overflow:hidden}
+.stat-bar{height:100%;border-radius:6px;background:var(--gradient);transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+.stat-note{font-size:.78rem;color:var(--dim);margin-top:4px}
+
+/* ── Quote table ──────────────────────────────────── */
+.quote-table-wrap{overflow-x:auto;margin-top:20px;-webkit-overflow-scrolling:touch}
+.quote-table{width:100%;border-collapse:collapse;min-width:560px}
+.quote-table th{text-align:left;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);padding:12px 16px;border-bottom:1px solid var(--card-border);white-space:nowrap}
+.quote-table td{padding:12px 16px;font-size:.9rem;border-bottom:1px solid rgba(30,41,59,.5)}
+.quote-table tr:hover td{background:rgba(0,212,170,.03)}
+.badge-win{display:inline-block;background:rgba(0,212,170,.15);color:var(--accent);font-size:.75rem;font-weight:600;padding:2px 10px;border-radius:6px}
+.badge-good{display:inline-block;background:rgba(0,180,216,.12);color:var(--accent2);font-size:.75rem;font-weight:600;padding:2px 10px;border-radius:6px}
+
+/* ── Capabilities list ────────────────────────────── */
+.cap-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
+@media(max-width:600px){.cap-list{grid-template-columns:1fr}}
+.cap-list li{display:flex;align-items:flex-start;gap:10px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:16px 20px;font-size:.9rem;color:var(--muted);line-height:1.6}
+.cap-list li .check{color:var(--accent);font-weight:700;flex-shrink:0;margin-top:2px}
+
+/* ── Algorithm compare ────────────────────────────── */
+.algo-compare{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+@media(max-width:768px){.algo-compare{grid-template-columns:1fr}}
+.algo-card{background:var(--bg2);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden}
+.algo-card.highlight{border-color:rgba(0,212,170,.3)}
+.algo-card.highlight::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gradient)}
+.algo-chart{height:180px;position:relative;margin-top:16px}
+.algo-chart svg{width:100%;height:100%}
+.algo-badge{position:absolute;top:12px;right:12px;font-size:.75rem;font-weight:600;padding:4px 10px;border-radius:6px}
+.algo-badge.better{background:rgba(0,212,170,.15);color:var(--accent)}
+.algo-badge.standard{background:rgba(148,163,184,.1);color:var(--muted)}
+
+/* ── Liquidity ────────────────────────────────────── */
+.liq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+@media(max-width:768px){.liq-grid{grid-template-columns:1fr}}
+.liq-card{background:var(--gradient-card);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px}
+.liq-card h3{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.liq-protocols{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.liq-tag{font-size:.78rem;background:var(--bg3);border-radius:6px;padding:3px 10px;color:var(--muted)}
+
+/* ── Route flow ───────────────────────────────────── */
+.route-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin:32px 0;padding:32px;background:var(--bg2);border:1px solid var(--card-border);border-radius:var(--radius)}
+.route-step{text-align:center;padding:16px 20px}
+.route-step .step-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 10px}
+.route-step .step-icon.s1{background:rgba(0,212,170,.12)}
+.route-step .step-icon.s2{background:rgba(0,180,216,.12)}
+.route-step .step-icon.s3{background:rgba(99,102,241,.12)}
+.route-step .step-label{font-size:.82rem;color:var(--muted);max-width:140px;margin:0 auto}
+.route-step .step-title{font-weight:600;font-size:.92rem;margin-bottom:4px}
+.route-arrow{font-size:1.2rem;color:var(--dim);padding:0 8px}
+@media(max-width:600px){.route-flow{flex-direction:column}.route-arrow{transform:rotate(90deg);padding:4px 0}}
+
+/* ── Security ─────────────────────────────────────── */
+.security-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:600px){.security-grid{grid-template-columns:1fr}}
+
+/* ── Sentinel ─────────────────────────────────────── */
+.sentinel-box{background:linear-gradient(145deg,rgba(99,102,241,.08),rgba(0,212,170,.06));border:1px solid rgba(99,102,241,.2);border-radius:var(--radius);padding:40px;margin-top:40px;position:relative;overflow:hidden}
+.sentinel-box::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(99,102,241,.15),transparent 70%);pointer-events:none}
+.sentinel-box h3{font-size:1.3rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.sentinel-features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+@media(max-width:768px){.sentinel-features{grid-template-columns:1fr}}
+.sentinel-feat{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--muted)}
+.sentinel-feat .check{color:var(--accent);font-weight:700;flex-shrink:0}
+
+/* ── Cards ────────────────────────────────────────── */
+.cards-grid{display:grid;gap:20px}
+.cards-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cards-3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.cards-3{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-4px);border-color:rgba(0,212,170,.3)}
+.card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px}
+.card-icon.green{background:rgba(0,212,170,.12)}
+.card-icon.blue{background:rgba(0,180,216,.12)}
+.card-icon.purple{background:rgba(99,102,241,.12)}
+.card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+
+/* ── CTA ──────────────────────────────────────────── */
+.cta-section{text-align:center;padding:100px 0;position:relative}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 100%,rgba(99,102,241,.1),transparent 70%);pointer-events:none}
+
+footer{border-top:1px solid var(--card-border);padding:32px 0;text-align:center;color:var(--dim);font-size:.82rem}
+
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s,transform .6s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- Language toggle -->
+<div class="lang-toggle">
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-zh" onclick="setLang('zh')">中文</button>
+</div>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge"><span class="dot"></span> <span data-en="Live on 7 Mainnets" data-zh="已上线 7 条主流公链"></span></div>
+    <h1>Bitget Wallet<br><span class="gradient-text" data-en="Aggregator" data-zh="聚合器"></span></h1>
+    <p data-en="High-performance same-chain swap aggregation powered by proprietary pricing algorithms. Consistently better execution prices, higher success rates, and deeper liquidity."
+       data-zh="高性能同链 Swap 聚合服务，由自研创新定价算法驱动，为用户持续提供更优的成交价格、更高的交易成功率和更深的流动性。"></p>
+    <div class="btn-group">
+      <a class="btn btn-primary" href="#" data-en="Get Started" data-zh="开始使用"></a>
+      <a class="btn btn-outline" href="#advantages" data-en="Learn More ↓" data-zh="了解更多 ↓"></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">99.91%</div><div class="label" data-en="Peak Success Rate (ETH)" data-zh="ETH 峰值成功率"></div></div>
+      <div class="hero-stat"><div class="num">13+</div><div class="label" data-en="DEX Protocols" data-zh="DEX 协议接入"></div></div>
+      <div class="hero-stat"><div class="num">7</div><div class="label" data-en="Supported Chains" data-zh="支持公链"></div></div>
+      <div class="hero-stat"><div class="num">77.19%</div><div class="label" data-en="Solana Quote Win Rate" data-zh="Solana 报价胜率"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CHAINS ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Supported Networks" data-zh="支持网络"></span>
+      <h2 data-en="Multi-Chain Coverage" data-zh="多链覆盖"></h2>
+      <p class="section-desc" data-en="Supporting seven major mainnets with continuous expansion planned across additional networks." data-zh="已支持七条主流公链，后续将持续拓展更多网络。"></p>
+      <div class="chain-list">
+        <span class="chain-badge"><span class="chain-dot" style="background:#627eea"></span> Ethereum</span>
+        <span class="chain-badge"><span class="chain-dot" style="background:#9945ff"></span> Solana</span>
+        <span class="chain-badge"><span class="chain-dot" style="background:#f0b90b"></span> BNB Chain</span>
+        <span class="chain-badge"><span class="chain-dot" style="background:#0052ff"></span> Base</span>
+        <span class="chain-badge"><span class="chain-dot" style="background:#28a0f0"></span> Arbitrum</span>
+        <span class="chain-badge"><span class="chain-dot" style="background:#8247e5"></span> Polygon</span>
+        <span class="chain-badge"><span class="chain-dot" style="background:#a1e44d"></span> Morph</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ 3 ADVANTAGES ═══════════════════ -->
+<section id="advantages">
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Core Advantages" data-zh="核心优势"></span>
+      <h2 data-en="Three Competitive Edges" data-zh="三大竞争优势"></h2>
+      <p class="section-desc" data-en="Built on proprietary pricing algorithms, the Aggregator demonstrates clear advantages across key metrics. Data below based on real transactions under identical conditions." data-zh="基于自研定价算法，Bitget Wallet 聚合器在关键性能指标上展现出显著优势。以下数据均基于相同条件下的真实交易数据。"></p>
+      <div class="adv-grid">
+        <div class="adv-card featured">
+          <div class="icon">📈</div>
+          <h3 data-en="Higher Success Rate" data-zh="交易成功率更高"></h3>
+          <p data-en="Industry-leading execution success rates across major chains. ETH consistently stable around 94%–99.91%, significantly outperforming competitors." data-zh="多条主链上的成功率均接近行业领先，ETH 链稳定在 94%–99.91%，显著优于同类聚合器。"></p>
+        </div>
+        <div class="adv-card featured">
+          <div class="icon">💰</div>
+          <h3 data-en="Higher Quote Win Rate" data-zh="报价胜率更高"></h3>
+          <p data-en="Consistently captures better optimal prices across common trading ranges. Solana quote win rate reaches 77.19% vs Jupiter." data-zh="在主流交易对和常见交易范围内，持续捕获最优报价，Solana 链上报价胜率达 77.19%。"></p>
+        </div>
+        <div class="adv-card featured">
+          <div class="icon">🛡️</div>
+          <h3 data-en="Enterprise Security" data-zh="企业级安全保障"></h3>
+          <p data-en="MEV protection, multi-firm audits (SlowMist, Go+, Certik), and the Sentinel real-time monitoring system for comprehensive security." data-zh="MEV 防护、多审计机构背书、Sentinel 实时监控系统，全方位保障交易安全与稳定。"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SUCCESS RATE ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Performance" data-zh="成功率"></span>
+      <h2 data-en="Industry-Leading Success Rates" data-zh="交易成功率更高"></h2>
+      <p class="section-desc" data-en="Based on real transaction data over the past 30 days under identical asset, volume and market conditions." data-zh="基于近 30 天真实交易数据统计，在多条主链上均保持行业领先的成功率。"></p>
+      <div class="stats-section">
+        <div class="stat-row">
+          <div class="stat-header">
+            <span class="stat-chain">🔷 Ethereum</span>
+            <span class="stat-value">94.04% – 99.91%</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar" style="width:99%"></div></div>
+          <div class="stat-note" data-en="Consistently stable around 99%" data-zh="持续稳定在 99% 左右，明显优于同类聚合器"></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-header">
+            <span class="stat-chain">🟣 Solana</span>
+            <span class="stat-value">80% – 92%</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar" style="width:88%"></div></div>
+          <div class="stat-note" data-en="High throughput chain with volatile conditions" data-zh="高吞吐链，部分 Meme 币交易接近 96%+"></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-header">
+            <span class="stat-chain">🟡 BNB Chain</span>
+            <span class="stat-value">94.33% – 97.6%</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar" style="width:96%"></div></div>
+          <div class="stat-note" data-en="Significantly outperforms on BNB Chain" data-zh="BNB Chain 上表现尤为突出"></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-header">
+            <span class="stat-chain">🔵 Base</span>
+            <span class="stat-value">98.5% – 99.31%</span>
+          </div>
+          <div class="stat-bar-bg"><div class="stat-bar" style="width:99%"></div></div>
+          <div class="stat-note" data-en="Stable and predictable execution" data-zh="执行稳定且可预测"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ QUOTE WIN RATE ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Pricing" data-zh="报价"></span>
+      <h2 data-en="Higher Quote Win Rate" data-zh="报价胜率更高"></h2>
+      <p class="section-desc" data-en="Across major chains and common trading ranges, consistently capturing better optimal prices versus mainstream aggregators." data-zh="在相同订单金额和链条件下，基于主流稳定币对和常见交易代币数据，几乎所有币种都能达到综合最优报价。"></p>
+      <div class="stats-section">
+        <div class="quote-table-wrap">
+          <table class="quote-table">
+            <thead>
+              <tr>
+                <th data-en="Chain" data-zh="公链"></th>
+                <th data-en="Order Size" data-zh="订单范围"></th>
+                <th data-en="Quote Win Rate" data-zh="报价胜率"></th>
+                <th data-en="Status" data-zh="状态"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>🔷 Ethereum</td>
+                <td data-en="All ranges" data-zh="全部范围"></td>
+                <td data-en="Outperforms across key ranges" data-zh="全面优于主流聚合器"></td>
+                <td><span class="badge-win" data-en="Winner" data-zh="领先"></span></td>
+              </tr>
+              <tr>
+                <td>🟡 BNB Chain</td>
+                <td>$0 – $1,000</td>
+                <td>~71.9%</td>
+                <td><span class="badge-win" data-en="Winner" data-zh="领先"></span></td>
+              </tr>
+              <tr>
+                <td>🟡 BNB Chain</td>
+                <td>> $1,000</td>
+                <td>~40%</td>
+                <td><span class="badge-good" data-en="Competitive" data-zh="竞争力强"></span></td>
+              </tr>
+              <tr>
+                <td>🟣 Solana (vs Jupiter)</td>
+                <td>$5 – $1,000+</td>
+                <td>77.19%</td>
+                <td><span class="badge-win" data-en="Winner" data-zh="领先"></span></td>
+              </tr>
+              <tr>
+                <td>🔵 Base / Arbitrum</td>
+                <td data-en="All ranges" data-zh="全部范围"></td>
+                <td data-en="Outperforms single DEX" data-zh="优于单一 DEX"></td>
+                <td><span class="badge-win" data-en="Winner" data-zh="领先"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CAPABILITIES ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Capabilities" data-zh="能力矩阵"></span>
+      <h2 data-en="Additional Capabilities & Guarantees" data-zh="其他能力与保障"></h2>
+      <p class="section-desc" data-en="Beyond success rates and pricing, the Aggregator provides comprehensive enterprise-grade capabilities." data-zh="除交易成功率与报价能力外，聚合器还具备全面的企业级能力。"></p>
+      <ul class="cap-list">
+        <li><span class="check">✓</span> <span data-en="Multi-chain: ETH / Solana / BNB Chain / Base / Arbitrum / Polygon / Morph, expanding" data-zh="多链支持：ETH / Solana / BNB Chain / Base / Arbitrum / Polygon / Morph，持续拓展"></span></li>
+        <li><span class="check">✓</span> <span data-en="MEV / anti-MEV protection — routes transactions through private mempools" data-zh="MEV / 抗 MEV 保护机制，将交易发送至私有内存池"></span></li>
+        <li><span class="check">✓</span> <span data-en="Gas estimation optimization — reduces on-chain transaction costs" data-zh="交易预估 Gas 优化技术，降低链上交易成本"></span></li>
+        <li><span class="check">✓</span> <span data-en="25+ self-aggregated liquidity pools across major DEXs" data-zh="25+ 自聚合流动性池支持，覆盖主流 DEX"></span></li>
+        <li><span class="check">✓</span> <span data-en="Multi-protocol routing engine — millisecond-level path evaluation" data-zh="多协议路由引擎，毫秒级评估最优路径"></span></li>
+        <li><span class="check">✓</span> <span data-en="Automatic retry on failure — maximizes transaction success rate" data-zh="失败自动重试机制，最大化交易成功率"></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ LIQUIDITY ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Liquidity" data-zh="流动性"></span>
+      <h2 data-en="Multi-Source Liquidity Aggregation" data-zh="多层流动性聚合"></h2>
+      <p class="section-desc" data-en="Integrating diverse liquidity sources to support all order sizes and trading pair needs." data-zh="聚合多条链的交叉流动性来源，整合形成最优交易策略。"></p>
+      <div class="liq-grid">
+        <div class="liq-card">
+          <h3><span data-en="🏊 AMM Pools" data-zh="🏊 主流 AMM 流动性池"></span></h3>
+          <p style="color:var(--muted);font-size:.9rem" data-en="Aggregating AMM liquidity from multiple DEXs across <strong>13+ protocols</strong> on 7 networks." data-zh="聚合 <strong>30+</strong> 个 AMM 流动性池，覆盖 7 条主链上的主流 DEX 协议。"></p>
+          <div class="liq-protocols">
+            <span class="liq-tag">Uniswap</span>
+            <span class="liq-tag">PancakeSwap</span>
+            <span class="liq-tag">Raydium</span>
+            <span class="liq-tag">Curve</span>
+            <span class="liq-tag" data-en="+9 more" data-zh="+26 更多"></span>
+          </div>
+        </div>
+        <div class="liq-card">
+          <h3><span data-en="🌑 Dark Pool / OTC" data-zh="🌑 Solana 生态引擎"></span></h3>
+          <p style="color:var(--muted);font-size:.9rem" data-en="Professional-grade AMMs for <strong>large and high-frequency</strong> trades." data-zh="深度接入 Solana 生态专用 DEX，为高频交易和 Meme 币提供<strong>极致流动性</strong>。"></p>
+          <div class="liq-protocols">
+            <span class="liq-tag">0x</span>
+            <span class="liq-tag">OKX/GTR</span>
+            <span class="liq-tag">Orca</span>
+            <span class="liq-tag">Lifinity</span>
+            <span class="liq-tag">SushiXL</span>
+          </div>
+        </div>
+        <div class="liq-card">
+          <h3><span data-en="📋 RFQ Integration" data-zh="📋 RFQ 机制"></span></h3>
+          <p style="color:var(--muted);font-size:.9rem" data-en="Request for Quote for optimal <strong>direct fills</strong> from professional market makers." data-zh="链下报价 + 链上结算，通过<strong>专业做市商</strong>获取更优成交价格。"></p>
+          <div class="liq-protocols">
+            <span class="liq-tag">RFQ Live ✓</span>
+            <span class="liq-tag" data-en="Bebop (in progress)" data-zh="Bebop（接入中）"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ ALGORITHM ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Core Technology" data-zh="核心技术"></span>
+      <h2 data-en="Proprietary Pricing Algorithm" data-zh="报价算法优化"></h2>
+      <p class="section-desc" data-en="Optimizes liquidity selection across complex conditions — multi-hop routing, market volatility — to improve pricing competitiveness." data-zh="基于实时流动性分析，路由引擎以毫秒级速度评估不同路径组合，选出最优交易路线。"></p>
+
+      <!-- Route flow diagram -->
+      <div class="route-flow">
+        <div class="route-step">
+          <div class="step-icon s1">🔍</div>
+          <div class="step-title" data-en="Path Scan" data-zh="路径扫描"></div>
+          <div class="step-label" data-en="Scan all possible routing combinations" data-zh="扫描所有可能的交易路径组合"></div>
+        </div>
+        <div class="route-arrow">→</div>
+        <div class="route-step">
+          <div class="step-icon s2">⚡</div>
+          <div class="step-title" data-en="Real-time Eval" data-zh="实时评估"></div>
+          <div class="step-label" data-en="Calculate Gas and slippage per route" data-zh="计算每条路由的 Gas 消耗和滑点"></div>
+        </div>
+        <div class="route-arrow">→</div>
+        <div class="route-step">
+          <div class="step-icon s3">🎯</div>
+          <div class="step-title" data-en="Optimal Select" data-zh="最优选择"></div>
+          <div class="step-label" data-en="Output the best path via optimization" data-zh="通过优化算法输出最优路径组合"></div>
+        </div>
+      </div>
+
+      <div class="algo-compare">
+        <div class="algo-card">
+          <span class="algo-badge standard" data-en="Traditional" data-zh="传统模型"></span>
+          <h3 data-en="Traditional Quoting Model" data-zh="传统报价模型"></h3>
+          <p style="color:var(--muted);font-size:.88rem" data-en="Standard aggregation with basic routing. Single-path price discovery with limited optimization." data-zh="标准聚合路由，单路径价格发现，优化空间有限。"></p>
+          <div class="algo-chart">
+            <svg viewBox="0 0 400 160" preserveAspectRatio="none">
+              <polyline points="0,140 50,120 100,130 150,90 200,100 250,80 300,95 350,70 400,85" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,140 50,120 100,130 150,90 200,100 250,80 300,95 350,70 400,85 400,160 0,160" fill="url(#fgray)" stroke="none"/>
+              <defs><linearGradient id="fgray" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#64748b" stop-opacity=".12"/><stop offset="100%" stop-color="#64748b" stop-opacity="0"/></linearGradient></defs>
+            </svg>
+          </div>
+        </div>
+        <div class="algo-card highlight">
+          <span class="algo-badge better" data-en="+15.4% Better" data-zh="优化 15.4%+"></span>
+          <h3 data-en="BW Quoting Model" data-zh="BW 报价模型"></h3>
+          <p style="color:var(--muted);font-size:.88rem" data-en="Multi-source optimization with dynamic routing. Captures superior pricing up to <strong style='color:var(--accent)'>70% improvement</strong>." data-zh="多源动态路由优化，最高可实现 <strong style='color:var(--accent)'>70% 价格提升</strong>。"></p>
+          <div class="algo-chart">
+            <svg viewBox="0 0 400 160" preserveAspectRatio="none">
+              <polyline points="0,140 50,110 100,95 150,60 200,70 250,40 300,50 350,25 400,35" fill="none" stroke="url(#lgrd)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,140 50,110 100,95 150,60 200,70 250,40 300,50 350,25 400,35 400,160 0,160" fill="url(#facc)" stroke="none"/>
+              <defs>
+                <linearGradient id="lgrd" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#00d4aa"/><stop offset="100%" stop-color="#6366f1"/></linearGradient>
+                <linearGradient id="facc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#00d4aa" stop-opacity=".15"/><stop offset="100%" stop-color="#00d4aa" stop-opacity="0"/></linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROTECTION ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Protection" data-zh="保障机制"></span>
+      <h2 data-en="Transaction Success Protection" data-zh="交易成功率保障机制"></h2>
+      <p class="section-desc" data-en="Multi-layer optimization of the transaction submission flow with technical measures to maximize success rates." data-zh="对交易提交流程进行多层优化，通过多项技术措施提升成功率。"></p>
+
+      <ul class="cap-list">
+        <li><span class="check">🔬</span> <span data-en="<strong>On-chain pre-execution simulation</strong> — detects Gas/amount errors before submission" data-zh="<strong>链上预执行模拟</strong> — 提前识别 Gas 或金额错误，减少链上失败"></span></li>
+        <li><span class="check">🌐</span> <span data-en="<strong>Multi-node load balancing</strong> — avoids single-point congestion on busy chains" data-zh="<strong>多节点负载均衡</strong> — 热门链采用多节点架构，避免单点拥堵"></span></li>
+        <li><span class="check">🛡️</span> <span data-en="<strong>MEV protection channel</strong> — anti-MEV on ETH/BNB via private mempool" data-zh="<strong>MEV 防护通道</strong> — ETH / BNB Chain 提供 anti-MEV 交易通道，避免三明治攻击"></span></li>
+        <li><span class="check">🔄</span> <span data-en="<strong>Auto-retry on failure</strong> — automatically retries failed transactions" data-zh="<strong>失败自动重试</strong> — 交易失败自动重试机制，最大化成功率"></span></li>
+      </ul>
+
+      <div class="sentinel-box">
+        <h3>🤖 Sentinel <span data-en="— Automated Protection System" data-zh="— 哨兵系统"></span></h3>
+        <p style="color:var(--muted);font-size:.95rem" data-en="Continuous monitoring suite tracking on-chain slippage, gas cost, and execution status in real-time. Anomaly detection triggers automatic adjustments to routing and pricing paths." data-zh="自动化监控套件，持续追踪链上滑点、Gas 成本和执行状态。检测到异常时，系统自动调整路由和定价路径，降低失败交易成本。"></p>
+        <div class="sentinel-features">
+          <div class="sentinel-feat"><span class="check">✓</span> <span data-en="Real-time slippage monitoring" data-zh="实时滑点监控"></span></div>
+          <div class="sentinel-feat"><span class="check">✓</span> <span data-en="Dynamic gas optimization" data-zh="动态 Gas 优化"></span></div>
+          <div class="sentinel-feat"><span class="check">✓</span> <span data-en="Execution status tracking" data-zh="执行状态追踪"></span></div>
+          <div class="sentinel-feat"><span class="check">✓</span> <span data-en="Auto-adjusting routes" data-zh="路由自动调整"></span></div>
+          <div class="sentinel-feat"><span class="check">✓</span> <span data-en="Failed TX cost reduction" data-zh="失败交易成本控制"></span></div>
+          <div class="sentinel-feat"><span class="check">✓</span> <span data-en="Competitive success rates" data-zh="行业领先成功率"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ DEVELOPER APIs ═══════════════════ -->
+<section>
+  <div class="container">
+    <div class="fade-up">
+      <span class="section-label" data-en="Developer APIs" data-zh="开发者 API"></span>
+      <h2 data-en="Beyond Aggregation" data-zh="不止于聚合"></h2>
+      <p class="section-desc" data-en="Complementary APIs to expand your crypto product capabilities with fewer technical costs." data-zh="扩展 API 能力，以更低技术成本拓展产品功能。"></p>
+      <div class="cards-grid cards-3">
+        <div class="card">
+          <div class="card-icon green">🔗</div>
+          <h3 data-en="Cross-Chain Swap API" data-zh="跨链互换 API"></h3>
+          <p data-en="Seamless cross-chain transactions with optimized routing and multi-bridge support." data-zh="无缝跨链交易，优化路由与多桥支持。"></p>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">👛</div>
+          <h3 data-en="Wallet Clone API" data-zh="钱包克隆 API"></h3>
+          <p data-en="Rapidly deploy wallet infrastructure with pre-built on-chain data and security detection." data-zh="快速部署钱包基础设施，内置链上数据和安全检测。"></p>
+        </div>
+        <div class="card">
+          <div class="card-icon purple">🔒</div>
+          <h3 data-en="Security Detection" data-zh="安全检测"></h3>
+          <p data-en="Real-time token and contract security analysis integrated into your product flow." data-zh="实时代币与合约安全分析，无缝集成到产品流程。"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CTA ═══════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="fade-up">
+      <h2 data-en="Ready to Integrate?" data-zh="立即接入 Bitget Wallet 聚合器"></h2>
+      <p style="color:var(--muted);margin-bottom:32px" data-en="Start building with the Bitget Wallet Aggregator today." data-zh="最优报价 · 最高成功率 · 企业级安全保障"></p>
+      <div class="btn-group">
+        <a class="btn btn-primary" href="#" data-en="View Documentation" data-zh="查看文档"></a>
+        <a class="btn btn-outline" href="#" data-en="Contact Us" data-zh="联系我们"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Bitget Wallet. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// ── i18n engine ──────────────────────────────────────
+let currentLang = /^zh/i.test(navigator.language) ? 'zh' : 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = lang === 'zh' ? 'Bitget Wallet 聚合器' : 'Bitget Wallet Aggregator';
+
+  // Toggle buttons
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+
+  // Apply all data-en / data-zh attributes
+  document.querySelectorAll('[data-en][data-zh]').forEach(el => {
+    const text = el.getAttribute('data-' + lang);
+    // Use innerHTML to support <strong> tags in translations
+    if (text.includes('<')) {
+      el.innerHTML = text;
+    } else {
+      el.textContent = text;
+    }
+  });
+
+  // Store preference
+  try { localStorage.setItem('bw_agg_lang', lang); } catch(e) {}
+}
+
+// Check stored preference first, then browser language
+(function() {
+  try {
+    const stored = localStorage.getItem('bw_agg_lang');
+    if (stored === 'en' || stored === 'zh') currentLang = stored;
+  } catch(e) {}
+  setLang(currentLang);
+})();
+
+// ── Scroll animations ────────────────────────────────
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── Stat bar animation ───────────────────────────────
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.stat-bar').forEach(bar => {
+        const w = bar.getAttribute('data-width');
+        if (w) bar.style.width = w + '%';
+      });
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.stats-section').forEach(el => {
+  el.querySelectorAll('.stat-bar').forEach(bar => {
+    bar.setAttribute('data-width', parseInt(bar.style.width));
+    bar.style.width = '0%';
+  });
+  barObs.observe(el);
+});
+</script>
+
+</body>
+</html>
