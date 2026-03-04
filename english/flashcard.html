@@ -200,6 +200,86 @@
         .deck-btn.active { border-color: var(--blue); color: var(--blue); background: #eff6ff; }
 
         /* ── Loading ─────────────────────────── */
+        /* ── Welcome screen (new-user landing) ───────────────────── */
+        .welcome-scr {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 20px 40px;
+            text-align: center;
+            gap: 0;
+        }
+        .welcome-logo {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: pulse-in .6s ease;
+        }
+        @keyframes pulse-in {
+            0%   { transform: scale(.6); opacity: 0; }
+            80%  { transform: scale(1.08); }
+            100% { transform: scale(1);   opacity: 1; }
+        }
+        .welcome-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: .5px;
+            margin-bottom: 4px;
+        }
+        .welcome-tagline {
+            font-size: 0.92rem;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+        .welcome-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            max-width: 320px;
+            margin-bottom: 28px;
+        }
+        .welcome-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8faff;
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            padding: 10px 14px;
+            text-align: left;
+        }
+        .welcome-feature .wf-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .welcome-feature .wf-text {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.4;
+        }
+        .welcome-feature .wf-text strong {
+            display: block;
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+        .btn-welcome-start {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            padding: 14px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(37,99,235,.35);
+            transition: transform .12s, filter .12s;
+        }
+        .btn-welcome-start:hover  { filter: brightness(1.08); }
+        .btn-welcome-start:active { transform: translateY(1px); }
+
         .loading-scr {
             flex: 1;
             display: flex;
@@ -1415,8 +1495,55 @@
         </button>
     </div>
 
+    <!-- ── New-user Welcome Screen ────────────────────────────────────── -->
+    <div v-if="showWelcome" class="welcome-scr">
+        <div class="welcome-logo">🔤</div>
+        <div class="welcome-title">VocabLoop</div>
+        <div class="welcome-tagline">{{ui.lang === 'en' ? 'Smart English vocabulary — spaced repetition PWA' : '智能英语词汇记忆 · 间隔重复闪卡'}}</div>
+        <div class="welcome-features">
+            <div class="welcome-feature">
+                <span class="wf-icon">🧠</span>
+                <span class="wf-text">
+                    <strong>{{ui.lang === 'en' ? 'Spaced Repetition' : '间隔重复算法'}}</strong>
+                    {{ui.lang === 'en' ? 'Science-backed SRS — review at the optimal moment' : '科学复习时机，记得更牢、忘得更慢'}}
+                </span>
+            </div>
+            <div class="welcome-feature">
+                <span class="wf-icon">📚</span>
+                <span class="wf-text">
+                    <strong>{{ui.lang === 'en' ? '3 Word Decks' : '三套词库'}}</strong>
+                    {{ui.lang === 'en' ? 'PET Exam · Daily English · Crypto — 3000+ words' : 'PET 考试 · 日常口语 · 加密金融，共 3000+ 词'}}
+                </span>
+            </div>
+            <div class="welcome-feature">
+                <span class="wf-icon">🔊</span>
+                <span class="wf-text">
+                    <strong>{{ui.lang === 'en' ? 'Native Pronunciation' : '真人发音'}}</strong>
+                    {{ui.lang === 'en' ? 'Audio for every word, auto-plays on flip' : '每词均有音频，翻卡自动朗读'}}
+                </span>
+            </div>
+            <div class="welcome-feature">
+                <span class="wf-icon">✈️</span>
+                <span class="wf-text">
+                    <strong>{{ui.lang === 'en' ? 'Works Offline' : '离线可用'}}</strong>
+                    {{ui.lang === 'en' ? 'PWA — install to home screen, no internet needed' : '安装到桌面，无网络照常学习'}}
+                </span>
+            </div>
+            <div class="welcome-feature">
+                <span class="wf-icon">🏆</span>
+                <span class="wf-text">
+                    <strong>{{ui.lang === 'en' ? 'Streaks & XP' : '连续打卡 & 经验值'}}</strong>
+                    {{ui.lang === 'en' ? 'Daily streaks, achievements and level-up system' : '每日连击、成就解锁、等级升级'}}
+                </span>
+            </div>
+        </div>
+        <button class="btn-welcome-start" @click="dismissWelcome">
+            {{ui.lang === 'en' ? '🚀 Start Learning' : '🚀 开始学习'}}
+        </button>
+    </div>
+
     <!-- Loading -->
-    <div v-if="loading" class="loading-scr">
+    <div v-else-if="loading" class="loading-scr">
         <div class="spinner"></div>
         <p>{{ui.loading}}</p>
     </div>
@@ -1947,6 +2074,7 @@
 const LANG = /^zh/i.test(navigator.language) ? 'zh' : 'en';
 const STRINGS = {
   zh: {
+    lang: 'zh',
     deckPET: 'PET 词汇', deckCrypto: 'Crypto 词汇', deckDaily: '日常口语',
     autoPlayOn:  '自动朗读：开（点击关闭）', autoPlayOff: '自动朗读：关（点击开启）',
     listToLearn: '今日新学', listToReview: '今日复习',
@@ -2061,6 +2189,7 @@ const STRINGS = {
     pwaIOSDismiss: '我知道了',
   },
   en: {
+    lang: 'en',
     deckPET: 'PET Vocab', deckCrypto: 'Crypto', deckDaily: 'Daily English',
     autoPlayOn:  'Auto-read: ON (tap to disable)', autoPlayOff: 'Auto-read: OFF (tap to enable)',
     listToLearn: 'To Learn', listToReview: 'To Review',
@@ -2411,6 +2540,7 @@ new Vue({
             decks:        DECKS,
             currentDeck:  DECKS[0],
             loading:      true,
+            showWelcome:  !localStorage.getItem('vl_welcome_shown_v1'),
             allWords:     [],
             state:        {},
             queue:        [],
@@ -2824,6 +2954,11 @@ new Vue({
         },
 
         // ── Deck switching ────────────────────────────────────────────────
+        dismissWelcome() {
+            this.showWelcome = false;
+            try { localStorage.setItem('vl_welcome_shown_v1', '1'); } catch (e) {}
+        },
+
         switchDeck(deck) {
             if (deck.id === this.currentDeck.id) return;
             if (this.practiceMode) this.exitPractice();
